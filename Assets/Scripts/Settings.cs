@@ -1,0 +1,14 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Settings : MonoBehaviour
+{
+    public bool hold_crouch;
+    public KeyCode crouch = KeyCode.C;
+    public KeyCode throwKey = KeyCode.R;
+    public KeyCode jump = KeyCode.Space;
+    public KeyCode sprint = KeyCode.LeftShift;
+    public float throwForce = 10f;
+    public float lookRange = 7f;
+}
