@@ -19,4 +19,10 @@ public class ToppingSO : ScriptableObject
     public float spawnOffset = 0.01f; // Offset in the Z axis when being placed; 
     public float spawnRadius; // Radius to check for existing sauce objects
     public float minDistance; // Minimum distance before spawning another sauce object
+
+    [Header("Special Additions")]
+    public bool checkForTopping = false;
+    public string checkToppingTag;
+    public float checkOffset = 0.05f;
+
 }

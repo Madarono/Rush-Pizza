@@ -13,6 +13,11 @@ public class Check : MonoBehaviour
         if(Input.GetMouseButtonDown(0))
         {
             CheckObject();
+        }
+
+        if(Input.GetMouseButtonDown(1))
+        {
+            InteractObject();
         } 
     }
 
@@ -50,6 +55,30 @@ public class Check : MonoBehaviour
             {
                 topping.isUsed = false;
                 drawing.topping = null;
+            }
+        }
+    }
+
+    public void InteractObject()
+    {
+        RaycastHit hit;
+
+        if(Physics.Raycast(transform.position, transform.forward, out hit, settings.lookRange))
+        {
+            GameObject obj = hit.collider.gameObject;
+
+            if(obj.CompareTag("Draggable"))
+            {
+                Interactable interactable = obj.GetComponent<Interactable>();
+                if(interactable != null)
+                {
+                    interactable.Spawn();
+                    if(topping != null)
+                    {
+                        topping.isUsed = false;
+                        drawing.topping = null;
+                    }
+                }
             }
         }
     }
