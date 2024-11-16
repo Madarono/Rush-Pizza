@@ -60,7 +60,8 @@ public class SauceDrawing : MonoBehaviour
             {
                 drawnPath.Add(hitPoint);
 
-                GameObject sauce = Instantiate(topping.toppingPrefab, hitPoint + Vector3.up * topping.spawnOffset, Quaternion.identity);
+                int randomPrefab = Random.Range(0, topping.toppingPrefab.Length);
+                GameObject sauce = Instantiate(topping.toppingPrefab[randomPrefab], hitPoint + Vector3.up * topping.spawnOffset, Quaternion.identity);
                 if (topping.checkForTopping)
                 {
                     Vector3[] directions = {

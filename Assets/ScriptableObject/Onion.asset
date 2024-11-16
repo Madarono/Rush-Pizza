@@ -10,28 +10,29 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bf40f44972f17c612854b3121a73991e, type: 3}
-  m_Name: Sauce
+  m_Name: Onion
   m_EditorClassIdentifier: 
-  name: Tomato Sauce
-  price: 0.05
+  name: Onion
+  price: 0.1
   toppingPrefab:
-  - {fileID: 6257833868502254409, guid: 40f0d3d6e621869408b45eadc2f82c6d, type: 3}
+  - {fileID: 8308246571903983331, guid: db617b9b07922f8cba4d6d51956393cc, type: 3}
+  - {fileID: 4976168023075392224, guid: bd60f6d1d916b0feeb808479ce8afe81, type: 3}
   rotationOffsets:
+  - -90
   - 0
   - 0
-  - 0
-  rotationRandom: 000100
+  rotationRandom: 000001
   drawingSurfaceLayer:
     serializedVersion: 2
     m_Bits: 128
   toppingLayer:
     serializedVersion: 2
-    m_Bits: 256
-  checkToppinglayer: 1
-  hold: 1
-  spawnOffset: 0.01
-  spawnRadius: 100
-  minDistance: 0.12
-  checkForTopping: 0
-  checkToppingTag: 
-  checkOffset: 0.05
+    m_Bits: 0
+  checkToppinglayer: 0
+  hold: 0
+  spawnOffset: 0.045
+  spawnRadius: 2.5
+  minDistance: 0
+  checkForTopping: 1
+  checkToppingTag: Topping
+  checkOffset: 0.03

@@ -2,49 +2,41 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class Ingrediants
+{
+    public string ingrediantName;
+    public List<GameObject> ingrediantObj;
+    public float ingrediantPercentage;
+    public float maxIngrediantPercentage = 100f;
+}
+
 public class Pizza : MonoBehaviour
 {
-    public string redSauceName = "Tomato Sauce";
-    public List<GameObject> redSauce;
-    public float saucePercentage;
-    public float maxSaucePercetage = 50f;
-    
-    public string cheeseName = "Cheese";
-    public List<GameObject> cheese;
-    public float cheesePercentage;
-    public float maxCheesePercentage = 50f;
+    public Ingrediants[] ingrediants;
 
     public void CheckName(string name, GameObject obj)
     {
-        switch(name)
+        for(int i = 0; i < ingrediants.Length; i++)
         {
-            case var _ when name == redSauceName:
-                redSauce.Add(obj);
+            if(name == ingrediants[i].ingrediantName)
+            {
+                ingrediants[i].ingrediantObj.Add(obj);
                 break;
-
-            case var _ when name == cheeseName:
-                cheese.Add(obj);
-                break;
-
-            default:
-                Debug.LogWarning($"Unknown topping or ingredient: {name}");
-                break;
+            }
         }
         UpdatePercentage();
     }
 
     public void UpdatePercentage()
     {
-        saucePercentage = redSauce.Count / maxSaucePercetage;
-        if(saucePercentage > 1)
+        for(int i = 0; i < ingrediants.Length; i++)
         {
-            saucePercentage = 1f;
-        }
-
-        cheesePercentage = cheese.Count / maxCheesePercentage;
-        if(cheesePercentage > 1)
-        {
-            cheesePercentage = 1f;
+            ingrediants[i].ingrediantPercentage = ingrediants[i].ingrediantObj.Count / ingrediants[i].maxIngrediantPercentage;
+            if(ingrediants[i].ingrediantPercentage > 1f)
+            {
+                ingrediants[i].ingrediantPercentage = 1f;
+            }
         }
     }
 }

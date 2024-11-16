@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Cheese
   price: 0.02
-  toppingPrefab: {fileID: 1750281345734851338, guid: 18ca99ecdcff5f345819e750a05aa3aa, type: 3}
+  toppingPrefab:
+  - {fileID: 1750281345734851338, guid: 18ca99ecdcff5f345819e750a05aa3aa, type: 3}
   rotationOffsets:
   - -90
   - 0
@@ -31,3 +32,6 @@ MonoBehaviour:
   spawnOffset: 0.021
   spawnRadius: 100
   minDistance: 0.12
+  checkForTopping: 0
+  checkToppingTag: 
+  checkOffset: 0.05

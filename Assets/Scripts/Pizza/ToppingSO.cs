@@ -9,7 +9,7 @@ public class ToppingSO : ScriptableObject
     public float price;
 
     [Header("For Drawing")]
-    public GameObject toppingPrefab;
+    public GameObject[] toppingPrefab;
     public float[] rotationOffsets = new float[3];
     public bool[] rotationRandom = new bool[3];
     public LayerMask drawingSurfaceLayer; // The surface of the pizza
