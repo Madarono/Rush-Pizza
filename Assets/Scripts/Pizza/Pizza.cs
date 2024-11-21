@@ -28,6 +28,10 @@ public class Pizza : MonoBehaviour
     private PlayerHolder playerHolder;
     public GameObject sideSeparator; //Separates the left and right sides
 
+    public bool isCooked;
+    public int cookedTimes;
+    public Material[] cookedMaterials;
+
     void Start()
     {
         playerHolder = GameObject.Find("UniversalScripts").GetComponent<PlayerHolder>();
@@ -35,7 +39,7 @@ public class Pizza : MonoBehaviour
 
     void Update()
     {
-        if(playerHolder.drawing.topping != null)
+        if(playerHolder.drawing.topping != null && !isCooked)
         {
             sideSeparator.SetActive(true);
         }
@@ -128,6 +132,17 @@ public class Pizza : MonoBehaviour
 
         // Calculate the average distance
         ingrediants[id].averageDistance = totalDistance / (ingrediants[id].ingrediantObj.Count - 1);
+    }
+
+    public void UpdateLooks()
+    {
+        if(cookedTimes < cookedMaterials.Length - 1)
+        {
+            MeshRenderer rend = GetComponent<MeshRenderer>();
+            Material[] mats = rend.materials;
+            mats[0] = cookedMaterials[cookedTimes];
+            rend.materials = mats;
+        }
     }
 
 

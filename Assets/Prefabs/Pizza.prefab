@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1567555917868759801}
   - component: {fileID: 5567488021035664586}
   - component: {fileID: 7264569388931626511}
+  - component: {fileID: 643478538551640440}
   m_Layer: 6
   m_Name: Pizza
   m_TagString: Draggable
@@ -228,6 +229,28 @@ MonoBehaviour:
     distanceBetweenObjects: []
     averageDistance: 0
   sideSeparator: {fileID: 5017545775201997720}
+  isCooked: 0
+  cookedTimes: 0
+  cookedMaterials:
+  - {fileID: 2100000, guid: 6df5c5a379723abcdaedf80dd3945a2d, type: 2}
+  - {fileID: 2100000, guid: 80c4dacfd292019d291652a964aee4f9, type: 2}
+  - {fileID: 2100000, guid: 16ad89fd0d6938e18b565be7ebc7d22b, type: 2}
+  - {fileID: 2100000, guid: f5cb2ca6d34aae124b2bc057b1cfb9ea, type: 2}
+  - {fileID: 2100000, guid: d6fc26663ed04a3e1ab674e91101ed61, type: 2}
+--- !u!114 &643478538551640440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1800456938401660260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c6f4aee697f243009884edfce1ddae8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canBePicked: 1
+  dragAndDrop: {fileID: 0}
 --- !u!1 &5017545775201997720
 GameObject:
   m_ObjectHideFlags: 0
@@ -345,6 +368,7 @@ GameObject:
   - component: {fileID: 1171388508902624237}
   - component: {fileID: 4468256158079256392}
   - component: {fileID: 6324225059717485273}
+  - component: {fileID: 4703535971905193428}
   m_Layer: 7
   m_Name: SauceArea
   m_TagString: Untagged
@@ -439,3 +463,16 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &4703535971905193428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7054762999742738928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9afb73bd758b3c95e9ba20b85dd44976, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pizza: {fileID: 7264569388931626511}

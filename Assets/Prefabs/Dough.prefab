@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3669569844302059892}
   - component: {fileID: 1811222658067584687}
   - component: {fileID: 1299867238181204689}
+  - component: {fileID: 1707627694854085101}
   m_Layer: 6
   m_Name: Dough
   m_TagString: Draggable
@@ -29,13 +30,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8371783868399049236}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -0.22479153, y: 0.7851569, z: -6.7153654}
   m_LocalScale: {x: 0.46633208, y: 0.46633208, z: 0.3927841}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!33 &6517200928151624470
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -149,3 +150,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactPrefab: {fileID: 1800456938401660260, guid: d34bd6cce70e249fd98dca4ec67b2009, type: 3}
   prefabRotation: {x: -90, y: 0, z: 0}
+--- !u!114 &1707627694854085101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8371783868399049236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c6f4aee697f243009884edfce1ddae8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canBePicked: 1

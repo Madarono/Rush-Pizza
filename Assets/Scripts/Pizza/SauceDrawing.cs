@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,6 +12,8 @@ public class SauceDrawing : MonoBehaviour
     private bool isDrawing;
     private Transform camera;
     private Vector3 lastSpawnPosition;  // Tracks the last spawn position to check distance
+
+    private PizzaHolder pizza;
 
     void Start()
     {
@@ -52,6 +55,12 @@ public class SauceDrawing : MonoBehaviour
     {
         if (Physics.Raycast(camera.position, camera.forward, out RaycastHit hit, settings.lookRange, topping.drawingSurfaceLayer))
         {
+            pizza = hit.collider.gameObject.GetComponent<PizzaHolder>();
+            if(pizza.pizza.isCooked)
+            {
+                return;
+            }
+
             Vector3 hitPoint = hit.point;
     
             // Only spawn sauce if far enough from last position and no other sauce nearby
