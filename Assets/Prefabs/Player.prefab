@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1735143082884138826
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 731494349900128435}
+  m_Layer: 3
+  m_Name: StandingPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &731494349900128435
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1735143082884138826}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.9519999, z: -0.12300002}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6146160448478742406}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2371487278791893524
 GameObject:
   m_ObjectHideFlags: 0
@@ -99,6 +130,8 @@ Transform:
   m_Children:
   - {fileID: 2219633870381147237}
   - {fileID: 6993459956952653775}
+  - {fileID: 731494349900128435}
+  - {fileID: 5743523505423793231}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!33 &1220351456328557216
@@ -244,15 +277,12 @@ MonoBehaviour:
   binds: {fileID: 0}
   dragAndDrop: {fileID: 10474280857171940}
   crouch_speed: 5
-  can_move: 1
-  debug_crouch: 0
-  done: 0
-  downForce: 90
-  standingScale: 2.803452
-  crouchingScale: 1.9
-  hold: 0
+  camera: {fileID: 6993459956952653775}
+  standingPosition: {fileID: 731494349900128435}
+  crouchingPosition: {fileID: 5743523505423793231}
+  transitionSpeed: 5
   is_crouching: 0
-  crouch_key: 0
+  can_move: 1
 --- !u!1 &6683540871721127676
 GameObject:
   m_ObjectHideFlags: 0
@@ -367,6 +397,37 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!1 &7680029436380339035
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5743523505423793231}
+  m_Layer: 3
+  m_Name: CrouchingPosiiton
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5743523505423793231
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7680029436380339035}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.04799996, z: -0.12300002}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6146160448478742406}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7984802032063782383
 GameObject:
   m_ObjectHideFlags: 0
@@ -407,7 +468,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7984802032063782383}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1260420b4cd71b24584bd770c3760ae6, type: 3}
   m_Name: 
@@ -590,8 +651,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 154d335fe21be584ca2b616992b670bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensX: 200
-  sensY: 200
+  sensX: 225
+  sensY: 225
   orientation: {fileID: 2219633870381147237}
   canMove: 1
 --- !u!114 &10474280857171940

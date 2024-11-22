@@ -31,6 +31,7 @@ public class DragAndDrop : MonoBehaviour
     public float dragForce = 10f;
     public float maxDragDistance = 5f;
     public DragDirection allowedDragDirection = DragDirection.X;
+
     private Camera mainCamera;
     private GameObject selectedObject;
     private Rigidbody selectedObjectRigidbody;
@@ -38,8 +39,6 @@ public class DragAndDrop : MonoBehaviour
     private Vector3 offset;
     private float objectZCoord;
     private bool isDragging = false;
-
-    private bool multiplayer;
 
     void Start()
     {
@@ -54,7 +53,7 @@ public class DragAndDrop : MonoBehaviour
             ThrowObject();
         }
 
-        if(Input.GetMouseButtonDown(0) && can_drag && !crouch.is_crouching)
+        if(Input.GetMouseButtonDown(0) && can_drag)
         {
             if(heldObject == null)
             {
@@ -138,11 +137,13 @@ public class DragAndDrop : MonoBehaviour
         {
             heldObjectRB.useGravity = true;
             heldObjectRB.drag = 0;
+            
             heldObject.transform.position = holdPosition.position;
             heldObject.transform.SetParent(null);
+            
             isDragging = false;
             heldObject = null;
-            // rotate_obj.targetedObject = null;
+
             heldObjectRB.constraints = RigidbodyConstraints.None;  
             heldObjectRB = null;
         }
@@ -164,12 +165,6 @@ public class DragAndDrop : MonoBehaviour
             heldObjectRB.constraints = RigidbodyConstraints.None;
             Vector3 throwDirection = mainCamera.transform.forward;
             heldObjectRB.AddForce(throwDirection * settings.throwForce, ForceMode.Impulse);
-    
-            // Clean up after throwing
-            // isDragging = false;
-            // selectedObject = null;
-            // heldObjectRB = null;
-            // rotate_obj.targetedObject = null;
             DropObject();
         }
     }
@@ -192,9 +187,6 @@ public class DragAndDrop : MonoBehaviour
                     Vector3 mousePosition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, objectZCoord);
                     offset = selectedObject.transform.position - mainCamera.ScreenToWorldPoint(mousePosition);
                     initialPosition = selectedObject.transform.position; // Store the initial position
-
-                    // rotate_obj.targetedObject = selectedObject; 
-
     
                     isDragging = true;
                 }

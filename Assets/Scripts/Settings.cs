@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Settings : MonoBehaviour
 {
-    public bool hold_crouch;
+    public bool holdCrouch;
     public KeyCode crouch = KeyCode.C;
     public KeyCode throwKey = KeyCode.R;
     public KeyCode jump = KeyCode.Space;
