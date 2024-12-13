@@ -5,4 +5,5 @@ using UnityEngine;
 public class PizzaHolder : MonoBehaviour
 {
     public Pizza pizza;
+    public GameObject visualCutter;
 }

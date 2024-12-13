@@ -22,11 +22,25 @@ public class Ingrediants
     public float averageDistance; 
 }
 
+[System.Serializable]
+public class PizzaCuts
+{
+    public List<GameObject> cuts = new List<GameObject>();
+    public float numberOfCuts;
+    public float numberOfSlices;
+
+    [Header("Separation of Toppings")]
+    public List<float> distanceBetweenCuts = new List<float>();
+    public float averageDistance; 
+}
+
 public class Pizza : MonoBehaviour
 {
     public Ingrediants[] ingrediants;
+    public PizzaCuts cuts;
     private PlayerHolder playerHolder;
     public GameObject sideSeparator; //Separates the left and right sides
+    public GameObject visualCutter;
 
     public bool isCooked;
     public int cookedTimes;
@@ -56,6 +70,7 @@ public class Pizza : MonoBehaviour
             if (name == ingrediants[i].ingrediantName)
             {
                 string side = CheckSide(obj.transform.position);
+                
                 if (side == "left")
                 {
                     ingrediants[i].leftSideObj.Add(obj);
@@ -64,8 +79,9 @@ public class Pizza : MonoBehaviour
                 {
                     ingrediants[i].rightSideObj.Add(obj);
                 }
-
+                    
                 ingrediants[i].ingrediantObj.Add(obj);
+
                 UpdatePercentage(i);
                 if(ingrediants[i].calculateDistance)
                 {
@@ -99,7 +115,6 @@ public class Pizza : MonoBehaviour
 
     public void UpdateDistance(int id)
     {
-        // If there's only one ingredient object, distances cannot be calculated
         if (ingrediants[id].ingrediantObj.Count <= 1)
         {
             ingrediants[id].distanceBetweenObjects.Clear();
@@ -107,7 +122,6 @@ public class Pizza : MonoBehaviour
             return;
         }
 
-        // Ensure the distanceBetweenObjects list matches the count of ingredient objects - 1
         while (ingrediants[id].distanceBetweenObjects.Count < ingrediants[id].ingrediantObj.Count - 1)
         {
             ingrediants[id].distanceBetweenObjects.Add(0);
@@ -121,7 +135,6 @@ public class Pizza : MonoBehaviour
 
         for (int o = 0; o < ingrediants[id].ingrediantObj.Count - 1; o++)
         {
-            // Calculate the distance between consecutive objects
             float distance = Vector3.Distance(
                 ingrediants[id].ingrediantObj[o].transform.position,
                 ingrediants[id].ingrediantObj[o + 1].transform.position
@@ -145,6 +158,41 @@ public class Pizza : MonoBehaviour
         }
     }
 
+    public void UpdateCuts()
+    {
+        if (cuts.cuts.Count <= 1)
+        {
+            cuts.distanceBetweenCuts.Clear();
+            cuts.averageDistance = 0f;
+            return;
+        }
+
+        cuts.numberOfCuts = cuts.cuts.Count;
+        cuts.numberOfSlices = cuts.numberOfCuts * 2f;
+
+        while (cuts.distanceBetweenCuts.Count < cuts.cuts.Count - 1)
+        {
+            cuts.distanceBetweenCuts.Add(0);
+        }
+        while (cuts.distanceBetweenCuts.Count > cuts.cuts.Count - 1)
+        {
+            cuts.distanceBetweenCuts.RemoveAt(cuts.distanceBetweenCuts.Count - 1);
+        }
+        
+        float totalDistanceCuts = 0f;
+        float totalElements = 0f;
+
+        for(int i = 0; i < cuts.cuts.Count - 1; i++)
+        {
+            totalElements = i;
+
+            cuts.distanceBetweenCuts[i] = Vector3.Distance(cuts.cuts[i].transform.eulerAngles, cuts.cuts[i + 1].transform.eulerAngles);
+            
+            totalDistanceCuts += cuts.distanceBetweenCuts[i];
+        }
+
+        cuts.averageDistance = totalDistanceCuts / totalElements;
+    }
 
     private string CheckSide(Vector3 ingredientPosition)
     {

@@ -11,4 +11,6 @@ public class Settings : MonoBehaviour
     public KeyCode sprint = KeyCode.LeftShift;
     public float throwForce = 10f;
     public float lookRange = 7f;
+
+    public bool oneTimeCut = true;
 }

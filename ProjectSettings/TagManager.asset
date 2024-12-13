@@ -8,6 +8,8 @@ TagManager:
   - Moveable
   - ToppingBox
   - Topping
+  - PizzaCutter
+  - PizzaBox
   layers:
   - Default
   - TransparentFX

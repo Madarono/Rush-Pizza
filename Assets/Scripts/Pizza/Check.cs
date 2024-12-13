@@ -8,6 +8,8 @@ public class Check : MonoBehaviour
     public SauceDrawing drawing;
     public ToppingBox topping;
 
+    private PizzaCutter cutter;
+
     public void Update()
     {
         if(Input.GetMouseButtonDown(0))
@@ -40,12 +42,39 @@ public class Check : MonoBehaviour
                 topping.isUsed = true;
                 return;
             }
+            else if(obj.CompareTag("PizzaCutter"))
+            {
+                if(cutter == null)
+                {
+                    cutter = obj.GetComponent<PizzaCutter>();
+                }
+
+                if(cutter.isUsed)
+                {
+                    cutter.TurnOff();
+                }
+                else
+                {
+                    cutter.TurnOn(transform);
+                }
+            }
+            else if(obj.CompareTag("PizzaBox"))
+            {
+                Animator anim = obj.GetComponent<Animator>();
+                TopPizzaBox top = obj.GetComponent<TopPizzaBox>();
+                top.notifyPizzaChecker();
+                anim.SetBool("Close", true);
+            }
             else
             {
                 if(topping != null)
                 {
                     topping.isUsed = false;
                     drawing.topping = null;
+                }
+                if(cutter != null)
+                {
+                    cutter.TurnOff();
                 }
             }
         }
@@ -55,6 +84,10 @@ public class Check : MonoBehaviour
             {
                 topping.isUsed = false;
                 drawing.topping = null;
+            }
+            if(cutter != null)
+            {
+                cutter.TurnOff();
             }
         }
     }
