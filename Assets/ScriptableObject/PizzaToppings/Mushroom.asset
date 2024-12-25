@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf40f44972f17c612854b3121a73991e, type: 3}
+  m_Name: Mushroom
+  m_EditorClassIdentifier: 
+  name: Mushroom
+  price: 0.1
+  toppingPrefab:
+  - {fileID: 7112272882900812211, guid: f29df392923107b619756ad36fe421d1, type: 3}
+  rotationOffsets:
+  - -90
+  - 0
+  - 0
+  rotationRandom: 000001
+  drawingSurfaceLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  toppingLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  checkToppinglayer: 0
+  hold: 0
+  spawnOffset: 0.045
+  spawnRadius: 2.5
+  minDistance: 0
+  checkForTopping: 1
+  checkToppingTag: Topping
+  checkOffset: 0.03

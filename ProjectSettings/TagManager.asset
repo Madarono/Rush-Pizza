@@ -10,6 +10,7 @@ TagManager:
   - Topping
   - PizzaCutter
   - PizzaBox
+  - Customer
   layers:
   - Default
   - TransparentFX

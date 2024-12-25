@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a031a9e5caadda508b930540ef278e10, type: 3}
+  m_Name: Key2
+  m_EditorClassIdentifier: 
+  keys:
+  - character: 116
+    overrideCharacter: 111
+  - character: 104
+    overrideCharacter: 113
+  - character: 101
+    overrideCharacter: 122
+  - character: 32
+    overrideCharacter: 105
+  - character: 113
+    overrideCharacter: 44
+  - character: 117
+    overrideCharacter: 108
+  - character: 105
+    overrideCharacter: 115
+  - character: 99
+    overrideCharacter: 107
+  - character: 107
+    overrideCharacter: 101
+  - character: 98
+    overrideCharacter: 116
+  - character: 114
+    overrideCharacter: 114
+  - character: 111
+    overrideCharacter: 119
+  - character: 119
+    overrideCharacter: 104
+  - character: 110
+    overrideCharacter: 121
+  - character: 102
+    overrideCharacter: 117
+  - character: 120
+    overrideCharacter: 106
+  - character: 106
+    overrideCharacter: 97
+  - character: 109
+    overrideCharacter: 110
+  - character: 112
+    overrideCharacter: 102
+  - character: 115
+    overrideCharacter: 103
+  - character: 118
+    overrideCharacter: 99
+  - character: 108
+    overrideCharacter: 118
+  - character: 97
+    overrideCharacter: 112
+  - character: 122
+    overrideCharacter: 98
+  - character: 121
+    overrideCharacter: 109
+  - character: 100
+    overrideCharacter: 120
+  - character: 103
+    overrideCharacter: 100
+  - character: 44
+    overrideCharacter: 32

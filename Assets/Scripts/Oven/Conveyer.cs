@@ -16,6 +16,21 @@ public class Conveyer : MonoBehaviour
             // otherObj = other.GameObject;
             Pickable pickable = other.GetComponent<Pickable>();
             pickable.canBePicked = false;
+            // Apply movement in the specified direction and speed
+            Vector3 movement = direction.normalized * speed * Time.deltaTime;
+            rb.MovePosition(rb.position + movement);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Rigidbody rb = other.GetComponent<Rigidbody>();
+        Pizza pizza = other.GetComponent<Pizza>();
+        if (rb != null && pizza != null)
+        {
+            // otherObj = other.GameObject;
+            Pickable pickable = other.GetComponent<Pickable>();
+            pickable.canBePicked = false;
             pickable.dragAndDrop.DropObject();
             // Apply movement in the specified direction and speed
             Vector3 movement = direction.normalized * speed * Time.deltaTime;

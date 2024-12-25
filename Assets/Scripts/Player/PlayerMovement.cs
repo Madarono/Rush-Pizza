@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public bool can_move = true;
+    public bool canMove = true;
     public Settings bind;
     public Crouch crouch;
 
@@ -48,6 +48,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        if(!canMove)
+        {
+            return;
+        }
+        
         MyInput();
         SpeedControl();
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f);

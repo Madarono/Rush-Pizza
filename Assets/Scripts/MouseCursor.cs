@@ -14,12 +14,22 @@ public class MouseCursor : MonoBehaviour
         cursor.SetActive(true);
     }
 
-    void Update()
+    public void ChangeCusorState()
     {
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            Cursor.lockState = Cursor.lockState == CursorLockMode.Locked ? CursorLockMode.None : CursorLockMode.Locked;
-        }
+        Cursor.visible = false;
+        Cursor.lockState = Cursor.lockState == CursorLockMode.Locked ? CursorLockMode.None : CursorLockMode.Locked;
+    }
+    
+    public void FreeCusorState()
+    {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.None;
+    }
+
+    public void LockCusorState()
+    {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     void FixedUpdate()

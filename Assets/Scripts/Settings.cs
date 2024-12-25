@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Settings : MonoBehaviour
 {
+    public bool english = true;
+
     public bool holdCrouch;
     public KeyCode crouch = KeyCode.C;
     public KeyCode throwKey = KeyCode.R;
