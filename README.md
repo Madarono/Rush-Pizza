@@ -1,5 +1,4 @@
-This is a game about making pizzas for hungry customers who want to try out your pizzeria! It is a fan project of a wonderful game made by Tapblaze called "Good Pizza Great Pizza".
-The goal for this little project of mine is to gain more knowledge and skills on game dev and show my love for this game!
+This is a fan project of the popular game "Good pizza great pizza" made by Tapblaze. This projects aims to imagine the game in a 3D space and attemps to implement every feature of the original game onto this new imagined 3D space.
 
 [P.S, I am not going to monitize this game whatsoever for obvious reasons.]
 [P.S, Please don't sue me.]
