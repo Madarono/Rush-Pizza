@@ -25,12 +25,18 @@ MonoBehaviour:
   speedOfTalk: 0.04
   toppings:
   - topping: 0
-    amount: 55
+    priceOfTopping: 1
+    amount: 70
     side: 2
+    differenceAccepted: 25
   - topping: 1
-    amount: 55
+    priceOfTopping: 1
+    amount: 70
     side: 2
-  - topping: 3
+    differenceAccepted: 25
+  - topping: 2
+    priceOfTopping: 3
     amount: 18
     side: 2
+    differenceAccepted: 5
   cookTimes: 1

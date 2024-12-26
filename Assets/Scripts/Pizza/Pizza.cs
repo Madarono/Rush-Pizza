@@ -6,6 +6,7 @@ using UnityEngine;
 public class Ingrediants
 {
     public string ingrediantName;
+    public PizzaOptions ingrediant;
     public List<GameObject> ingrediantObj;
     public float maxIngrediantPercentage = 100f;
     public float ingrediantPercentage;

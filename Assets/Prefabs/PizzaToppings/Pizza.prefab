@@ -252,8 +252,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ingrediants:
   - ingrediantName: Cheese
+    ingrediant: 1
     ingrediantObj: []
-    maxIngrediantPercentage: 55
+    maxIngrediantPercentage: 70
     ingrediantPercentage: 0
     leftSideObj: []
     leftPercentage: 0
@@ -263,8 +264,9 @@ MonoBehaviour:
     distanceBetweenObjects: []
     averageDistance: 0
   - ingrediantName: Tomato Sauce
+    ingrediant: 0
     ingrediantObj: []
-    maxIngrediantPercentage: 55
+    maxIngrediantPercentage: 70
     ingrediantPercentage: 0
     leftSideObj: []
     leftPercentage: 0
@@ -274,6 +276,7 @@ MonoBehaviour:
     distanceBetweenObjects: []
     averageDistance: 0
   - ingrediantName: Pepperoni
+    ingrediant: 2
     ingrediantObj: []
     maxIngrediantPercentage: 18
     ingrediantPercentage: 0
@@ -285,6 +288,7 @@ MonoBehaviour:
     distanceBetweenObjects: []
     averageDistance: 0
   - ingrediantName: Sausage
+    ingrediant: 3
     ingrediantObj: []
     maxIngrediantPercentage: 18
     ingrediantPercentage: 0
@@ -296,6 +300,7 @@ MonoBehaviour:
     distanceBetweenObjects: []
     averageDistance: 0
   - ingrediantName: Mushroom
+    ingrediant: 4
     ingrediantObj: []
     maxIngrediantPercentage: 18
     ingrediantPercentage: 0
@@ -307,6 +312,7 @@ MonoBehaviour:
     distanceBetweenObjects: []
     averageDistance: 0
   - ingrediantName: Olive
+    ingrediant: 5
     ingrediantObj: []
     maxIngrediantPercentage: 18
     ingrediantPercentage: 0
@@ -318,6 +324,7 @@ MonoBehaviour:
     distanceBetweenObjects: []
     averageDistance: 0
   - ingrediantName: Onion
+    ingrediant: 6
     ingrediantObj: []
     maxIngrediantPercentage: 18
     ingrediantPercentage: 0
@@ -329,6 +336,7 @@ MonoBehaviour:
     distanceBetweenObjects: []
     averageDistance: 0
   - ingrediantName: Paprika
+    ingrediant: 7
     ingrediantObj: []
     maxIngrediantPercentage: 18
     ingrediantPercentage: 0

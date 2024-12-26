@@ -40,8 +40,10 @@ public enum PizzaCook
 public class PizzaTopping
 {
     public PizzaOptions topping;
-    public float amount;
+    public float priceOfTopping; //Total price for the amount given
+    public int amount;
     public PizzaSide side;
+    public int differenceAccepted;
 }
 
 [System.Serializable]
@@ -59,4 +61,5 @@ public class Dialog : ScriptableObject
     public float speedOfTalk = 0.2f;
     public PizzaTopping[] toppings;
     public PizzaCook cookTimes;
+    public int numberOfCuts = 3;
 }

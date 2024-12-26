@@ -103,7 +103,7 @@ public class Encryptor : MonoBehaviour
 
             keys.Add(newKey);
 
-            Debug.Log($"Mapped: {exampleChar} -> {availableSet.character}");
+            // Debug.Log($"Mapped: {exampleChar} -> {availableSet.character}");
         }
     }
 

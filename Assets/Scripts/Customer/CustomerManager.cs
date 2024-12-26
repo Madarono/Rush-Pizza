@@ -47,7 +47,7 @@ public class CustomerManager : MonoBehaviour
         {
             InstantiateCustomer();
         }
-        if(Input.GetKeyDown(KeyCode.R))
+        if(Input.GetKeyDown(KeyCode.Y))
         {
             DeleteCustomer();
         }
@@ -62,6 +62,21 @@ public class CustomerManager : MonoBehaviour
             playerCam.canMove = true;
             goScript.askedHint = false;
             goScript.askedWhat = false;
+            
+            if(goScript.state == States.Talking)
+            {
+                settings.money += goScript.bill;
+            }
+
+
+            if(goScript.state == States.Ending)
+            {
+                Destroy(goScript.gameObject);
+                goScript = null;
+                dialogWindow.SetActive(false);
+                return;
+            }
+
             goScript.state = States.Waiting;
             dialogWindow.SetActive(false);
             //Make order stuff happen here

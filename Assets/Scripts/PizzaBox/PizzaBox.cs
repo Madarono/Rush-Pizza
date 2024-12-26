@@ -14,10 +14,14 @@ public enum PizzaRating
 [System.Serializable]
 public class BoxInformation
 {
-    public string ingrediantName;
-    public float ingrediantPercentage;
-    public float leftPercentage;
-    public float rightPercentage;
+    // public string ingrediantName;
+    public PizzaOptions ingrediant;
+    public int toppingCount;
+    public int leftSideCount;
+    public int rightSideCount;
+    // public float ingrediantPercentage;
+    // public float leftPercentage;
+    // public float rightPercentage;
 
     public float averageDistance;
     public PizzaRating toppingDistanceRating;
@@ -43,8 +47,8 @@ public class PizzaRatingRequirement
 
 public class PizzaBox : MonoBehaviour
 {
-    private Ingrediants[] ingrediants;
-    private PizzaCuts cuts;
+    [HideInInspector]public Ingrediants[] ingrediants;
+    [HideInInspector]public PizzaCuts cuts;
 
     public BoxInformation[] toppingInfo;
     public CutInformation cutInfo;
@@ -74,11 +78,12 @@ public class PizzaBox : MonoBehaviour
     {
         for(int i = 0; i < ingrediants.Length; i++)
         {
-            toppingInfo[i].ingrediantName = ingrediants[i].ingrediantName;
-            toppingInfo[i].ingrediantPercentage = ingrediants[i].ingrediantPercentage;
-            toppingInfo[i].leftPercentage = ingrediants[i].leftPercentage;
-            toppingInfo[i].rightPercentage = ingrediants[i].rightPercentage;
+            // toppingInfo[i].ingrediantName = ingrediants[i].ingrediantName;
+            toppingInfo[i].ingrediant = ingrediants[i].ingrediant;
+            toppingInfo[i].leftSideCount = ingrediants[i].leftSideObj.Count;
+            toppingInfo[i].rightSideCount = ingrediants[i].rightSideObj.Count;
             toppingInfo[i].averageDistance = ingrediants[i].averageDistance;
+            toppingInfo[i].toppingCount = ingrediants[i].ingrediantObj.Count;
         }
 
         cutInfo.numberOfCuts = cuts.numberOfCuts;
@@ -107,7 +112,7 @@ public class PizzaBox : MonoBehaviour
 
         for(int i = 0; i < toppingInfo.Length; i++)
         {
-            if(toppingInfo[i].ingrediantPercentage <= 0 || toppingInfo[i].averageDistance <= 0)
+            if(toppingInfo[i].averageDistance <= 0)
             {
                 continue;
             }
@@ -138,14 +143,21 @@ public class PizzaBox : MonoBehaviour
         
         float overallRating = 0;
         overallRating = totalRating / totalElements;
+        bool hasRating = false;
         for(int i = 0; i < overallRatingReq.Length; i++)
         {
             if(overallRating >= overallRatingReq[i].minRequirement && overallRating <= overallRatingReq[i].maxRequirement)
             {
+                hasRating = true;
                 overallPizzaRating = overallRatingReq[i].rating;
                 Debug.Log("Finalized Rating");
                 break;
             }
+        }
+
+        if(!hasRating)
+        {
+            overallPizzaRating = PizzaRating.Good;
         }
         Debug.Log(overallRating);
     }

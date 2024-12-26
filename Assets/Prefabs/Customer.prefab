@@ -120,17 +120,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a9c09c7ebc3dfb32a30f9563a81c1c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialog: {fileID: 11400000, guid: 43473eacb71a6ff25840aa9df3414833, type: 2}
+  state: 0
   mouseCursor: {fileID: 0}
   playerMovement: {fileID: 0}
   playerCam: {fileID: 0}
+  dialog: {fileID: 11400000, guid: 43473eacb71a6ff25840aa9df3414833, type: 2}
+  toppings: []
+  cookTimes: 0
+  cookedTimes: 0
+  numberOfCuts: 0
+  overallPizzaRating: 0
+  tipAdditions:
+  - rating: 0
+    percentageOfTip: 0.4
+  - rating: 1
+    percentageOfTip: 0.3
+  - rating: 2
+    percentageOfTip: 0.2
+  - rating: 3
+    percentageOfTip: 0.1
+  - rating: 4
+    percentageOfTip: 0
+  tip: 0
+  bill: 0
+  happyLines:
+  - englishVersion: This is the best pizza I've ever had!
+    deutschVersion: 'das ist die best pizza ich je hatte '
+  - englishVersion: What a wonderful pizza you made!
+    deutschVersion: Was eine wunderbare pizza sie gemachen!
+  upsetLines:
+  - englishVersion: .. It is terrible.
+    deutschVersion: .. es ist schrecklich.
+  - englishVersion: I hope this pizza never opens again.
+    deutschVersion: ich hoffe diese pizzabackerei machen nie wieder auf.
+  dialogWindow: {fileID: 0}
+  dialogContent: {fileID: 0}
   okayButton: {fileID: 0}
   whatButton: {fileID: 0}
   hintButton: {fileID: 0}
   askedWhat: 0
   askedHint: 0
-  dialogWindow: {fileID: 0}
-  dialogContent: {fileID: 0}
   settings: {fileID: 0}
   specialCharcters:
   - character: ','

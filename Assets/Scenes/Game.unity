@@ -1230,6 +1230,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   english: 1
+  money: 100
   holdCrouch: 0
   crouch: 99
   throwKey: 114
@@ -1306,11 +1307,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   key: {fileID: 11400000, guid: b6ee0d022b2a68715b82cb468057a640, type: 2}
-  inputEcryption: kill yourself ya youssef
+  inputEcryption: 
   outputEncryption: 
   inputDecryption: 
   outputDecryption: 
-  randomize: 1
+  randomize: 0
   keys: []
 --- !u!1 &447908112
 GameObject:
@@ -6065,10 +6066,6 @@ PrefabInstance:
       propertyPath: settings
       value: 
       objectReference: {fileID: 440461161}
-    - target: {fileID: 5663998875915540810, guid: 0dceed5462eae33c484ff755090085a4, type: 3}
-      propertyPath: settings
-      value: 
-      objectReference: {fileID: 440461161}
     - target: {fileID: 5669127327197589333, guid: 0dceed5462eae33c484ff755090085a4, type: 3}
       propertyPath: m_Name
       value: Player
@@ -6371,53 +6368,60 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7645fecc150dff23955d698ed5a9fd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ingrediants: []
+  cuts:
+    cuts: []
+    numberOfCuts: 0
+    numberOfSlices: 0
+    distanceBetweenCuts: []
+    averageDistance: 0
   toppingInfo:
-  - ingrediantName: 
-    ingrediantPercentage: 0
-    leftPercentage: 0
-    rightPercentage: 0
+  - ingrediant: 0
+    toppingCount: 0
+    leftSideCount: 0
+    rightSideCount: 0
     averageDistance: 0
     toppingDistanceRating: 0
-  - ingrediantName: 
-    ingrediantPercentage: 0
-    leftPercentage: 0
-    rightPercentage: 0
+  - ingrediant: 0
+    toppingCount: 0
+    leftSideCount: 0
+    rightSideCount: 0
     averageDistance: 0
     toppingDistanceRating: 0
-  - ingrediantName: 
-    ingrediantPercentage: 0
-    leftPercentage: 0
-    rightPercentage: 0
+  - ingrediant: 0
+    toppingCount: 0
+    leftSideCount: 0
+    rightSideCount: 0
     averageDistance: 0
     toppingDistanceRating: 0
-  - ingrediantName: 
-    ingrediantPercentage: 0
-    leftPercentage: 0
-    rightPercentage: 0
+  - ingrediant: 0
+    toppingCount: 0
+    leftSideCount: 0
+    rightSideCount: 0
     averageDistance: 0
     toppingDistanceRating: 0
-  - ingrediantName: 
-    ingrediantPercentage: 0
-    leftPercentage: 0
-    rightPercentage: 0
+  - ingrediant: 0
+    toppingCount: 0
+    leftSideCount: 0
+    rightSideCount: 0
     averageDistance: 0
     toppingDistanceRating: 0
-  - ingrediantName: 
-    ingrediantPercentage: 0
-    leftPercentage: 0
-    rightPercentage: 0
+  - ingrediant: 0
+    toppingCount: 0
+    leftSideCount: 0
+    rightSideCount: 0
     averageDistance: 0
     toppingDistanceRating: 0
-  - ingrediantName: 
-    ingrediantPercentage: 0
-    leftPercentage: 0
-    rightPercentage: 0
+  - ingrediant: 0
+    toppingCount: 0
+    leftSideCount: 0
+    rightSideCount: 0
     averageDistance: 0
     toppingDistanceRating: 0
-  - ingrediantName: 
-    ingrediantPercentage: 0
-    leftPercentage: 0
-    rightPercentage: 0
+  - ingrediant: 0
+    toppingCount: 0
+    leftSideCount: 0
+    rightSideCount: 0
     averageDistance: 0
     toppingDistanceRating: 0
   cutInfo:
@@ -6632,7 +6636,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   box: {fileID: 7703690775760875591}
-  checkRange: 1.5
+  checkRange: 2
   pizzaOnTop: 0
   pizza: {fileID: 0}
   pizzaLayer:

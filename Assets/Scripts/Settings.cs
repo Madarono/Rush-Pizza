@@ -5,6 +5,7 @@ using UnityEngine;
 public class Settings : MonoBehaviour
 {
     public bool english = true;
+    public float money;
 
     public bool holdCrouch;
     public KeyCode crouch = KeyCode.C;
