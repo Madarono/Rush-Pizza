@@ -35,6 +35,7 @@ public class RotateObject : MonoBehaviour
             drag.heldObject.transform.SetParent(null);
             targetedObject.transform.position = drag.heldObject.transform.position;
             drag.heldObject.transform.SetParent(targetedObject.transform);
+            drag.can_drag = false;
             isRotating = true;
             p_cam.canMove = false;
         }
@@ -42,6 +43,7 @@ public class RotateObject : MonoBehaviour
         // Check for right mouse button release
         if (Input.GetMouseButtonUp(1)  && targetedObject.transform.childCount > 0)
         {
+            drag.can_drag = true;
             isRotating = false;
             p_cam.canMove = true;
         }

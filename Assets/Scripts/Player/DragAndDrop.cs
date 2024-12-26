@@ -48,12 +48,17 @@ public class DragAndDrop : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(settings.throwKey) && can_drag)
+        if(!can_drag)
+        {
+            return;
+        }
+        
+        if (Input.GetKeyDown(settings.throwKey))
         {
             ThrowObject();
         }
 
-        if(Input.GetMouseButtonDown(0) && can_drag)
+        if(Input.GetMouseButtonDown(0))
         {
             if(heldObject == null)
             {
@@ -80,7 +85,7 @@ public class DragAndDrop : MonoBehaviour
             }
         }
 
-        if(Input.GetMouseButtonDown(2) && can_drag)
+        if(Input.GetMouseButtonDown(2))
         {
             if(selectedObject == null)
             {
