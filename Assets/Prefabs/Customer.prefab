@@ -121,12 +121,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
+  pricing:
+  - topping: 0
+    fullPriceTopping: 1
+  - topping: 1
+    fullPriceTopping: 1
+  - topping: 2
+    fullPriceTopping: 3
   mouseCursor: {fileID: 0}
   playerMovement: {fileID: 0}
   playerCam: {fileID: 0}
-  dialog: {fileID: 11400000, guid: 43473eacb71a6ff25840aa9df3414833, type: 2}
-  toppings: []
+  dialog: {fileID: 11400000, guid: d83f2863f5233c496b3c63f761defea2, type: 2}
+  leftToppings: []
+  rightToppings: []
   cookTimes: 0
+  pizzaSides:
+  - left: 0
+    right: 0
+  - left: 0
+    right: 0
   cookedTimes: 0
   numberOfCuts: 0
   overallPizzaRating: 0

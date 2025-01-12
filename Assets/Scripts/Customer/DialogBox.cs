@@ -31,7 +31,7 @@ public class DialogBox : MonoBehaviour
     public void CheckDimentions(string dialog)
     {
         dialogString = dialog;
-        Debug.Log(dialogString.Length);
+        // Debug.Log(dialogString.Length);
         int dialogCount = dialog.Length;
 
         foreach (var dim in dimentions)

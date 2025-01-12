@@ -79,7 +79,6 @@ public class CustomerManager : MonoBehaviour
 
             goScript.state = States.Waiting;
             dialogWindow.SetActive(false);
-            //Make order stuff happen here
         }
     }
 

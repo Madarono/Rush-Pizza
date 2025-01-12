@@ -22,21 +22,8 @@ MonoBehaviour:
   - content: Dough. Cheese. Sauce, and pepperoni. That's it.
     contentDeutsch: Teig. Kase. Sosse, und salami,  Das war's.
     type: 2
-  speedOfTalk: 0.04
-  toppings:
-  - topping: 0
-    priceOfTopping: 1
-    amount: 70
-    side: 2
-    differenceAccepted: 25
-  - topping: 1
-    priceOfTopping: 1
-    amount: 70
-    side: 2
-    differenceAccepted: 25
-  - topping: 2
-    priceOfTopping: 3
-    amount: 18
-    side: 2
-    differenceAccepted: 5
+  speedOfTalk: 0.03
+  leftToppings: []
+  rightToppings: []
   cookTimes: 1
+  numberOfCuts: 3

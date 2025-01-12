@@ -25,7 +25,8 @@ public class InteractCheck : MonoBehaviour
         {
             if(customer != null && customer.state == States.Static)
             {
-                customer.toppings = customer.dialog.toppings;
+                customer.leftToppings = customer.dialog.leftToppings;
+                customer.rightToppings = customer.dialog.rightToppings;
                 customer.cookTimes = customer.dialog.cookTimes;
                 customer.numberOfCuts = customer.dialog.numberOfCuts;
                 customer.InitiateTalk(TalkType.Initial);

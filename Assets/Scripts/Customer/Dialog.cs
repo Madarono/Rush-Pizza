@@ -14,13 +14,6 @@ public enum PizzaOptions
     Paprika
 }
 
-public enum PizzaSide
-{
-    Left,
-    Right,
-    AllRound
-}
-
 public enum TalkType
 {
     Initial,
@@ -40,10 +33,9 @@ public enum PizzaCook
 public class PizzaTopping
 {
     public PizzaOptions topping;
-    public float priceOfTopping; //Total price for the amount given
     public int amount;
-    public PizzaSide side;
-    public int differenceAccepted;
+    public int minDifferenceAccepted;
+    public int maxDifferenceAccepted;
 }
 
 [System.Serializable]
@@ -59,7 +51,10 @@ public class Dialog : ScriptableObject
 {
     public Talk[] talk;
     public float speedOfTalk = 0.2f;
-    public PizzaTopping[] toppings;
+
+    public PizzaTopping[] leftToppings;
+    public PizzaTopping[] rightToppings;
+
     public PizzaCook cookTimes;
     public int numberOfCuts = 3;
 }

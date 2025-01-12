@@ -41,7 +41,7 @@ public class RotateObject : MonoBehaviour
         }
 
         // Check for right mouse button release
-        if (Input.GetMouseButtonUp(1)  && targetedObject.transform.childCount > 0)
+        if ((Input.GetMouseButtonUp(1) && targetedObject.transform.childCount > 0) || (isRotating && targetedObject.transform.childCount == 0))
         {
             drag.can_drag = true;
             isRotating = false;

@@ -27,23 +27,41 @@ public class TipAdditions
 }
 
 [System.Serializable]
+public class IngrediantPricing
+{
+    public PizzaOptions topping;
+    public float fullPriceTopping;
+}
+
+[System.Serializable]
 public class Lines
 {
     public string englishVersion;
     public string deutschVersion;
 }
 
+[System.Serializable]
+public class SideToCheck
+{
+    public bool left;
+    public bool right;
+}
+
 public class Customer : MonoBehaviour
 {
     public States state;
+    public IngrediantPricing[] pricing;
     [HideInInspector]public MouseCursor mouseCursor;
     [HideInInspector]public PlayerMovement playerMovement;
     [HideInInspector]public Player_Cam playerCam;
 
     [Header("Ordering")]
     public Dialog dialog;
-    public PizzaTopping[] toppings;
+    public PizzaTopping[] leftToppings;
+    public PizzaTopping[] rightToppings;
     public PizzaCook cookTimes;
+    public SideToCheck[] pizzaSides = new SideToCheck[2]; 
+
     public int cookedTimes;
     public int numberOfCuts;
 
@@ -75,18 +93,15 @@ public class Customer : MonoBehaviour
 
     public void InitiateTalk(TalkType talkType)
     {
+        StopAllCoroutines();
+
         if(state == States.Waiting)
         {
             return;
         }
         if(state == States.Static)
         {
-            bill = 5f;
-
-            for(int i = 0; i < toppings.Length; i++)
-            {
-                bill += toppings[i].priceOfTopping;
-            }
+            SetBill();
         }
 
         state = States.Talking;
@@ -120,6 +135,37 @@ public class Customer : MonoBehaviour
             playerMovement.canMove = false;
             playerCam.canMove = false;
         }
+    }
+
+    public void SetBill()
+    {
+        bill = 5f;
+
+        for(int i = 0; i < dialog.leftToppings.Length; i++)
+        {
+            for(int o = 0; o < pricing.Length; o++)
+            {
+                if(dialog.leftToppings[i].topping == pricing[o].topping)
+                {
+                    bill += pricing[o].fullPriceTopping / 2f;
+                    break;
+                }
+            }
+        }
+
+        for(int i = 0; i < dialog.rightToppings.Length; i++)
+        {
+            for(int o = 0; o < pricing.Length; o++)
+            {
+                if(dialog.rightToppings[i].topping == pricing[o].topping)
+                {
+                    bill += pricing[o].fullPriceTopping / 2f;
+                    break;
+                }
+            }
+        }
+
+        Debug.Log("Bill: " + bill.ToString());
     }
 
     IEnumerator ShowText(string content)
@@ -163,7 +209,7 @@ public class Customer : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter(Collision col)
+    void OnCollisionEnter(Collision col) //When order is ready
     {
         if(state != States.Waiting)
         {
@@ -181,7 +227,24 @@ public class Customer : MonoBehaviour
             if(box.ingrediants.Length > 0)
             {
                 Debug.Log("Box has information");
-                CheckIngrediants(box);
+                CheckSide(box);
+                bool checkIngrediants = false;
+                for(int i = 0; i < pizzaSides.Length; i++)
+                {
+                    if(pizzaSides[i].left || pizzaSides[i].right)
+                    {
+                        checkIngrediants = true;
+                    }
+                    else
+                    {
+                        checkIngrediants = false;
+                    }
+                }
+
+                if(checkIngrediants)
+                {
+                    CheckIngrediants(box);
+                }
                 Destroy(obj);
             }
             else
@@ -193,156 +256,281 @@ public class Customer : MonoBehaviour
 
     public void CheckIngrediants(PizzaBox pizzabox)
     {
-        for(int i = 0; i < toppings.Length; i++)
+        for(int i = 0; i < pizzaSides.Length; i++)
         {
-            for(int o = 0; o < pizzabox.toppingInfo.Length; o++)
+            if(pizzaSides[i].left)
             {
-                if(toppings[i].topping == pizzabox.toppingInfo[o].ingrediant)
+                if(i == 0)
                 {
-                    switch(toppings[i].side)
+                    for(int q = 0; q < leftToppings.Length; q++)
                     {
-                        case PizzaSide.Left:
-                            if(pizzabox.toppingInfo[o].toppingDistanceRating == PizzaRating.Terrible)
+                        for(int o = 0; o < pizzabox.toppingInfo.Length; o++)
+                        {
+                            if(leftToppings[q].topping == pizzabox.toppingInfo[o].ingrediant)
                             {
-                                Upset();
-                                return;
-                            }
-
-                            if(pizzabox.toppingInfo[o].leftSideCount == toppings[i].amount)
-                            {
-                                Debug.Log("Exact");
-                                
-                                PizzaRating rating = pizzabox.toppingInfo[o].toppingDistanceRating;
-                                for(int r = 0; r < tipAdditions.Length; r++)
+                                if(pizzabox.toppingInfo[o].toppingDistanceRating == PizzaRating.Terrible)
                                 {
-                                    if(rating == tipAdditions[r].rating)
-                                    {
-                                        tip += toppings[i].priceOfTopping / tipAdditions[r].percentageOfTip; 
-                                    }
+                                    Upset();
+                                    return;
                                 }
-                            }
-                            else
-                            {
-                                int difference = pizzabox.toppingInfo[o].leftSideCount - toppings[i].amount;
-                                Debug.Log("Not exact, difference: " + difference);
-                                if(difference <= toppings[i].differenceAccepted && difference >= -toppings[i].differenceAccepted)
+
+                                if(pizzabox.toppingInfo[o].leftSideCount == leftToppings[q].amount)
                                 {
-                                    Debug.Log("The difference is accepted.");
-                                    
+                                    Debug.Log("Exact");
+
                                     PizzaRating rating = pizzabox.toppingInfo[o].toppingDistanceRating;
                                     for(int r = 0; r < tipAdditions.Length; r++)
                                     {
                                         if(rating == tipAdditions[r].rating)
                                         {
-                                            tip += toppings[i].priceOfTopping / tipAdditions[r].percentageOfTip; 
+                                            for(int p = 0; p < pricing.Length; p++)
+                                            {
+                                                if(leftToppings[q].topping == pricing[p].topping)
+                                                {
+                                                    tip = pricing[p].fullPriceTopping / tipAdditions[r].percentageOfTip;
+                                                }
+                                            }
                                         }
                                     }
                                 }
                                 else
                                 {
-                                    Upset();
-                                    return;
-                                }
-                            }
-                            break;
-
-                        case PizzaSide.Right:
-                            if(pizzabox.toppingInfo[o].toppingDistanceRating == PizzaRating.Terrible)
-                            {
-                                Upset();
-                                return;
-                            }
-
-                            if(pizzabox.toppingInfo[o].rightSideCount == toppings[i].amount)
-                            {
-
-                                Debug.Log("Exact");
-                                
-                                PizzaRating rating = pizzabox.toppingInfo[o].toppingDistanceRating;
-                                for(int r = 0; r < tipAdditions.Length; r++)
-                                {
-                                    if(rating == tipAdditions[r].rating)
+                                    int difference = pizzabox.toppingInfo[o].leftSideCount - leftToppings[q].amount;
+                                    Debug.Log("Not exact, difference: " + difference);
+                                    if(difference <= leftToppings[q].maxDifferenceAccepted && difference >= leftToppings[q].minDifferenceAccepted)
                                     {
-                                        tip += toppings[i].priceOfTopping / tipAdditions[r].percentageOfTip; 
+                                        Debug.Log("The difference is accepted.");
+
+                                        PizzaRating rating = pizzabox.toppingInfo[o].toppingDistanceRating;
+                                        for(int r = 0; r < tipAdditions.Length; r++)
+                                        {
+                                            if(rating == tipAdditions[r].rating)
+                                            {
+                                                for(int p = 0; p < pricing.Length; p++)
+                                                {
+                                                    if(leftToppings[q].topping == pricing[p].topping)
+                                                    {
+                                                        tip = pricing[p].fullPriceTopping / tipAdditions[r].percentageOfTip;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        Upset();
+                                        return;
                                     }
                                 }
                             }
-                            else
+                        }
+                    }
+                }
+                else
+                {
+                    for(int q = 0; q < rightToppings.Length; q++)
+                    {
+                        for(int o = 0; o < pizzabox.toppingInfo.Length; o++)
+                        {
+                            if(rightToppings[q].topping == pizzabox.toppingInfo[o].ingrediant)
                             {
-                                int difference = pizzabox.toppingInfo[o].rightSideCount - toppings[i].amount;
-                                Debug.Log("Not exact, difference: " + difference);
-                                if(difference <= toppings[i].differenceAccepted && difference >= -toppings[i].differenceAccepted)
+                                if(pizzabox.toppingInfo[o].toppingDistanceRating == PizzaRating.Terrible)
                                 {
-                                    Debug.Log("The difference is accepted.");
-                                    
+                                    Upset();
+                                    return;
+                                }
+
+                                if(pizzabox.toppingInfo[o].leftSideCount == rightToppings[q].amount)
+                                {
+                                    Debug.Log("Exact");
+
                                     PizzaRating rating = pizzabox.toppingInfo[o].toppingDistanceRating;
                                     for(int r = 0; r < tipAdditions.Length; r++)
                                     {
                                         if(rating == tipAdditions[r].rating)
                                         {
-                                            tip += toppings[i].priceOfTopping / tipAdditions[r].percentageOfTip; 
+                                            for(int p = 0; p < pricing.Length; p++)
+                                            {
+                                                if(rightToppings[q].topping == pricing[p].topping)
+                                                {
+                                                    tip = pricing[p].fullPriceTopping / tipAdditions[r].percentageOfTip;
+                                                }
+                                            }
                                         }
                                     }
                                 }
                                 else
                                 {
-                                    Upset();
-                                    return;
-                                }
-                            }
-                            break;
-                        
-                        case PizzaSide.AllRound:
-                            if(pizzabox.toppingInfo[o].toppingDistanceRating == PizzaRating.Terrible)
-                            {
-                                Upset();
-                                return;
-                            }
-
-                            if(pizzabox.toppingInfo[o].toppingCount == toppings[i].amount)
-                            {
-                                
-                                Debug.Log("Exact");
-                                
-                                PizzaRating rating = pizzabox.toppingInfo[o].toppingDistanceRating;
-                                for(int r = 0; r < tipAdditions.Length; r++)
-                                {
-                                    if(rating == tipAdditions[r].rating)
+                                    int difference = pizzabox.toppingInfo[o].leftSideCount - rightToppings[q].amount;
+                                    Debug.Log("Not exact, difference: " + difference);
+                                    if(difference <= rightToppings[q].maxDifferenceAccepted && difference >= rightToppings[q].minDifferenceAccepted)
                                     {
-                                        tip += toppings[i].priceOfTopping / tipAdditions[r].percentageOfTip; 
+                                        Debug.Log("The difference is accepted.");
+
+                                        PizzaRating rating = pizzabox.toppingInfo[o].toppingDistanceRating;
+                                        for(int r = 0; r < tipAdditions.Length; r++)
+                                        {
+                                            if(rating == tipAdditions[r].rating)
+                                            {
+                                                for(int p = 0; p < pricing.Length; p++)
+                                                {
+                                                    if(rightToppings[q].topping == pricing[p].topping)
+                                                    {
+                                                        tip = pricing[p].fullPriceTopping / tipAdditions[r].percentageOfTip;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        Upset();
+                                        return;
                                     }
                                 }
                             }
-                            else
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if(i == 0)
+                {
+                    for(int q = 0; q < leftToppings.Length; q++)
+                    {
+                        for(int o = 0; o < pizzabox.toppingInfo.Length; o++)
+                        {
+                            if(leftToppings[q].topping == pizzabox.toppingInfo[o].ingrediant)
                             {
-                                int difference = pizzabox.toppingInfo[o].toppingCount - toppings[i].amount;
-                                Debug.Log("Not exact, difference: " + difference);
-                                if(difference <= toppings[i].differenceAccepted && difference >= -toppings[i].differenceAccepted)
+                                if(pizzabox.toppingInfo[o].toppingDistanceRating == PizzaRating.Terrible)
                                 {
-                                    Debug.Log("The difference is accepted.");
-                                    
+                                    Upset();
+                                    return;
+                                }
+
+                                if(pizzabox.toppingInfo[o].rightSideCount == leftToppings[q].amount)
+                                {
+                                    Debug.Log("Exact");
+
                                     PizzaRating rating = pizzabox.toppingInfo[o].toppingDistanceRating;
                                     for(int r = 0; r < tipAdditions.Length; r++)
                                     {
                                         if(rating == tipAdditions[r].rating)
                                         {
-                                            tip += toppings[i].priceOfTopping / tipAdditions[r].percentageOfTip; 
+                                            for(int p = 0; p < pricing.Length; p++)
+                                            {
+                                                if(leftToppings[q].topping == pricing[p].topping)
+                                                {
+                                                    tip = pricing[p].fullPriceTopping / tipAdditions[r].percentageOfTip;
+                                                }
+                                            }
                                         }
                                     }
                                 }
                                 else
                                 {
+                                    int difference = pizzabox.toppingInfo[o].rightSideCount - leftToppings[q].amount;
+                                    Debug.Log("Not exact, difference: " + difference);
+                                    if(difference <= leftToppings[q].maxDifferenceAccepted && difference >= leftToppings[q].minDifferenceAccepted)
+                                    {
+                                        Debug.Log("The difference is accepted.");
+
+                                        PizzaRating rating = pizzabox.toppingInfo[o].toppingDistanceRating;
+                                        for(int r = 0; r < tipAdditions.Length; r++)
+                                        {
+                                            if(rating == tipAdditions[r].rating)
+                                            {
+                                                for(int p = 0; p < pricing.Length; p++)
+                                                {
+                                                    if(leftToppings[q].topping == pricing[p].topping)
+                                                    {
+                                                        tip = pricing[p].fullPriceTopping / tipAdditions[r].percentageOfTip;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        Upset();
+                                        return;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    for(int q = 0; q < rightToppings.Length; q++)
+                    {
+                        for(int o = 0; o < pizzabox.toppingInfo.Length; o++)
+                        {
+                            if(rightToppings[q].topping == pizzabox.toppingInfo[o].ingrediant)
+                            {
+                                if(pizzabox.toppingInfo[o].toppingDistanceRating == PizzaRating.Terrible)
+                                {
                                     Upset();
                                     return;
                                 }
+
+                                if(pizzabox.toppingInfo[o].rightSideCount == rightToppings[q].amount)
+                                {
+                                    Debug.Log("Exact");
+
+                                    PizzaRating rating = pizzabox.toppingInfo[o].toppingDistanceRating;
+                                    for(int r = 0; r < tipAdditions.Length; r++)
+                                    {
+                                        if(rating == tipAdditions[r].rating)
+                                        {
+                                            for(int p = 0; p < pricing.Length; p++)
+                                            {
+                                                if(rightToppings[q].topping == pricing[p].topping)
+                                                {
+                                                    tip = pricing[p].fullPriceTopping / tipAdditions[r].percentageOfTip;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    int difference = pizzabox.toppingInfo[o].rightSideCount - rightToppings[q].amount;
+                                    Debug.Log("Not exact, difference: " + difference);
+                                    if(difference <= rightToppings[q].maxDifferenceAccepted && difference >= rightToppings[q].minDifferenceAccepted)
+                                    {
+                                        Debug.Log("The difference is accepted.");
+
+                                        PizzaRating rating = pizzabox.toppingInfo[o].toppingDistanceRating;
+                                        for(int r = 0; r < tipAdditions.Length; r++)
+                                        {
+                                            if(rating == tipAdditions[r].rating)
+                                            {
+                                                for(int p = 0; p < pricing.Length; p++)
+                                                {
+                                                    if(rightToppings[q].topping == pricing[p].topping)
+                                                    {
+                                                        tip = pricing[p].fullPriceTopping / tipAdditions[r].percentageOfTip;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        Upset();
+                                        return;
+                                    }
+                                }
                             }
-                            break;
+                        }
                     }
                 }
             }
         }
 
-        switch(cookTimes)
+        switch(cookTimes) //Sets the cookTimes
         {
             case PizzaCook.Raw:
                 cookedTimes = 0;
@@ -361,9 +549,13 @@ public class Customer : MonoBehaviour
                 break;
         }
 
-        if(pizzabox.cookedTimes != this.cookedTimes)
+        if(pizzabox.cookedTimes != this.cookedTimes) //If the cook times isn't exact then check if it is 1 more than it.
         {
-            if(pizzabox.cookedTimes != this.cookedTimes + 1 && this.cookedTimes + 1 != 4)
+            if(pizzabox.cookedTimes == this.cookedTimes + 1 && this.cookedTimes + 1 != 4)
+            {
+                tip += 1f;
+            }
+            else
             {
                 Upset();
                 return;
@@ -371,10 +563,10 @@ public class Customer : MonoBehaviour
         }
         else
         {
-            tip += 1.5f;
+            tip += 1f;
         }
 
-        if(pizzabox.cuts.numberOfCuts != this.numberOfCuts)
+        if(pizzabox.cuts.numberOfCuts != this.numberOfCuts) //Checks if cuts are exact and if not then less or equal to two more cuts.
         {
             if(pizzabox.cuts.numberOfCuts <= this.numberOfCuts + 2)
             {
@@ -392,6 +584,116 @@ public class Customer : MonoBehaviour
         }
 
         Satisfied();
+    }
+
+    public void CheckSide(PizzaBox pizzabox)
+    {
+        bool[] leftChecks = new bool[dialog.leftToppings.Length];
+        bool[] rightChecks = new bool[dialog.leftToppings.Length];
+
+        for(int i = 0; i < dialog.leftToppings.Length; i++)
+        {
+            for(int o = 0; o < pizzabox.toppingInfo.Length; o++)
+            {
+                if(dialog.leftToppings[i].topping == pizzabox.toppingInfo[o].ingrediant)
+                {
+                    if(pizzabox.toppingInfo[o].leftSideCount > 0)
+                    {
+                        leftChecks[i] = true;
+                    }
+                    if(pizzabox.toppingInfo[o].rightSideCount > 0)
+                    {
+                        rightChecks[i] = true;
+                    }
+                }
+            }
+        }
+
+        bool continueCheck = false;
+        for(int i = 0; i < leftChecks.Length; i++)
+        {
+            if(!leftChecks[i])
+            {
+                Debug.Log("Left Failed For LeftSide");
+                continueCheck = true;
+                break;
+            }
+
+            Debug.Log("Left succeeded For LeftSide");
+            pizzaSides[0].left = true;
+            pizzaSides[0].right = false;
+        }
+
+        if(continueCheck)
+        {
+            for(int i = 0; i < rightChecks.Length; i++)
+            {
+                if(!rightChecks[i])
+                {
+                    Debug.Log("Right Failed For LeftSide");
+                    Upset();
+                    return;
+                }
+
+                Debug.Log("Right succeeded For LeftSide");
+                pizzaSides[0].left = false;
+                pizzaSides[0].right = true;
+            }
+        }
+
+        //Right Side
+        bool[] leftChecks1 = new bool[dialog.rightToppings.Length];
+        bool[] rightChecks1 = new bool[dialog.rightToppings.Length];
+
+        for(int i = 0; i < dialog.rightToppings.Length; i++)
+        {
+            for(int o = 0; o < pizzabox.toppingInfo.Length; o++)
+            {
+                if(dialog.rightToppings[i].topping == pizzabox.toppingInfo[o].ingrediant)
+                {
+                    if(pizzabox.toppingInfo[o].leftSideCount > 0)
+                    {
+                        leftChecks1[i] = true;
+                    }
+                    if(pizzabox.toppingInfo[o].rightSideCount > 0)
+                    {
+                        rightChecks1[i] = true;
+                    }
+                }
+            }
+        }
+
+        bool continueCheck1 = false;
+        for(int i = 0; i < leftChecks1.Length; i++)
+        {
+            if(!leftChecks1[i] || !continueCheck)
+            {
+                Debug.Log("Left Failed For RightSide");
+                continueCheck1 = true;
+                break;
+            }
+
+            Debug.Log("Left succeeded For RightSide");
+            pizzaSides[1].left = true;
+            pizzaSides[1].right = false;
+        }
+
+        if(continueCheck1)
+        {
+            for(int i = 0; i < rightChecks1.Length; i++)
+            {
+                if(!rightChecks1[i])
+                {
+                    Debug.Log("Right Failed For RightSide");
+                    Upset();
+                    return;
+                }
+
+                Debug.Log("Right succeeded For RightSide");
+                pizzaSides[1].left = false;
+                pizzaSides[1].right = true;
+            }
+        }
     }
 
     void Upset()
