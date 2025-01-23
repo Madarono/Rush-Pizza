@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class CustomerManager : MonoBehaviour
@@ -24,9 +25,13 @@ public class CustomerManager : MonoBehaviour
     public TextMeshProUGUI whatText;
     public GameObject hintButton;
     public TextMeshProUGUI hintText;
+    public TextMeshProUGUI patienceCounter;
+    public Image emotion;
+    public GameObject emotionWindow;
     
     void Start()
     {
+        emotionWindow.SetActive(false);
         if(settings.english)
         {
             okayText.text = "Okay";
@@ -63,20 +68,23 @@ public class CustomerManager : MonoBehaviour
             goScript.askedHint = false;
             goScript.askedWhat = false;
             
-            if(goScript.state == States.Talking)
+            if(goScript.state == States.Talking) //Initiate Order
             {
                 settings.money += goScript.bill;
+                emotionWindow.SetActive(true);
             }
 
 
-            if(goScript.state == States.Ending)
+            if(goScript.state == States.Ending) //End Order
             {
                 Destroy(goScript.gameObject);
                 goScript = null;
                 dialogWindow.SetActive(false);
+                emotionWindow.SetActive(false);
                 return;
             }
 
+            goScript.SetPatience();
             goScript.state = States.Waiting;
             dialogWindow.SetActive(false);
         }
@@ -119,6 +127,8 @@ public class CustomerManager : MonoBehaviour
         goScript.okayButton = okayButton;
         goScript.whatButton = whatButton;
         goScript.hintButton = hintButton;
+        goScript.patienceCounter = patienceCounter;
+        goScript.emotion = emotion;
     }
 
     public void DeleteCustomer()

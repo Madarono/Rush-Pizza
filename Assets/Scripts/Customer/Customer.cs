@@ -31,6 +31,7 @@ public class IngrediantPricing
 {
     public PizzaOptions topping;
     public float fullPriceTopping;
+    public float patienceInSeconds;
 }
 
 [System.Serializable]
@@ -45,6 +46,14 @@ public class SideToCheck
 {
     public bool left;
     public bool right;
+}
+
+[System.Serializable]
+public class EmotionRequirements
+{
+    public Sprite emotion;
+    public float maxPatienceRequired;
+    public float minPatienceRequired;
 }
 
 public class Customer : MonoBehaviour
@@ -70,8 +79,18 @@ public class Customer : MonoBehaviour
     public float tip;
     public float bill;
 
+    [Header("Lines")]
     public Lines[] happyLines;
     public Lines[] upsetLines;
+
+    [Header("Patience")]
+    private float totalPatience;
+    private float percentageOfPatience;
+    public float patience;
+    public TextMeshProUGUI patienceCounter;
+
+    public Image emotion;
+    public EmotionRequirements[] emotionStages;
 
     [Header("Visual")]
     public GameObject dialogWindow;
@@ -89,6 +108,17 @@ public class Customer : MonoBehaviour
     void Start()
     {
         dialogBox = dialogWindow.GetComponent<DialogBox>();
+    }
+    
+    void Update()
+    {
+        if(state == States.Waiting && patience > 0)
+        {
+            patience -= Time.deltaTime;
+            percentageOfPatience = patience / totalPatience * 100f;
+            patienceCounter.text = "%" + percentageOfPatience.ToString("F0");
+            SetEmotion();
+        }
     }
 
     public void InitiateTalk(TalkType talkType)
@@ -167,6 +197,57 @@ public class Customer : MonoBehaviour
 
         Debug.Log("Bill: " + bill.ToString());
     }
+    public void SetPatience()
+    {   
+        patience = 60f;
+
+        for(int i = 0; i < dialog.leftToppings.Length; i++)
+        {
+            for(int o = 0; o < pricing.Length; o++)
+            {
+                if(dialog.leftToppings[i].topping == pricing[o].topping)
+                {
+                    patience += pricing[o].patienceInSeconds;
+                    break;
+                }
+            }
+        }
+
+        for(int i = 0; i < dialog.rightToppings.Length; i++)
+        {
+            for(int o = 0; o < pricing.Length; o++)
+            {
+                if(dialog.rightToppings[i].topping == pricing[o].topping)
+                {
+                    patience += pricing[o].patienceInSeconds;
+                    break;
+                }
+            }
+        }
+
+        totalPatience = patience;
+    }
+    public void SetEmotion() //0 for happy, 1 for impatient, 2 for angry
+    {
+        if(percentageOfPatience > emotionStages[1].maxPatienceRequired)
+        {
+            return;
+        }
+
+        for(int i = 0; i < emotionStages.Length; i++)
+        {
+            if(percentageOfPatience <= emotionStages[i].maxPatienceRequired && percentageOfPatience >= emotionStages[i].minPatienceRequired)
+            {
+                emotion.sprite = emotionStages[i].emotion;
+                return;
+            }
+        }
+    }
+
+    public void SetEmotion(int id)
+    {
+        emotion.sprite = emotionStages[id].emotion;
+    }
 
     IEnumerator ShowText(string content)
     {
@@ -220,6 +301,12 @@ public class Customer : MonoBehaviour
 
         PizzaBox box = obj.GetComponent<PizzaBox>();
 
+        if(patience <= 0)
+        {
+            Upset();
+            return;
+        }
+
         if(box != null)
         {
             Debug.Log("Found Box!");
@@ -254,6 +341,7 @@ public class Customer : MonoBehaviour
         }
     }
 
+    //Checking Phase
     public void CheckIngrediants(PizzaBox pizzabox)
     {
         for(int i = 0; i < pizzaSides.Length; i++)
@@ -698,6 +786,7 @@ public class Customer : MonoBehaviour
 
     void Upset()
     {
+        SetEmotion(2);
         settings.money -= bill;
         Debug.Log("Very angry");
         string line = "";
@@ -719,7 +808,10 @@ public class Customer : MonoBehaviour
 
     void Satisfied()
     {
-        settings.money += tip;
+        SetEmotion(0);
+        float endingTip = Mathf.Round((tip * (percentageOfPatience / 100f)) * 100f) / 100f;
+        Debug.Log("Starting Tip: " + tip + ", Ending Tip: " + endingTip);
+        settings.money += endingTip;
         Debug.Log("Very happy");
         string line = "";
         if(settings.english)

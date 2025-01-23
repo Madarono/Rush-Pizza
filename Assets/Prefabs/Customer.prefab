@@ -124,14 +124,32 @@ MonoBehaviour:
   pricing:
   - topping: 0
     fullPriceTopping: 1
+    patienceInSeconds: 60
   - topping: 1
     fullPriceTopping: 1
+    patienceInSeconds: 60
   - topping: 2
     fullPriceTopping: 3
+    patienceInSeconds: 80
+  - topping: 3
+    fullPriceTopping: 3
+    patienceInSeconds: 80
+  - topping: 4
+    fullPriceTopping: 1.6
+    patienceInSeconds: 80
+  - topping: 5
+    fullPriceTopping: 1.6
+    patienceInSeconds: 80
+  - topping: 6
+    fullPriceTopping: 1.6
+    patienceInSeconds: 80
+  - topping: 7
+    fullPriceTopping: 1.8
+    patienceInSeconds: 80
   mouseCursor: {fileID: 0}
   playerMovement: {fileID: 0}
   playerCam: {fileID: 0}
-  dialog: {fileID: 11400000, guid: d83f2863f5233c496b3c63f761defea2, type: 2}
+  dialog: {fileID: 11400000, guid: 43473eacb71a6ff25840aa9df3414833, type: 2}
   leftToppings: []
   rightToppings: []
   cookTimes: 0
@@ -166,6 +184,19 @@ MonoBehaviour:
     deutschVersion: .. es ist schrecklich.
   - englishVersion: I hope this pizza never opens again.
     deutschVersion: ich hoffe diese pizzabackerei machen nie wieder auf.
+  patience: 0
+  patienceCounter: {fileID: 0}
+  emotion: {fileID: 0}
+  emotionStages:
+  - emotion: {fileID: 21300000, guid: 56bca5b1b9221981fa59ee31e7dc19bb, type: 3}
+    maxPatienceRequired: 100
+    minPatienceRequired: 50
+  - emotion: {fileID: 21300000, guid: d7e4095c7ba9d1fe6a0f3f491258efc5, type: 3}
+    maxPatienceRequired: 50
+    minPatienceRequired: 20
+  - emotion: {fileID: 21300000, guid: 7cb12ce8313ff35d09267804bfa721b5, type: 3}
+    maxPatienceRequired: 20
+    minPatienceRequired: 0
   dialogWindow: {fileID: 0}
   dialogContent: {fileID: 0}
   okayButton: {fileID: 0}
