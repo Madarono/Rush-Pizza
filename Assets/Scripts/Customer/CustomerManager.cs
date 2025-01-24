@@ -8,6 +8,9 @@ public class CustomerManager : MonoBehaviour
 {
     public GameObject customerPrefab;
     public Transform spawnPosition;
+    public Dialog[] orders;
+    public bool randomizeCustomerOrders = true;
+
     private GameObject customer;
     private Customer goScript;
 
@@ -118,6 +121,7 @@ public class CustomerManager : MonoBehaviour
         GameObject go = Instantiate(customerPrefab, spawnPosition.position, Quaternion.identity);
         customer = go;
         goScript = go.GetComponent<Customer>();
+        goScript.dialog = orders[Random.Range(0, orders.Length)];
         goScript.settings = settings;
         goScript.mouseCursor = mouseCursor;
         goScript.playerMovement = playerMovement;
