@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Sauce
   m_EditorClassIdentifier: 
   name: Tomato Sauce
-  price: 0.05
+  priceToPlace: 0.02
   toppingPrefab:
   - {fileID: 6257833868502254409, guid: 40f0d3d6e621869408b45eadc2f82c6d, type: 3}
   rotationOffsets:

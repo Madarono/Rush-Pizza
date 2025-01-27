@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Onion
   m_EditorClassIdentifier: 
   name: Onion
-  price: 0.1
+  priceToPlace: 0.08
   toppingPrefab:
   - {fileID: 8308246571903983331, guid: db617b9b07922f8cba4d6d51956393cc, type: 3}
   - {fileID: 4976168023075392224, guid: bd60f6d1d916b0feeb808479ce8afe81, type: 3}

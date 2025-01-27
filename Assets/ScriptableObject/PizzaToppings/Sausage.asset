@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Sausage
   m_EditorClassIdentifier: 
   name: Sausage
-  price: 0.1
+  priceToPlace: 0.16
   toppingPrefab:
   - {fileID: 5824572969392080045, guid: 05bf1a7991580dbcdbc0f2ea652b105c, type: 3}
   rotationOffsets:

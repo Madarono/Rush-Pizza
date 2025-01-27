@@ -35,11 +35,13 @@ public class Check : MonoBehaviour
                 if(topping != null)
                 {
                     topping.isUsed = false;
+                    topping.CloseUseBox();
                 }
                 ToppingBox box = obj.GetComponent<ToppingBox>();
                 drawing.topping = box.topping;
                 topping = box;
                 topping.isUsed = true;
+                topping.OpenUseBox();
                 return;
             }
             else if(obj.CompareTag("PizzaCutter"))
@@ -73,6 +75,7 @@ public class Check : MonoBehaviour
                 if(topping != null)
                 {
                     topping.isUsed = false;
+                    topping.CloseUseBox();
                     drawing.topping = null;
                 }
                 if(cutter != null)
@@ -86,6 +89,7 @@ public class Check : MonoBehaviour
             if(topping != null)
             {
                 topping.isUsed = false;
+                topping.CloseUseBox();
                 drawing.topping = null;
             }
             if(cutter != null)
@@ -112,6 +116,7 @@ public class Check : MonoBehaviour
                     if(topping != null)
                     {
                         topping.isUsed = false;
+                        topping.CloseUseBox();
                         drawing.topping = null;
                     }
                 }

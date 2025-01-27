@@ -2,12 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class ObjectAndMaterials
+{
+    public MeshRenderer mesh;
+    public Material onMaterial;
+    public Material offMaterial;
+}
+
 public class PizzaCutter : MonoBehaviour
 {
     public bool isUsed = false;
     public bool isOnPizza = false;
     public Settings settings;
     public LayerMask pizzaLayer;
+    public float distanceAwayAllowed = 20f;
+    public ObjectAndMaterials[] materials;
     private Transform cameraTransform;
     private PizzaHolder pizza;
 
@@ -16,15 +26,22 @@ public class PizzaCutter : MonoBehaviour
         if(isUsed)
         {
             CheckForPizza();
+            float distance = Vector3.Distance(transform.position, cameraTransform.position);
+            if(distance > distanceAwayAllowed)
+            {
+                TurnOff();
+            }
         }
-
     }
 
     public void TurnOn(Transform camera)
     {
         isUsed = true;
         cameraTransform = camera;
-
+        for(int i = 0; i < materials.Length; i++)
+        {
+            materials[i].mesh.material = materials[i].onMaterial;
+        }
     }
 
     public void TurnOff()
@@ -33,6 +50,10 @@ public class PizzaCutter : MonoBehaviour
         if(pizza != null)
         {
             pizza.visualCutter.SetActive(false);
+        }
+        for(int i = 0; i < materials.Length; i++)
+        {
+            materials[i].mesh.material = materials[i].offMaterial;
         }
     }
 

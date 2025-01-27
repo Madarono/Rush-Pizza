@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Paprika
   m_EditorClassIdentifier: 
   name: Paprika
-  price: 0.1
+  priceToPlace: 0.09
   toppingPrefab:
   - {fileID: 41623849788886710, guid: c3b088821678f344a8deb310c906099b, type: 3}
   - {fileID: 7712885947916829074, guid: 24de9661173ded1dcb9994796a89d2b9, type: 3}

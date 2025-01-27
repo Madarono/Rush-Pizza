@@ -150,6 +150,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interactPrefab: {fileID: 1800456938401660260, guid: d34bd6cce70e249fd98dca4ec67b2009, type: 3}
   prefabRotation: {x: -90, y: 0, z: 0}
+  settings: {fileID: 0}
+  costToChange: 2
 --- !u!114 &1707627694854085101
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -163,3 +165,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canBePicked: 1
+  dragAndDrop: {fileID: 0}

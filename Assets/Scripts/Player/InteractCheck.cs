@@ -15,6 +15,7 @@ public class InteractCheck : MonoBehaviour
     public Settings settings;
     public LayerMask checkLayers;
     public Checks[] checks;
+    public float extraRange = 1f;
     private Customer customer;
 
     void Update()
@@ -25,10 +26,6 @@ public class InteractCheck : MonoBehaviour
         {
             if(customer != null && customer.state == States.Static)
             {
-                customer.leftToppings = customer.dialog.leftToppings;
-                customer.rightToppings = customer.dialog.rightToppings;
-                customer.cookTimes = customer.dialog.cookTimes;
-                customer.numberOfCuts = customer.dialog.numberOfCuts;
                 customer.InitiateTalk(TalkType.Initial);
                 customer = null;
             }
@@ -40,7 +37,7 @@ public class InteractCheck : MonoBehaviour
         RaycastHit hit;
 
         // Debug.DrawRay(transform.position, transform.forward, Color.green, settings.lookRange);
-        if(Physics.Raycast(transform.position, transform.forward, out hit, settings.lookRange, checkLayers))
+        if(Physics.Raycast(transform.position, transform.forward, out hit, settings.lookRange + extraRange, checkLayers))
         {
             // Debug.Log("Found Something");
             GameObject obj = hit.collider.gameObject;

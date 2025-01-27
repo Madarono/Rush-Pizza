@@ -14,6 +14,11 @@ public class CustomerManager : MonoBehaviour
     private GameObject customer;
     private Customer goScript;
 
+    [Header("Custommer Spawn Rate")]
+    public float minWait = 1f;
+    public float maxWait = 4f;
+    private float currentWait;
+
     [Header("Things for Customer script")]
     public MouseCursor mouseCursor;
     public PlayerMovement playerMovement;
@@ -34,6 +39,7 @@ public class CustomerManager : MonoBehaviour
     
     void Start()
     {
+        currentWait = Random.Range(minWait, maxWait);
         emotionWindow.SetActive(false);
         if(settings.english)
         {
@@ -59,6 +65,16 @@ public class CustomerManager : MonoBehaviour
         {
             DeleteCustomer();
         }
+
+        if(currentWait > 0f && customer == null)
+        {
+            currentWait -= Time.deltaTime;
+        }
+        else if(currentWait <= 0f && customer == null)
+        {
+            currentWait = 0f;
+            InstantiateCustomer();
+        }
     }
 
     public void AskOkay()
@@ -73,21 +89,21 @@ public class CustomerManager : MonoBehaviour
             
             if(goScript.state == States.Talking) //Initiate Order
             {
-                settings.money += goScript.bill;
+                settings.AddToMoney(goScript.bill);
                 emotionWindow.SetActive(true);
+                goScript.SetPatience();
             }
 
 
             if(goScript.state == States.Ending) //End Order
             {
-                Destroy(goScript.gameObject);
+                DeleteCustomer();
                 goScript = null;
                 dialogWindow.SetActive(false);
                 emotionWindow.SetActive(false);
                 return;
             }
-
-            goScript.SetPatience();
+            
             goScript.state = States.Waiting;
             dialogWindow.SetActive(false);
         }
@@ -121,7 +137,12 @@ public class CustomerManager : MonoBehaviour
         GameObject go = Instantiate(customerPrefab, spawnPosition.position, Quaternion.identity);
         customer = go;
         goScript = go.GetComponent<Customer>();
-        goScript.dialog = orders[Random.Range(0, orders.Length)];
+        if(randomizeCustomerOrders)
+        {
+            goScript.dialog = orders[Random.Range(0, orders.Length)];
+        }
+        goScript.pizzasNeeded = goScript.dialog.pizzas.Length;
+
         goScript.settings = settings;
         goScript.mouseCursor = mouseCursor;
         goScript.playerMovement = playerMovement;
@@ -140,6 +161,9 @@ public class CustomerManager : MonoBehaviour
         if(customer != null)
         {
             Destroy(customer);
+            emotionWindow.SetActive(false);
+            customer = null;
+            currentWait = Random.Range(minWait, maxWait);
             Debug.Log("Deleted customer successfully.");
         }
     }

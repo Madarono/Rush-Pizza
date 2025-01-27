@@ -23,7 +23,34 @@ MonoBehaviour:
     contentDeutsch: Teig. Kase. Sosse, und salami,  Das war's.
     type: 2
   speedOfTalk: 0.03
-  leftToppings: []
-  rightToppings: []
-  cookTimes: 1
-  numberOfCuts: 3
+  pizzas:
+  - leftToppings:
+    - topping: 1
+      amount: 30
+      minDifferenceAccepted: -30
+      maxDifferenceAccepted: 100
+    - topping: 0
+      amount: 30
+      minDifferenceAccepted: -30
+      maxDifferenceAccepted: 100
+    - topping: 2
+      amount: 9
+      minDifferenceAccepted: -3
+      maxDifferenceAccepted: 7
+    rightToppings:
+    - topping: 1
+      amount: 30
+      minDifferenceAccepted: -30
+      maxDifferenceAccepted: 100
+    - topping: 0
+      amount: 30
+      minDifferenceAccepted: -30
+      maxDifferenceAccepted: 100
+    - topping: 2
+      amount: 9
+      minDifferenceAccepted: -3
+      maxDifferenceAccepted: 7
+    cookTimes: 1
+    numberOfCuts: 3
+    minimumCutsAllowed: 3
+    maximumCutsAllowed: 5

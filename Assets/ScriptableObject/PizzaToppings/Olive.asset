@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Olive
   m_EditorClassIdentifier: 
   name: Olive
-  price: 0.1
+  priceToPlace: 0.08
   toppingPrefab:
   - {fileID: 5591101033673955641, guid: 3e1dd73f3a0bf6f5c8f72c2742758a48, type: 3}
   - {fileID: 2044254859156138933, guid: c66620eb9fe722c78a492760f8b70610, type: 3}

@@ -30,6 +30,17 @@ public enum PizzaCook
 }
 
 [System.Serializable]
+public class Pizzas
+{
+    public PizzaTopping[] leftToppings;
+    public PizzaTopping[] rightToppings;
+    public PizzaCook cookTimes;
+    public int numberOfCuts = 3;
+    public int minimumCutsAllowed = 3;
+    public int maximumCutsAllowed = 5;
+}
+
+[System.Serializable]
 public class PizzaTopping
 {
     public PizzaOptions topping;
@@ -52,9 +63,5 @@ public class Dialog : ScriptableObject
     public Talk[] talk;
     public float speedOfTalk = 0.2f;
 
-    public PizzaTopping[] leftToppings;
-    public PizzaTopping[] rightToppings;
-
-    public PizzaCook cookTimes;
-    public int numberOfCuts = 3;
+    public Pizzas[] pizzas;
 }

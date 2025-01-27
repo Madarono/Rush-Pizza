@@ -124,40 +124,36 @@ MonoBehaviour:
   pricing:
   - topping: 0
     fullPriceTopping: 1
-    patienceInSeconds: 60
+    patienceInSeconds: 50
   - topping: 1
     fullPriceTopping: 1
-    patienceInSeconds: 60
+    patienceInSeconds: 50
   - topping: 2
     fullPriceTopping: 3
-    patienceInSeconds: 80
+    patienceInSeconds: 70
   - topping: 3
     fullPriceTopping: 3
-    patienceInSeconds: 80
+    patienceInSeconds: 70
   - topping: 4
     fullPriceTopping: 1.6
-    patienceInSeconds: 80
+    patienceInSeconds: 70
   - topping: 5
     fullPriceTopping: 1.6
-    patienceInSeconds: 80
+    patienceInSeconds: 70
   - topping: 6
     fullPriceTopping: 1.6
-    patienceInSeconds: 80
+    patienceInSeconds: 70
   - topping: 7
     fullPriceTopping: 1.8
-    patienceInSeconds: 80
+    patienceInSeconds: 70
   mouseCursor: {fileID: 0}
   playerMovement: {fileID: 0}
   playerCam: {fileID: 0}
   dialog: {fileID: 11400000, guid: 43473eacb71a6ff25840aa9df3414833, type: 2}
-  leftToppings: []
-  rightToppings: []
   cookTimes: 0
-  pizzaSides:
-  - left: 0
-    right: 0
-  - left: 0
-    right: 0
+  pizzaSides: []
+  pizzasNeeded: 0
+  pizzaBoxes: []
   cookedTimes: 0
   numberOfCuts: 0
   overallPizzaRating: 0

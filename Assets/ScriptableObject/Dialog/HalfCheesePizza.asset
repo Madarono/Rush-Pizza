@@ -24,15 +24,18 @@ MonoBehaviour:
     contentDeutsch: halb sosse halb kase.
     type: 2
   speedOfTalk: 0.03
-  leftToppings:
-  - topping: 0
-    amount: 35
-    minDifferenceAccepted: -30
-    maxDifferenceAccepted: 40
-  rightToppings:
-  - topping: 1
-    amount: 35
-    minDifferenceAccepted: -30
-    maxDifferenceAccepted: 40
-  cookTimes: 1
-  numberOfCuts: 3
+  pizzas:
+  - leftToppings:
+    - topping: 1
+      amount: 30
+      minDifferenceAccepted: -30
+      maxDifferenceAccepted: 100
+    rightToppings:
+    - topping: 0
+      amount: 30
+      minDifferenceAccepted: -30
+      maxDifferenceAccepted: 100
+    cookTimes: 1
+    numberOfCuts: 3
+    minimumCutsAllowed: 3
+    maximumCutsAllowed: 5

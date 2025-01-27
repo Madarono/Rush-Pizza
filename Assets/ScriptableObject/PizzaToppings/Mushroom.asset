@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Mushroom
   m_EditorClassIdentifier: 
   name: Mushroom
-  price: 0.1
+  priceToPlace: 0.08
   toppingPrefab:
   - {fileID: 7112272882900812211, guid: f29df392923107b619756ad36fe421d1, type: 3}
   rotationOffsets:
