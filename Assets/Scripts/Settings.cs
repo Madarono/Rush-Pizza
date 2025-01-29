@@ -27,6 +27,8 @@ public class Settings : MonoBehaviour, IDataPersistence
     public KeyCode throwKey = KeyCode.R;
     public KeyCode jump = KeyCode.Space;
     public KeyCode sprint = KeyCode.LeftShift;
+    public KeyCode pause = KeyCode.Tab;
+    public KeyCode showStats = KeyCode.Q;
     public float throwForce = 10f;
     public float lookRange = 7f;
 
@@ -42,13 +44,6 @@ public class Settings : MonoBehaviour, IDataPersistence
             data.money = this.money;
         }
         // Will make a universal script so that it works in mainmenu and outside of it. 
-        // data.english = this.english;
-        // data.holdCrouch = this.holdCrouch;
-        // data.h24Format = this.h24Format;
-        // data.crouch = this.crouch;
-        // data.throwKey = this.throwKey;
-        // data.jump = this.jump;
-        // data.sprint = this.sprint;
     }
 
     public void LoadData(GameData data)
@@ -57,10 +52,14 @@ public class Settings : MonoBehaviour, IDataPersistence
         this.english = data.english;
         this.holdCrouch = data.holdCrouch;
         this.h24Format = data.h24Format;
+
+        //Might remove this later
         this.crouch = data.crouch;
         this.throwKey = data.throwKey;
         this.jump = data.jump;
         this.sprint = data.sprint;
+        this.pause = data.pause;
+        this.showStats = data.showStats;
         RefreshMoneyCounter();
         timeChanges.UpdateTime();
     }

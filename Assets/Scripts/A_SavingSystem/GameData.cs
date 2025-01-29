@@ -16,6 +16,8 @@ public class GameData
     public KeyCode throwKey;
     public KeyCode jump;
     public KeyCode sprint; 
+    public KeyCode pause; 
+    public KeyCode showStats; 
 
     public GameData()
     {
@@ -29,5 +31,7 @@ public class GameData
         this.throwKey = KeyCode.R;
         this.jump = KeyCode.None;
         this.sprint = KeyCode.LeftShift;
+        this.pause = KeyCode.Tab;
+        this.showStats = KeyCode.Q;
     }
 }
