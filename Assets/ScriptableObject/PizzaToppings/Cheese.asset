@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Cheese
   m_EditorClassIdentifier: 
   name: Cheese
-  priceToPlace: 0.02
+  priceToPlace: 0.015
   toppingPrefab:
   - {fileID: 1750281345734851338, guid: 18ca99ecdcff5f345819e750a05aa3aa, type: 3}
   rotationOffsets:

@@ -7,7 +7,8 @@ public class Interactable : MonoBehaviour
     public GameObject interactPrefab;
     public Vector3 prefabRotation;
     public Settings settings;
-    public float costToChange = 5f;
+    public Stats stats;
+    public float costToChange = 2f;
 
     public void Spawn()
     {
@@ -18,6 +19,7 @@ public class Interactable : MonoBehaviour
         if(settings != null)
         {
             settings.AddWithoutVisual(-costToChange);
+            stats.doughSpent += costToChange;
         }
 
         Destroy(gameObject);

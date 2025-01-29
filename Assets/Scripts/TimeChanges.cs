@@ -16,6 +16,7 @@ public class TimeChanges : MonoBehaviour
     private float speedOfTransition;
 
     [Header("Timer")]
+    public Stats stats;
     public Settings settings;
     public bool h24Format;
 
@@ -29,8 +30,19 @@ public class TimeChanges : MonoBehaviour
     private float timeMultiplyer;
     private float currentTime;
 
+    [Header("End Of The Day")]
+    public MouseCursor mouseCursor;
+    public PlayerMovement playerMovement;
+    public Player_Cam playerCam;
+
+    public CustomerManager manager;
+    public GameObject blackScreen;
+    public float delayDuration = 2.5f;
+
     void Start()
     {
+        blackScreen.SetActive(false);
+        settings.canSaveMoney = false;
         ResetTime();
         skyMaterial.SetColor("_SkyGradientTop", topGradientTransitions[0]);
         skyMaterial.SetColor("_SkyGradientBottom", bottomGradientTransitions[0]);
@@ -51,6 +63,7 @@ public class TimeChanges : MonoBehaviour
         //Stop if current time is equal to dayTimeInHours
         if(currentTime >= (dayTimeInHours * 60 * 60))
         {
+            EndOfTheDay();
             return;
         }
 
@@ -74,11 +87,11 @@ public class TimeChanges : MonoBehaviour
     public void ResetTime()
     {
         timeMultiplyer =  (dayTimeInHours * 60 * 60) / ingameHoursInSeconds;
-        Debug.Log(timeMultiplyer);
+        // Debug.Log(timeMultiplyer);
         currentTime = 0;
     }
 
-    void UpdateTime()
+    public void UpdateTime()
     {
         //CurrentTime = 60
         sunVisual.fillAmount = currentTime / (dayTimeInHours * 60 * 60);
@@ -158,5 +171,27 @@ public class TimeChanges : MonoBehaviour
             }
         }
 
+    }
+
+    void EndOfTheDay()
+    {
+        if(manager.customer != null || manager.abortCustomerChecking)
+        {
+            return;
+        }
+        manager.abortCustomerChecking = true;
+        settings.canSaveMoney = true;
+        StartCoroutine(EndofDay());
+    }
+
+    IEnumerator EndofDay() //ToDo List tomorrow
+    {
+        playerMovement.canMove = false;
+        playerCam.canMove = false;
+        mouseCursor.FreeCusorState();
+        yield return new WaitForSeconds(1f);
+        blackScreen.SetActive(true);
+        yield return new WaitForSeconds(delayDuration);
+        stats.ShowEndOfTheDay();
     }
 }

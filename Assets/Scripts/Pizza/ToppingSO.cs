@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Topping", menuName = "Custom/Topping")]
 public class ToppingSO : ScriptableObject
 {
-    public string name;
+    public int indexForStat;
     public float priceToPlace;
 
     [Header("For Drawing")]

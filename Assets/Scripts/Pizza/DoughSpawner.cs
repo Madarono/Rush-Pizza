@@ -14,6 +14,7 @@ public class DoughSpawner : MonoBehaviour
     [Header("Special modifications")]
     public bool isDough;
     public Settings settings;
+    public Stats stats;
 
     void Start()
     {
@@ -74,6 +75,7 @@ public class DoughSpawner : MonoBehaviour
             {
                 Interactable dough = go.GetComponent<Interactable>();
                 dough.settings = this.settings;
+                dough.stats = this.stats;
             }
         }
     }

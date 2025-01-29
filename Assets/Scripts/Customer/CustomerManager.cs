@@ -6,12 +6,14 @@ using TMPro;
 
 public class CustomerManager : MonoBehaviour
 {
+    public Stats stats;
+    [HideInInspector]public bool abortCustomerChecking = false;
     public GameObject customerPrefab;
     public Transform spawnPosition;
     public Dialog[] orders;
     public bool randomizeCustomerOrders = true;
 
-    private GameObject customer;
+    [HideInInspector]public GameObject customer;
     private Customer goScript;
 
     [Header("Custommer Spawn Rate")]
@@ -66,6 +68,11 @@ public class CustomerManager : MonoBehaviour
             DeleteCustomer();
         }
 
+        if(abortCustomerChecking)
+        {
+            return;
+        }
+
         if(currentWait > 0f && customer == null)
         {
             currentWait -= Time.deltaTime;
@@ -90,8 +97,9 @@ public class CustomerManager : MonoBehaviour
             if(goScript.state == States.Talking) //Initiate Order
             {
                 settings.AddToMoney(goScript.bill);
+                stats.moneyGained += goScript.bill;
                 emotionWindow.SetActive(true);
-                goScript.SetPatience();
+                // goScript.SetPatience();
             }
 
 
@@ -114,7 +122,10 @@ public class CustomerManager : MonoBehaviour
         if(goScript != null)
         {
             goScript.askedWhat = true;
+            goScript.patience = goScript.patience * 0.91f;
             goScript.InitiateTalk(TalkType.What);
+            emotionWindow.SetActive(true);
+            goScript.UpdatePatience();
         }
     }
 
@@ -123,7 +134,10 @@ public class CustomerManager : MonoBehaviour
         if(goScript != null)
         {
             goScript.askedHint = true;
+            goScript.patience = goScript.patience * 0.88f;
             goScript.InitiateTalk(TalkType.Hint);
+            emotionWindow.SetActive(true);
+            goScript.UpdatePatience();
         }
     }
 
@@ -154,6 +168,7 @@ public class CustomerManager : MonoBehaviour
         goScript.hintButton = hintButton;
         goScript.patienceCounter = patienceCounter;
         goScript.emotion = emotion;
+        goScript.stats = stats;
     }
 
     public void DeleteCustomer()

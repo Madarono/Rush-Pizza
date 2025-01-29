@@ -5,10 +5,12 @@ using UnityEngine.UI;
 using TMPro;
 using System.Globalization;
 
-public class Settings : MonoBehaviour
+public class Settings : MonoBehaviour, IDataPersistence
 {
     public float money;
+    public bool canSaveMoney = true; //Use this when starting the day
     public TextMeshProUGUI moneyCounter;
+    public TextMeshProUGUI negativeMoneyCounter;
     public Image moneyVisual;
     public Sprite usd;
     public Sprite euro;
@@ -31,10 +33,66 @@ public class Settings : MonoBehaviour
     public bool oneTimeCut = true;
     public bool english = true;
     public bool h24Format = false;
+    public TimeChanges timeChanges;
 
-
-    void Start()
+    public void SaveData(GameData data)
     {
+        if(canSaveMoney)
+        {
+            data.money = this.money;
+        }
+        // Will make a universal script so that it works in mainmenu and outside of it. 
+        // data.english = this.english;
+        // data.holdCrouch = this.holdCrouch;
+        // data.h24Format = this.h24Format;
+        // data.crouch = this.crouch;
+        // data.throwKey = this.throwKey;
+        // data.jump = this.jump;
+        // data.sprint = this.sprint;
+    }
+
+    public void LoadData(GameData data)
+    {
+        this.money = data.money;
+        this.english = data.english;
+        this.holdCrouch = data.holdCrouch;
+        this.h24Format = data.h24Format;
+        this.crouch = data.crouch;
+        this.throwKey = data.throwKey;
+        this.jump = data.jump;
+        this.sprint = data.sprint;
+        RefreshMoneyCounter();
+        timeChanges.UpdateTime();
+    }
+
+    public void RefreshMoneyCounter()
+    {
+        if(money < 0)
+        {
+            float absoluteMoney = -money;
+            if(english)
+            {
+                negativeMoneyCounter.text = "-$" + absoluteMoney.ToString("F2");
+            }
+            else
+            {
+                negativeMoneyCounter.text = "-€" + absoluteMoney.ToString("F2", new CultureInfo("de-DE"));
+            }
+
+            negativeMoneyCounter.gameObject.SetActive(true);
+            moneyCounter.gameObject.SetActive(false);
+
+            if(english)
+            {
+                moneyVisual.sprite = usd;
+            }
+            else
+            {
+                moneyVisual.sprite = euro;
+            }
+            return;
+        }
+
         if(english)
         {
             moneyCounter.text = "$" + money.ToString("F2");
@@ -43,40 +101,20 @@ public class Settings : MonoBehaviour
         {
             moneyCounter.text = "€" + money.ToString("F2", new CultureInfo("de-DE"));
         }
-        if(english)
-        {
-            moneyVisual.sprite = usd;
-        }
-        else
-        {
-            moneyVisual.sprite = euro;
-        }
+        moneyCounter.gameObject.SetActive(true);
+        negativeMoneyCounter.gameObject.SetActive(false);
     }
 
     public void AddWithoutVisual(float amount)
     {
         money += amount;
-        if(english)
-        {
-            moneyCounter.text = "$" + money.ToString("F2");
-        }
-        else
-        {
-            moneyCounter.text = "€" + money.ToString("F2", new CultureInfo("de-DE"));
-        }
+        RefreshMoneyCounter();
     }
 
     public void AddToMoney(float amount)
     {
         money += amount;
-        if(english)
-        {
-            moneyCounter.text = "$" + money.ToString("F2");
-        }
-        else
-        {
-            moneyCounter.text = "€" + money.ToString("F2", new CultureInfo("de-DE"));
-        }
+        RefreshMoneyCounter();
         StopAllCoroutines(); //Remove if this causes bugs later on
         StartCoroutine(ShowCashAniamtion());
 
@@ -107,7 +145,6 @@ public class Settings : MonoBehaviour
                 registervisual[1].text = "-€" + removeNegative.ToString("F2", new CultureInfo("de-DE"));
             }
         }
-
     } 
 
     IEnumerator UnactivateRegisterVisual(bool positive)

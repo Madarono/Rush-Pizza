@@ -63,6 +63,7 @@ public class Customer : MonoBehaviour
     [HideInInspector]public MouseCursor mouseCursor;
     [HideInInspector]public PlayerMovement playerMovement;
     [HideInInspector]public Player_Cam playerCam;
+    [HideInInspector]public Stats stats;
 
     [Header("Ordering")]
     public Dialog dialog;
@@ -108,6 +109,7 @@ public class Customer : MonoBehaviour
 
     void Start()
     {
+        SetPatience();
         dialogBox = dialogWindow.GetComponent<DialogBox>();
     }
     
@@ -116,8 +118,7 @@ public class Customer : MonoBehaviour
         if(state == States.Waiting && patience > 0)
         {
             patience -= Time.deltaTime;
-            percentageOfPatience = patience / totalPatience * 100f;
-            patienceCounter.text = "%" + percentageOfPatience.ToString("F0");
+            UpdatePatience();
             SetEmotion();
         }
     }
@@ -239,7 +240,14 @@ public class Customer : MonoBehaviour
         }
 
         totalPatience = patience;
+        UpdatePatience();
     }
+    public void UpdatePatience()
+    {
+        percentageOfPatience = patience / totalPatience * 100f;
+        patienceCounter.text = "%" + percentageOfPatience.ToString("F0");
+    }
+
     public void SetEmotion() //0 for happy, 1 for impatient, 2 for angry
     {
         for(int i = 0; i < emotionStages.Length; i++)
@@ -883,6 +891,7 @@ public class Customer : MonoBehaviour
     {
         SetEmotion(2);
         settings.AddToMoney(-bill);
+        stats.refundsLost += bill;
         Debug.Log("Very angry");
         string line = "";
         if(settings.english)
@@ -906,6 +915,7 @@ public class Customer : MonoBehaviour
         SetEmotion(0);
         float endingTip = Mathf.Round((tip * (percentageOfPatience / 100f)) * 100f) / 100f;      
         settings.AddToMoney(endingTip);
+        stats.tipGained += endingTip;
         
         string line = "";
         if(settings.english)

@@ -10,7 +10,19 @@ public class LanguageStrings : MonoBehaviour
     public string english;
     public string deutsch;
 
-    void Start()
+    void Awake()
+    {
+        if(settings.english)
+        {
+            text.text = english;
+        }
+        else
+        {
+            text.text = deutsch;
+        }
+    }
+
+    void Update()
     {
         if(settings.english)
         {

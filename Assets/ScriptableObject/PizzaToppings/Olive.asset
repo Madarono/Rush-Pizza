@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf40f44972f17c612854b3121a73991e, type: 3}
   m_Name: Olive
   m_EditorClassIdentifier: 
-  name: Olive
+  indexForStat: 5
   priceToPlace: 0.08
   toppingPrefab:
   - {fileID: 5591101033673955641, guid: 3e1dd73f3a0bf6f5c8f72c2742758a48, type: 3}
