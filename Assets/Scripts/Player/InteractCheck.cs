@@ -12,6 +12,7 @@ public class Checks
 
 public class InteractCheck : MonoBehaviour
 {
+    public Pausing pausing;
     public Settings settings;
     public LayerMask checkLayers;
     public Checks[] checks;
@@ -26,6 +27,7 @@ public class InteractCheck : MonoBehaviour
         {
             if(customer != null && customer.state == States.Static)
             {
+                pausing.lockMouse = false;
                 customer.InitiateTalk(TalkType.Initial);
                 customer = null;
             }

@@ -90,12 +90,14 @@ public class Stats : MonoBehaviour
             information[7].infoValue[1].gameObject.SetActive(true);
         }
 
-        for(int i = 0; i < toppingStats.Length; i++)
+        toppingStats[0].valueVisual.text = "-" + doughSpent.ToString("F2");
+        for(int i = 1; i < toppingStats.Length; i++)
         {
             if(!toppingStats[i].showVisual)
             {
                 continue;
             }
+
 
             toppingStats[i].valueVisual.text = "-" + toppingStats[i].moneySpent.ToString("F2");
         }

@@ -4,21 +4,34 @@ using UnityEngine;
 
 public class Pausing : MonoBehaviour
 {
+    [Header("Scripts")]
     public MouseCursor mouse;
     public Settings settings;
+    public Controls controls;
+    public Tabs tabs;
+
+    [Header("Pausing")]
     public HoverInformaton[] buttons;
     public GameObject pauseWindow;
     public Animator pauseAnimator;
     public float delayOfLeaving = 0.9f;
     private bool isPausing = false;
+    [HideInInspector]public bool lockMouse = true;
+    [HideInInspector]public bool canPause = true; //Controls.cs controls this.
 
     void Start()
     {
         pauseWindow.SetActive(false);
+        canPause = true;
     }
 
     void Update()
     {
+        if(!canPause)
+        {
+            return;
+        }
+
         if(Input.GetKeyDown(settings.pause))
         {
             StopAllCoroutines();
@@ -44,8 +57,13 @@ public class Pausing : MonoBehaviour
 
     void UnPause()
     {
-        mouse.LockCusorState();
+        if(lockMouse)
+        {
+            mouse.LockCusorState();
+        }
         Time.timeScale = 1f;
+        controls.CloseWindow();
+        tabs.ResetAllTabs();
         StartCoroutine(WaitForPauseClosing());
         StartCoroutine(DelayMoving());
     }

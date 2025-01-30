@@ -16,6 +16,7 @@ public class TimeChanges : MonoBehaviour
     private float speedOfTransition;
 
     [Header("Timer")]
+    public Pausing pause;
     public Stats stats;
     public Settings settings;
     public bool h24Format;
@@ -29,6 +30,7 @@ public class TimeChanges : MonoBehaviour
 
     private float timeMultiplyer;
     private float currentTime;
+    [HideInInspector]public float cacheTime;
 
     [Header("End Of The Day")]
     public MouseCursor mouseCursor;
@@ -57,7 +59,7 @@ public class TimeChanges : MonoBehaviour
         if(currentTime <= (dayTimeInHours * 60 * 60))
         {
             currentTime += Time.deltaTime * timeMultiplyer;
-            UpdateTime();
+            UpdateTime(currentTime);
         }
 
         //Stop if current time is equal to dayTimeInHours
@@ -91,17 +93,17 @@ public class TimeChanges : MonoBehaviour
         currentTime = 0;
     }
 
-    public void UpdateTime()
+    public void UpdateTime(float time)
     {
         //CurrentTime = 60
-        sunVisual.fillAmount = currentTime / (dayTimeInHours * 60 * 60);
+        sunVisual.fillAmount = time / (dayTimeInHours * 60 * 60);
 
-        int hours = Mathf.FloorToInt((int)currentTime / 3600) % 24;
-        int minutes = Mathf.FloorToInt(((int)currentTime % 3600) / 60);
+        int hours = Mathf.FloorToInt((int)time / 3600) % 24;
+        int minutes = Mathf.FloorToInt(((int)time % 3600) / 60);
         
         if(minutes % 10 == 0)
         {
-            // Debug.Log(hours + ":" + minutes);   
+            cacheTime = time;
             
             int hourCombined = startingHour + hours;
             if(h24Format)
@@ -181,10 +183,11 @@ public class TimeChanges : MonoBehaviour
         }
         manager.abortCustomerChecking = true;
         settings.canSaveMoney = true;
+        pause.lockMouse = false;
         StartCoroutine(EndofDay());
     }
 
-    IEnumerator EndofDay() //ToDo List tomorrow
+    IEnumerator EndofDay()
     {
         playerMovement.canMove = false;
         playerCam.canMove = false;

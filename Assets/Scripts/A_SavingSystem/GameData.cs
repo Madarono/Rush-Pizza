@@ -17,13 +17,12 @@ public class GameData
     public KeyCode jump;
     public KeyCode sprint; 
     public KeyCode pause; 
-    public KeyCode showStats; 
 
     public GameData()
     {
         //Settings.cs
         this.money = 50f;
-        this.holdCrouch = true;
+        this.holdCrouch = false;
         this.english = true;
         this.h24Format = false;
 
@@ -32,6 +31,5 @@ public class GameData
         this.jump = KeyCode.None;
         this.sprint = KeyCode.LeftShift;
         this.pause = KeyCode.Tab;
-        this.showStats = KeyCode.Q;
     }
 }

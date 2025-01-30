@@ -28,7 +28,7 @@ public class Settings : MonoBehaviour, IDataPersistence
     public KeyCode jump = KeyCode.Space;
     public KeyCode sprint = KeyCode.LeftShift;
     public KeyCode pause = KeyCode.Tab;
-    public KeyCode showStats = KeyCode.Q;
+    // public KeyCode showStats = KeyCode.Q;
     public float throwForce = 10f;
     public float lookRange = 7f;
 
@@ -43,25 +43,16 @@ public class Settings : MonoBehaviour, IDataPersistence
         {
             data.money = this.money;
         }
-        // Will make a universal script so that it works in mainmenu and outside of it. 
     }
 
     public void LoadData(GameData data)
     {
         this.money = data.money;
-        this.english = data.english;
+
         this.holdCrouch = data.holdCrouch;
         this.h24Format = data.h24Format;
 
-        //Might remove this later
-        this.crouch = data.crouch;
-        this.throwKey = data.throwKey;
-        this.jump = data.jump;
-        this.sprint = data.sprint;
-        this.pause = data.pause;
-        this.showStats = data.showStats;
         RefreshMoneyCounter();
-        timeChanges.UpdateTime();
     }
 
     public void RefreshMoneyCounter()
@@ -80,7 +71,6 @@ public class Settings : MonoBehaviour, IDataPersistence
 
             negativeMoneyCounter.gameObject.SetActive(true);
             moneyCounter.gameObject.SetActive(false);
-
             if(english)
             {
                 moneyVisual.sprite = usd;
@@ -99,6 +89,14 @@ public class Settings : MonoBehaviour, IDataPersistence
         else
         {
             moneyCounter.text = "€" + money.ToString("F2", new CultureInfo("de-DE"));
+        }
+        if(english)
+        {
+            moneyVisual.sprite = usd;
+        }
+        else
+        {
+            moneyVisual.sprite = euro;
         }
         moneyCounter.gameObject.SetActive(true);
         negativeMoneyCounter.gameObject.SetActive(false);

@@ -144,11 +144,12 @@ MonoBehaviour:
   - {fileID: 5313198460454295718}
   - {fileID: 1413647381660627184}
   - {fileID: 2655187463773255669}
-  checkDelay: 2
+  checkDelay: 1
   checkRange: 1
   rotationOffset: {x: 90, y: 180, z: 0, w: 0}
   isDough: 1
   settings: {fileID: 0}
+  stats: {fileID: 0}
 --- !u!65 &4516087887251710964
 BoxCollider:
   m_ObjectHideFlags: 0

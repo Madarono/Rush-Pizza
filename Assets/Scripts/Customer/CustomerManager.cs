@@ -6,6 +6,7 @@ using TMPro;
 
 public class CustomerManager : MonoBehaviour
 {
+    public Pausing pausing;
     public Stats stats;
     [HideInInspector]public bool abortCustomerChecking = false;
     public GameObject customerPrefab;
@@ -43,18 +44,6 @@ public class CustomerManager : MonoBehaviour
     {
         currentWait = Random.Range(minWait, maxWait);
         emotionWindow.SetActive(false);
-        if(settings.english)
-        {
-            okayText.text = "Okay";
-            whatText.text = "What?";
-            hintText.text = "Hint";
-        }
-        else
-        {
-            okayText.text = "Okay";
-            whatText.text = "Was?";
-            hintText.text = "Tipp";
-        }
     }
 
     void Update()
@@ -114,6 +103,7 @@ public class CustomerManager : MonoBehaviour
             
             goScript.state = States.Waiting;
             dialogWindow.SetActive(false);
+            pausing.lockMouse = true;
         }
     }
 
