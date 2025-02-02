@@ -18,6 +18,9 @@ public class GameData
     public KeyCode sprint; 
     public KeyCode pause; 
 
+    //RecipeSystem.cs
+    public bool[] isVisible = new bool[8];
+
     public GameData()
     {
         //Settings.cs
@@ -31,5 +34,8 @@ public class GameData
         this.jump = KeyCode.None;
         this.sprint = KeyCode.LeftShift;
         this.pause = KeyCode.Tab;
+
+        //RecipeSystem.cs
+        this.isVisible = new bool[8];
     }
 }

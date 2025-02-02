@@ -149,7 +149,9 @@ MonoBehaviour:
   mouseCursor: {fileID: 0}
   playerMovement: {fileID: 0}
   playerCam: {fileID: 0}
-  dialog: {fileID: 11400000, guid: 43473eacb71a6ff25840aa9df3414833, type: 2}
+  stats: {fileID: 0}
+  recipeSys: {fileID: 0}
+  dialog: {fileID: 11400000, guid: 72c3d11a18cf87601b271a289fdfbb20, type: 2}
   cookTimes: 0
   pizzaSides: []
   pizzasNeeded: 0

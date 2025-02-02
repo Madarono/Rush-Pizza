@@ -8,6 +8,7 @@ public class Pausing : MonoBehaviour
     public MouseCursor mouse;
     public Settings settings;
     public Controls controls;
+    public RecipeSystem recipeSys;
     public Tabs tabs;
 
     [Header("Pausing")]
@@ -63,6 +64,7 @@ public class Pausing : MonoBehaviour
         }
         Time.timeScale = 1f;
         controls.CloseWindow();
+        recipeSys.CloseWindow();
         tabs.ResetAllTabs();
         StartCoroutine(WaitForPauseClosing());
         StartCoroutine(DelayMoving());

@@ -23,6 +23,7 @@ public class CustomerManager : MonoBehaviour
     private float currentWait;
 
     [Header("Things for Customer script")]
+    public RecipeSystem recipeSys;
     public MouseCursor mouseCursor;
     public PlayerMovement playerMovement;
     public Player_Cam playerCam;
@@ -159,6 +160,7 @@ public class CustomerManager : MonoBehaviour
         goScript.patienceCounter = patienceCounter;
         goScript.emotion = emotion;
         goScript.stats = stats;
+        goScript.recipeSys = recipeSys;
     }
 
     public void DeleteCustomer()

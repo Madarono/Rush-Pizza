@@ -60,8 +60,12 @@ public class Talk
 [CreateAssetMenu(fileName="Dialog", menuName="Custom/Dialog", order=1)]
 public class Dialog : ScriptableObject
 {
-    public Talk[] talk;
-    public float speedOfTalk = 0.2f;
+    public Talk[] talk = new Talk[3];
+    public float speedOfTalk = 0.4f;
 
     public Pizzas[] pizzas;
+
+    [Header("Recipe System")]
+    public bool giveToRecipe = true;
+    public int indexOfRecipe;
 }

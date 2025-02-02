@@ -10,17 +10,9 @@ public class Keybinds
     public TextMeshProUGUI visual;
 }
 
-public class Controls : MonoBehaviour, IDataPersistence
+public class Controls : WindowOpening, IDataPersistence
 {
-    public GameObject header;
-    public GameObject controlsWindow;
-    
-    [Header("Animations")]
-    public Animator headerAnim;
-    public Animator controlsAnim;
-    public float durationForClosing = 1f;
-    
-    public bool isOpen;
+    public RecipeSystem RecipeSystem;
 
     [Header("Keybinds")]
     public Pausing pause;
@@ -85,10 +77,10 @@ public class Controls : MonoBehaviour, IDataPersistence
         settings.RefreshMoneyCounter();
     }
 
-    void Start()
+    public override void OpenWindow()
     {
-        header.SetActive(false);
-        controlsWindow.SetActive(false);
+        base.OpenWindow();
+        RecipeSystem.CloseWindow();
     }
 
     void Update()
@@ -115,41 +107,6 @@ public class Controls : MonoBehaviour, IDataPersistence
                 change = false;
             }
         }
-    }
-
-
-    public void BothWindow()
-    {
-        if(isOpen)
-        {
-            CloseWindow();
-        }
-        else
-        {
-            OpenWindow();
-        }
-    }
-
-    public void CloseWindow()
-    {
-        StartCoroutine(ClosingWindow());
-        isOpen = false;
-    }
-
-    IEnumerator ClosingWindow()
-    {
-        headerAnim.SetTrigger("Close");
-        controlsAnim.SetTrigger("Close");
-        yield return new WaitForSecondsRealtime(durationForClosing);
-        header.SetActive(false);
-        controlsWindow.SetActive(false);
-    }
-    
-    public void OpenWindow()
-    {
-        header.SetActive(true);
-        controlsWindow.SetActive(true);
-        isOpen = true;
     }
 
     //Extras Window

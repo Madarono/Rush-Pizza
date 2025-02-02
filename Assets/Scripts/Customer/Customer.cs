@@ -64,6 +64,7 @@ public class Customer : MonoBehaviour
     [HideInInspector]public PlayerMovement playerMovement;
     [HideInInspector]public Player_Cam playerCam;
     [HideInInspector]public Stats stats;
+    [HideInInspector]public RecipeSystem recipeSys;
 
     [Header("Ordering")]
     public Dialog dialog;
@@ -908,6 +909,11 @@ public class Customer : MonoBehaviour
         playerCam.canMove = false;
         state = States.Ending;
         StartCoroutine(ShowText(line));
+
+        if(dialog.giveToRecipe)
+        {
+            recipeSys.VisibleRecipe(dialog.indexOfRecipe);
+        }
     }
 
     void Satisfied()
@@ -932,5 +938,10 @@ public class Customer : MonoBehaviour
         playerCam.canMove = false;
         state = States.Ending;
         StartCoroutine(ShowText(line));
+
+        if(dialog.giveToRecipe)
+        {
+            recipeSys.VisibleRecipe(dialog.indexOfRecipe);
+        }
     }
 }
