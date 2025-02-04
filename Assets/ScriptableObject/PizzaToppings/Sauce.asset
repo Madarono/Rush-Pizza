@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf40f44972f17c612854b3121a73991e, type: 3}
   m_Name: Sauce
   m_EditorClassIdentifier: 
-  indexForStat: 1
+  indexForStat: 2
   priceToPlace: 0.015
   toppingPrefab:
   - {fileID: 6257833868502254409, guid: 40f0d3d6e621869408b45eadc2f82c6d, type: 3}

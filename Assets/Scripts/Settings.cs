@@ -28,6 +28,7 @@ public class Settings : MonoBehaviour, IDataPersistence
     public KeyCode jump = KeyCode.Space;
     public KeyCode sprint = KeyCode.LeftShift;
     public KeyCode pause = KeyCode.Tab;
+    public KeyCode showBrief = KeyCode.B;
     // public KeyCode showStats = KeyCode.Q;
     public float throwForce = 10f;
     public float lookRange = 7f;

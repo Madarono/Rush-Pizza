@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf40f44972f17c612854b3121a73991e, type: 3}
   m_Name: Onion
   m_EditorClassIdentifier: 
-  indexForStat: 6
+  indexForStat: 7
   priceToPlace: 0.08
   toppingPrefab:
   - {fileID: 8308246571903983331, guid: db617b9b07922f8cba4d6d51956393cc, type: 3}

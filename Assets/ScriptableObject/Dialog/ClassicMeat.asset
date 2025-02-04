@@ -16,7 +16,7 @@ MonoBehaviour:
   - content: Hey, I'd like a classic meat pizza please.
     contentDeutsch: Hallo, Ich hatte gern ein fleischklassich pizza bitte.
     type: 0
-  - content: Classic meat, bitte.
+  - content: Classic meat, please.
     contentDeutsch: Fleischklassich, bitte.
     type: 1
   - content: A cheese pizza with pepperoni and sausage on top of it.

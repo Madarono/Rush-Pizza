@@ -17,6 +17,11 @@ public class GameData
     public KeyCode jump;
     public KeyCode sprint; 
     public KeyCode pause; 
+    public KeyCode showBrief;
+
+    //Controls.cs
+    public bool showFPS;
+    public int choosingFPS;
 
     //RecipeSystem.cs
     public bool[] isVisible = new bool[8];
@@ -29,11 +34,17 @@ public class GameData
         this.english = true;
         this.h24Format = false;
 
+        //Keybinds
         this.crouch = KeyCode.C;
         this.throwKey = KeyCode.R;
         this.jump = KeyCode.None;
         this.sprint = KeyCode.LeftShift;
         this.pause = KeyCode.Tab;
+        this.showBrief = KeyCode.B;
+
+        //Controls.cs
+        this.showFPS = false;
+        this.choosingFPS = 0;
 
         //RecipeSystem.cs
         this.isVisible = new bool[8];

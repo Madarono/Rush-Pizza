@@ -591,6 +591,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settings: {fileID: 0}
+  stats: {fileID: 0}
   dragAndDrop: {fileID: 2864299558816733803}
   topping: {fileID: 0}
 --- !u!114 &3363011888225572067
@@ -638,6 +639,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 770404e21ff95b3a5ac978925be6ac1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerMovement: {fileID: 581912345680454974}
+  player: {fileID: 4928333182216781957}
+  pausing: {fileID: 0}
   settings: {fileID: 0}
   checkLayers:
     serializedVersion: 2

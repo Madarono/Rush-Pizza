@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf40f44972f17c612854b3121a73991e, type: 3}
   m_Name: Cheese
   m_EditorClassIdentifier: 
-  indexForStat: 0
+  indexForStat: 1
   priceToPlace: 0.015
   toppingPrefab:
   - {fileID: 1750281345734851338, guid: 18ca99ecdcff5f345819e750a05aa3aa, type: 3}

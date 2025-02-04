@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf40f44972f17c612854b3121a73991e, type: 3}
   m_Name: Paprika
   m_EditorClassIdentifier: 
-  indexForStat: 7
+  indexForStat: 8
   priceToPlace: 0.09
   toppingPrefab:
   - {fileID: 41623849788886710, guid: c3b088821678f344a8deb310c906099b, type: 3}

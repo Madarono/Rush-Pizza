@@ -12,6 +12,8 @@ public class Checks
 
 public class InteractCheck : MonoBehaviour
 {
+    public PlayerMovement playerMovement;
+    public Rigidbody player;
     public Pausing pausing;
     public Settings settings;
     public LayerMask checkLayers;
@@ -29,6 +31,8 @@ public class InteractCheck : MonoBehaviour
             {
                 pausing.lockMouse = false;
                 customer.InitiateTalk(TalkType.Initial);
+                playerMovement.canMove = false;
+                player.velocity = Vector3.zero;
                 customer = null;
             }
         }

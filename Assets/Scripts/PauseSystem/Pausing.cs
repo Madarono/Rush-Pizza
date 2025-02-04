@@ -10,6 +10,7 @@ public class Pausing : MonoBehaviour
     public Controls controls;
     public RecipeSystem recipeSys;
     public Tabs tabs;
+    public Brief brief;
 
     [Header("Pausing")]
     public HoverInformaton[] buttons;
@@ -53,6 +54,7 @@ public class Pausing : MonoBehaviour
         mouse.FreeCusorState();
         Time.timeScale = 0f;
         pauseWindow.SetActive(true);
+        brief.CloseWindow();
         StartCoroutine(DelayMoving());
     }
 
@@ -72,7 +74,7 @@ public class Pausing : MonoBehaviour
 
     IEnumerator WaitForPauseClosing()
     {
-        pauseAnimator.SetTrigger("Unpause");
+        pauseAnimator.SetTrigger("Close");
         yield return new WaitForSeconds(delayOfLeaving);
         pauseWindow.SetActive(false);
     }

@@ -12,7 +12,9 @@ public class Keybinds
 
 public class Controls : WindowOpening, IDataPersistence
 {
+    [Header("Scripts")]
     public RecipeSystem RecipeSystem;
+    public Fps fpsScript;
 
     [Header("Keybinds")]
     public Pausing pause;
@@ -29,6 +31,13 @@ public class Controls : WindowOpening, IDataPersistence
     public TextMeshProUGUI crouchVisual;
     public bool h24Format;
     public TextMeshProUGUI formatVisual;
+    
+    [Header("FPS")]
+    public bool showFPS;
+    public TextMeshProUGUI fpsVisual;
+    public int choosingFPS;
+    public int[] limit;
+    public TextMeshProUGUI limitVisual;
 
 
     public void SaveData(GameData data)
@@ -40,6 +49,8 @@ public class Controls : WindowOpening, IDataPersistence
         data.pause = this.keybinds[3].keybind;
         data.h24Format = this.h24Format;
         data.holdCrouch = this.holdCrouch;
+        data.showFPS = this.showFPS;
+        data.choosingFPS = this.choosingFPS;
     }
 
     public void LoadData(GameData data)
@@ -51,6 +62,8 @@ public class Controls : WindowOpening, IDataPersistence
         this.keybinds[3].keybind = data.pause;
         this.h24Format = data.h24Format;
         this.holdCrouch = data.holdCrouch;
+        this.showFPS = data.showFPS;
+        this.choosingFPS = data.choosingFPS;
         if(timeChanges != null)
         {
             timeChanges.UpdateTime(timeChanges.cacheTime);
@@ -136,12 +149,18 @@ public class Controls : WindowOpening, IDataPersistence
         {
             crouchVisual.text = holdCrouch ? "Hold" : "Toggle";
             formatVisual.text = h24Format ? "24 Hour" : "12 Hour";
+            fpsVisual.text = showFPS ? "Show" : "Hide";
         }
         else
         {
             formatVisual.text = h24Format ? "24 Stunde" : "12 Stunde";
             crouchVisual.text = holdCrouch ? "Halt" : "Umschalten";
+            fpsVisual.text = showFPS ? "Anzeigen" : "Ausblenden";
         }
+
+        fpsScript.showFPS = showFPS;
+        limitVisual.text = limit[choosingFPS].ToString();
+        fpsScript.ChangeFpsLimit(limit[choosingFPS]);
     }
 
     public void ChangeHoldCrouch()
@@ -170,6 +189,39 @@ public class Controls : WindowOpening, IDataPersistence
         }
         ApplyToSettings();
     }
+    public void ChangeFPS()
+    {
+        showFPS = !showFPS;
+        if(english)
+        {
+            fpsVisual.text = showFPS ? "Show" : "Hide";
+        }
+        else
+        {
+            fpsVisual.text = showFPS ? "Anzeigen" : "Ausblenden";
+        }
+
+        fpsScript.showFPS = this.showFPS;
+    }
+    public void ChangeFPSLimit()
+    {
+        choosingFPS++;
+        if(choosingFPS >= limit.Length)
+        {
+            choosingFPS = 0;
+        }
+
+        for(int i = 0; i < limit.Length; i++)
+        {
+            if(choosingFPS == i)
+            {
+                fpsScript.ChangeFpsLimit(limit[i]);
+                limitVisual.text = limit[i].ToString();
+                break;
+            }
+        }
+    }
+
 
     //Keybinds Window
     public void ConfigureKeys(int id)

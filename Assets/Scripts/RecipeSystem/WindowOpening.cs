@@ -16,8 +16,15 @@ public class WindowOpening : MonoBehaviour
 
     public virtual void Start()
     {
-        header.SetActive(false);
-        window.SetActive(false);
+        if(header != null)
+        {
+            header.SetActive(false);
+        }
+
+        if(window != null)
+        {
+            window.SetActive(false);
+        }
     }
 
     public virtual void BothWindow()
@@ -35,22 +42,44 @@ public class WindowOpening : MonoBehaviour
     public virtual void CloseWindow()
     {
         StartCoroutine(ClosingWindow());
-        isOpen = false;
     }
 
     IEnumerator ClosingWindow()
     {
-        headerAnim.SetTrigger("Close");
-        windowAnim.SetTrigger("Close");
+        if(headerAnim != null)
+        {
+            headerAnim.SetTrigger("Close");
+        }
+        if(windowAnim != null)
+        {
+            windowAnim.SetTrigger("Close");
+        }
+        
         yield return new WaitForSecondsRealtime(durationForClosing);
-        header.SetActive(false);
-        window.SetActive(false);
+        
+        if(header != null)
+        {
+            header.SetActive(false);
+        }
+        if(window != null)
+        {
+            window.SetActive(false);
+        }
+
+        isOpen = false;
     }
     
     public virtual void OpenWindow()
     {
-        header.SetActive(true);
-        window.SetActive(true);
+        if(header != null)
+        {
+            header.SetActive(true);
+        }
+
+        if(window != null)
+        {
+            window.SetActive(true);
+        }
         isOpen = true;
     }
 }

@@ -7,6 +7,7 @@ using TMPro;
 public class CustomerManager : MonoBehaviour
 {
     public Pausing pausing;
+    public Brief brief;
     public Stats stats;
     [HideInInspector]public bool abortCustomerChecking = false;
     public GameObject customerPrefab;
@@ -89,7 +90,8 @@ public class CustomerManager : MonoBehaviour
                 settings.AddToMoney(goScript.bill);
                 stats.moneyGained += goScript.bill;
                 emotionWindow.SetActive(true);
-                // goScript.SetPatience();
+                brief.canBrief = true;
+                brief.ShowPaper();
             }
 
 
@@ -99,6 +101,9 @@ public class CustomerManager : MonoBehaviour
                 goScript = null;
                 dialogWindow.SetActive(false);
                 emotionWindow.SetActive(false);
+                brief.canBrief = false;
+                brief.HidePaper();
+                brief.dialog = null;
                 return;
             }
             
@@ -113,6 +118,7 @@ public class CustomerManager : MonoBehaviour
         if(goScript != null)
         {
             goScript.askedWhat = true;
+            brief.askedWhat = true;
             goScript.patience = goScript.patience * 0.91f;
             goScript.InitiateTalk(TalkType.What);
             emotionWindow.SetActive(true);
@@ -125,6 +131,7 @@ public class CustomerManager : MonoBehaviour
         if(goScript != null)
         {
             goScript.askedHint = true;
+            brief.askedHint = true;
             goScript.patience = goScript.patience * 0.88f;
             goScript.InitiateTalk(TalkType.Hint);
             emotionWindow.SetActive(true);
@@ -161,6 +168,8 @@ public class CustomerManager : MonoBehaviour
         goScript.emotion = emotion;
         goScript.stats = stats;
         goScript.recipeSys = recipeSys;
+        goScript.manager = this;
+        goScript.brief = brief;
     }
 
     public void DeleteCustomer()

@@ -65,6 +65,8 @@ public class Customer : MonoBehaviour
     [HideInInspector]public Player_Cam playerCam;
     [HideInInspector]public Stats stats;
     [HideInInspector]public RecipeSystem recipeSys;
+    [HideInInspector]public CustomerManager manager;
+    [HideInInspector]public Brief brief;
 
     [Header("Ordering")]
     public Dialog dialog;
@@ -85,6 +87,9 @@ public class Customer : MonoBehaviour
     [Header("Lines")]
     public Lines[] happyLines;
     public Lines[] upsetLines;
+
+    private string cacheLines;
+    private bool skipLines = false; 
 
     [Header("Patience")]
     private float totalPatience;
@@ -122,10 +127,20 @@ public class Customer : MonoBehaviour
             UpdatePatience();
             SetEmotion();
         }
+        else if(patience <= 0 && state == States.Waiting)
+        {
+            LeaveWithoutNotice();
+        }
+
+        if(skipLines && Input.GetMouseButtonDown(0))
+        {
+            SkipTalk();
+        }
     }
 
     public void InitiateTalk(TalkType talkType)
     {
+        brief.dialog = dialog;
         StopAllCoroutines();
 
         if(state == States.Waiting)
@@ -146,7 +161,9 @@ public class Customer : MonoBehaviour
             {
                 if(dialog.talk[i].type == talkType)
                 {           
-                    StartCoroutine(ShowText(dialog.talk[i].content));   
+                    StartCoroutine(ShowText(dialog.talk[i].content)); 
+                    StartCoroutine(EnableSkipLines());
+                    cacheLines = dialog.talk[i].content;  
                     break;
                 }
             }
@@ -161,6 +178,8 @@ public class Customer : MonoBehaviour
                 if(dialog.talk[i].type == talkType)
                 {                
                     StartCoroutine(ShowText(dialog.talk[i].contentDeutsch));
+                    StartCoroutine(EnableSkipLines());
+                    cacheLines = dialog.talk[i].contentDeutsch;  
                     break;
                 }
             }
@@ -168,6 +187,62 @@ public class Customer : MonoBehaviour
             playerMovement.canMove = false;
             playerCam.canMove = false;
         }
+    }
+
+    IEnumerator ShowText(string content)
+    {
+        dialogWindow.SetActive(true);
+        dialogBox.CheckDimentions(content);
+        whatButton.SetActive(false);
+        hintButton.SetActive(false);
+
+        okayButton.SetActive(true);
+        if(!askedHint && state != States.Ending)
+        {
+            if(askedWhat)
+            {
+                hintButton.SetActive(true);
+            }
+            else
+            {
+                whatButton.SetActive(true);
+            }
+        }
+
+        dialogContent.text = "";
+        for(int i = 0; i < content.Length; i++)
+        {
+            float delay = dialog.speedOfTalk;
+            char character = content[i];
+            dialogContent.text = dialogContent.text + character.ToString();
+            
+            for(int o = 0; o < specialCharcters.Length; o++)
+            {
+                string characterString = character.ToString();
+                if(characterString == specialCharcters[o].character)
+                {
+                    delay += specialCharcters[o].addedWaitTime;
+                    break;
+                }
+            }
+
+            yield return new WaitForSeconds(delay);
+        }
+
+        skipLines = false;
+    }
+
+    IEnumerator EnableSkipLines()
+    {
+        yield return new WaitForSeconds(0.1f);
+        skipLines = true;
+    }
+    
+    void SkipTalk()
+    {
+        StopAllCoroutines();
+        dialogContent.text = cacheLines;
+        skipLines = false;
     }
 
     public void SetBill()
@@ -204,7 +279,7 @@ public class Customer : MonoBehaviour
             }
         }
 
-        Debug.Log("Bill: " + bill.ToString());
+        // Debug.Log("Bill: " + bill.ToString());
     }
     public void SetPatience()
     {   
@@ -266,46 +341,7 @@ public class Customer : MonoBehaviour
         emotion.sprite = emotionStages[id].emotion;
     }
 
-    IEnumerator ShowText(string content)
-    {
-        dialogWindow.SetActive(true);
-        dialogBox.CheckDimentions(content);
-        whatButton.SetActive(false);
-        hintButton.SetActive(false);
-
-        okayButton.SetActive(true);
-        if(!askedHint && state != States.Ending)
-        {
-            if(askedWhat)
-            {
-                hintButton.SetActive(true);
-            }
-            else
-            {
-                whatButton.SetActive(true);
-            }
-        }
-
-        dialogContent.text = "";
-        for(int i = 0; i < content.Length; i++)
-        {
-            float delay = dialog.speedOfTalk;
-            char character = content[i];
-            dialogContent.text = dialogContent.text + character.ToString();
-            
-            for(int o = 0; o < specialCharcters.Length; o++)
-            {
-                string characterString = character.ToString();
-                if(characterString == specialCharcters[o].character)
-                {
-                    delay += specialCharcters[o].addedWaitTime;
-                    break;
-                }
-            }
-
-            yield return new WaitForSeconds(delay);
-        }
-    }
+    
 
     void OnCollisionEnter(Collision col) //When order is ready
     {
@@ -893,7 +929,6 @@ public class Customer : MonoBehaviour
         SetEmotion(2);
         settings.AddToMoney(-bill);
         stats.refundsLost += bill;
-        Debug.Log("Very angry");
         string line = "";
         if(settings.english)
         {
@@ -914,6 +949,14 @@ public class Customer : MonoBehaviour
         {
             recipeSys.VisibleRecipe(dialog.indexOfRecipe);
         }
+    }
+
+    void LeaveWithoutNotice()
+    {
+        settings.AddToMoney(-bill);
+        stats.refundsLost += bill;
+        state = States.Ending;
+        manager.AskOkay();
     }
 
     void Satisfied()

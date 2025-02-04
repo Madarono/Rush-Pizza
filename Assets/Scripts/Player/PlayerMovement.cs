@@ -80,6 +80,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate() 
     {
+        if(!canMove)
+        {
+            return;
+        }
+        
         MovePlayer();
         ApplyCustomGravity();
     }
@@ -110,7 +115,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void MovePlayer()
     {
-
         if(Input.GetKey(bind.sprint) && !crouch.is_crouching)
         {
             moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
