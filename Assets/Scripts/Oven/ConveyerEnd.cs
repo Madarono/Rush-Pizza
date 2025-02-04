@@ -27,6 +27,7 @@ public class ConveyerEnd : MonoBehaviour
             {
                 pickable = other.GetComponent<Pickable>();
                 pickable.canBePicked = true;
+                pizza.canBeCooked = true;
             }
         }
     }
@@ -40,6 +41,7 @@ public class ConveyerEnd : MonoBehaviour
             {
                 pizza.isCooked = true;
                 pizza.cookedTimes++;
+                pizza.canBeCooked = false;
                 pizza.UpdateLooks();
             }
 

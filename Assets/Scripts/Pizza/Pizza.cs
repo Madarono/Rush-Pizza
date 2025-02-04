@@ -43,6 +43,7 @@ public class Pizza : MonoBehaviour
     public GameObject sideSeparator; //Separates the left and right sides
     public GameObject visualCutter;
 
+    public bool canBeCooked = true;
     public bool isCooked;
     public int cookedTimes;
     public Material[] cookedMaterials;

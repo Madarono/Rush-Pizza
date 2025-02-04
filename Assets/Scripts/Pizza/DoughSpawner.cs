@@ -15,6 +15,7 @@ public class DoughSpawner : MonoBehaviour
     public bool isDough;
     public Settings settings;
     public Stats stats;
+    public DragAndDrop dragAndDrop;
 
     void Start()
     {
@@ -76,6 +77,7 @@ public class DoughSpawner : MonoBehaviour
                 Interactable dough = go.GetComponent<Interactable>();
                 dough.settings = this.settings;
                 dough.stats = this.stats;
+                dough.dragAndDrop = this.dragAndDrop;
             }
         }
     }

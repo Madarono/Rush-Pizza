@@ -183,6 +183,8 @@ public class Brief : WindowOpening
                     GameObject go = Instantiate(selectedPrefab, Vector3.one, Quaternion.identity);
                     go.transform.SetParent(parentSpawn);
                     go.transform.localScale = Vector3.one;
+                    go.transform.position = parentSpawn.position;
+                    go.transform.rotation = parentSpawn.rotation;
                     TextMeshProUGUI goText = go.GetComponent<TextMeshProUGUI>();
                     goText.text = talk[i]; 
                 }
@@ -192,6 +194,8 @@ public class Brief : WindowOpening
                     GameObject go = Instantiate(answerPrefab, Vector3.one, Quaternion.identity);
                     go.transform.SetParent(parentSpawn);
                     go.transform.localScale = Vector3.one;
+                    go.transform.position = parentSpawn.position;
+                    go.transform.rotation = parentSpawn.rotation;
                     TextMeshProUGUI goText = go.GetComponent<TextMeshProUGUI>();
                     goText.text = answer[i]; 
                 }

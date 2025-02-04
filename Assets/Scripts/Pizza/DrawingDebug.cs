@@ -52,7 +52,13 @@ public class DrawingDebug : MonoBehaviour
             if(activeProjectModel == null)
             {
                 activeProjectModel = Instantiate(projectModel, hit.point, Quaternion.identity);
-                activeProjectModel.transform.rotation = Quaternion.Euler(topping.rotationOffsets[0], topping.rotationOffsets[1], topping.rotationOffsets[2]);
+                activeProjectModel.transform.up = hit.normal;
+                activeProjectModel.transform.Rotate(
+                    topping.rotationOffsets[0], 
+                    topping.rotationOffsets[1], 
+                    topping.rotationOffsets[2], 
+                    Space.Self
+                );
                 UpdateProjectModel();
             }
 

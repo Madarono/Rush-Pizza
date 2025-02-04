@@ -98,14 +98,12 @@ public class SauceDrawing : MonoBehaviour
                     }
                 }
 
-                float xRotation = topping.rotationRandom[0] ? Random.Range(-360f, 360f) : 0f;
-                float yRotation = topping.rotationRandom[1] ? Random.Range(-360f, 360f) : 0f;
-                float zRotation = topping.rotationRandom[2] ? Random.Range(-360f, 360f) : 0f;
-    
-                sauce.transform.rotation = Quaternion.Euler(
-                    xRotation + topping.rotationOffsets[0],
-                    yRotation + topping.rotationOffsets[1],
-                    zRotation + topping.rotationOffsets[2]
+                sauce.transform.up = hit.normal; // Align the sauce with the pizza surface normal
+                sauce.transform.Rotate(
+                    topping.rotationOffsets[0] + (topping.rotationRandom[0] ? Random.Range(-360f, 360f) : 0f),
+                    topping.rotationOffsets[1] + (topping.rotationRandom[1] ? Random.Range(-360f, 360f) : 0f),
+                    topping.rotationOffsets[2] + (topping.rotationRandom[2] ? Random.Range(-360f, 360f) : 0f),
+                    Space.Self
                 );
     
                 sauce.transform.SetParent(hit.transform);

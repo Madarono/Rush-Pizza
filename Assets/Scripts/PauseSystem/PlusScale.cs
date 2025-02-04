@@ -6,10 +6,10 @@ public class PlusScale : MonoBehaviour
 {
     [Header("Increase Scale When Hovering")]
     Vector3 scale; //Scale
-    public float increaseMultiplyer;
+    public float increaseMultiplyer = 1f;
     public bool increase;
-    public float maxIncrease = 1.2f;
-    public float minIncrease = 0.759196f;
+    public float maxIncrease = 1.05f;
+    public float minIncrease = 1f;
 
     public void IncreaseInScale()
     {

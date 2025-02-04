@@ -8,6 +8,7 @@ public class Interactable : MonoBehaviour
     public Vector3 prefabRotation;
     public Settings settings;
     public Stats stats;
+    public DragAndDrop dragAndDrop;
     public float costToChange = 2f;
 
     public void Spawn()
@@ -15,6 +16,12 @@ public class Interactable : MonoBehaviour
         gameObject.SetActive(false);
         GameObject go = Instantiate(interactPrefab, transform.position, Quaternion.identity);
         go.transform.rotation = Quaternion.Euler(prefabRotation.x, prefabRotation.y, prefabRotation.z);
+
+        if(dragAndDrop != null)
+        {
+            Pickable pickable = go.GetComponent<Pickable>();
+            pickable.dragAndDrop = dragAndDrop;
+        }
        
         if(settings != null)
         {

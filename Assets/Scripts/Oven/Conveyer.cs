@@ -6,11 +6,13 @@ public class Conveyer : MonoBehaviour
 {
     public Vector3 direction = new Vector3(1, 0, 0);
     public float speed = 2f;
+    private Pizza pizza;
+    public Transform referenceX;
 
     private void OnTriggerStay(Collider other)
     {
         Rigidbody rb = other.GetComponent<Rigidbody>();
-        Pizza pizza = other.GetComponent<Pizza>();
+        pizza = other.GetComponent<Pizza>();
         if (rb != null && pizza != null)
         {
             Vector3 movement = direction.normalized * speed * Time.deltaTime;
@@ -18,10 +20,21 @@ public class Conveyer : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnd(Collider other)
+    {
+        pizza = other.GetComponent<Pizza>();
+        if(pizza != null)
+        {
+            Pickable pickable = other.GetComponent<Pickable>();
+            pickable.canBePicked = true;
+            pizza.canBeCooked = true;
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         Rigidbody rb = other.GetComponent<Rigidbody>();
-        Pizza pizza = other.GetComponent<Pizza>();
+        pizza = other.GetComponent<Pizza>();
         if (rb != null && pizza != null)
         {
             Pickable pickable = other.GetComponent<Pickable>();
@@ -29,6 +42,9 @@ public class Conveyer : MonoBehaviour
             pickable.dragAndDrop.DropObject();
 
             rb.velocity = Vector3.zero;
+
+            other.transform.position = new Vector3(other.transform.position.x, other.transform.position.y, referenceX.position.z);
+            other.transform.rotation = Quaternion.Euler(-90f, 0f, 0f);
         }
     }
 }
