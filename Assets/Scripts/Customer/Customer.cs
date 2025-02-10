@@ -374,21 +374,8 @@ public class Customer : MonoBehaviour
                     return;
                 }
 
-                CheckSide(pizzaBoxes);
-                bool checkIngrediants = false;
-                for(int i = 0; i < pizzaSides.Count; i++)
-                {
-                    if(pizzaSides[i].left || pizzaSides[i].right)
-                    {
-                        checkIngrediants = true;
-                        continue;
-                    }
-
-                    checkIngrediants = false;
-                    break;
-                }
-
-                if(checkIngrediants)
+                bool canCheck = CheckSide(pizzaBoxes);
+                if(canCheck)
                 {
                     CheckIngrediants(pizzaBoxes);
                 }
@@ -408,7 +395,7 @@ public class Customer : MonoBehaviour
         for(int w = 0; w < dialog.pizzas.Length; w++)
         {
             minSidesChecked = w * 2;
-            maxSidesChecked = minSidesChecked;
+            maxSidesChecked = minSidesChecked + 1;
             for(int i = minSidesChecked; i < maxSidesChecked; i++)
             {
                 if(pizzaSides[i].left)
@@ -423,7 +410,7 @@ public class Customer : MonoBehaviour
                                 {
                                     if(dialog.pizzas[w].leftToppings[q].topping == pizzabox[k].toppingInfo[o].ingrediant)
                                     {
-                                        if(pizzabox[k].toppingInfo[o].toppingDistanceRating == PizzaRating.Terrible)
+                                        if(pizzabox[k].toppingInfo[o].toppingDistanceRating == PizzaRating.Terrible || pizzabox[k].toppingInfo[o].toppingDistanceRating == PizzaRating.Bad)
                                         {
                                             Upset();
                                             return;
@@ -778,12 +765,30 @@ public class Customer : MonoBehaviour
         Satisfied();
     }
 
-    public void CheckSide(List<PizzaBox> pizzabox)
+    public bool CheckSide(List<PizzaBox> pizzabox)
     {
         while(pizzaSides.Count < (pizzaBoxes.Count * 2))
         {
             SideToCheck sides = new SideToCheck();
             pizzaSides.Add(sides);
+        }
+
+        if(dialog.hatedToppings.Length > 0)
+        {
+            foreach(PizzaBox box in pizzabox)
+            {
+                for(int i = 0; i < box.toppingInfo.Length; i++)
+                {
+                    for(int o = 0; o < dialog.hatedToppings.Length; o++)
+                    {
+                        if((box.toppingInfo[i].rightSideCount > 0 || box.toppingInfo[i].leftSideCount > 0) && box.toppingInfo[i].ingrediant == dialog.hatedToppings[o])
+                        {
+                            Upset();
+                            return false;
+                        }
+                    }
+                }
+            }
         }
 
         int minSidesChecked = 0;
@@ -920,8 +925,10 @@ public class Customer : MonoBehaviour
         if(callUpset)
         {
             Upset();
-            return;
+            return false;
         }
+
+        return true;
     }
 
     void Upset()

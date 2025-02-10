@@ -151,7 +151,9 @@ MonoBehaviour:
   playerCam: {fileID: 0}
   stats: {fileID: 0}
   recipeSys: {fileID: 0}
-  dialog: {fileID: 11400000, guid: 72c3d11a18cf87601b271a289fdfbb20, type: 2}
+  manager: {fileID: 0}
+  brief: {fileID: 0}
+  dialog: {fileID: 11400000, guid: 410cab9e6b5cc1ff2b463d20cb54e339, type: 2}
   cookTimes: 0
   pizzaSides: []
   pizzasNeeded: 0

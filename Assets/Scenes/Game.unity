@@ -9651,7 +9651,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 257f33c1a3c3a5f009cb5c64ff16b34e, type: 2}
   - {fileID: 11400000, guid: 01a025ab298c2e8bf8b5e9fad2a2e2cd, type: 2}
   - {fileID: 11400000, guid: f6f4b852908dabdb0936fda92ba2ac14, type: 2}
-  randomizeCustomerOrders: 1
+  randomizeCustomerOrders: 0
   customer: {fileID: 0}
   minWait: 1
   maxWait: 4

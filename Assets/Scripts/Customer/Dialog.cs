@@ -65,6 +65,10 @@ public class Dialog : ScriptableObject
 
     public Pizzas[] pizzas;
 
+    [Header("Other Toppings")]
+    public PizzaOptions[] hatedToppings;
+    public int maximumToppingsAllowed = 3;
+
     [Header("Recipe System")]
     public bool giveToRecipe = true;
     public int indexOfRecipe;

@@ -448,13 +448,13 @@ MonoBehaviour:
   - rating: 4
     maxRequirement: 0
     minRequirement: 0.35
-  - rating: 0
+  - rating: 2
     maxRequirement: 0.35
     minRequirement: 0.42
   - rating: 1
     maxRequirement: 0.42
     minRequirement: 0.49
-  - rating: 2
+  - rating: 0
     maxRequirement: 0.49
     minRequirement: 0.56
   - rating: 3
