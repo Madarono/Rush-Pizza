@@ -449,7 +449,7 @@ public class Customer : MonoBehaviour
                                         {
                                             if(pizzabox[k].toppingInfo[o].ingrediant == toppingAttributes[j].ingrediant)
                                             {
-                                                index = i;
+                                                index = j;
                                                 break;
                                             }
                                         }
@@ -475,7 +475,7 @@ public class Customer : MonoBehaviour
                                         else
                                         {
                                             int difference = pizzabox[k].toppingInfo[o].leftSideCount - toppingAttributes[index].amount;
-                                            Debug.Log("Not exact, difference: " + difference);
+                                            Debug.Log("Not exact, difference: " + difference + " in " + dialog.pizzas[w].leftToppings[q]);
                                             if(difference <= toppingAttributes[index].maxDifferenceAccepted && difference >= toppingAttributes[index].minDifferenceAccepted)
                                             {
                                                 Debug.Log("The difference is accepted.");
@@ -497,6 +497,7 @@ public class Customer : MonoBehaviour
                                             }
                                             else
                                             {
+                                                Debug.Log("Difference Denied");
                                                 Upset();
                                                 return;
                                             }
@@ -528,7 +529,7 @@ public class Customer : MonoBehaviour
                                         {
                                             if(pizzabox[k].toppingInfo[o].ingrediant == toppingAttributes[j].ingrediant)
                                             {
-                                                index = i;
+                                                index = j;
                                                 break;
                                             }
                                         }
@@ -554,7 +555,7 @@ public class Customer : MonoBehaviour
                                         else
                                         {
                                             int difference = pizzabox[k].toppingInfo[o].leftSideCount - toppingAttributes[index].amount;
-                                            Debug.Log("Not exact, difference: " + difference);
+                                            Debug.Log("Not exact, difference: " + difference + " in " + dialog.pizzas[w].rightToppings[q]);
                                             if(difference <= toppingAttributes[index].maxDifferenceAccepted && difference >= toppingAttributes[index].minDifferenceAccepted)
                                             {
                                                 Debug.Log("The difference is accepted.");
@@ -576,6 +577,7 @@ public class Customer : MonoBehaviour
                                             }
                                             else
                                             {
+                                                Debug.Log("Difference Denied");
                                                 Upset();
                                                 return;
                                             }
@@ -610,7 +612,7 @@ public class Customer : MonoBehaviour
                                         {
                                             if(pizzabox[k].toppingInfo[o].ingrediant == toppingAttributes[j].ingrediant)
                                             {
-                                                index = i;
+                                                index = j;
                                                 break;
                                             }
                                         }
@@ -636,7 +638,7 @@ public class Customer : MonoBehaviour
                                         else
                                         {
                                             int difference = pizzabox[k].toppingInfo[o].rightSideCount - toppingAttributes[index].amount;
-                                            Debug.Log("Not exact, difference: " + difference);
+                                            Debug.Log("Not exact, difference: " + difference + " in " + dialog.pizzas[w].leftToppings[q]);
                                             if(difference <= toppingAttributes[index].maxDifferenceAccepted && difference >= toppingAttributes[index].minDifferenceAccepted)
                                             {
                                                 Debug.Log("The difference is accepted.");
@@ -658,6 +660,7 @@ public class Customer : MonoBehaviour
                                             }
                                             else
                                             {
+                                                Debug.Log("Difference Denied");
                                                 Upset();
                                                 return;
                                             }
@@ -689,7 +692,7 @@ public class Customer : MonoBehaviour
                                         {
                                             if(pizzabox[k].toppingInfo[o].ingrediant == toppingAttributes[j].ingrediant)
                                             {
-                                                index = i;
+                                                index = j;
                                                 break;
                                             }
                                         }
@@ -715,7 +718,7 @@ public class Customer : MonoBehaviour
                                         else
                                         {
                                             int difference = pizzabox[k].toppingInfo[o].rightSideCount - toppingAttributes[index].amount;
-                                            Debug.Log("Not exact, difference: " + difference);
+                                            Debug.Log("Not exact, difference: " + difference + " in " + dialog.pizzas[w].rightToppings[q]);
                                             if(difference <= toppingAttributes[index].maxDifferenceAccepted && difference >= toppingAttributes[index].minDifferenceAccepted)
                                             {
                                                 Debug.Log("The difference is accepted.");
@@ -737,6 +740,7 @@ public class Customer : MonoBehaviour
                                             }
                                             else
                                             {
+                                                Debug.Log("Difference Denied");
                                                 Upset();
                                                 return;
                                             }

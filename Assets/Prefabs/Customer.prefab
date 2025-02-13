@@ -156,6 +156,7 @@ MonoBehaviour:
   pizzaboxToppings:
   - ingrediant: 
     amount: 
+  dialogToppings: 
   dialog: {fileID: 11400000, guid: 43473eacb71a6ff25840aa9df3414833, type: 2}
   cookTimes: 0
   pizzaSides: []
@@ -163,35 +164,35 @@ MonoBehaviour:
   - ingrediant: 0
     amount: 35
     minDifferenceAccepted: -15
-    maxDifferenceAccepted: 100
+    maxDifferenceAccepted: 999
   - ingrediant: 1
     amount: 35
     minDifferenceAccepted: -15
-    maxDifferenceAccepted: 100
+    maxDifferenceAccepted: 999
   - ingrediant: 2
     amount: 9
     minDifferenceAccepted: -3
-    maxDifferenceAccepted: 7
+    maxDifferenceAccepted: 10
   - ingrediant: 3
     amount: 9
     minDifferenceAccepted: -3
-    maxDifferenceAccepted: 7
+    maxDifferenceAccepted: 10
   - ingrediant: 4
     amount: 9
     minDifferenceAccepted: -3
-    maxDifferenceAccepted: 7
+    maxDifferenceAccepted: 10
   - ingrediant: 5
     amount: 9
     minDifferenceAccepted: -3
-    maxDifferenceAccepted: 7
+    maxDifferenceAccepted: 10
   - ingrediant: 6
     amount: 9
     minDifferenceAccepted: -3
-    maxDifferenceAccepted: 7
+    maxDifferenceAccepted: 10
   - ingrediant: 7
     amount: 9
     minDifferenceAccepted: -3
-    maxDifferenceAccepted: 7
+    maxDifferenceAccepted: 10
   pizzasNeeded: 0
   pizzaBoxes: []
   cookedTimes: 0
