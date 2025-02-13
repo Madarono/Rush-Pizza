@@ -25,19 +25,13 @@ MonoBehaviour:
     type: 2
   speedOfTalk: 0.04
   pizzas:
-  - leftToppings:
-    - topping: 1
-      amount: 30
-      minDifferenceAccepted: -30
-      maxDifferenceAccepted: 100
-    rightToppings:
-    - topping: 0
-      amount: 30
-      minDifferenceAccepted: -30
-      maxDifferenceAccepted: 100
+  - leftToppings: 00000000
+    rightToppings: 01000000
     cookTimes: 1
     numberOfCuts: 3
     minimumCutsAllowed: 3
     maximumCutsAllowed: 5
+  hatedToppings: 
+  maximumToppingsAllowed: 3
   giveToRecipe: 0
   indexOfRecipe: 0

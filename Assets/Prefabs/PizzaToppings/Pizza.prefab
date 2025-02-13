@@ -263,7 +263,7 @@ MonoBehaviour:
     calculateDistance: 0
     distanceBetweenObjects: []
     averageDistance: 0
-  - ingrediantName: Tomato Sauce
+  - ingrediantName: Sauce
     ingrediant: 0
     ingrediantObj: []
     maxIngrediantPercentage: 70
@@ -355,6 +355,7 @@ MonoBehaviour:
     averageDistance: 0
   sideSeparator: {fileID: 5017545775201997720}
   visualCutter: {fileID: 84750372716840742}
+  canBeCooked: 1
   isCooked: 0
   cookedTimes: 0
   cookedMaterials:

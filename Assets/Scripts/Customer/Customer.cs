@@ -41,6 +41,7 @@ public class Lines
     public string deutschVersion;
 }
 
+//Pizza
 [System.Serializable]
 public class SideToCheck
 {
@@ -49,11 +50,29 @@ public class SideToCheck
 }
 
 [System.Serializable]
+public class ToppingAttributes
+{
+    public PizzaOptions ingrediant;
+    public int amount;
+    public int minDifferenceAccepted;
+    public int maxDifferenceAccepted;
+}
+
+//
+
+[System.Serializable]
 public class EmotionRequirements
 {
     public Sprite emotion;
     public float maxPatienceRequired;
     public float minPatienceRequired;
+}
+
+[System.Serializable]
+public class CheckToppings
+{
+    public List<PizzaOptions> ingrediant = new List<PizzaOptions>();
+    public List<int> amount = new List<int>();
 }
 
 public class Customer : MonoBehaviour
@@ -68,10 +87,15 @@ public class Customer : MonoBehaviour
     [HideInInspector]public CustomerManager manager;
     [HideInInspector]public Brief brief;
 
+    [Header("Checkng Toppings")]
+    public List<CheckToppings> pizzaboxToppings = new List<CheckToppings>();
+    public List<PizzaOptions> dialogToppings = new List<PizzaOptions>();
+
     [Header("Ordering")]
     public Dialog dialog;
     public PizzaCook cookTimes;
     public List<SideToCheck> pizzaSides; 
+    public ToppingAttributes[] toppingAttributes;
 
     public float pizzasNeeded;
     public List<PizzaBox> pizzaBoxes;
@@ -255,7 +279,7 @@ public class Customer : MonoBehaviour
             {
                 for(int o = 0; o < pricing.Length; o++)
                 {
-                    if(dialog.pizzas[p].leftToppings[i].topping == pricing[o].topping)
+                    if(dialog.pizzas[p].leftToppings[i] == pricing[o].topping)
                     {
                         bill += pricing[o].fullPriceTopping / 2f;
                         break;
@@ -270,7 +294,7 @@ public class Customer : MonoBehaviour
             {
                 for(int o = 0; o < pricing.Length; o++)
                 {
-                    if(dialog.pizzas[p].rightToppings[i].topping == pricing[o].topping)
+                    if(dialog.pizzas[p].rightToppings[i] == pricing[o].topping)
                     {
                         bill += pricing[o].fullPriceTopping / 2f;
                         break;
@@ -291,7 +315,7 @@ public class Customer : MonoBehaviour
             {
                 for(int o = 0; o < pricing.Length; o++)
                 {
-                    if(dialog.pizzas[p].leftToppings[i].topping == pricing[o].topping)
+                    if(dialog.pizzas[p].leftToppings[i] == pricing[o].topping)
                     {
                         patience += pricing[o].patienceInSeconds;
                         break;
@@ -306,7 +330,7 @@ public class Customer : MonoBehaviour
             {
                 for(int o = 0; o < pricing.Length; o++)
                 {
-                    if(dialog.pizzas[p].rightToppings[i].topping == pricing[o].topping)
+                    if(dialog.pizzas[p].rightToppings[i] == pricing[o].topping)
                     {
                         patience += pricing[o].patienceInSeconds;
                         break;
@@ -362,11 +386,9 @@ public class Customer : MonoBehaviour
 
         if(box != null)
         {
-            Debug.Log("Found Box!");
 
             if(box.ingrediants.Length > 0)
             {
-                Debug.Log("Box has information");
                 pizzaBoxes.Add(box);
                 obj.SetActive(false);
                 if(pizzaBoxes.Count < pizzasNeeded)
@@ -374,10 +396,16 @@ public class Customer : MonoBehaviour
                     return;
                 }
 
-                bool canCheck = CheckSide(pizzaBoxes);
-                if(canCheck)
+                bool sideCheck = CheckSide(pizzaBoxes);
+                bool toppingCheck = CheckToppings(pizzaBoxes);
+                if(sideCheck && toppingCheck)
                 {
                     CheckIngrediants(pizzaBoxes);
+                }
+                else
+                {
+                    Upset();
+                    return;
                 }
             }
             else
@@ -400,7 +428,7 @@ public class Customer : MonoBehaviour
             {
                 if(pizzaSides[i].left)
                 {
-                    if(i == 0)
+                    if(i == minSidesChecked) //minSides for left, else for Right side of the checking process
                     {
                         for(int q = 0; q < dialog.pizzas[w].leftToppings.Length; q++)
                         {
@@ -408,7 +436,7 @@ public class Customer : MonoBehaviour
                             {
                                 for(int o = 0; o < pizzabox[k].toppingInfo.Length; o++)
                                 {
-                                    if(dialog.pizzas[w].leftToppings[q].topping == pizzabox[k].toppingInfo[o].ingrediant)
+                                    if(dialog.pizzas[w].leftToppings[q] == pizzabox[k].toppingInfo[o].ingrediant)
                                     {
                                         if(pizzabox[k].toppingInfo[o].toppingDistanceRating == PizzaRating.Terrible || pizzabox[k].toppingInfo[o].toppingDistanceRating == PizzaRating.Bad)
                                         {
@@ -416,7 +444,16 @@ public class Customer : MonoBehaviour
                                             return;
                                         }
 
-                                        if(pizzabox[k].toppingInfo[o].leftSideCount == dialog.pizzas[w].leftToppings[q].amount)
+                                        int index = 0;
+                                        for(int j = 0; j < toppingAttributes.Length; j++)
+                                        {
+                                            if(pizzabox[k].toppingInfo[o].ingrediant == toppingAttributes[j].ingrediant)
+                                            {
+                                                index = i;
+                                                break;
+                                            }
+                                        }
+                                        if(pizzabox[k].toppingInfo[o].leftSideCount == toppingAttributes[index].amount)
                                         {
                                             Debug.Log("Exact");
 
@@ -427,7 +464,7 @@ public class Customer : MonoBehaviour
                                                 {
                                                     for(int p = 0; p < pricing.Length; p++)
                                                     {
-                                                        if(dialog.pizzas[w].leftToppings[q].topping == pricing[p].topping)
+                                                        if(dialog.pizzas[w].leftToppings[q] == pricing[p].topping)
                                                         {
                                                             tip = pricing[p].fullPriceTopping / tipAdditions[r].percentageOfTip;
                                                         }
@@ -437,9 +474,9 @@ public class Customer : MonoBehaviour
                                         }
                                         else
                                         {
-                                            int difference = pizzabox[k].toppingInfo[o].leftSideCount - dialog.pizzas[w].leftToppings[q].amount;
+                                            int difference = pizzabox[k].toppingInfo[o].leftSideCount - toppingAttributes[index].amount;
                                             Debug.Log("Not exact, difference: " + difference);
-                                            if(difference <= dialog.pizzas[w].leftToppings[q].maxDifferenceAccepted && difference >= dialog.pizzas[w].leftToppings[q].minDifferenceAccepted)
+                                            if(difference <= toppingAttributes[index].maxDifferenceAccepted && difference >= toppingAttributes[index].minDifferenceAccepted)
                                             {
                                                 Debug.Log("The difference is accepted.");
 
@@ -450,7 +487,7 @@ public class Customer : MonoBehaviour
                                                     {
                                                         for(int p = 0; p < pricing.Length; p++)
                                                         {
-                                                            if(dialog.pizzas[w].leftToppings[q].topping == pricing[p].topping)
+                                                            if(dialog.pizzas[w].leftToppings[q] == pricing[p].topping)
                                                             {
                                                                 tip = pricing[p].fullPriceTopping / tipAdditions[r].percentageOfTip;
                                                             }
@@ -478,15 +515,24 @@ public class Customer : MonoBehaviour
                             {
                                 for(int o = 0; o < pizzabox[k].toppingInfo.Length; o++)
                                 {
-                                    if(dialog.pizzas[w].rightToppings[q].topping == pizzabox[k].toppingInfo[o].ingrediant)
+                                    if(dialog.pizzas[w].rightToppings[q] == pizzabox[k].toppingInfo[o].ingrediant)
                                     {
-                                        if(pizzabox[k].toppingInfo[o].toppingDistanceRating == PizzaRating.Terrible)
+                                        if(pizzabox[k].toppingInfo[o].toppingDistanceRating == PizzaRating.Terrible || pizzabox[k].toppingInfo[o].toppingDistanceRating == PizzaRating.Bad)
                                         {
                                             Upset();
                                             return;
                                         }
 
-                                        if(pizzabox[k].toppingInfo[o].leftSideCount == dialog.pizzas[w].rightToppings[q].amount)
+                                        int index = 0;
+                                        for(int j = 0; j < toppingAttributes.Length; j++)
+                                        {
+                                            if(pizzabox[k].toppingInfo[o].ingrediant == toppingAttributes[j].ingrediant)
+                                            {
+                                                index = i;
+                                                break;
+                                            }
+                                        }
+                                        if(pizzabox[k].toppingInfo[o].leftSideCount == toppingAttributes[index].amount)
                                         {
                                             Debug.Log("Exact");
 
@@ -497,7 +543,7 @@ public class Customer : MonoBehaviour
                                                 {
                                                     for(int p = 0; p < pricing.Length; p++)
                                                     {
-                                                        if(dialog.pizzas[w].rightToppings[q].topping == pricing[p].topping)
+                                                        if(dialog.pizzas[w].rightToppings[q] == pricing[p].topping)
                                                         {
                                                             tip = pricing[p].fullPriceTopping / tipAdditions[r].percentageOfTip;
                                                         }
@@ -507,9 +553,9 @@ public class Customer : MonoBehaviour
                                         }
                                         else
                                         {
-                                            int difference = pizzabox[k].toppingInfo[o].leftSideCount - dialog.pizzas[w].rightToppings[q].amount;
+                                            int difference = pizzabox[k].toppingInfo[o].leftSideCount - toppingAttributes[index].amount;
                                             Debug.Log("Not exact, difference: " + difference);
-                                            if(difference <= dialog.pizzas[w].rightToppings[q].maxDifferenceAccepted && difference >= dialog.pizzas[w].rightToppings[q].minDifferenceAccepted)
+                                            if(difference <= toppingAttributes[index].maxDifferenceAccepted && difference >= toppingAttributes[index].minDifferenceAccepted)
                                             {
                                                 Debug.Log("The difference is accepted.");
 
@@ -520,7 +566,7 @@ public class Customer : MonoBehaviour
                                                     {
                                                         for(int p = 0; p < pricing.Length; p++)
                                                         {
-                                                            if(dialog.pizzas[w].rightToppings[q].topping == pricing[p].topping)
+                                                            if(dialog.pizzas[w].rightToppings[q] == pricing[p].topping)
                                                             {
                                                                 tip = pricing[p].fullPriceTopping / tipAdditions[r].percentageOfTip;
                                                             }
@@ -543,7 +589,7 @@ public class Customer : MonoBehaviour
                 }
                 else
                 {
-                    if(i == 0)
+                    if(i == minSidesChecked) //minSides for left, else for Right side of the checking process
                     {
                         for(int q = 0; q < dialog.pizzas[w].leftToppings.Length; q++)
                         {
@@ -551,15 +597,24 @@ public class Customer : MonoBehaviour
                             {
                                 for(int o = 0; o < pizzabox[k].toppingInfo.Length; o++)
                                 {
-                                    if(dialog.pizzas[w].leftToppings[q].topping == pizzabox[k].toppingInfo[o].ingrediant)
+                                    if(dialog.pizzas[w].leftToppings[q] == pizzabox[k].toppingInfo[o].ingrediant)
                                     {
-                                        if(pizzabox[k].toppingInfo[o].toppingDistanceRating == PizzaRating.Terrible)
+                                        if(pizzabox[k].toppingInfo[o].toppingDistanceRating == PizzaRating.Terrible || pizzabox[k].toppingInfo[o].toppingDistanceRating == PizzaRating.Bad)
                                         {
                                             Upset();
                                             return;
                                         }
 
-                                        if(pizzabox[k].toppingInfo[o].rightSideCount == dialog.pizzas[w].leftToppings[q].amount)
+                                        int index = 0;
+                                        for(int j = 0; j < toppingAttributes.Length; j++)
+                                        {
+                                            if(pizzabox[k].toppingInfo[o].ingrediant == toppingAttributes[j].ingrediant)
+                                            {
+                                                index = i;
+                                                break;
+                                            }
+                                        }
+                                        if(pizzabox[k].toppingInfo[o].rightSideCount == toppingAttributes[index].amount)
                                         {
                                             Debug.Log("Exact");
 
@@ -570,7 +625,7 @@ public class Customer : MonoBehaviour
                                                 {
                                                     for(int p = 0; p < pricing.Length; p++)
                                                     {
-                                                        if(dialog.pizzas[w].leftToppings[q].topping == pricing[p].topping)
+                                                        if(dialog.pizzas[w].leftToppings[q] == pricing[p].topping)
                                                         {
                                                             tip = pricing[p].fullPriceTopping / tipAdditions[r].percentageOfTip;
                                                         }
@@ -580,9 +635,9 @@ public class Customer : MonoBehaviour
                                         }
                                         else
                                         {
-                                            int difference = pizzabox[k].toppingInfo[o].rightSideCount - dialog.pizzas[w].leftToppings[q].amount;
+                                            int difference = pizzabox[k].toppingInfo[o].rightSideCount - toppingAttributes[index].amount;
                                             Debug.Log("Not exact, difference: " + difference);
-                                            if(difference <= dialog.pizzas[w].leftToppings[q].maxDifferenceAccepted && difference >= dialog.pizzas[w].leftToppings[q].minDifferenceAccepted)
+                                            if(difference <= toppingAttributes[index].maxDifferenceAccepted && difference >= toppingAttributes[index].minDifferenceAccepted)
                                             {
                                                 Debug.Log("The difference is accepted.");
 
@@ -593,7 +648,7 @@ public class Customer : MonoBehaviour
                                                     {
                                                         for(int p = 0; p < pricing.Length; p++)
                                                         {
-                                                            if(dialog.pizzas[w].leftToppings[q].topping == pricing[p].topping)
+                                                            if(dialog.pizzas[w].leftToppings[q] == pricing[p].topping)
                                                             {
                                                                 tip = pricing[p].fullPriceTopping / tipAdditions[r].percentageOfTip;
                                                             }
@@ -610,6 +665,7 @@ public class Customer : MonoBehaviour
                                     }
                                 }
                             }
+                            
                         }
                     }
                     else
@@ -620,15 +676,24 @@ public class Customer : MonoBehaviour
                             {
                                 for(int o = 0; o < pizzabox[k].toppingInfo.Length; o++)
                                 {
-                                    if(dialog.pizzas[w].rightToppings[q].topping == pizzabox[k].toppingInfo[o].ingrediant)
+                                    if(dialog.pizzas[w].rightToppings[q] == pizzabox[k].toppingInfo[o].ingrediant)
                                     {
-                                        if(pizzabox[k].toppingInfo[o].toppingDistanceRating == PizzaRating.Terrible)
+                                        if(pizzabox[k].toppingInfo[o].toppingDistanceRating == PizzaRating.Terrible || pizzabox[k].toppingInfo[o].toppingDistanceRating == PizzaRating.Bad)
                                         {
                                             Upset();
                                             return;
                                         }
 
-                                        if(pizzabox[k].toppingInfo[o].rightSideCount == dialog.pizzas[w].rightToppings[q].amount)
+                                        int index = 0;
+                                        for(int j = 0; j < toppingAttributes.Length; j++)
+                                        {
+                                            if(pizzabox[k].toppingInfo[o].ingrediant == toppingAttributes[j].ingrediant)
+                                            {
+                                                index = i;
+                                                break;
+                                            }
+                                        }
+                                        if(pizzabox[k].toppingInfo[o].rightSideCount == toppingAttributes[index].amount)
                                         {
                                             Debug.Log("Exact");
 
@@ -639,7 +704,7 @@ public class Customer : MonoBehaviour
                                                 {
                                                     for(int p = 0; p < pricing.Length; p++)
                                                     {
-                                                        if(dialog.pizzas[w].rightToppings[q].topping == pricing[p].topping)
+                                                        if(dialog.pizzas[w].rightToppings[q] == pricing[p].topping)
                                                         {
                                                             tip = pricing[p].fullPriceTopping / tipAdditions[r].percentageOfTip;
                                                         }
@@ -649,9 +714,9 @@ public class Customer : MonoBehaviour
                                         }
                                         else
                                         {
-                                            int difference = pizzabox[k].toppingInfo[o].rightSideCount - dialog.pizzas[w].rightToppings[q].amount;
+                                            int difference = pizzabox[k].toppingInfo[o].rightSideCount - toppingAttributes[index].amount;
                                             Debug.Log("Not exact, difference: " + difference);
-                                            if(difference <= dialog.pizzas[w].rightToppings[q].maxDifferenceAccepted && difference >= dialog.pizzas[w].rightToppings[q].minDifferenceAccepted)
+                                            if(difference <= toppingAttributes[index].maxDifferenceAccepted && difference >= toppingAttributes[index].minDifferenceAccepted)
                                             {
                                                 Debug.Log("The difference is accepted.");
 
@@ -662,7 +727,7 @@ public class Customer : MonoBehaviour
                                                     {
                                                         for(int p = 0; p < pricing.Length; p++)
                                                         {
-                                                            if(dialog.pizzas[w].rightToppings[q].topping == pricing[p].topping)
+                                                            if(dialog.pizzas[w].rightToppings[q] == pricing[p].topping)
                                                             {
                                                                 tip = pricing[p].fullPriceTopping / tipAdditions[r].percentageOfTip;
                                                             }
@@ -679,6 +744,7 @@ public class Customer : MonoBehaviour
                                     }
                                 }
                             }
+                            
                         }
                     }
                 }
@@ -806,7 +872,7 @@ public class Customer : MonoBehaviour
                 {
                     for(int o = 0; o < pizzabox[p].toppingInfo.Length; o++)
                     {
-                        if(dialog.pizzas[q].leftToppings[i].topping == pizzabox[p].toppingInfo[o].ingrediant)
+                        if(dialog.pizzas[q].leftToppings[i] == pizzabox[p].toppingInfo[o].ingrediant)
                         {
                             if(pizzabox[p].toppingInfo[o].leftSideCount > 0)
                             {
@@ -860,7 +926,7 @@ public class Customer : MonoBehaviour
                 {
                     for(int o = 0; o < pizzabox[p].toppingInfo.Length; o++)
                     {
-                        if(dialog.pizzas[q].rightToppings[i].topping == pizzabox[p].toppingInfo[o].ingrediant)
+                        if(dialog.pizzas[q].rightToppings[i] == pizzabox[p].toppingInfo[o].ingrediant)
                         {
                             if(pizzabox[p].toppingInfo[o].leftSideCount > 0)
                             {
@@ -929,6 +995,102 @@ public class Customer : MonoBehaviour
         }
 
         return true;
+    }
+
+    bool CheckToppings(List<PizzaBox> pizzabox)
+    {
+        pizzaboxToppings.Clear();
+        dialogToppings.Clear();
+
+        foreach(PizzaBox box in pizzabox)
+        {
+            CheckToppings topping = new CheckToppings();
+            for(int i = 0; i < box.toppingInfo.Length; i++)
+            {
+                if(box.toppingInfo[i].leftSideCount > 0 || box.toppingInfo[i].rightSideCount > 0)
+                {
+                    topping.ingrediant.Add(box.toppingInfo[i].ingrediant);
+                    int bothSides = box.toppingInfo[i].leftSideCount + box.toppingInfo[i].rightSideCount;
+                    topping.amount.Add(bothSides);
+                }
+            }
+            pizzaboxToppings.Add(topping);
+        }
+
+        for(int i = 0; i < dialog.pizzas.Length; i++)
+        {
+            foreach(PizzaOptions option in dialog.pizzas[i].leftToppings)
+            {
+                if(!dialogToppings.Contains(option))
+                {
+                    dialogToppings.Add(option);
+                }
+            }
+            foreach(PizzaOptions option in dialog.pizzas[i].rightToppings)
+            {
+                if(!dialogToppings.Contains(option))
+                {
+                    dialogToppings.Add(option);
+                }
+            }
+        }
+
+        if(pizzaboxToppings.Count <= 0)
+        {
+            Debug.Log("Nothing in box");
+            return false;
+        }
+
+        List<PizzaOptions> duplicatePizza = new List<PizzaOptions>();
+        List<int> duplicateAmount = new List<int>();
+        foreach(CheckToppings pizza in pizzaboxToppings)
+        {
+            for(int i = 0; i < pizza.ingrediant.Count; i++)
+            {
+                if(!duplicatePizza.Contains(pizza.ingrediant[i]))
+                {
+                    duplicatePizza.Add(pizza.ingrediant[i]);
+                    duplicateAmount.Add(pizza.amount[i]);
+                }
+            }
+        }
+
+        for (int i = duplicatePizza.Count - 1; i >= 0; i--)
+        {
+            foreach (PizzaOptions topping in dialogToppings)
+            {
+                if (duplicatePizza[i] == topping)
+                {
+                    Debug.Log("Removed: " + duplicatePizza[i].ToString());
+                    int index = duplicatePizza.IndexOf(duplicatePizza[i]);
+                    if (index >= 0 && index < duplicateAmount.Count) //Prevents out of range errors
+                    {
+                        duplicateAmount.RemoveAt(index);
+                    }
+                    
+                    duplicatePizza.RemoveAt(i);
+                    
+                    break;
+                }
+            }
+        }
+
+        int extraToppings = 0;
+        foreach(int duplicate in duplicateAmount)
+        {
+            extraToppings += duplicate;
+        }
+
+        if(extraToppings > dialog.maximumToppingsAllowed)
+        {
+            Debug.Log("Too much toppings");
+            return false;
+        }
+        else
+        {
+            Debug.Log("Accepted toppings");
+            return true;
+        }
     }
 
     void Upset()

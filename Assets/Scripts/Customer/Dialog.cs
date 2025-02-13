@@ -32,21 +32,12 @@ public enum PizzaCook
 [System.Serializable]
 public class Pizzas
 {
-    public PizzaTopping[] leftToppings;
-    public PizzaTopping[] rightToppings;
+    public PizzaOptions[] leftToppings;
+    public PizzaOptions[] rightToppings;
     public PizzaCook cookTimes;
     public int numberOfCuts = 3;
     public int minimumCutsAllowed = 3;
     public int maximumCutsAllowed = 5;
-}
-
-[System.Serializable]
-public class PizzaTopping
-{
-    public PizzaOptions topping;
-    public int amount;
-    public int minDifferenceAccepted;
-    public int maxDifferenceAccepted;
 }
 
 [System.Serializable]

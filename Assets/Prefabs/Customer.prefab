@@ -153,9 +153,45 @@ MonoBehaviour:
   recipeSys: {fileID: 0}
   manager: {fileID: 0}
   brief: {fileID: 0}
-  dialog: {fileID: 11400000, guid: 410cab9e6b5cc1ff2b463d20cb54e339, type: 2}
+  pizzaboxToppings:
+  - ingrediant: 
+    amount: 
+  dialog: {fileID: 11400000, guid: 43473eacb71a6ff25840aa9df3414833, type: 2}
   cookTimes: 0
   pizzaSides: []
+  toppingAttributes:
+  - ingrediant: 0
+    amount: 35
+    minDifferenceAccepted: -15
+    maxDifferenceAccepted: 100
+  - ingrediant: 1
+    amount: 35
+    minDifferenceAccepted: -15
+    maxDifferenceAccepted: 100
+  - ingrediant: 2
+    amount: 9
+    minDifferenceAccepted: -3
+    maxDifferenceAccepted: 7
+  - ingrediant: 3
+    amount: 9
+    minDifferenceAccepted: -3
+    maxDifferenceAccepted: 7
+  - ingrediant: 4
+    amount: 9
+    minDifferenceAccepted: -3
+    maxDifferenceAccepted: 7
+  - ingrediant: 5
+    amount: 9
+    minDifferenceAccepted: -3
+    maxDifferenceAccepted: 7
+  - ingrediant: 6
+    amount: 9
+    minDifferenceAccepted: -3
+    maxDifferenceAccepted: 7
+  - ingrediant: 7
+    amount: 9
+    minDifferenceAccepted: -3
+    maxDifferenceAccepted: 7
   pizzasNeeded: 0
   pizzaBoxes: []
   cookedTimes: 0
