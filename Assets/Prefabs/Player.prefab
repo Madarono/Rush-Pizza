@@ -650,6 +650,11 @@ MonoBehaviour:
   - tagName: Customer
     interactionVisual: {fileID: 0}
     customer: 1
+    merchant: 0
+  - tagName: Merchant
+    interactionVisual: {fileID: 0}
+    customer: 0
+    merchant: 1
   extraRange: 3
 --- !u!1 &5511904338182600044
 GameObject:

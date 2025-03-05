@@ -1122,6 +1122,8 @@ public class Customer : MonoBehaviour
         {
             recipeSys.VisibleRecipe(dialog.indexOfRecipe);
         }
+
+        RemoveBoxes();
     }
 
     void LeaveWithoutNotice()
@@ -1159,5 +1161,21 @@ public class Customer : MonoBehaviour
         {
             recipeSys.VisibleRecipe(dialog.indexOfRecipe);
         }
+
+        RemoveBoxes();
+    }
+
+    void RemoveBoxes()
+    {
+        if(pizzaBoxes.Count <= 0)
+        {
+            return;
+        }
+
+        for(int i = pizzaBoxes.Count - 1; i >= 0; i--)
+        {
+            Destroy(pizzaBoxes[i].gameObject);
+        }
+        pizzaBoxes.Clear();
     }
 }

@@ -39,6 +39,7 @@ public class Check : MonoBehaviour
                 }
                 ToppingBox box = obj.GetComponent<ToppingBox>();
                 drawing.topping = box.topping;
+                drawing.idForSupply = box.id;
                 topping = box;
                 topping.isUsed = true;
                 topping.OpenUseBox();

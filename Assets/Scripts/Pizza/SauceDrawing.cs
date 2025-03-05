@@ -8,6 +8,11 @@ public class SauceDrawing : MonoBehaviour
     public Stats stats;
     public DragAndDrop dragAndDrop;
     public ToppingSO topping;
+
+    [Header("Supply.cs")]
+    public int idForSupply;
+    public Supply supply;
+
     
     private List<Vector3> drawnPath = new List<Vector3>();
     private bool isDrawing;
@@ -57,6 +62,12 @@ public class SauceDrawing : MonoBehaviour
         if (Physics.Raycast(camera.position, camera.forward, out RaycastHit hit, settings.lookRange, topping.drawingSurfaceLayer))
         {
             pizza = hit.collider.gameObject.GetComponent<PizzaHolder>();
+            
+            if(pizza == null)
+            {
+                return;
+            }
+            
             if(pizza.pizza.isCooked)
             {
                 return;
@@ -72,8 +83,16 @@ public class SauceDrawing : MonoBehaviour
 
                 int randomPrefab = Random.Range(0, topping.toppingPrefab.Length);
                 GameObject sauce = Instantiate(topping.toppingPrefab[randomPrefab], hitPoint + Vector3.up * topping.spawnOffset, Quaternion.identity);
-                settings.AddWithoutVisual(-topping.priceToPlace);
-                stats.toppingStats[topping.indexForStat].moneySpent += topping.priceToPlace;
+                
+                if(supply.ingrediantSupply[idForSupply].freeSupply > 0)
+                {
+                    supply.ingrediantSupply[idForSupply].freeSupply--;
+                }
+                else
+                {
+                    settings.AddWithoutVisual(-topping.priceToPlace);
+                    stats.toppingStats[topping.indexForStat].moneySpent += topping.priceToPlace;
+                }
                 
                 if (topping.checkForTopping)
                 {

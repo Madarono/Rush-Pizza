@@ -19,8 +19,8 @@ public class Interactable : MonoBehaviour
 
         if(dragAndDrop != null)
         {
-            Pickable pickable = go.GetComponent<Pickable>();
-            pickable.dragAndDrop = dragAndDrop;
+            Pizza pizza = go.GetComponent<Pizza>();
+            pizza.dragAndDrop = dragAndDrop;
         }
        
         if(settings != null)

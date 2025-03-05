@@ -150,6 +150,7 @@ MonoBehaviour:
   isDough: 1
   settings: {fileID: 0}
   stats: {fileID: 0}
+  dragAndDrop: {fileID: 0}
 --- !u!65 &4516087887251710964
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -133,7 +133,11 @@ public class Brief : WindowOpening
         }
         player.canMove = true;
         cam.canMove = true;
-        pausing.lockMouse = true;
+
+        if(isOpen)
+        {
+            pausing.lockMouse = true;
+        }
     }
 
     public void ShowPaper()

@@ -16,6 +16,7 @@ public class TimeChanges : MonoBehaviour
     private float speedOfTransition;
 
     [Header("Timer")]
+    public Mission mission;
     public Pausing pause;
     public Stats stats;
     public Settings settings;
@@ -36,6 +37,8 @@ public class TimeChanges : MonoBehaviour
     public MouseCursor mouseCursor;
     public PlayerMovement playerMovement;
     public Player_Cam playerCam;
+    public Supply supply;
+    public License license;
 
     public CustomerManager manager;
     public GameObject blackScreen;
@@ -183,6 +186,9 @@ public class TimeChanges : MonoBehaviour
         }
         manager.abortCustomerChecking = true;
         settings.canSaveMoney = true;
+        supply.canSave = true;
+        license.canSave = true;
+        mission.canSave = true;
         pause.lockMouse = false;
         StartCoroutine(EndofDay());
     }

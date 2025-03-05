@@ -6,17 +6,21 @@ using TMPro;
 
 public class CustomerManager : MonoBehaviour
 {
+    public Mission mission;
     public Pausing pausing;
     public Brief brief;
     public Stats stats;
-    [HideInInspector]public bool abortCustomerChecking = false;
     public GameObject customerPrefab;
+    public GameObject merchantPrefab;
     public Transform spawnPosition;
     public Dialog[] orders;
     public bool randomizeCustomerOrders = true;
 
+    [HideInInspector]public bool abortCustomerChecking = false;
     [HideInInspector]public GameObject customer;
+    [HideInInspector]public GameObject merchant;
     private Customer goScript;
+    private Merchant merchantScript;
 
     [Header("Custommer Spawn Rate")]
     public float minWait = 1f;
@@ -33,31 +37,46 @@ public class CustomerManager : MonoBehaviour
 
     public GameObject dialogWindow;
     public GameObject okayButton;
-    public TextMeshProUGUI okayText;
     public GameObject whatButton;
-    public TextMeshProUGUI whatText;
     public GameObject hintButton;
-    public TextMeshProUGUI hintText;
+    public GameObject noButton;
     public TextMeshProUGUI patienceCounter;
     public Image emotion;
     public GameObject emotionWindow;
-    
+
+    [Header("Things for Merchant script")]
+    public Supply supply;
+    public License license;
+    public GameObject merchantWindow;
+    public Animator[] merchantContent;
+    public Transform parentSpawn;
+    public Transform startingPlace;
+    public Occupation[] places;
+    public Animator windowAnim;
+    public TextMeshProUGUI priceVisual;
+
+    private bool hasInstantiatedMerchant = false;
+
     void Start()
     {
         currentWait = Random.Range(minWait, maxWait);
         emotionWindow.SetActive(false);
+        merchantWindow.SetActive(false);
     }
 
     void Update()
     {
+        //Debugging
         if(Input.GetKeyDown(KeyCode.T))
         {
-            InstantiateCustomer();
+            InstantiateMerchant();
         }
         if(Input.GetKeyDown(KeyCode.Y))
         {
             DeleteCustomer();
+            DeleteMerchant();
         }
+        //
 
         if(abortCustomerChecking)
         {
@@ -71,7 +90,14 @@ public class CustomerManager : MonoBehaviour
         else if(currentWait <= 0f && customer == null)
         {
             currentWait = 0f;
-            InstantiateCustomer();
+            if(!hasInstantiatedMerchant)
+            {
+                InstantiateMerchant();
+            }
+            else
+            {
+                InstantiateCustomer();
+            }
         }
     }
 
@@ -111,6 +137,10 @@ public class CustomerManager : MonoBehaviour
             dialogWindow.SetActive(false);
             pausing.lockMouse = true;
         }
+        else if(merchantScript != null)
+        {
+            merchantScript.OpenMerchantWindow();
+        }
     }
 
     public void AskWhat()
@@ -139,10 +169,58 @@ public class CustomerManager : MonoBehaviour
         }
     }
 
+    public void AskNo()
+    {
+        DeleteMerchant();
+        merchantScript = null;
+        dialogWindow.SetActive(false);
+        noButton.SetActive(false);
+    }
+
+    public void AskBuy()
+    {
+        if(merchantScript == null)
+        {
+            return;
+        }
+        if(merchantScript.cartPrice > settings.money) //Save what is bought at the end of the day, supply and license
+        {
+            return;
+        }
+
+        settings.AddWithoutVisual(-merchantScript.cartPrice);
+        merchantScript.BuyCart();
+    }
+    
+    public void AskCancel()
+    {
+        if(merchantScript == null)
+        {
+            return;
+        }
+
+        merchantScript.UnCartAll();
+    }
+
+    public void AskLeave()//For Merchant
+    {
+        if(merchantScript == null)
+        {
+            return;
+        }
+
+        merchantScript.CloseMerchantWindow();
+        merchantScript.SelfDestruction();
+        dialogWindow.SetActive(false);
+        noButton.SetActive(false);
+        merchantScript = null;
+    }
+
     public void InstantiateCustomer()
     {
-        if(customer != null)
+        if(customer != null || merchant != null)
         {
+            currentWait = Random.Range(minWait, maxWait);
             return;
         }
 
@@ -172,6 +250,45 @@ public class CustomerManager : MonoBehaviour
         goScript.brief = brief;
     }
 
+    public void InstantiateMerchant()
+    {
+        if(merchant != null)
+        {
+            return;
+        }
+
+        GameObject go = Instantiate(merchantPrefab, spawnPosition.position, Quaternion.identity);
+        merchant = go;
+        merchantScript = go.GetComponent<Merchant>();
+
+        merchantScript.settings = settings;
+        merchantScript.mouseCursor = mouseCursor;
+        merchantScript.playerMovement = playerMovement;
+        merchantScript.playerCam = playerCam;
+        merchantScript.dialogWindow = dialogWindow;
+        merchantScript.dialogContent = dialogContent;
+        merchantScript.okayButton = okayButton;
+        merchantScript.noButton = noButton;
+        merchantScript.manager = this;
+        merchantScript.pause = pausing;
+        merchantScript.merchantWindow = merchantWindow;
+        merchantScript.parentSpawn = parentSpawn;
+        merchantScript.windowAnim = windowAnim;
+        merchantScript.startingPlace = startingPlace;
+        merchantScript.places = places;
+        merchantScript.priceVisual = priceVisual;
+        merchantScript.supply = supply;
+        merchantScript.merchantContent = merchantContent;
+        merchantScript.license = license;
+        merchantScript.mission = mission;
+
+        mission.merchantScript = merchantScript;
+        mission.Refresh();
+
+        hasInstantiatedMerchant = true;
+        currentWait = Random.Range(minWait, maxWait);
+    }
+
     public void DeleteCustomer()
     {
         if(customer != null)
@@ -180,7 +297,18 @@ public class CustomerManager : MonoBehaviour
             emotionWindow.SetActive(false);
             customer = null;
             currentWait = Random.Range(minWait, maxWait);
-            Debug.Log("Deleted customer successfully.");
+        }
+    }
+    public void DeleteMerchant()
+    {
+        if(merchant != null)
+        {
+            Destroy(merchant);
+            merchant = null;
+            mouseCursor.LockCusorState();
+            playerMovement.canMove = true;
+            playerCam.canMove = true;
+            currentWait = Random.Range(minWait, maxWait);
         }
     }
     

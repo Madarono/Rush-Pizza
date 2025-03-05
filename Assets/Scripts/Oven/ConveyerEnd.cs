@@ -25,8 +25,8 @@ public class ConveyerEnd : MonoBehaviour
         {
             if(checkPickable)
             {
-                pickable = other.GetComponent<Pickable>();
-                pickable.canBePicked = true;
+                // pickable = other.GetComponent<Pickable>();
+                // pickable.canBePicked = true;
                 pizza.canBeCooked = true;
             }
         }
@@ -45,8 +45,7 @@ public class ConveyerEnd : MonoBehaviour
                 pizza.UpdateLooks();
             }
 
-            pickable = other.GetComponent<Pickable>();
-            if(isGate && pickable != null && !pickable.canBePicked)
+            if(isGate)
             {
                 if(openGate)
                 {

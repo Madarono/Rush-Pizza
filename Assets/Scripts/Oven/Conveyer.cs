@@ -25,8 +25,6 @@ public class Conveyer : MonoBehaviour
         pizza = other.GetComponent<Pizza>();
         if(pizza != null)
         {
-            Pickable pickable = other.GetComponent<Pickable>();
-            pickable.canBePicked = true;
             pizza.canBeCooked = true;
         }
     }
@@ -37,9 +35,7 @@ public class Conveyer : MonoBehaviour
         pizza = other.GetComponent<Pizza>();
         if (rb != null && pizza != null)
         {
-            Pickable pickable = other.GetComponent<Pickable>();
-            pickable.canBePicked = false;
-            pickable.dragAndDrop.DropObject();
+            pizza.dragAndDrop.DropObject();
 
             rb.velocity = Vector3.zero;
 

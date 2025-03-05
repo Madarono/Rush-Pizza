@@ -26,6 +26,15 @@ public class GameData
     //RecipeSystem.cs
     public bool[] isVisible = new bool[8];
 
+    //Supply.cs
+    public int[] sumSupply;
+
+    //License.cs
+    public bool[] boxesPlaced;
+
+    //Mission.cs
+    public int[] saveState;
+
     public GameData()
     {
         //Settings.cs
@@ -48,5 +57,14 @@ public class GameData
 
         //RecipeSystem.cs
         this.isVisible = new bool[8];
+
+        //Supply.cs
+        this.sumSupply = new int[8];
+
+        //License.cs
+        this.boxesPlaced = new bool[8];
+
+        //Mission.cs
+        this.saveState = new int[0];
     }
 }

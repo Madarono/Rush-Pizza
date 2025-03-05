@@ -37,6 +37,12 @@ public class DrawingDebug : MonoBehaviour
         if(Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, settings.lookRange, topping.drawingSurfaceLayer))
         {
             PizzaHolder pizza = hit.collider.gameObject.GetComponent<PizzaHolder>();
+
+            if(pizza == null)
+            {
+                return;
+            }
+
             if(pizza.pizza.isCooked || pizza == null)
             {
                 if(activeProjectModel != null)

@@ -18,8 +18,8 @@ public class Pausing : MonoBehaviour
     public Animator pauseAnimator;
     public float delayOfLeaving = 0.9f;
     private bool isPausing = false;
-    [HideInInspector]public bool lockMouse = true;
-    [HideInInspector]public bool canPause = true; //Controls.cs controls this.
+    public bool lockMouse = true;
+    public bool canPause = true; //Controls.cs controls this.
 
     void Start()
     {

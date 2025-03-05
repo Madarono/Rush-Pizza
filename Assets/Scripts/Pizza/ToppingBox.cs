@@ -6,8 +6,12 @@ public class ToppingBox : MonoBehaviour
 {
     public ToppingSO topping;
     public bool isUsed = false;
-
+    
     public Animator boxAnimation;
+    
+    [Header("Id for Supply.cs")]
+    public int id;
+
 
     public void OpenUseBox()
     {

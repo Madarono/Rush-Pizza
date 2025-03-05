@@ -37,6 +37,7 @@ public class PizzaCuts
 
 public class Pizza : MonoBehaviour
 {
+    [HideInInspector]public DragAndDrop dragAndDrop;
     public Ingrediants[] ingrediants;
     public PizzaCuts cuts;
     private PlayerHolder playerHolder;

@@ -85,7 +85,8 @@ public class Stats : MonoBehaviour
         }
         else
         {
-            information[7].infoValue[1].text = "-" + profits.ToString();
+            float absoluteProfit = -profits;
+            information[7].infoValue[1].text = "-" + absoluteProfit.ToString();
             information[7].infoValue[0].gameObject.SetActive(false);
             information[7].infoValue[1].gameObject.SetActive(true);
         }

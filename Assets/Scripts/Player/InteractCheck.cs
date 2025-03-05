@@ -8,6 +8,7 @@ public class Checks
     public string tagName;
     public GameObject interactionVisual;
     public bool customer;
+    public bool merchant;
 }
 
 public class InteractCheck : MonoBehaviour
@@ -20,6 +21,7 @@ public class InteractCheck : MonoBehaviour
     public Checks[] checks;
     public float extraRange = 1f;
     private Customer customer;
+    private Merchant merchant;
 
     void Update()
     {
@@ -33,7 +35,15 @@ public class InteractCheck : MonoBehaviour
                 customer.InitiateTalk(TalkType.Initial);
                 playerMovement.canMove = false;
                 player.velocity = Vector3.zero;
+               
                 customer = null;
+            }
+            else if(merchant != null && merchant.state == MerchantStates.Static)
+            {
+                pausing.lockMouse = false;
+                merchant.InitiateTalk();
+                playerMovement.canMove = false;
+                player.velocity = Vector3.zero;
             }
         }
     }
@@ -48,7 +58,7 @@ public class InteractCheck : MonoBehaviour
             // Debug.Log("Found Something");
             GameObject obj = hit.collider.gameObject;
 
-            foreach(var check in checks)
+            foreach(Checks check in checks)
             {
                 if(obj.CompareTag(check.tagName))
                 {
@@ -63,6 +73,14 @@ public class InteractCheck : MonoBehaviour
                             check.interactionVisual.SetActive(false);
                         }
                     }
+                    else if(check.merchant)
+                    {
+                        merchant = obj.GetComponent<Merchant>();
+                        if(merchant.state != MerchantStates.Static)
+                        {
+                            check.interactionVisual.SetActive(false);
+                        }
+                    }
 
                     break;
                 }
@@ -72,10 +90,10 @@ public class InteractCheck : MonoBehaviour
         {
             foreach(var check in checks)
             {
-                // Debug.Log("Removing Visuals");
                 check.interactionVisual.SetActive(false);
             }
             customer = null;
+            merchant = null;
         }
     }
 }

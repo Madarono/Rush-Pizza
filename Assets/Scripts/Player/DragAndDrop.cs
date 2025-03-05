@@ -114,19 +114,13 @@ public class DragAndDrop : MonoBehaviour
         {
             if(hit.collider.CompareTag("Draggable"))
             {
-                // rotate_obj.targetedObject = heldObject;
-                Pickable heldObjectScript = hit.collider.gameObject.GetComponent<Pickable>();
-                if(heldObjectScript.canBePicked)
-                {
-                    heldObject = hit.collider.gameObject;
-                    heldObjectScript.dragAndDrop = this;
-                    heldObjectRB = heldObject.GetComponent<Rigidbody>();
-                    heldObjectRB.constraints = RigidbodyConstraints.FreezeRotation;  
-                    
-                    heldObject.transform.SetParent(parent_obj);
-    
-                    holdPos.SetHoldPosition(2.5f);
-                }
+                heldObject = hit.collider.gameObject;
+                heldObjectRB = heldObject.GetComponent<Rigidbody>();
+                heldObjectRB.constraints = RigidbodyConstraints.FreezeRotation;  
+                
+                heldObject.transform.SetParent(parent_obj);
+
+                holdPos.SetHoldPosition(2.5f);
             }
             if(heldObjectRB != null)
             {

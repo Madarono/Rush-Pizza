@@ -15,6 +15,9 @@ public class Settings : MonoBehaviour, IDataPersistence
     public Sprite usd;
     public Sprite euro;
 
+    [Header("IngrediantsBought")]
+    public PizzaOptions[] ingrediantsAvailable; //For Merchant.cs
+
     [Header("Cash Register Visual")]
     public TextMeshPro[] registervisual = new TextMeshPro[2]; 
     public float durationvisible = 1.5f;

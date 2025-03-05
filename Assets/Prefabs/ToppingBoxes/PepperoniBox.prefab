@@ -129,6 +129,7 @@ MonoBehaviour:
   topping: {fileID: 11400000, guid: eaa69a88441ac17679f9af4b21899cb5, type: 2}
   isUsed: 0
   boxAnimation: {fileID: 39125377401484892}
+  id: 2
 --- !u!95 &39125377401484892
 Animator:
   serializedVersion: 5
