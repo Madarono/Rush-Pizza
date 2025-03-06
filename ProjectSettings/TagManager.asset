@@ -11,6 +11,7 @@ TagManager:
   - PizzaCutter
   - PizzaBox
   - Customer
+  - Merchant
   layers:
   - Default
   - TransparentFX
