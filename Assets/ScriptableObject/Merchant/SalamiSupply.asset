@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ingrediantType: 2
   neutral: 0
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 094df2b5c4d1baf5091c4cab493fcd76, type: 3}
   price: 6
   infoEnglish: Adds 50 pepperonis in your supply to use for free on a pizza.
   infoDeutsch: Hinzufungt 50 salamis in dein vorrat zu fur gratis auf ein pizza nutzen.
   itemType: 0
-  licenseType: 0
+  licenseID: 0
   supplyCount: 50

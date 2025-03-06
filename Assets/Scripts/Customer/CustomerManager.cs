@@ -6,7 +6,6 @@ using TMPro;
 
 public class CustomerManager : MonoBehaviour
 {
-    public Mission mission;
     public Pausing pausing;
     public Brief brief;
     public Stats stats;
@@ -28,6 +27,7 @@ public class CustomerManager : MonoBehaviour
     private float currentWait;
 
     [Header("Things for Customer script")]
+    public Mission mission;
     public RecipeSystem recipeSys;
     public MouseCursor mouseCursor;
     public PlayerMovement playerMovement;
@@ -248,6 +248,7 @@ public class CustomerManager : MonoBehaviour
         goScript.recipeSys = recipeSys;
         goScript.manager = this;
         goScript.brief = brief;
+        goScript.mission = mission;
     }
 
     public void InstantiateMerchant()

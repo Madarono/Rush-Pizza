@@ -49,6 +49,12 @@ public class Supply : MonoBehaviour, IDataPersistence
         for(int i = 0; i < ingrediantSupply.Length; i++)
         {
             ingrediantSupply[i].freeSupply = sumSupply[i];
+
+            if(ingrediantSupply[i].freeSupply > 0)
+            {
+                ingrediantSupply[i].box.supply = ingrediantSupply[i].freeSupply;
+                ingrediantSupply[i].box.UpdateSupply();
+            }
         }
     }
 
@@ -63,6 +69,8 @@ public class Supply : MonoBehaviour, IDataPersistence
                 {
                     ingrediantSupply[i].freeSupply = ingrediantSupply[i].maxSupply;
                 }
+                ingrediantSupply[i].box.supply = ingrediantSupply[i].freeSupply;
+                ingrediantSupply[i].box.UpdateSupply();
                 break;
             }
         }

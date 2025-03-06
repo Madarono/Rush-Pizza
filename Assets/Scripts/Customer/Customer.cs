@@ -80,6 +80,7 @@ public class Customer : MonoBehaviour
     public States state;
     public IngrediantPricing[] pricing;
     [HideInInspector]public MouseCursor mouseCursor;
+    [HideInInspector]public Mission mission;
     [HideInInspector]public PlayerMovement playerMovement;
     [HideInInspector]public Player_Cam playerCam;
     [HideInInspector]public Stats stats;
@@ -364,8 +365,6 @@ public class Customer : MonoBehaviour
     {
         emotion.sprite = emotionStages[id].emotion;
     }
-
-    
 
     void OnCollisionEnter(Collision col) //When order is ready
     {
@@ -1099,6 +1098,7 @@ public class Customer : MonoBehaviour
 
     void Upset()
     {
+        mission.pizzasMade++;
         SetEmotion(2);
         settings.AddToMoney(-bill);
         stats.refundsLost += bill;
@@ -1136,6 +1136,7 @@ public class Customer : MonoBehaviour
 
     void Satisfied()
     {
+        mission.pizzasMade++;
         SetEmotion(0);
         float endingTip = Mathf.Round((tip * (percentageOfPatience / 100f)) * 100f) / 100f;      
         settings.AddToMoney(endingTip);

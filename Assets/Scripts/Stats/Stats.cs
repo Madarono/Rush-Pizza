@@ -20,7 +20,7 @@ public class ShowText
     public float delayToAppear;
 }
 
-public class Stats : MonoBehaviour
+public class Stats : MonoBehaviour, IDataPersistence
 {
     public Settings settings;
 
@@ -47,6 +47,16 @@ public class Stats : MonoBehaviour
     public GameObject supplies;
     public Transform[] suppliesPositions = new Transform[2]; 
 
+    public void SaveData(GameData data)
+    {
+        data.day = this.day;
+    }
+
+    public void LoadData(GameData data)
+    {
+        this.day = data.day;
+    }
+
     void Start()
     {
         paper.SetActive(false);
@@ -61,6 +71,7 @@ public class Stats : MonoBehaviour
         supplies.SetActive(true);
         settings.AddWithoutVisual(-rent);
         float totalUsedSupplies = 0f;
+        toppingStats[0].moneySpent = doughSpent;
         for(int i = 0; i < toppingStats.Length; i++)
         {
             totalUsedSupplies += toppingStats[i].moneySpent;
@@ -103,6 +114,7 @@ public class Stats : MonoBehaviour
             toppingStats[i].valueVisual.text = "-" + toppingStats[i].moneySpent.ToString("F2");
         }
 
+        day++;
         StartCoroutine(SmoothTransition());
     }
 

@@ -87,6 +87,8 @@ public class SauceDrawing : MonoBehaviour
                 if(supply.ingrediantSupply[idForSupply].freeSupply > 0)
                 {
                     supply.ingrediantSupply[idForSupply].freeSupply--;
+                    supply.ingrediantSupply[idForSupply].box.supply = supply.ingrediantSupply[idForSupply].freeSupply;
+                    supply.ingrediantSupply[idForSupply].box.UpdateSupply();
                 }
                 else
                 {

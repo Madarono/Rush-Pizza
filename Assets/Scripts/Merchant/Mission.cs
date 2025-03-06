@@ -17,11 +17,29 @@ public class GuaranteedLicense
     public LicenseState licenseState;
 }
 
+[System.Serializable]
+public class ObjectiveLicense
+{
+    public int dayRequired;
+    public int pizzasRequired;
+    public float moneyRequired;
+
+    public int idForLicense;
+}
+
 public class Mission : MonoBehaviour, IDataPersistence
 {
     public GuaranteedLicense[] licenses;
     public Merchant merchantScript;
     public bool canSave = false;
+    
+    [Header("Objective")]
+    public ObjectiveLicense[] objective;
+    public Settings settings;
+    public Stats stats; //Day
+    public int pizzasMade;
+    public float moneyGained;
+
     private List<int> saveState = new List<int>();
     private int[] intSaveState;
 
@@ -32,13 +50,18 @@ public class Mission : MonoBehaviour, IDataPersistence
         {
             ChangeStateIntoInt();
             data.saveState = this.saveState.ToArray();
+            data.pizzasMade = this.pizzasMade;
+            data.moneyGained = this.moneyGained;
         }
     }
 
     public void LoadData(GameData data)
     {
         this.intSaveState = data.saveState;
+        this.pizzasMade = data.pizzasMade;
+        this.moneyGained = data.moneyGained;
         ChangeIntIntoState();
+        CheckRequirements();
     }
 
     public void Refresh()
@@ -129,5 +152,23 @@ public class Mission : MonoBehaviour, IDataPersistence
                     break;
             }
         }
+    }
+
+    public void CheckRequirements()
+    {
+        int days = stats.day;
+
+        foreach(ObjectiveLicense obj in objective)
+        {
+            if(days >= obj.dayRequired && pizzasMade >= obj.pizzasRequired && moneyGained >= obj.moneyRequired)
+            {
+                if(licenses[obj.idForLicense].licenseState == LicenseState.Empty)
+                {
+                    licenses[obj.idForLicense].licenseState = LicenseState.Available;
+                }
+            }
+        }
+
+        Refresh();
     }
 }

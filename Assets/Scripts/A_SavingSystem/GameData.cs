@@ -26,6 +26,9 @@ public class GameData
     //RecipeSystem.cs
     public bool[] isVisible = new bool[8];
 
+    //Stats.cs
+    public int day;
+
     //Supply.cs
     public int[] sumSupply;
 
@@ -34,6 +37,8 @@ public class GameData
 
     //Mission.cs
     public int[] saveState;
+    public int pizzasMade;
+    public float moneyGained;
 
     public GameData()
     {
@@ -66,5 +71,10 @@ public class GameData
 
         //Mission.cs
         this.saveState = new int[0];
+        this.pizzasMade = 0;
+        this.moneyGained = 0;
+        
+        //Stats.cs
+        this.day = 0;
     }
 }

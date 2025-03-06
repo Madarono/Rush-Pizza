@@ -266,6 +266,7 @@ public class Merchant : MonoBehaviour
         }
         item.merchant = this;
         item.goods = goodies;
+        item.icon.sprite = goodies.icon;
     }
 
     public void AddToCart(MerchantItem item)
@@ -297,6 +298,7 @@ public class Merchant : MonoBehaviour
             display.merchantItem = item;
             display.icon.sprite = item.icon.sprite;
             display.price = item.goods.price;
+            display.icon.sprite = item.icon.sprite;
 
             item.gameObject.SetActive(false);
             inCartItems.Add(item);

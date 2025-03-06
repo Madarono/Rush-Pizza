@@ -11,6 +11,7 @@ public class Settings : MonoBehaviour, IDataPersistence
     public bool canSaveMoney = true; //Use this when starting the day
     public TextMeshProUGUI moneyCounter;
     public TextMeshProUGUI negativeMoneyCounter;
+    public Mission mission;
     public Image moneyVisual;
     public Sprite usd;
     public Sprite euro;
@@ -108,12 +109,20 @@ public class Settings : MonoBehaviour, IDataPersistence
 
     public void AddWithoutVisual(float amount)
     {
+        if(amount > 0)
+        {
+            mission.moneyGained += amount;
+        }
         money += amount;
         RefreshMoneyCounter();
     }
 
     public void AddToMoney(float amount)
     {
+        if(amount > 0)
+        {
+            mission.moneyGained += amount;
+        }
         money += amount;
         RefreshMoneyCounter();
         StopAllCoroutines(); //Remove if this causes bugs later on
