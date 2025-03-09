@@ -22,6 +22,8 @@ public class GameData
     //Controls.cs
     public bool showFPS;
     public int choosingFPS;
+    public bool[] volumeValues;
+    public int quality;
 
     //RecipeSystem.cs
     public bool[] isVisible = new bool[8];
@@ -59,6 +61,8 @@ public class GameData
         //Controls.cs
         this.showFPS = false;
         this.choosingFPS = 0;
+        this.volumeValues = new bool[5];
+        this.quality = 5;
 
         //RecipeSystem.cs
         this.isVisible = new bool[8];

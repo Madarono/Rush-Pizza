@@ -16,6 +16,7 @@ public class MenuTab
 public class Tabs : MonoBehaviour
 {
     public MenuTab[] menus;
+    public Controls controls;
 
     void Start()
     {
@@ -36,6 +37,11 @@ public class Tabs : MonoBehaviour
 
     public void ChangeTabs(int index)
     {
+        if(index == 1)
+        {
+            controls.UpdateAllPPVisual();
+            controls.UpdateQualitySettngs(controls.quality);
+        }
         ResetAllTabs();
 
         menus[index].window.SetActive(true);

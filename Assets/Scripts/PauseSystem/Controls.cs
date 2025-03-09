@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 using TMPro;
 
 [System.Serializable]
@@ -8,6 +9,13 @@ public class Keybinds
 {
     public KeyCode keybind;
     public TextMeshProUGUI visual;
+}
+
+[System.Serializable]
+public class LanguageVisual
+{
+    public string english;
+    public string deutsch;
 }
 
 public class Controls : WindowOpening, IDataPersistence
@@ -22,6 +30,21 @@ public class Controls : WindowOpening, IDataPersistence
     public bool change;
     public int index;
     private KeyCode key;
+
+    [Header("Graphics")]
+    public PostProcessVolume volume; //Post processing volume
+    public TextMeshProUGUI[] volumeVisual = new TextMeshProUGUI[5];
+
+    private Bloom bloom;
+    private AmbientOcclusion ao;
+    private ColorGrading cg;
+    private MotionBlur blur;
+    private DepthOfField field;
+
+    public bool[] volumeValues = new bool[5];
+    [Range (0,5)] public int quality = 5;
+    public TextMeshProUGUI qualityVisual;
+    public LanguageVisual[] qualityString;
 
     [Header("Extras")]
     public Settings settings;
@@ -51,6 +74,9 @@ public class Controls : WindowOpening, IDataPersistence
         data.holdCrouch = this.holdCrouch;
         data.showFPS = this.showFPS;
         data.choosingFPS = this.choosingFPS;
+        data.volumeValues = this.volumeValues;
+        data.volumeValues = this.volumeValues;
+        data.quality = this.quality;
     }
 
     public void LoadData(GameData data)
@@ -64,13 +90,68 @@ public class Controls : WindowOpening, IDataPersistence
         this.holdCrouch = data.holdCrouch;
         this.showFPS = data.showFPS;
         this.choosingFPS = data.choosingFPS;
+        this.volumeValues = data.volumeValues;
+        this.quality = data.quality;
+        
         if(timeChanges != null)
         {
             timeChanges.UpdateTime(timeChanges.cacheTime);
         }
+        
         ApplyToSettings();
         UpdateKeybinds();
         UpdateModifications();
+        GetPostProcessing();
+        UpdatePostProcessing();
+        UpdateAllPPVisual();
+        UpdateQualitySettngs(quality);
+    }
+
+    void GetPostProcessing()
+    {
+        volume.profile.TryGetSettings(out bloom);
+        volume.profile.TryGetSettings(out ao);
+        volume.profile.TryGetSettings(out cg);
+        volume.profile.TryGetSettings(out blur);
+        volume.profile.TryGetSettings(out field);
+    }
+
+    void UpdatePostProcessing()
+    {
+        bloom.enabled.value = volumeValues[0];
+        ao.enabled.value = volumeValues[1];
+        cg.enabled.value = volumeValues[2];
+        blur.enabled.value = volumeValues[3];
+        field.enabled.value = volumeValues[4];
+    }
+
+    public void UpdateAllPPVisual()
+    {
+        for(int i = 0; i < volumeValues.Length; i++)
+        {
+            if(settings.english)
+            {
+                volumeVisual[i].text = volumeValues[i] ? "On" : "Off";
+            }
+            else
+            {
+                volumeVisual[i].text = volumeValues[i] ? "Ein" : "Aus";
+            }   
+        }
+    }
+
+    public void UpdateQualitySettngs(int index)
+    {
+        QualitySettings.SetQualityLevel(index, true);
+        
+        if(settings.english)
+        {
+            qualityVisual.text = qualityString[quality].english;
+        }
+        else
+        {
+            qualityVisual.text = qualityString[quality].deutsch;
+        }
     }
 
     void ApplyToSettings()
@@ -162,7 +243,6 @@ public class Controls : WindowOpening, IDataPersistence
         limitVisual.text = limit[choosingFPS].ToString();
         fpsScript.ChangeFpsLimit(limit[choosingFPS]);
     }
-
     public void ChangeHoldCrouch()
     {
         holdCrouch = !holdCrouch;
@@ -188,6 +268,33 @@ public class Controls : WindowOpening, IDataPersistence
             formatVisual.text = h24Format ? "24 Stunde" : "12 Stunde";
         }
         ApplyToSettings();
+    }
+    public void ChangePostProcessing(int index)
+    {
+        volumeValues[index] = !volumeValues[index];
+
+        if(settings.english)
+        {
+            volumeVisual[index].text = volumeValues[index] ? "On" : "Off";
+        }
+        else
+        {
+            volumeVisual[index].text = volumeValues[index] ? "Ein" : "Aus";
+        }
+
+        UpdatePostProcessing();
+    }
+    public void ChangeQuality()
+    {
+        int c_quality = quality;
+        c_quality++;
+        if(c_quality > 5)
+        {
+            c_quality = 0;
+        }
+        quality = c_quality;
+
+        UpdateQualitySettngs(quality);
     }
     public void ChangeFPS()
     {

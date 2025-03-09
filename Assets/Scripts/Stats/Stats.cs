@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 using TMPro;
 
@@ -47,6 +48,12 @@ public class Stats : MonoBehaviour, IDataPersistence
     public GameObject supplies;
     public Transform[] suppliesPositions = new Transform[2]; 
 
+    [Header("Options")]
+    public GameObject newDayScreen;
+    public float newDayDelay = 0.9f;
+    public GameObject nextDayScreen;
+    public float nextDayDelay = 1f;
+
     public void SaveData(GameData data)
     {
         data.day = this.day;
@@ -59,6 +66,7 @@ public class Stats : MonoBehaviour, IDataPersistence
 
     void Start()
     {
+        StartCoroutine(NewDay());
         paper.SetActive(false);
         for(int i = 0; i < information.Length; i++)
         {
@@ -78,7 +86,7 @@ public class Stats : MonoBehaviour, IDataPersistence
         }
         totalUsedSupplies = Mathf.Round(totalUsedSupplies * 100f) / 100f;
         
-        profits = -totalUsedSupplies + -refundsLost + (moneyGained + tipGained);
+        profits = -totalUsedSupplies + -refundsLost + -rent + (moneyGained + tipGained);
         profits = Mathf.Round(profits * 100f) / 100f;
         paper.SetActive(true);
         information[0].infoValue[0].text = day.ToString();
@@ -140,6 +148,11 @@ public class Stats : MonoBehaviour, IDataPersistence
         }
     }
 
+    public void GoToNextDay()
+    {
+        StartCoroutine(NextDay());
+    }
+
     IEnumerator SmoothTransition()
     {
         yield return new WaitForSeconds(delayPaper);
@@ -148,5 +161,20 @@ public class Stats : MonoBehaviour, IDataPersistence
             yield return new WaitForSeconds(information[i].delayToAppear);
             information[i].info.SetActive(true);
         }
+    }
+
+    IEnumerator NewDay()
+    {
+        newDayScreen.SetActive(true);
+        yield return new WaitForSeconds(newDayDelay);
+        newDayScreen.SetActive(false);
+    }
+
+    IEnumerator NextDay()
+    {
+        nextDayScreen.SetActive(true);
+        yield return new WaitForSeconds(nextDayDelay);
+        DataPersistenceManager.instance.SaveGame();
+        SceneManager.LoadScene("Game");
     }
 }
