@@ -125,6 +125,11 @@ public class Brief : WindowOpening
 
     public override void CloseWindow()
     {
+        if(!isOpen)
+        {
+            return;
+        }
+        
         base.CloseWindow();
         briefWindowAnim.SetTrigger("Close");
         if(Time.timeScale == 1)

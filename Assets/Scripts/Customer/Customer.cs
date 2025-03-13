@@ -79,6 +79,7 @@ public class Customer : MonoBehaviour
 {
     public States state;
     public IngrediantPricing[] pricing;
+    [HideInInspector]public Pausing pause;
     [HideInInspector]public MouseCursor mouseCursor;
     [HideInInspector]public Mission mission;
     [HideInInspector]public PlayerMovement playerMovement;
@@ -178,6 +179,7 @@ public class Customer : MonoBehaviour
         }
 
         state = States.Talking;
+        pause.lockMouse = false;
 
         dialogWindow.SetActive(true);
         if(settings.english)

@@ -190,6 +190,7 @@ public class CustomerManager : MonoBehaviour
 
         settings.AddWithoutVisual(-merchantScript.cartPrice);
         merchantScript.BuyCart();
+        pausing.lockMouse = true;
     }
     
     public void AskCancel()
@@ -249,6 +250,7 @@ public class CustomerManager : MonoBehaviour
         goScript.manager = this;
         goScript.brief = brief;
         goScript.mission = mission;
+        goScript.pause = pausing;
     }
 
     public void InstantiateMerchant()

@@ -18,6 +18,7 @@ public class GameData
     public KeyCode sprint; 
     public KeyCode pause; 
     public KeyCode showBrief;
+    public KeyCode zoom;
 
     //Controls.cs
     public bool showFPS;
@@ -62,6 +63,7 @@ public class GameData
         this.sprint = KeyCode.LeftShift;
         this.pause = KeyCode.Tab;
         this.showBrief = KeyCode.B;
+        this.zoom = KeyCode.Q;
 
         //Controls.cs
         this.showFPS = false;

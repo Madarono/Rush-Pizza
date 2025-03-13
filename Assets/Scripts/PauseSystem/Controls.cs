@@ -88,6 +88,7 @@ public class Controls : WindowOpening, IDataPersistence
         data.throwKey = this.keybinds[1].keybind;
         data.sprint = this.keybinds[2].keybind;
         data.pause = this.keybinds[3].keybind;
+        data.zoom = this.keybinds[4].keybind;
         data.h24Format = this.h24Format;
         data.holdCrouch = this.holdCrouch;
         data.showFPS = this.showFPS;
@@ -107,6 +108,7 @@ public class Controls : WindowOpening, IDataPersistence
         this.keybinds[1].keybind = data.throwKey;
         this.keybinds[2].keybind = data.sprint;
         this.keybinds[3].keybind = data.pause;
+        this.keybinds[4].keybind = data.zoom;
         this.h24Format = data.h24Format;
         this.holdCrouch = data.holdCrouch;
         this.showFPS = data.showFPS;
@@ -193,6 +195,7 @@ public class Controls : WindowOpening, IDataPersistence
         settings.throwKey = this.keybinds[1].keybind;
         settings.sprint = this.keybinds[2].keybind;
         settings.pause = this.keybinds[3].keybind;
+        settings.zoom = this.keybinds[4].keybind;
         settings.h24Format = this.h24Format;
         settings.holdCrouch = this.holdCrouch;
         settings.RefreshMoneyCounter();
@@ -223,7 +226,7 @@ public class Controls : WindowOpening, IDataPersistence
             if (detectedKey != KeyCode.None)
             {
                 key = detectedKey;
-                Debug.Log("Pressed Key: " + key);
+                // Debug.Log("Pressed Key: " + key);
                 ChangeKey(key);
                 change = false;
             }

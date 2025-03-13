@@ -99,6 +99,7 @@ public class Merchant : MonoBehaviour
     public void InitiateTalk()
     {
         state = MerchantStates.Talking;
+        pause.lockMouse = false;
 
         StopAllCoroutines();
         dialogWindow.SetActive(true);
