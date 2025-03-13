@@ -10,6 +10,16 @@ public class Player_Cam : MonoBehaviour
     float xRotation;
     float yRotation;
 
+    [Header("Zoom")]
+    public Controls controls;
+    public Settings settings;
+    public Camera camera;
+    public float zoomSpeed = 5f;
+    public bool goZoom = false;
+    public float targetZoom;
+    public float zoomMultiplyer = 0.6f;
+    
+    
     public bool canMove = true;
 
     private void Update()
@@ -17,6 +27,15 @@ public class Player_Cam : MonoBehaviour
         if(!canMove)
         {
             return;
+        }
+
+        if(Input.GetKeyDown(settings.zoom))
+        {
+            ZoomIn();
+        }
+        else if(Input.GetKeyUp(settings.zoom))
+        {
+            ZoomOut();
         }
         
         float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;
@@ -27,5 +46,34 @@ public class Player_Cam : MonoBehaviour
     
         transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
         orientation.rotation = Quaternion.Euler(0, yRotation, 0);
+    }
+
+    private void FixedUpdate()
+    {
+        if(goZoom)
+        {
+            camera.fieldOfView = Mathf.Lerp(camera.fieldOfView, targetZoom, zoomSpeed * Time.deltaTime);
+        }
+        else
+        {
+            camera.fieldOfView = Mathf.Lerp(camera.fieldOfView, controls.currentFov, zoomSpeed * Time.deltaTime);
+        }
+    }
+
+    void ZoomIn()
+    {
+        CalculateTargetZoom();
+        goZoom = true;
+    }
+
+    void CalculateTargetZoom()
+    {
+        targetZoom = controls.currentFov * zoomMultiplyer;
+    }
+
+    void ZoomOut()
+    {
+        CalculateTargetZoom();
+        goZoom = false;
     }
 }

@@ -190,6 +190,7 @@ public class TimeChanges : MonoBehaviour
         license.canSave = true;
         mission.canSave = true;
         pause.lockMouse = false;
+        mission.UpdateVisual();
         StartCoroutine(EndofDay());
     }
 

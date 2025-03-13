@@ -9,6 +9,7 @@ public class Pausing : MonoBehaviour
     public Settings settings;
     public Controls controls;
     public RecipeSystem recipeSys;
+    public DragAndDrop drag;
     public Tabs tabs;
     public Brief brief;
 
@@ -51,6 +52,7 @@ public class Pausing : MonoBehaviour
 
     void Pause()
     {
+        drag.can_drag = false;
         mouse.FreeCusorState();
         Time.timeScale = 0f;
         pauseWindow.SetActive(true);
@@ -64,6 +66,7 @@ public class Pausing : MonoBehaviour
         {
             mouse.LockCusorState();
         }
+        drag.can_drag = true;
         Time.timeScale = 1f;
         controls.CloseWindow();
         recipeSys.CloseWindow();

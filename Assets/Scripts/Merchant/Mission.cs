@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine.UI;
 using UnityEngine;
+using TMPro;
 
 public enum LicenseState
 {
@@ -15,6 +17,8 @@ public class GuaranteedLicense
 {
     public MerchantGoods license;
     public LicenseState licenseState;
+
+    public bool doneAnimation;
 }
 
 [System.Serializable]
@@ -23,6 +27,9 @@ public class ObjectiveLicense
     public int dayRequired;
     public int pizzasRequired;
     public float moneyRequired;
+    
+    public string licenseNameEnglish;
+    public string licenseNameDeutsch;
 
     public int idForLicense;
 }
@@ -40,8 +47,33 @@ public class Mission : MonoBehaviour, IDataPersistence
     public int pizzasMade;
     public float moneyGained;
 
-    private List<int> saveState = new List<int>();
+    [Header("VisualObjective")]
+    public GameObject objectiveWindow;
+    public Transform[] objectivePlaces = new Transform[2];
+    public float windowSpeed = 7f;
+    private bool isOpen = false;
+
+    public TextMeshProUGUI daysVisual;
+    public TextMeshProUGUI pizzasVisual;
+    public TextMeshProUGUI moneyVisual;
+
+    public Image progressBar;
+    public float fillSpeed = 2f;
+    
+    public TextMeshProUGUI licenseName;
+    public Animator objectiveWindowAniamtor;
+    // public float animationWait;
+
+    private bool doneReward = false;
+    
+    private float percentage;
+    public int objectiveId;
+
+    private List<int> saveState = new List<int>(); //For LicenseState
     private int[] intSaveState;
+
+    private List<bool> animationSave = new List<bool>();//For DoneAnimation
+    private bool[] boolSave;
 
 
     public void SaveData(GameData data)
@@ -49,18 +81,27 @@ public class Mission : MonoBehaviour, IDataPersistence
         if(canSave)
         {
             ChangeStateIntoInt();
+            ChangeAnimationIntoBool();
+            data.animationSave = this.animationSave.ToArray();
             data.saveState = this.saveState.ToArray();
             data.pizzasMade = this.pizzasMade;
             data.moneyGained = this.moneyGained;
+            data.percentage = this.percentage;
         }
     }
 
     public void LoadData(GameData data)
     {
+        this.boolSave = data.animationSave;
         this.intSaveState = data.saveState;
         this.pizzasMade = data.pizzasMade;
         this.moneyGained = data.moneyGained;
+        this.percentage = data.percentage;
+
+        progressBar.fillAmount = percentage;
+
         ChangeIntIntoState();
+        ChangeBoolIntoAnimation();
         CheckRequirements();
     }
 
@@ -97,6 +138,27 @@ public class Mission : MonoBehaviour, IDataPersistence
         }
 
         Refresh();
+    }
+
+    void ChangeAnimationIntoBool()
+    {
+        foreach(GuaranteedLicense guaranteed in licenses)
+        {
+            animationSave.Add(guaranteed.doneAnimation);
+        }
+    }
+
+    void ChangeBoolIntoAnimation()
+    {
+        if(boolSave.Length == 0)
+        {
+            return;
+        }
+
+        for(int i = 0; i < boolSave.Length; i++)
+        {
+            licenses[i].doneAnimation = boolSave[i];
+        }
     }
 
     void ChangeStateIntoInt()
@@ -170,5 +232,84 @@ public class Mission : MonoBehaviour, IDataPersistence
         }
 
         Refresh();
+    }
+    
+    public void BothObjectiveVisual()
+    {
+        isOpen = !isOpen;
+
+        if(!isOpen || objectiveId == 0)
+        {
+            return;
+        }
+
+        if(licenses[objectiveId - 1].licenseState == LicenseState.Available && !licenses[objectiveId - 1].doneAnimation)
+        {
+            Reward();
+        }
+    }
+
+    public void UpdateVisual()
+    {
+        int days = stats.day;
+
+        for(int i = 0; i < objective.Length; i++)
+        {
+            if(days < objective[i].dayRequired || pizzasMade < objective[i].pizzasRequired || moneyGained < objective[i].moneyRequired)
+            {
+                objectiveId = i;
+                break;
+            }
+        }
+
+        daysVisual.text = days.ToString() + "/" + objective[objectiveId].dayRequired;
+        pizzasVisual.text = pizzasMade.ToString() + "/" + objective[objectiveId].pizzasRequired;
+        moneyVisual.text = moneyGained.ToString() + "/" + objective[objectiveId].moneyRequired;
+
+        percentage = ((Mathf.Clamp(days / objective[objectiveId].dayRequired, 0f, 1f)) + (Mathf.Clamp(pizzasMade / objective[objectiveId].pizzasRequired, 0f, 1f)) + (Mathf.Clamp(moneyGained / objective[objectiveId].moneyRequired, 0f, 1f))) / 3f;
+    }
+
+    public void Reward()
+    {
+        UpdateLicenseName();
+        objectiveWindowAniamtor.SetTrigger("NewLicense");
+        StartCoroutine(ShowNewInformation());
+        licenses[objectiveId - 1].doneAnimation = true;
+    }
+
+    IEnumerator ShowNewInformation()
+    {
+        yield return new WaitForSeconds(2f);
+        UpdateVisual();
+    }
+
+    public void UpdateLicenseName()
+    {
+        if(objectiveId == 0)
+        {
+            return;
+        }
+        
+        if(settings.english)
+        {
+            licenseName.text = "(" + objective[objectiveId - 1].licenseNameEnglish + ")";
+        }
+        else
+        {
+            licenseName.text = "(" + objective[objectiveId - 1].licenseNameDeutsch + ")";
+        }
+    }
+
+    void FixedUpdate()
+    {
+        if(isOpen)
+        {
+            objectiveWindow.transform.position = Vector3.Lerp(objectiveWindow.transform.position, objectivePlaces[1].position, windowSpeed * Time.unscaledDeltaTime);
+            progressBar.fillAmount = Mathf.Lerp(progressBar.fillAmount, percentage, fillSpeed * Time.unscaledDeltaTime);
+        }
+        else
+        {
+            objectiveWindow.transform.position = Vector3.Lerp(objectiveWindow.transform.position, objectivePlaces[0].position, windowSpeed * Time.unscaledDeltaTime);
+        }
     }
 }

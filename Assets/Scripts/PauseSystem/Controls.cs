@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Rendering.PostProcessing;
 using TMPro;
 
@@ -22,6 +23,7 @@ public class Controls : WindowOpening, IDataPersistence
 {
     [Header("Scripts")]
     public RecipeSystem RecipeSystem;
+    public Mission mission;
     public Fps fpsScript;
 
     [Header("Keybinds")]
@@ -46,6 +48,15 @@ public class Controls : WindowOpening, IDataPersistence
     public TextMeshProUGUI qualityVisual;
     public LanguageVisual[] qualityString;
 
+    [Header("Audio")]
+    public float master;
+    public Slider masterSlider;
+    public TextMeshProUGUI masterVisual;
+
+    public float background;
+    public Slider backgroundSlider;
+    public TextMeshProUGUI backgroundVisual;
+
     [Header("Extras")]
     public Settings settings;
     public TimeChanges timeChanges;
@@ -54,6 +65,13 @@ public class Controls : WindowOpening, IDataPersistence
     public TextMeshProUGUI crouchVisual;
     public bool h24Format;
     public TextMeshProUGUI formatVisual;
+
+    public Camera camera;
+    public Slider fovSlider;
+    public float minFov = 30f;
+    public float maxFov = 120f;
+    public float currentFov = 60f;
+    public TextMeshProUGUI fovVisual;
     
     [Header("FPS")]
     public bool showFPS;
@@ -77,6 +95,9 @@ public class Controls : WindowOpening, IDataPersistence
         data.volumeValues = this.volumeValues;
         data.volumeValues = this.volumeValues;
         data.quality = this.quality;
+        data.cameraFOV = this.currentFov;
+        data.master = this.master;
+        data.background = this.background;
     }
 
     public void LoadData(GameData data)
@@ -92,6 +113,9 @@ public class Controls : WindowOpening, IDataPersistence
         this.choosingFPS = data.choosingFPS;
         this.volumeValues = data.volumeValues;
         this.quality = data.quality;
+        this.currentFov = data.cameraFOV;
+        this.master = data.master;
+        this.background = data.background;
         
         if(timeChanges != null)
         {
@@ -103,7 +127,9 @@ public class Controls : WindowOpening, IDataPersistence
         UpdateModifications();
         GetPostProcessing();
         UpdatePostProcessing();
-        UpdateAllPPVisual();
+        UpdateAudioSliders();
+        // UpdateAllPPVisual();
+        UpdateCameraFOV();
         UpdateQualitySettngs(quality);
     }
 
@@ -162,6 +188,7 @@ public class Controls : WindowOpening, IDataPersistence
         }
 
         settings.english = this.english;
+        mission.UpdateLicenseName();
         settings.crouch = this.keybinds[0].keybind;
         settings.throwKey = this.keybinds[1].keybind;
         settings.sprint = this.keybinds[2].keybind;
@@ -243,6 +270,21 @@ public class Controls : WindowOpening, IDataPersistence
         limitVisual.text = limit[choosingFPS].ToString();
         fpsScript.ChangeFpsLimit(limit[choosingFPS]);
     }
+    void UpdateCameraFOV()
+    {
+        if(camera != null)
+        {
+            camera.fieldOfView = currentFov;
+        }
+
+        fovSlider.value = (currentFov - minFov) / (maxFov - minFov);
+    }
+    void UpdateAudioSliders()
+    {
+        masterSlider.value = master;
+        backgroundSlider.value = background;
+    }
+
     public void ChangeHoldCrouch()
     {
         holdCrouch = !holdCrouch;
@@ -328,7 +370,27 @@ public class Controls : WindowOpening, IDataPersistence
             }
         }
     }
+    public void ChangeFOV()
+    {
+        float sliderPercentage = fovSlider.value;
 
+        currentFov = Mathf.Lerp(minFov, maxFov, sliderPercentage);
+        fovVisual.text = currentFov.ToString("F0");
+        
+        UpdateCameraFOV();
+    }
+    public void ChangeMaster()
+    {
+        master = masterSlider.value;
+        float perctenageVisual = master * 100f;
+        masterVisual.text = perctenageVisual.ToString("F0");
+    }
+    public void ChangeBackground()
+    {
+        background = backgroundSlider.value;
+        float perctenageVisual = background * 100f;
+        backgroundVisual.text = perctenageVisual.ToString("F0");
+    }
 
     //Keybinds Window
     public void ConfigureKeys(int id)

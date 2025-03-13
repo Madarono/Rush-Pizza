@@ -519,6 +519,13 @@ MonoBehaviour:
   sensX: 225
   sensY: 225
   orientation: {fileID: 8156452376910465488}
+  controls: {fileID: 0}
+  settings: {fileID: 0}
+  camera: {fileID: 3202419463283325042}
+  zoomSpeed: 5
+  goZoom: 0
+  targetZoom: 0
+  zoomMultiplyer: 0.45
   canMove: 1
 --- !u!114 &2864299558816733803
 MonoBehaviour:

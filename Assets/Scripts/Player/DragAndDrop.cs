@@ -22,6 +22,9 @@ public class DragAndDrop : MonoBehaviour
     public Transform holdPosition;
 
     public GameObject heldObject;
+    public float durationNoDrop = 0.3f;
+    private bool canDrop = true;
+
     private Rigidbody heldObjectRB;
 
     private bool isRotating = false;
@@ -53,7 +56,7 @@ public class DragAndDrop : MonoBehaviour
             return;
         }
         
-        if (Input.GetKeyDown(settings.throwKey))
+        if (Input.GetKeyDown(settings.throwKey) && canDrop)
         {
             ThrowObject();
         }
@@ -64,7 +67,7 @@ public class DragAndDrop : MonoBehaviour
             {
                 TryPickupObject();
             }
-            else
+            else if(heldObject != null && canDrop)
             {
                 DropObject();
             }
@@ -121,6 +124,8 @@ public class DragAndDrop : MonoBehaviour
                 heldObject.transform.SetParent(parent_obj);
 
                 holdPos.SetHoldPosition(2.5f);
+
+                StartCoroutine(DelayDropping());
             }
             if(heldObjectRB != null)
             {
@@ -290,6 +295,13 @@ public class DragAndDrop : MonoBehaviour
             Vector3 forceDirection = (targetPosition - selectedObjectRigidbody.position);
             selectedObjectRigidbody.velocity = forceDirection * dragForce * Time.fixedDeltaTime;
         }
+    }
+
+    IEnumerator DelayDropping()
+    {
+        canDrop = false;
+        yield return new WaitForSeconds(durationNoDrop);
+        canDrop = true;
     }
 
 }

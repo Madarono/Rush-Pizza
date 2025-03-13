@@ -24,6 +24,9 @@ public class GameData
     public int choosingFPS;
     public bool[] volumeValues;
     public int quality;
+    public float cameraFOV;
+    public float master;
+    public float background;
 
     //RecipeSystem.cs
     public bool[] isVisible = new bool[8];
@@ -39,8 +42,10 @@ public class GameData
 
     //Mission.cs
     public int[] saveState;
+    public bool[] animationSave;
     public int pizzasMade;
     public float moneyGained;
+    public float percentage;
 
     public GameData()
     {
@@ -63,6 +68,9 @@ public class GameData
         this.choosingFPS = 0;
         this.volumeValues = new bool[5];
         this.quality = 5;
+        this.cameraFOV = 60f;
+        this.master = 1f;
+        this.background = 1f;
 
         //RecipeSystem.cs
         this.isVisible = new bool[8];
@@ -75,8 +83,10 @@ public class GameData
 
         //Mission.cs
         this.saveState = new int[0];
+        this.animationSave = new bool[0];
         this.pizzasMade = 0;
         this.moneyGained = 0;
+        this.percentage = 0;
         
         //Stats.cs
         this.day = 0;
