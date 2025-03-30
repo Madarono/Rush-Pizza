@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public enum ItemType
 {
     Supply,
-    License
+    License,
+    Decoration
 }
 
 [CreateAssetMenu(fileName="Item", menuName="Custom/Goodies", order=1)]
@@ -15,6 +16,7 @@ public class MerchantGoods : ScriptableObject
     [Header("Ingrediant Type")]
     public PizzaOptions ingrediantType;
     public bool neutral = false;
+    public bool putOnce = false; 
 
     [Header("Information")]
     public Sprite icon;
@@ -25,6 +27,13 @@ public class MerchantGoods : ScriptableObject
 
     [Header("Type")]
     public ItemType itemType;
+
+    [Header("If license")]
     public int licenseID;
+
+    [Header("If Supply")]
     public int supplyCount;
+
+    [Header("If Decor")]
+    public int decorID;
 }

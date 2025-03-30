@@ -45,6 +45,8 @@ public class CustomerManager : MonoBehaviour
     public GameObject emotionWindow;
 
     [Header("Things for Merchant script")]
+    public BuildSystem buildSystem;
+    public BuildMerchant buildMerchant;
     public Supply supply;
     public License license;
     public GameObject merchantWindow;
@@ -67,15 +69,15 @@ public class CustomerManager : MonoBehaviour
     void Update()
     {
         //Debugging
-        if(Input.GetKeyDown(KeyCode.T))
-        {
-            InstantiateMerchant();
-        }
-        if(Input.GetKeyDown(KeyCode.Y))
-        {
-            DeleteCustomer();
-            DeleteMerchant();
-        }
+        // if(Input.GetKeyDown(KeyCode.T))
+        // {
+        //     InstantiateMerchant();
+        // }
+        // if(Input.GetKeyDown(KeyCode.Y))
+        // {
+        //     DeleteCustomer();
+        //     DeleteMerchant();
+        // }
         //
 
         if(abortCustomerChecking)
@@ -130,6 +132,7 @@ public class CustomerManager : MonoBehaviour
                 brief.canBrief = false;
                 brief.HidePaper();
                 brief.dialog = null;
+                pausing.lockMouse = true;
                 return;
             }
             
@@ -284,11 +287,17 @@ public class CustomerManager : MonoBehaviour
         merchantScript.merchantContent = merchantContent;
         merchantScript.license = license;
         merchantScript.mission = mission;
+        merchantScript.buildMerchant = buildMerchant;
+        merchantScript.buildSystem = buildSystem;
 
         mission.merchantScript = merchantScript;
         mission.Refresh();
 
         hasInstantiatedMerchant = true;
+        
+        buildMerchant.merchant = merchantScript;
+        buildMerchant.SendToMerchant();
+        
         currentWait = Random.Range(minWait, maxWait);
     }
 

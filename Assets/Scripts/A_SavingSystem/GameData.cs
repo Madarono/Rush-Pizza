@@ -19,6 +19,8 @@ public class GameData
     public KeyCode pause; 
     public KeyCode showBrief;
     public KeyCode zoom;
+    public KeyCode buildMode;
+    public KeyCode changeMode;
 
     //Controls.cs
     public bool showFPS;
@@ -48,6 +50,17 @@ public class GameData
     public float moneyGained;
     public float percentage;
 
+    //DecorManager.cs
+    public int[] decorID;
+    public float[] decorVectors;
+    public float[] decorRotation;
+
+    //BuildSystem.cs
+    public int[] buildID;
+
+    //BuildMerchant.cs
+    public bool[] decorSafe;
+
     public GameData()
     {
         //Settings.cs
@@ -64,6 +77,8 @@ public class GameData
         this.pause = KeyCode.Tab;
         this.showBrief = KeyCode.B;
         this.zoom = KeyCode.Q;
+        this.buildMode = KeyCode.Y;
+        this.changeMode = KeyCode.H;
 
         //Controls.cs
         this.showFPS = false;
@@ -92,5 +107,16 @@ public class GameData
         
         //Stats.cs
         this.day = 0;
+
+        //DecorManager.cs
+        this.decorID = new int[0];
+        this.decorVectors = new float[0];
+        this.decorRotation = new float[0];
+
+        //BuildSystem.cs
+        this.buildID = new int[0];
+
+        //BuildMerchant.cs
+        this.decorSafe = new bool[0];
     }
 }

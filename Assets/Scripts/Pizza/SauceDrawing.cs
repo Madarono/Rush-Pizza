@@ -13,6 +13,9 @@ public class SauceDrawing : MonoBehaviour
     public int idForSupply;
     public Supply supply;
 
+    private Vector3 hitNormal;
+    public Vector3 previousPizzaPos;
+
     
     private List<Vector3> drawnPath = new List<Vector3>();
     private bool isDrawing;
@@ -62,6 +65,14 @@ public class SauceDrawing : MonoBehaviour
         if (Physics.Raycast(camera.position, camera.forward, out RaycastHit hit, settings.lookRange, topping.drawingSurfaceLayer))
         {
             pizza = hit.collider.gameObject.GetComponent<PizzaHolder>();
+
+            Vector3 pizzaPos = hit.transform.position;
+            
+            if(pizzaPos != previousPizzaPos)
+            {
+                hitNormal = hit.normal;
+            }
+            previousPizzaPos = hit.transform.position;
             
             if(pizza == null)
             {
@@ -120,6 +131,10 @@ public class SauceDrawing : MonoBehaviour
                 }
 
                 sauce.transform.up = hit.normal; // Align the sauce with the pizza surface normal
+                if(hitNormal != Vector3.zero)
+                {
+                    sauce.transform.up = hitNormal;
+                }
                 sauce.transform.Rotate(
                     topping.rotationOffsets[0] + (topping.rotationRandom[0] ? Random.Range(-360f, 360f) : 0f),
                     topping.rotationOffsets[1] + (topping.rotationRandom[1] ? Random.Range(-360f, 360f) : 0f),

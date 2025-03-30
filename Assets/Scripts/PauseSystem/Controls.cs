@@ -5,6 +5,12 @@ using UnityEngine.UI;
 using UnityEngine.Rendering.PostProcessing;
 using TMPro;
 
+public enum CameraRenderingPath
+{
+    Forward,
+    Deferred
+}
+
 [System.Serializable]
 public class Keybinds
 {
@@ -13,10 +19,11 @@ public class Keybinds
 }
 
 [System.Serializable]
-public class LanguageVisual
+public class QualityVisual
 {
     public string english;
     public string deutsch;
+    public CameraRenderingPath rendering;
 }
 
 public class Controls : WindowOpening, IDataPersistence
@@ -46,7 +53,7 @@ public class Controls : WindowOpening, IDataPersistence
     public bool[] volumeValues = new bool[5];
     [Range (0,5)] public int quality = 5;
     public TextMeshProUGUI qualityVisual;
-    public LanguageVisual[] qualityString;
+    public QualityVisual[] qualityString;
 
     [Header("Audio")]
     public float master;
@@ -89,6 +96,8 @@ public class Controls : WindowOpening, IDataPersistence
         data.sprint = this.keybinds[2].keybind;
         data.pause = this.keybinds[3].keybind;
         data.zoom = this.keybinds[4].keybind;
+        data.buildMode = this.keybinds[5].keybind;
+        data.changeMode = this.keybinds[6].keybind;
         data.h24Format = this.h24Format;
         data.holdCrouch = this.holdCrouch;
         data.showFPS = this.showFPS;
@@ -109,6 +118,8 @@ public class Controls : WindowOpening, IDataPersistence
         this.keybinds[2].keybind = data.sprint;
         this.keybinds[3].keybind = data.pause;
         this.keybinds[4].keybind = data.zoom;
+        this.keybinds[5].keybind = data.buildMode;
+        this.keybinds[6].keybind = data.changeMode;
         this.h24Format = data.h24Format;
         this.holdCrouch = data.holdCrouch;
         this.showFPS = data.showFPS;
@@ -171,6 +182,22 @@ public class Controls : WindowOpening, IDataPersistence
     public void UpdateQualitySettngs(int index)
     {
         QualitySettings.SetQualityLevel(index, true);
+
+        switch(qualityString[quality].rendering)
+        {
+            case CameraRenderingPath.Forward:
+                camera.renderingPath = RenderingPath.Forward;
+                break;
+
+            case CameraRenderingPath.Deferred:
+                camera.renderingPath = RenderingPath.DeferredShading;
+                break;
+
+            default:
+                camera.renderingPath = RenderingPath.Forward;
+                break;
+        }
+
         
         if(settings.english)
         {
@@ -196,6 +223,8 @@ public class Controls : WindowOpening, IDataPersistence
         settings.sprint = this.keybinds[2].keybind;
         settings.pause = this.keybinds[3].keybind;
         settings.zoom = this.keybinds[4].keybind;
+        settings.buildMode = this.keybinds[5].keybind;
+        settings.changeMode = this.keybinds[6].keybind;
         settings.h24Format = this.h24Format;
         settings.holdCrouch = this.holdCrouch;
         settings.RefreshMoneyCounter();

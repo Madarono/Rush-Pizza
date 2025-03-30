@@ -1100,6 +1100,7 @@ public class Customer : MonoBehaviour
 
     void Upset()
     {
+        pause.lockMouse = false;
         mission.pizzasMade++;
         SetEmotion(2);
         settings.AddToMoney(-bill);
@@ -1138,6 +1139,7 @@ public class Customer : MonoBehaviour
 
     void Satisfied()
     {
+        pause.lockMouse = false;
         mission.pizzasMade++;
         SetEmotion(0);
         float endingTip = Mathf.Round((tip * (percentageOfPatience / 100f)) * 100f) / 100f;      

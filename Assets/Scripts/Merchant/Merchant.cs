@@ -30,6 +30,8 @@ public class ItemTypeVisual
 public class Merchant : MonoBehaviour
 {
     public MerchantStates state;
+    [HideInInspector]public BuildSystem buildSystem;
+    [HideInInspector]public BuildMerchant buildMerchant;
     [HideInInspector]public Mission mission;
     [HideInInspector]public License license;
     [HideInInspector]public Supply supply;
@@ -228,6 +230,15 @@ public class Merchant : MonoBehaviour
         {
             int goodChoosing = Random.Range(0, availableGoods.Count);
             InstantiateItem(availableGoods[goodChoosing]);
+            if(availableGoods[goodChoosing].putOnce)
+            {
+                availableGoods.Remove(availableGoods[goodChoosing]);
+                
+                if(availableGoods.Count == 0) //If the decor was the only one there, then break to avoid errors
+                {
+                    break;
+                }
+            }
         }
     }
 
@@ -347,6 +358,12 @@ public class Merchant : MonoBehaviour
                 case ItemType.License:
                     license.InstantiateBox(inCartItems[i].goods.licenseID);
                     mission.BoughtItem(inCartItems[i].goods);
+                    break;
+
+                case ItemType.Decoration:
+                    buildSystem.AddToInventory(inCartItems[i].goods.decorID);
+                    buildSystem.VisualizeNotification(inCartItems[i].goods.decorID);
+                    buildMerchant.UpdateSold(inCartItems[i].goods);
                     break;
 
                 default:

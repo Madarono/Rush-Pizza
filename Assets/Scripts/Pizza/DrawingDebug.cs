@@ -30,6 +30,7 @@ public class DrawingDebug : MonoBehaviour
             {
                 Destroy(activeProjectModel);
                 activeProjectModel = null;
+                sauceDrawing.previousPizzaPos = Vector3.zero;
             }
             return;
         }

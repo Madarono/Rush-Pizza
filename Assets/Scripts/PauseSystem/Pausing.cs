@@ -18,7 +18,7 @@ public class Pausing : MonoBehaviour
     public GameObject pauseWindow;
     public Animator pauseAnimator;
     public float delayOfLeaving = 0.9f;
-    private bool isPausing = false;
+    [HideInInspector]public bool isPausing = false;
     public bool lockMouse = true;
     public bool canPause = true; //Controls.cs controls this.
 

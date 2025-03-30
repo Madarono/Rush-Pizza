@@ -550,6 +550,7 @@ MonoBehaviour:
   dragSpeed: 10
   holdPosition: {fileID: 4289567964776557623}
   heldObject: {fileID: 0}
+  durationNoDrop: 0.15
   dragForce: 70
   maxDragDistance: 100
   allowedDragDirection: 0
@@ -605,6 +606,7 @@ MonoBehaviour:
   topping: {fileID: 0}
   idForSupply: 0
   supply: {fileID: 0}
+  previousPizzaPos: {x: 0, y: 0, z: 0}
 --- !u!114 &3363011888225572067
 MonoBehaviour:
   m_ObjectHideFlags: 0

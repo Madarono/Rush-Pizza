@@ -24,6 +24,7 @@ public class ShowText
 public class Stats : MonoBehaviour, IDataPersistence
 {
     public Settings settings;
+    public Mission mission;
 
     [Header("Stats")]
     public int day;
@@ -123,6 +124,8 @@ public class Stats : MonoBehaviour, IDataPersistence
         }
 
         day++;
+        mission.CheckRequirements();
+        mission.UpdateVisual();
         StartCoroutine(SmoothTransition());
     }
 

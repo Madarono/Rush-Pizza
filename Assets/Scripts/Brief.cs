@@ -17,6 +17,7 @@ public class Brief : WindowOpening
     public Settings settings;
     public MouseCursor mouse;
     public PlayerMovement player;
+    public DragAndDrop drag;
     public Player_Cam cam;
 
     
@@ -115,6 +116,7 @@ public class Brief : WindowOpening
     public override void OpenWindow()
     {
         base.OpenWindow();
+        drag.can_drag = false;
         mouse.FreeCusorState();
         player.canMove = false;
         cam.canMove = false;
@@ -136,6 +138,7 @@ public class Brief : WindowOpening
         {
             mouse.LockCusorState();
         }
+        drag.can_drag = true;
         player.canMove = true;
         cam.canMove = true;
 

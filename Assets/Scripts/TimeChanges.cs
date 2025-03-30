@@ -34,6 +34,9 @@ public class TimeChanges : MonoBehaviour
     [HideInInspector]public float cacheTime;
 
     [Header("End Of The Day")]
+    public BuildSystem buildSystem;
+    public DecorManager decorManager;
+    public BuildMerchant buildMerchant;
     public MouseCursor mouseCursor;
     public PlayerMovement playerMovement;
     public Player_Cam playerCam;
@@ -184,6 +187,9 @@ public class TimeChanges : MonoBehaviour
         {
             return;
         }
+        decorManager.canSave = true;
+        buildSystem.canSave = true;
+        buildMerchant.canSave = true;
         manager.abortCustomerChecking = true;
         settings.canSaveMoney = true;
         supply.canSave = true;
