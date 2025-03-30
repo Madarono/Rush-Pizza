@@ -12,6 +12,7 @@ TagManager:
   - PizzaBox
   - Customer
   - Merchant
+  - UnBuildable
   layers:
   - Default
   - TransparentFX
@@ -23,8 +24,8 @@ TagManager:
   - Pizza
   - Sauce
   - Cheese
-  - 
-  - 
+  - Buildable
+  - Decoration
   - 
   - 
   - 
