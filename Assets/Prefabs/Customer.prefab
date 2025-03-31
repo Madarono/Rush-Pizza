@@ -387,6 +387,7 @@ GameObject:
   - component: {fileID: 3797427718886157761}
   - component: {fileID: -7706596405168723544}
   - component: {fileID: 4730463226951115290}
+  - component: {fileID: 7573996761906022196}
   m_Layer: 0
   m_Name: Customer
   m_TagString: Customer
@@ -541,11 +542,11 @@ MonoBehaviour:
   pizzaSides: []
   toppingAttributes:
   - ingrediant: 0
-    amount: 35
+    amount: 25
     minDifferenceAccepted: -15
     maxDifferenceAccepted: 999
   - ingrediant: 1
-    amount: 35
+    amount: 25
     minDifferenceAccepted: -15
     maxDifferenceAccepted: 999
   - ingrediant: 2
@@ -590,6 +591,7 @@ MonoBehaviour:
     percentageOfTip: 0
   tip: 0
   bill: 0
+  feedback: {fileID: 7573996761906022196}
   happyLines:
   - englishVersion: This is the best pizza I've ever had!
     deutschVersion: 'das ist die best pizza ich je hatte '
@@ -678,6 +680,80 @@ MonoBehaviour:
   meshRend:
   - {fileID: 1121942850564292908}
   - {fileID: 4575735671252172083}
+--- !u!114 &7573996761906022196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5603340106613123398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ef815e1338558b13903759d882957ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tooMuch:
+  - englishVersion: You put too much [Ingrediant] on my pizza. I don't want it.
+    deutschVersion: Sie setzen zu viel [Ingrediant] auf meine pizza. Ich will es
+      nicht.
+  tooLittle:
+  - englishVersion: There is too little [Ingrediant] on my pizza, I can't have it
+      like this.
+    deutschVersion: Da ist zu wenig [Ingrediant] auf meine pizza. Ich kann es so
+      nicht haben.
+  terribleQuality:
+  - englishVersion: The pizza looks terrible, I can't believe I waited for this.
+    deutschVersion: Die pizza sieht schrecklich aus, Ich kann nicht glauben, Ich
+      wartete fur das.
+  tooLittleCuts:
+  - englishVersion: Did you forget to cut the pizza?
+    deutschVersion: Haben sie die pizza schneiden vergessen?
+  tooMuchCuts:
+  - englishVersion: I am eating this alone, not for a family of 5.
+    deutschVersion: Ich esse das allein. nicht fur eine familie von 5.
+  overcooked:
+  - englishVersion: Looks like you forgot to stop cooking it.
+    deutschVersion: 'Sieht aus wie du es kochen stoppen vergessen. '
+  undercooked:
+  - englishVersion: Are you giving raw pizzas now?
+    deutschVersion: giben sie jetzt rohe pizzas?
+  hatedToppings:
+  - englishVersion: I told you not to add [Ingrediant] on my pizza.
+    deutschVersion: Ich erzahlte dich nicht zu [Ingrediant] auf meine pizza hinzufungen.
+  foreignToppings:
+  - englishVersion: There is too much [Ingrediant] on my pizza that I didn't ask
+      for.
+    deutschVersion: Da ist zu viele [Ingrediant] auf mein pizza, das ich frage nicht
+      fur.
+  settings: {fileID: 0}
+  ingrediantCode: '[Ingrediant]'
+  ingrediantName: 
+  ingrediantChecks:
+  - ingrediant: 0
+    englishName: Sauce
+    deutschName: Sosse
+  - ingrediant: 1
+    englishName: Cheese
+    deutschName: Kase
+  - ingrediant: 2
+    englishName: Pepperoni
+    deutschName: Salami
+  - ingrediant: 3
+    englishName: Sausage
+    deutschName: Wurstchen
+  - ingrediant: 4
+    englishName: Mushroom
+    deutschName: Pilzen
+  - ingrediant: 5
+    englishName: Olive
+    deutschName: Oliven
+  - ingrediant: 6
+    englishName: Onion
+    deutschName: Zwiebel
+  - ingrediant: 7
+    englishName: Bell Pepper
+    deutschName: Paprika
+  dialogText: 
 --- !u!1 &6476489469915965831
 GameObject:
   m_ObjectHideFlags: 0

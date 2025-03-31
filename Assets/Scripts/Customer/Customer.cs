@@ -111,6 +111,7 @@ public class Customer : MonoBehaviour
     public float bill;
 
     [Header("Lines")]
+    public AdvancedFeedback feedback;
     public Lines[] happyLines;
     public Lines[] upsetLines;
 
@@ -439,8 +440,10 @@ public class Customer : MonoBehaviour
                                 {
                                     if(dialog.pizzas[w].leftToppings[q] == pizzabox[k].toppingInfo[o].ingrediant)
                                     {
+                                        //Terrible quality
                                         if(pizzabox[k].toppingInfo[o].toppingDistanceRating == PizzaRating.Terrible || pizzabox[k].toppingInfo[o].toppingDistanceRating == PizzaRating.Bad)
                                         {
+                                            feedback.BadQuality();
                                             Upset();
                                             return;
                                         }
@@ -498,7 +501,9 @@ public class Customer : MonoBehaviour
                                             }
                                             else
                                             {
-                                                Debug.Log("Difference Denied");
+                                                Debug.Log("Difference Denied"); //When the difference is too high or too low
+                                                feedback.TurnIngrediantToName(pizzabox[k].toppingInfo[o].ingrediant);
+                                                feedback.CheckDifference(difference);
                                                 Upset();
                                                 return;
                                             }
@@ -521,6 +526,7 @@ public class Customer : MonoBehaviour
                                     {
                                         if(pizzabox[k].toppingInfo[o].toppingDistanceRating == PizzaRating.Terrible || pizzabox[k].toppingInfo[o].toppingDistanceRating == PizzaRating.Bad)
                                         {
+                                            feedback.BadQuality();
                                             Upset();
                                             return;
                                         }
@@ -579,6 +585,8 @@ public class Customer : MonoBehaviour
                                             else
                                             {
                                                 Debug.Log("Difference Denied");
+                                                feedback.TurnIngrediantToName(pizzabox[k].toppingInfo[o].ingrediant);
+                                                feedback.CheckDifference(difference);
                                                 Upset();
                                                 return;
                                             }
@@ -604,6 +612,7 @@ public class Customer : MonoBehaviour
                                     {
                                         if(pizzabox[k].toppingInfo[o].toppingDistanceRating == PizzaRating.Terrible || pizzabox[k].toppingInfo[o].toppingDistanceRating == PizzaRating.Bad)
                                         {
+                                            feedback.BadQuality();
                                             Upset();
                                             return;
                                         }
@@ -662,6 +671,8 @@ public class Customer : MonoBehaviour
                                             else
                                             {
                                                 Debug.Log("Difference Denied");
+                                                feedback.TurnIngrediantToName(pizzabox[k].toppingInfo[o].ingrediant);
+                                                feedback.CheckDifference(difference);
                                                 Upset();
                                                 return;
                                             }
@@ -684,6 +695,7 @@ public class Customer : MonoBehaviour
                                     {
                                         if(pizzabox[k].toppingInfo[o].toppingDistanceRating == PizzaRating.Terrible || pizzabox[k].toppingInfo[o].toppingDistanceRating == PizzaRating.Bad)
                                         {
+                                            feedback.BadQuality();
                                             Upset();
                                             return;
                                         }
@@ -742,6 +754,8 @@ public class Customer : MonoBehaviour
                                             else
                                             {
                                                 Debug.Log("Difference Denied");
+                                                feedback.TurnIngrediantToName(pizzabox[k].toppingInfo[o].ingrediant);
+                                                feedback.CheckDifference(difference);
                                                 Upset();
                                                 return;
                                             }
@@ -798,6 +812,7 @@ public class Customer : MonoBehaviour
                     }
                     else
                     {
+                        feedback.Checkcooked(pizzabox[p].cookedTimes);
                         Upset();
                         return;
                     }
@@ -822,6 +837,7 @@ public class Customer : MonoBehaviour
                     }
                     else
                     {
+                        feedback.CheckCuts((int)pizzabox[p].cuts.numberOfCuts, dialog.pizzas[i].minimumCutsAllowed, dialog.pizzas[i].maximumCutsAllowed);
                         Upset();
                         return;
                     }
@@ -854,6 +870,8 @@ public class Customer : MonoBehaviour
                     {
                         if((box.toppingInfo[i].rightSideCount > 0 || box.toppingInfo[i].leftSideCount > 0) && box.toppingInfo[i].ingrediant == dialog.hatedToppings[o])
                         {
+                            feedback.TurnIngrediantToName(dialog.hatedToppings[o]);
+                            feedback.HatedTopping();
                             Upset();
                             return false;
                         }
@@ -1089,6 +1107,23 @@ public class Customer : MonoBehaviour
         if(extraToppings > dialog.maximumToppingsAllowed)
         {
             Debug.Log("Too much toppings");
+            int highest = 0;
+            for(int i = 0; i < duplicateAmount.Count; i++)
+            {
+                if(duplicateAmount[i] > highest)
+                {
+                    highest = duplicateAmount[i];
+                }
+            }
+            for(int i = 0; i < duplicateAmount.Count; i++)
+            {
+                if(highest == duplicateAmount[i])
+                {
+                    feedback.TurnIngrediantToName(duplicatePizza[i]);
+                    break;
+                }
+            }
+            feedback.TooMuchForeignToppings();
             return false;
         }
         else
@@ -1108,17 +1143,33 @@ public class Customer : MonoBehaviour
         string line = "";
         if(settings.english)
         {
-            line = upsetLines[Random.Range(0,upsetLines.Length)].englishVersion;
+            if(feedback.dialogText != "")
+            {
+                line = feedback.dialogText;
+            }
+            else
+            {
+                line = upsetLines[Random.Range(0,upsetLines.Length)].englishVersion;
+            }
         }
         else
         {
-            line = upsetLines[Random.Range(0,upsetLines.Length)].deutschVersion;
+            if(feedback.dialogText != "")
+            {
+                line = feedback.dialogText;
+            }
+            else
+            {
+                line = upsetLines[Random.Range(0,upsetLines.Length)].deutschVersion;
+            }
         }
 
         mouseCursor.FreeCusorState();
         playerMovement.canMove = false;
         playerCam.canMove = false;
         state = States.Ending;
+        cacheLines = line;
+        StartCoroutine(EnableSkipLines());
         StartCoroutine(ShowText(line));
 
         if(dialog.giveToRecipe)
@@ -1160,6 +1211,8 @@ public class Customer : MonoBehaviour
         playerMovement.canMove = false;
         playerCam.canMove = false;
         state = States.Ending;
+        cacheLines = line;
+        StartCoroutine(EnableSkipLines());
         StartCoroutine(ShowText(line));
 
         if(dialog.giveToRecipe)
