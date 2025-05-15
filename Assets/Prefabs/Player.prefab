@@ -652,6 +652,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 770404e21ff95b3a5ac978925be6ac1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainMenu: {fileID: 0}
   playerMovement: {fileID: 581912345680454974}
   player: {fileID: 4928333182216781957}
   pausing: {fileID: 0}
@@ -664,10 +665,17 @@ MonoBehaviour:
     interactionVisual: {fileID: 0}
     customer: 1
     merchant: 0
+    mainMenu: 0
   - tagName: Merchant
     interactionVisual: {fileID: 0}
     customer: 0
     merchant: 1
+    mainMenu: 0
+  - tagName: MainMenu
+    interactionVisual: {fileID: 0}
+    customer: 0
+    merchant: 0
+    mainMenu: 1
   extraRange: 3
 --- !u!114 &612445579820348042
 MonoBehaviour:

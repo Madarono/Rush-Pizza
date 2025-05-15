@@ -9,10 +9,14 @@ public class Checks
     public GameObject interactionVisual;
     public bool customer;
     public bool merchant;
+    public bool mainMenu;
 }
 
 public class InteractCheck : MonoBehaviour
 {
+    public MainMenu mainMenu;
+    public SoundManager sound;
+    public Transform mainMenuButton;
     public PlayerMovement playerMovement;
     public Rigidbody player;
     public Pausing pausing;
@@ -25,6 +29,11 @@ public class InteractCheck : MonoBehaviour
 
     void Update()
     {
+        if(pausing.isPausing)
+        {
+            return;
+        }
+        
         CheckForInteractable();
 
         if(Input.GetMouseButtonDown(0))
@@ -44,6 +53,11 @@ public class InteractCheck : MonoBehaviour
                 merchant.InitiateTalk();
                 playerMovement.canMove = false;
                 player.velocity = Vector3.zero;
+            }
+            else if(mainMenu != null && mainMenu.gameState == PizzaGameState.MainMenu && checks[2].interactionVisual.activeInHierarchy)
+            {
+                sound.Generate2DSound(mainMenuButton.position, sound.startGame, true, 0.4f);
+                mainMenu.BeginGame();
             }
         }
     }
@@ -81,7 +95,10 @@ public class InteractCheck : MonoBehaviour
                             check.interactionVisual.SetActive(false);
                         }
                     }
-
+                    else if(check.mainMenu && mainMenu == null)
+                    {
+                        check.interactionVisual.SetActive(false);
+                    }
                     break;
                 }
             }

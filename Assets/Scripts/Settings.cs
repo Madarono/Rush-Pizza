@@ -20,10 +20,13 @@ public class Settings : MonoBehaviour, IDataPersistence
     public PizzaOptions[] ingrediantsAvailable; //For Merchant.cs
 
     [Header("Cash Register Visual")]
+    public SoundManager sound;
+
     public TextMeshPro[] registervisual = new TextMeshPro[2]; 
     public float durationvisible = 1.5f;
     public Animator cashRegisterAnimator;
     public float durationOfAnimation;
+    public float delaySound = 1f;
 
     [Header("Keybinds and Modifications")]
     public bool holdCrouch;
@@ -161,9 +164,19 @@ public class Settings : MonoBehaviour, IDataPersistence
         }
     } 
 
+    public void RegisterGetSound()
+    {
+        sound.GenerateSound(cashRegisterAnimator.gameObject.transform.position, sound.registerGet, true, .45f);
+    }
+
+    public void RegisterLoseSound()
+    {
+        sound.GenerateSound(cashRegisterAnimator.gameObject.transform.position, sound.registerLose, true, .45f);
+    }
+
     IEnumerator UnactivateRegisterVisual(bool positive)
     {
-        yield return new WaitForSeconds(durationOfAnimation);
+        yield return new WaitForSeconds(delaySound);
         if(positive)
         {
             registervisual[0].gameObject.SetActive(true);

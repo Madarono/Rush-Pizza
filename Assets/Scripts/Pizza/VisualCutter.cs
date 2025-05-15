@@ -4,9 +4,18 @@ using UnityEngine;
 
 public class VisualCutter : MonoBehaviour
 {
+    public SoundManager sound;
     public float moveAmount = 5f;
     public GameObject cutPrefab;
     public Pizza pizza;
+
+    void Start()
+    {
+        if(sound == null)
+        {
+            sound = GameObject.Find("UniversalScripts").GetComponent<SoundManager>();
+        }
+    }
 
     void Update()
     {
@@ -38,5 +47,6 @@ public class VisualCutter : MonoBehaviour
         go.transform.SetParent(transform.parent);
         pizza.cuts.cuts.Add(go);
         pizza.UpdateCuts();
+        sound.GenerateSound(transform.position, sound.cut, true, 1f);
     }
 }

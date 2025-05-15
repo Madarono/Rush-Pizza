@@ -1135,6 +1135,7 @@ public class Customer : MonoBehaviour
 
     void Upset()
     {
+        settings.RegisterLoseSound();
         pause.lockMouse = false;
         mission.pizzasMade++;
         SetEmotion(2);
@@ -1183,6 +1184,7 @@ public class Customer : MonoBehaviour
     void LeaveWithoutNotice()
     {
         settings.AddToMoney(-bill);
+        settings.RegisterLoseSound();
         stats.refundsLost += bill;
         state = States.Ending;
         manager.AskOkay();
@@ -1190,6 +1192,7 @@ public class Customer : MonoBehaviour
 
     void Satisfied()
     {
+        settings.RegisterGetSound();
         pause.lockMouse = false;
         mission.pizzasMade++;
         SetEmotion(0);

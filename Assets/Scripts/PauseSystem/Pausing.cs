@@ -69,6 +69,7 @@ public class Pausing : MonoBehaviour
         drag.can_drag = true;
         Time.timeScale = 1f;
         controls.CloseWindow();
+        controls.StopLeave();
         recipeSys.CloseWindow();
         tabs.ResetAllTabs();
         StartCoroutine(WaitForPauseClosing());

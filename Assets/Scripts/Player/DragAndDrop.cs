@@ -11,6 +11,7 @@ public enum DragDirection
 }
 public class DragAndDrop : MonoBehaviour
 {
+    public SoundManager sound;
     public Transform parent_obj;
     public Crouch crouch;
     private Move_HoldPos holdPos;
@@ -69,7 +70,7 @@ public class DragAndDrop : MonoBehaviour
             }
             else if(heldObject != null && canDrop)
             {
-                DropObject();
+                DropObject(true);
             }
 
 
@@ -126,6 +127,7 @@ public class DragAndDrop : MonoBehaviour
                 holdPos.SetHoldPosition(2.5f);
 
                 StartCoroutine(DelayDropping());
+                sound.GenerateSound(transform.position, sound.pickup, true, 0.1f);
             }
             if(heldObjectRB != null)
             {
@@ -135,7 +137,7 @@ public class DragAndDrop : MonoBehaviour
         }
     }
 
-    public void DropObject()
+    public void DropObject(bool playSound)
     {
         if(heldObjectRB != null)
         {
@@ -150,6 +152,11 @@ public class DragAndDrop : MonoBehaviour
 
             heldObjectRB.constraints = RigidbodyConstraints.None;  
             heldObjectRB = null;
+
+            if(playSound)
+            {
+                sound.GenerateSound(transform.position, sound.pickup, true, 0.1f);
+            }
         }
     }
 
@@ -169,7 +176,8 @@ public class DragAndDrop : MonoBehaviour
             heldObjectRB.constraints = RigidbodyConstraints.None;
             Vector3 throwDirection = mainCamera.transform.forward;
             heldObjectRB.AddForce(throwDirection * settings.throwForce, ForceMode.Impulse);
-            DropObject();
+            sound.GenerateSound(transform.position, sound.pickup, true, 0.2f);
+            DropObject(false);
         }
     }
 

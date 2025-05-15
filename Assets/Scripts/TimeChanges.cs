@@ -16,6 +16,7 @@ public class TimeChanges : MonoBehaviour
     private float speedOfTransition;
 
     [Header("Timer")]
+    public MainMenu main;
     public Mission mission;
     public Pausing pause;
     public Stats stats;
@@ -61,6 +62,11 @@ public class TimeChanges : MonoBehaviour
     {
         h24Format = settings.h24Format;
 
+        if(main.gameState == PizzaGameState.MainMenu)
+        {
+            return;
+        }
+
         //Time
         if(currentTime <= (dayTimeInHours * 60 * 60))
         {
@@ -97,6 +103,7 @@ public class TimeChanges : MonoBehaviour
         timeMultiplyer =  (dayTimeInHours * 60 * 60) / ingameHoursInSeconds;
         // Debug.Log(timeMultiplyer);
         currentTime = 0;
+        UpdateTime(currentTime);
     }
 
     public void UpdateTime(float time)

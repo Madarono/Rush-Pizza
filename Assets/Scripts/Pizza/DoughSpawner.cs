@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class DoughSpawner : MonoBehaviour
 {
+    public SoundManager sound;
+    public MainMenu main;
     public GameObject doughPrefab;
     public Transform[] doughSpawns;
     public float checkDelay = 1f;
@@ -25,6 +27,11 @@ public class DoughSpawner : MonoBehaviour
 
     void Update()
     {
+        if(main.gameState == PizzaGameState.MainMenu)
+        {
+            return;
+        }
+        
         if(checkDelay > 0)
         {
             checkDelay -= Time.deltaTime;
@@ -75,6 +82,7 @@ public class DoughSpawner : MonoBehaviour
             if(isDough)
             {
                 Interactable dough = go.GetComponent<Interactable>();
+                dough.sound = this.sound;
                 dough.settings = this.settings;
                 dough.stats = this.stats;
                 dough.dragAndDrop = this.dragAndDrop;

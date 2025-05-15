@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Interactable : MonoBehaviour
 {
+    public SoundManager sound;
     public GameObject interactPrefab;
     public Vector3 prefabRotation;
     public Settings settings;
@@ -28,6 +29,8 @@ public class Interactable : MonoBehaviour
             settings.AddWithoutVisual(-costToChange);
             stats.doughSpent += costToChange;
         }
+
+        sound.GenerateSound(transform.position, sound.spreadDough, true, .15f);
 
         Destroy(gameObject);
     }

@@ -176,8 +176,9 @@ public class Stats : MonoBehaviour, IDataPersistence
     IEnumerator NextDay()
     {
         nextDayScreen.SetActive(true);
-        yield return new WaitForSeconds(nextDayDelay);
+        yield return new WaitForSecondsRealtime(nextDayDelay);
         DataPersistenceManager.instance.SaveGame();
+        Time.timeScale = 1f;
         SceneManager.LoadScene("Game");
     }
 }

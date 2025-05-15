@@ -6,7 +6,8 @@ public class ConveyerEnd : MonoBehaviour
 {
     [Header("End of conveyer")]
     public bool checkPickable = false;
-    
+    public Conveyer conveyer;
+
     [Header("Cooking")]
     public bool checkCooked = false;
 
@@ -26,7 +27,8 @@ public class ConveyerEnd : MonoBehaviour
             if(checkPickable)
             {
                 // pickable = other.GetComponent<Pickable>();
-                // pickable.canBePicked = true;
+                // pickable.canBePicked = true
+                conveyer.CheckForPizza(pizza);
                 pizza.canBeCooked = true;
             }
         }

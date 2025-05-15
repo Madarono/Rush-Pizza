@@ -6,6 +6,7 @@ using TMPro;
 
 public class CustomerManager : MonoBehaviour
 {
+    public MainMenu main;
     public Pausing pausing;
     public Brief brief;
     public Stats stats;
@@ -45,6 +46,7 @@ public class CustomerManager : MonoBehaviour
     public GameObject emotionWindow;
 
     [Header("Things for Merchant script")]
+    public SoundManager sound;
     public BuildSystem buildSystem;
     public BuildMerchant buildMerchant;
     public Supply supply;
@@ -56,6 +58,7 @@ public class CustomerManager : MonoBehaviour
     public Occupation[] places;
     public Animator windowAnim;
     public TextMeshProUGUI priceVisual;
+    public ButtonListener buyButton;
 
     private bool hasInstantiatedMerchant = false;
 
@@ -68,6 +71,11 @@ public class CustomerManager : MonoBehaviour
 
     void Update()
     {
+        if(main.gameState == PizzaGameState.MainMenu)
+        {
+            return;
+        }
+
         //Debugging
         // if(Input.GetKeyDown(KeyCode.T))
         // {
@@ -116,6 +124,7 @@ public class CustomerManager : MonoBehaviour
             if(goScript.state == States.Talking) //Initiate Order
             {
                 settings.AddToMoney(goScript.bill);
+                settings.RegisterGetSound();
                 stats.moneyGained += goScript.bill;
                 emotionWindow.SetActive(true);
                 brief.canBrief = true;
@@ -289,6 +298,8 @@ public class CustomerManager : MonoBehaviour
         merchantScript.mission = mission;
         merchantScript.buildMerchant = buildMerchant;
         merchantScript.buildSystem = buildSystem;
+        merchantScript.sound = sound;
+        merchantScript.buyButton = buyButton;
 
         mission.merchantScript = merchantScript;
         mission.Refresh();

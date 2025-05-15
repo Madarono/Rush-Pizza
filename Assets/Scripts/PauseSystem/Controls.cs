@@ -29,9 +29,15 @@ public class QualityVisual
 public class Controls : WindowOpening, IDataPersistence
 {
     [Header("Scripts")]
+    public Stats stats;
     public RecipeSystem RecipeSystem;
     public Mission mission;
     public Fps fpsScript;
+
+    [Header("Leaving")]
+    public GameObject sureWindow;
+    public Animator sureAnim;
+    public float sureLeaveDuration = 1f;
 
     [Header("Keybinds")]
     public Pausing pause;
@@ -228,6 +234,12 @@ public class Controls : WindowOpening, IDataPersistence
         settings.h24Format = this.h24Format;
         settings.holdCrouch = this.holdCrouch;
         settings.RefreshMoneyCounter();
+
+        if(timeChanges != null)
+        {
+            timeChanges.h24Format = settings.h24Format;
+            timeChanges.UpdateTime(timeChanges.cacheTime);
+        }
     }
 
     public override void OpenWindow()
@@ -461,5 +473,27 @@ public class Controls : WindowOpening, IDataPersistence
         {
             keybinds[i].visual.text = keybinds[i].keybind.ToString();
         }
+    }
+
+    public void Leave()
+    {
+        sureWindow.SetActive(true);
+    }
+
+    public void StopLeave()
+    {
+        StartCoroutine(TurnOffSureWindow());
+    }
+
+    public void ConfirmLeave()
+    {
+        stats.GoToNextDay();
+    }
+
+    IEnumerator TurnOffSureWindow()
+    {
+        sureAnim.SetTrigger("Close");
+        yield return new WaitForSecondsRealtime(sureLeaveDuration);
+        sureWindow.SetActive(false);
     }
 }

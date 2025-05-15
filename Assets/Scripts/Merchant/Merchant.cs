@@ -84,6 +84,9 @@ public class Merchant : MonoBehaviour
     public List<MerchantItem> inCartItems;
     public List<MerchantDisplay> inCartDisplay;
 
+    [HideInInspector]public ButtonListener buyButton;
+    [HideInInspector]public SoundManager sound;
+
     void Start()
     {
         RefreshPrice();
@@ -95,6 +98,15 @@ public class Merchant : MonoBehaviour
         if(skipLines && Input.GetMouseButtonDown(0))
         {
             SkipTalk();
+        }
+
+        if(settings.money >= cartPrice && cartPrice > 0)
+        {
+            buyButton.overrideClip = sound.buyMerchant;
+        }
+        else
+        {
+            buyButton.overrideClip = null;
         }
     }
 

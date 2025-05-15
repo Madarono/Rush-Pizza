@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SauceDrawing : MonoBehaviour
 {
+    public SoundManager sound;
     public Settings settings;
     public Stats stats;
     public DragAndDrop dragAndDrop;
@@ -94,7 +95,8 @@ public class SauceDrawing : MonoBehaviour
 
                 int randomPrefab = Random.Range(0, topping.toppingPrefab.Length);
                 GameObject sauce = Instantiate(topping.toppingPrefab[randomPrefab], hitPoint + Vector3.up * topping.spawnOffset, Quaternion.identity);
-                
+                sound.GenerateSound(hitPoint, sound.splat, true, 0.4f);
+
                 if(supply.ingrediantSupply[idForSupply].freeSupply > 0)
                 {
                     supply.ingrediantSupply[idForSupply].freeSupply--;

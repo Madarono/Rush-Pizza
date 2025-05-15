@@ -6,6 +6,7 @@ using System.Linq;
 
 public class BuildSystem : MonoBehaviour, IDataPersistence
 {
+    public SoundManager sound;
     public DecorManager decorManager;
     public Settings settings;
     public Pausing pausing;
@@ -273,6 +274,7 @@ public class BuildSystem : MonoBehaviour, IDataPersistence
         decorScript.canBeStored = false;
         decorScript.CheckManager();
         isSelecting = true;
+        sound.Generate2DSound(heldDecor.transform.position, sound.decorationSelection, true, .25f);
     }
 
     public void CenterOnChild(RectTransform child)
@@ -358,6 +360,7 @@ public class BuildSystem : MonoBehaviour, IDataPersistence
             else
             {
                 decorScript.Activate();
+                sound.GenerateSound(heldDecor.transform.position, sound.pickup, true, 0.1f);
             }
         }
     }
@@ -386,6 +389,7 @@ public class BuildSystem : MonoBehaviour, IDataPersistence
 
         if(isSelecting)
         {
+            sound.GenerateSound(heldDecor.transform.position, sound.pickup, true, 0.2f);
             isSelecting = false;
             decorScript.canBeStored = true;
             decorScript.CheckManager();
@@ -394,12 +398,16 @@ public class BuildSystem : MonoBehaviour, IDataPersistence
         }
         else if(!selectingMode)
         {
+            if(heldDecor != null)
+            {
+                sound.GenerateSound(heldDecor.transform.position, sound.pickup, true, 0.2f);
+            }
             if(decorScript != null)
             {
                 decorScript.selected.SetActive(false);
             }
             decorScript.Unactivate();
-        }
+        }        
     }
 
     void BuildMode()
