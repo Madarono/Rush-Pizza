@@ -30,7 +30,7 @@ public class ButtonListener : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        sound.Generate2DSound(transform.position, sound.decorationSelection, true, 0.25f);
+        sound.Generate2DSound(transform.position, sound.decorationSelection, true, 0.6f);
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -41,12 +41,12 @@ public class ButtonListener : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     {
         if(overrideClip)
         {
-            sound.Generate2DSound(transform.position, overrideClip, true, 0.25f);
+            sound.Generate2DSound(transform.position, overrideClip, true, 0.6f);
             return;
         }
 
         AudioClip clip = sound.buttonClick[Random.Range(0, sound.buttonClick.Length)];
-        sound.Generate2DSound(transform.position, clip, true, 0.25f);
+        sound.Generate2DSound(transform.position, clip, true, 0.6f);
     }
 
     void OnDestroy()

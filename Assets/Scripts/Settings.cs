@@ -47,6 +47,7 @@ public class Settings : MonoBehaviour, IDataPersistence
     public bool oneTimeCut = true;
     public bool english = true;
     public bool h24Format = false;
+    public bool enableVoice = true;
     public TimeChanges timeChanges;
 
     public void SaveData(GameData data)
@@ -166,12 +167,12 @@ public class Settings : MonoBehaviour, IDataPersistence
 
     public void RegisterGetSound()
     {
-        sound.GenerateSound(cashRegisterAnimator.gameObject.transform.position, sound.registerGet, true, .45f);
+        sound.GenerateSound(cashRegisterAnimator.gameObject.transform.position, sound.registerGet, true, .6f);
     }
 
     public void RegisterLoseSound()
     {
-        sound.GenerateSound(cashRegisterAnimator.gameObject.transform.position, sound.registerLose, true, .45f);
+        sound.GenerateSound(cashRegisterAnimator.gameObject.transform.position, sound.registerLose, true, .6f);
     }
 
     IEnumerator UnactivateRegisterVisual(bool positive)

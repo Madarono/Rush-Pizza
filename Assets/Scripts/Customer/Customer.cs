@@ -114,6 +114,7 @@ public class Customer : MonoBehaviour
     public AdvancedFeedback feedback;
     public Lines[] happyLines;
     public Lines[] upsetLines;
+    public float delayOfVoice = 0.1f;
 
     private string cacheLines;
     private bool skipLines = false; 
@@ -190,6 +191,10 @@ public class Customer : MonoBehaviour
                 if(dialog.talk[i].type == talkType)
                 {           
                     StartCoroutine(ShowText(dialog.talk[i].content)); 
+                    if(settings.enableVoice)
+                    {
+                        StartCoroutine(MakeVoice(dialog.talk[i].content));
+                    }
                     StartCoroutine(EnableSkipLines());
                     cacheLines = dialog.talk[i].content;  
                     break;
@@ -206,6 +211,10 @@ public class Customer : MonoBehaviour
                 if(dialog.talk[i].type == talkType)
                 {                
                     StartCoroutine(ShowText(dialog.talk[i].contentDeutsch));
+                    if(settings.enableVoice)
+                    {
+                        StartCoroutine(MakeVoice(dialog.talk[i].contentDeutsch));
+                    }
                     StartCoroutine(EnableSkipLines());
                     cacheLines = dialog.talk[i].contentDeutsch;  
                     break;
@@ -257,7 +266,18 @@ public class Customer : MonoBehaviour
             yield return new WaitForSeconds(delay);
         }
 
+        StopAllCoroutines(); //Maybe remove this if there are bugs
         skipLines = false;
+    }
+    IEnumerator MakeVoice(string content)
+    {
+        for(int i = 0; i < content.Length; i++)
+        {
+            int randomVoice = Random.Range(0, manager.sound.customerVoice.Length);
+            int randomType = Random.Range(0, manager.sound.customerVoice[randomVoice].voice.Length);
+            manager.sound.Generate2DSound(transform.position, manager.sound.customerVoice[randomVoice].voice[randomType], true, 0.6f);
+            yield return new WaitForSeconds(delayOfVoice);
+        }
     }
 
     IEnumerator EnableSkipLines()
@@ -1172,6 +1192,10 @@ public class Customer : MonoBehaviour
         cacheLines = line;
         StartCoroutine(EnableSkipLines());
         StartCoroutine(ShowText(line));
+        if(settings.enableVoice)
+        {
+            StartCoroutine(MakeVoice(line));
+        }
 
         if(dialog.giveToRecipe)
         {
@@ -1217,6 +1241,10 @@ public class Customer : MonoBehaviour
         cacheLines = line;
         StartCoroutine(EnableSkipLines());
         StartCoroutine(ShowText(line));
+        if(settings.enableVoice)
+        {
+            StartCoroutine(MakeVoice(line));
+        }
 
         if(dialog.giveToRecipe)
         {

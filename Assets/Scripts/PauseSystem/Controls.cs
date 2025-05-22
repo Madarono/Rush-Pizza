@@ -26,6 +26,14 @@ public class QualityVisual
     public CameraRenderingPath rendering;
 }
 
+[System.Serializable]
+public class ResolutionLevel
+{
+    public string visual;
+    public int width;
+    public int length;
+}
+
 public class Controls : WindowOpening, IDataPersistence
 {
     [Header("Scripts")]
@@ -61,6 +69,10 @@ public class Controls : WindowOpening, IDataPersistence
     public TextMeshProUGUI qualityVisual;
     public QualityVisual[] qualityString;
 
+    public int resolutionChoosing = 1;
+    public ResolutionLevel[] resolutionLevels;
+    public TextMeshProUGUI resolutionVisual;
+
     [Header("Audio")]
     public float master;
     public Slider masterSlider;
@@ -78,6 +90,8 @@ public class Controls : WindowOpening, IDataPersistence
     public TextMeshProUGUI crouchVisual;
     public bool h24Format;
     public TextMeshProUGUI formatVisual;
+    public bool enableVoice = true;
+    public TextMeshProUGUI voiceVisual;
 
     public Camera camera;
     public Slider fovSlider;
@@ -114,6 +128,8 @@ public class Controls : WindowOpening, IDataPersistence
         data.cameraFOV = this.currentFov;
         data.master = this.master;
         data.background = this.background;
+        data.enableVoice = this.enableVoice;
+        data.resolutionChoosing = this.resolutionChoosing;
     }
 
     public void LoadData(GameData data)
@@ -135,12 +151,15 @@ public class Controls : WindowOpening, IDataPersistence
         this.currentFov = data.cameraFOV;
         this.master = data.master;
         this.background = data.background;
+        this.enableVoice = data.enableVoice;
+        this.resolutionChoosing = data.resolutionChoosing;
         
         if(timeChanges != null)
         {
             timeChanges.UpdateTime(timeChanges.cacheTime);
         }
         
+        Screen.SetResolution(resolutionLevels[resolutionChoosing].width, resolutionLevels[resolutionChoosing].length, true);
         ApplyToSettings();
         UpdateKeybinds();
         UpdateModifications();
@@ -233,6 +252,7 @@ public class Controls : WindowOpening, IDataPersistence
         settings.changeMode = this.keybinds[6].keybind;
         settings.h24Format = this.h24Format;
         settings.holdCrouch = this.holdCrouch;
+        settings.enableVoice = this.enableVoice;
         settings.RefreshMoneyCounter();
 
         if(timeChanges != null)
@@ -294,6 +314,22 @@ public class Controls : WindowOpening, IDataPersistence
             timeChanges.UpdateTime(timeChanges.cacheTime);
         }
     }
+    public void ToggleVoice()
+    {
+        enableVoice = !enableVoice;
+        UpdateModifications();
+        ApplyToSettings();
+    }
+    public void ChangeResolution()
+    {
+        resolutionChoosing++;
+        if(resolutionChoosing >= resolutionLevels.Length)
+        {
+            resolutionChoosing = 0;
+        } 
+        Screen.SetResolution(resolutionLevels[resolutionChoosing].width, resolutionLevels[resolutionChoosing].length, true);
+        UpdateModifications();
+    }
 
     public void UpdateModifications()
     {
@@ -302,14 +338,17 @@ public class Controls : WindowOpening, IDataPersistence
             crouchVisual.text = holdCrouch ? "Hold" : "Toggle";
             formatVisual.text = h24Format ? "24 Hour" : "12 Hour";
             fpsVisual.text = showFPS ? "Show" : "Hide";
+            voiceVisual.text = enableVoice ? "On" : "Off";
         }
         else
         {
             formatVisual.text = h24Format ? "24 Stunde" : "12 Stunde";
             crouchVisual.text = holdCrouch ? "Halt" : "Umschalten";
             fpsVisual.text = showFPS ? "Anzeigen" : "Ausblenden";
+            voiceVisual.text = enableVoice ? "Ein" : "Aus";
         }
 
+        resolutionVisual.text = resolutionLevels[resolutionChoosing].visual;
         fpsScript.showFPS = showFPS;
         limitVisual.text = limit[choosingFPS].ToString();
         fpsScript.ChangeFpsLimit(limit[choosingFPS]);

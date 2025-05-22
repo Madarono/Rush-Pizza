@@ -15,10 +15,10 @@ public class Cosmetics : MonoBehaviour
     public GameObject[] shirts;
     public GameObject[] hats;
 
-    [Header("Outfit")]
-    public int changeForOutfit = 25;
-    public bool wearOutfit;
-    public Outfit[] outfits;
+    // [Header("Outfit")]
+    // public int changeForOutfit = 25;
+    // public bool wearOutfit;
+    // public Outfit[] outfits;
 
     [Header("Skin Tone")]
     public Material[] skinTone;
@@ -37,16 +37,16 @@ public class Cosmetics : MonoBehaviour
             obj.SetActive(false);
         }
 
-        int chance = Random.Range(0, 100);
-        if(chance >= changeForOutfit || wearOutfit)
-        {
-            int randomOutfit = Random.Range(0, outfits.Length);
-            for(int i = 0; i < outfits[randomOutfit].clothes.Length; i++)
-            {
-                outfits[randomOutfit].clothes[i].SetActive(true);
-            }
-            return;
-        }
+        // int chance = Random.Range(0, 100);
+        // if(chance >= changeForOutfit || wearOutfit)
+        // {
+        //     int randomOutfit = Random.Range(0, outfits.Length);
+        //     for(int i = 0; i < outfits[randomOutfit].clothes.Length; i++)
+        //     {
+        //         outfits[randomOutfit].clothes[i].SetActive(true);
+        //     }
+        //     return;
+        // }
 
         int randomShirt = Random.Range(0, shirts.Length);
         int randomHat = Random.Range(0, hats.Length);

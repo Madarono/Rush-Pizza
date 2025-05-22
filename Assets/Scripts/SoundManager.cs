@@ -2,6 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class CustomerVoice
+{
+    public string voiceName; //Just for knowing what it is.
+    public AudioClip[] voice;
+}
+
 public class SoundManager : MonoBehaviour
 {
     public Controls controls;
@@ -20,6 +27,11 @@ public class SoundManager : MonoBehaviour
     public AudioClip registerLose;
     public AudioClip selectTopping;
     public AudioClip conveyerBelt;
+
+    [Header("Customer")]
+    public AudioClip customerEnter;
+    public AudioClip customerLeave;
+    public CustomerVoice[] customerVoice;
 
     [Header("Pick Up")]
     public AudioClip pickup;

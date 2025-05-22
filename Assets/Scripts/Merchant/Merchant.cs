@@ -44,6 +44,7 @@ public class Merchant : MonoBehaviour
     [Header("Speaking")]
     public Lines[] merchantLines;
     public float speedOfTalk = 0.03f;
+    public float delayOfVoice = 0.1f;
 
     private string cacheLines;
     private bool skipLines = false; 
@@ -121,6 +122,10 @@ public class Merchant : MonoBehaviour
         {
             int random = Random.Range(0, merchantLines.Length);
             StartCoroutine(ShowText(merchantLines[random].englishVersion)); 
+            if(settings.enableVoice)
+            {
+                StartCoroutine(MakeVoice(merchantLines[random].englishVersion));
+            }
             StartCoroutine(EnableSkipLines());
             cacheLines = merchantLines[random].englishVersion;
 
@@ -132,6 +137,10 @@ public class Merchant : MonoBehaviour
         {
             int random = Random.Range(0, merchantLines.Length);
             StartCoroutine(ShowText(merchantLines[random].deutschVersion)); 
+            if(settings.enableVoice)
+            {
+                StartCoroutine(MakeVoice(merchantLines[random].deutschVersion));
+            }
             StartCoroutine(EnableSkipLines());
             cacheLines = merchantLines[random].deutschVersion;
               
@@ -165,11 +174,22 @@ public class Merchant : MonoBehaviour
                     break;
                 }
             }
-
             yield return new WaitForSeconds(delay);
         }
 
+        StopAllCoroutines();
         skipLines = false;
+    }
+
+    IEnumerator MakeVoice(string content)
+    {
+        for(int i = 0; i < content.Length; i++)
+        {
+            int randomVoice = Random.Range(0, manager.sound.customerVoice.Length);
+            int randomType = Random.Range(0, manager.sound.customerVoice[randomVoice].voice.Length);
+            manager.sound.Generate2DSound(transform.position, manager.sound.customerVoice[randomVoice].voice[randomType], true, 0.6f);
+            yield return new WaitForSeconds(delayOfVoice);
+        }
     }
 
     IEnumerator EnableSkipLines()

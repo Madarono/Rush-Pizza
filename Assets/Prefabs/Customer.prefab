@@ -388,6 +388,7 @@ GameObject:
   - component: {fileID: -7706596405168723544}
   - component: {fileID: 4730463226951115290}
   - component: {fileID: 7573996761906022196}
+  - component: {fileID: 8724767140982381607}
   m_Layer: 0
   m_Name: Customer
   m_TagString: Customer
@@ -602,6 +603,7 @@ MonoBehaviour:
     deutschVersion: .. es ist schrecklich.
   - englishVersion: I hope this pizza never opens again.
     deutschVersion: ich hoffe diese pizzabackerei machen nie wieder auf.
+  delayOfVoice: 0.1
   patience: 0
   patienceCounter: {fileID: 0}
   emotion: {fileID: 0}
@@ -665,7 +667,7 @@ MonoBehaviour:
   - {fileID: 52865211446425768}
   - {fileID: 8662394703177523715}
   - {fileID: 8535966810395814587}
-  changeForOutfit: 15
+  changeForOutfit: 0
   wearOutfit: 0
   outfits:
   - clothes:
@@ -754,6 +756,27 @@ MonoBehaviour:
     englishName: Bell Pepper
     deutschName: Paprika
   dialogText: 
+--- !u!95 &8724767140982381607
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5603340106613123398}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f42ec6d86469f82a288a4e7f9fb841fb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &6476489469915965831
 GameObject:
   m_ObjectHideFlags: 0

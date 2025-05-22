@@ -808,6 +808,7 @@ GameObject:
   - component: {fileID: 6577939368665667185}
   - component: {fileID: 3797427718886157761}
   - component: {fileID: 5696604712210310589}
+  - component: {fileID: 3890603113077398472}
   m_Layer: 0
   m_Name: Merchant
   m_TagString: Merchant
@@ -982,6 +983,29 @@ MonoBehaviour:
   priceVisual: {fileID: 0}
   inCartItems: []
   inCartDisplay: []
+  buyButton: {fileID: 0}
+  sound: {fileID: 0}
+--- !u!95 &3890603113077398472
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5603340106613123398}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f42ec6d86469f82a288a4e7f9fb841fb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &7578918476726543452
 GameObject:
   m_ObjectHideFlags: 0

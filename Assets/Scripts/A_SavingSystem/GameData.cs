@@ -30,6 +30,8 @@ public class GameData
     public float cameraFOV;
     public float master;
     public float background;
+    public bool enableVoice;
+    public int resolutionChoosing;
 
     //RecipeSystem.cs
     public bool[] isVisible = new bool[8];
@@ -88,6 +90,8 @@ public class GameData
         this.cameraFOV = 60f;
         this.master = 1f;
         this.background = 1f;
+        this.enableVoice = true;
+        this.resolutionChoosing = 6;
 
         //RecipeSystem.cs
         this.isVisible = new bool[8];

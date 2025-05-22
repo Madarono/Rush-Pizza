@@ -238,8 +238,12 @@ public class CustomerManager : MonoBehaviour
         }
 
         GameObject go = Instantiate(customerPrefab, spawnPosition.position, Quaternion.identity);
+        sound.Generate2DSound(go.transform.position, sound.customerEnter, true, .5f);
         customer = go;
         goScript = go.GetComponent<Customer>();
+        Cosmetics cosmetics = go.GetComponent<Cosmetics>();
+        cosmetics.ChangeOutfit();
+        cosmetics.ChangeSkin();
         if(randomizeCustomerOrders)
         {
             goScript.dialog = orders[Random.Range(0, orders.Length)];
@@ -273,6 +277,7 @@ public class CustomerManager : MonoBehaviour
         }
 
         GameObject go = Instantiate(merchantPrefab, spawnPosition.position, Quaternion.identity);
+        sound.Generate2DSound(go.transform.position, sound.customerEnter, true, .5f);
         merchant = go;
         merchantScript = go.GetComponent<Merchant>();
 
@@ -316,23 +321,66 @@ public class CustomerManager : MonoBehaviour
     {
         if(customer != null)
         {
-            Destroy(customer);
-            emotionWindow.SetActive(false);
-            customer = null;
-            currentWait = Random.Range(minWait, maxWait);
+            StartCoroutine(animationDeleteCustomer());
         }
     }
+
+    IEnumerator animationDeleteCustomer()
+    {
+        sound.Generate2DSound(customer.transform.position, sound.customerLeave, true, .7f);
+        Animator anim = customer.GetComponent<Animator>();
+        anim.SetTrigger("Leave");
+
+        float length = 0;
+        
+        RuntimeAnimatorController ac = anim.runtimeAnimatorController;
+        foreach(AnimationClip clip in ac.animationClips)
+        {
+            if(clip.name == "CustomerLeave")
+            {
+                length = clip.length;
+            }
+        }
+
+        yield return new WaitForSeconds(length);
+        Destroy(customer);
+        emotionWindow.SetActive(false);
+        customer = null;
+        currentWait = Random.Range(minWait, maxWait);
+    }
+
     public void DeleteMerchant()
     {
         if(merchant != null)
         {
-            Destroy(merchant);
-            merchant = null;
-            mouseCursor.LockCusorState();
-            playerMovement.canMove = true;
-            playerCam.canMove = true;
-            currentWait = Random.Range(minWait, maxWait);
+            StartCoroutine(animationDeleteMerchant());
         }
+    }
+
+    IEnumerator animationDeleteMerchant()
+    {
+        sound.Generate2DSound(merchant.transform.position, sound.customerLeave, true, .7f);
+        Animator anim = merchant.GetComponent<Animator>();
+        anim.SetTrigger("Leave");
+
+        float length = 0;
+        
+        RuntimeAnimatorController ac = anim.runtimeAnimatorController;
+        foreach(AnimationClip clip in ac.animationClips)
+        {
+            if(clip.name == "CustomerLeave")
+            {
+                length = clip.length;
+            }
+        }
+
+        yield return new WaitForSeconds(length);
+        Destroy(merchant);
+        merchant = null;
+        mouseCursor.LockCusorState();
+        playerMovement.canMove = true;
+        playerCam.canMove = true;
+        currentWait = Random.Range(minWait, maxWait);
     }
     
 }

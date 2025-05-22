@@ -407,7 +407,12 @@ public class BuildSystem : MonoBehaviour, IDataPersistence
                 decorScript.selected.SetActive(false);
             }
             decorScript.Unactivate();
-        }        
+        }       
+        BuildDecor[] allDecorScripts = Object.FindObjectsOfType<BuildDecor>();
+        foreach(BuildDecor decor in  allDecorScripts)
+        {
+            decor.selected.SetActive(false);
+        }
     }
 
     void BuildMode()
