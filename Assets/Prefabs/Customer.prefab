@@ -388,6 +388,7 @@ GameObject:
   - component: {fileID: -7706596405168723544}
   - component: {fileID: 4730463226951115290}
   - component: {fileID: 7573996761906022196}
+  - component: {fileID: 8143261331562052855}
   - component: {fileID: 8724767140982381607}
   m_Layer: 0
   m_Name: Customer
@@ -500,6 +501,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
+  advancedTip: {fileID: 8143261331562052855}
   pricing:
   - topping: 0
     fullPriceTopping: 1
@@ -590,7 +592,6 @@ MonoBehaviour:
     percentageOfTip: 0.1
   - rating: 4
     percentageOfTip: 0
-  tip: 0
   bill: 0
   feedback: {fileID: 7573996761906022196}
   happyLines:
@@ -667,12 +668,6 @@ MonoBehaviour:
   - {fileID: 52865211446425768}
   - {fileID: 8662394703177523715}
   - {fileID: 8535966810395814587}
-  changeForOutfit: 0
-  wearOutfit: 0
-  outfits:
-  - clothes:
-    - {fileID: 9113962093160014230}
-    - {fileID: 8535966810395814587}
   skinTone:
   - {fileID: 2100000, guid: d95c973dfc87ad44cb7bf25affb74ae6, type: 2}
   - {fileID: 2100000, guid: 76a1e3d88e47947f2988256cb25bb62a, type: 2}
@@ -756,6 +751,52 @@ MonoBehaviour:
     englishName: Bell Pepper
     deutschName: Paprika
   dialogText: 
+--- !u!114 &8143261331562052855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5603340106613123398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b66b1bb89d8433eb2bd10d5c942c5999, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  finalTip: 0
+  tip: 0
+  perfectCookingTip: 1.25
+  perfectCutTip: 0.75
+  patienceTip:
+  - minPatience: 20
+    percentageOfTip: -1
+  - minPatience: 30
+    percentageOfTip: -0.4
+  - minPatience: 40
+    percentageOfTip: -0.3
+  - minPatience: 50
+    percentageOfTip: -0.2
+  - minPatience: 60
+    percentageOfTip: 0.2
+  - minPatience: 70
+    percentageOfTip: 0.3
+  - minPatience: 80
+    percentageOfTip: 0.4
+  - minPatience: 90
+    percentageOfTip: 0.5
+  - minPatience: 100
+    percentageOfTip: 0.6
+  toppingTip:
+  - rating: 0
+    percentageOfTip: 0.8
+  - rating: 1
+    percentageOfTip: 0.7
+  - rating: 2
+    percentageOfTip: 0.6
+  - rating: 3
+    percentageOfTip: 0.3
+  - rating: 4
+    percentageOfTip: 0
 --- !u!95 &8724767140982381607
 Animator:
   serializedVersion: 5

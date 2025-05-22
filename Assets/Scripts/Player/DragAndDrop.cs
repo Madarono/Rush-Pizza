@@ -127,7 +127,7 @@ public class DragAndDrop : MonoBehaviour
                 holdPos.SetHoldPosition(2.5f);
 
                 StartCoroutine(DelayDropping());
-                sound.GenerateSound(transform.position, sound.pickup, true, 0.1f);
+                sound.GenerateSound(transform.position, sound.pickup, true, 0.2f);
             }
             if(heldObjectRB != null)
             {
@@ -155,7 +155,7 @@ public class DragAndDrop : MonoBehaviour
 
             if(playSound)
             {
-                sound.GenerateSound(transform.position, sound.pickup, true, 0.1f);
+                sound.GenerateSound(transform.position, sound.pickup, true, 0.2f);
             }
         }
     }
@@ -176,7 +176,7 @@ public class DragAndDrop : MonoBehaviour
             heldObjectRB.constraints = RigidbodyConstraints.None;
             Vector3 throwDirection = mainCamera.transform.forward;
             heldObjectRB.AddForce(throwDirection * settings.throwForce, ForceMode.Impulse);
-            sound.GenerateSound(transform.position, sound.pickup, true, 0.2f);
+            sound.GenerateSound(transform.position, sound.pickup, true, 0.3f);
             DropObject(false);
         }
     }

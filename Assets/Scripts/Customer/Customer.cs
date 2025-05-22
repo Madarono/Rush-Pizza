@@ -19,12 +19,6 @@ public enum States
     Ending
 }
 
-[System.Serializable]
-public class TipAdditions
-{
-    public PizzaRating rating;
-    public float percentageOfTip;
-}
 
 [System.Serializable]
 public class IngrediantPricing
@@ -78,6 +72,7 @@ public class CheckToppings
 public class Customer : MonoBehaviour
 {
     public States state;
+    public AdvancedTippingSystem advancedTip;
     public IngrediantPricing[] pricing;
     [HideInInspector]public Pausing pause;
     [HideInInspector]public MouseCursor mouseCursor;
@@ -107,7 +102,7 @@ public class Customer : MonoBehaviour
 
     public PizzaRating overallPizzaRating;
     public TipAdditions[] tipAdditions;
-    public float tip;
+    // public float tip;
     public float bill;
 
     [Header("Lines")]
@@ -490,7 +485,9 @@ public class Customer : MonoBehaviour
                                                     {
                                                         if(dialog.pizzas[w].leftToppings[q] == pricing[p].topping)
                                                         {
-                                                            tip = pricing[p].fullPriceTopping / tipAdditions[r].percentageOfTip;
+                                                            advancedTip.AddToTip(rating, pricing[p].fullPriceTopping);
+
+                                                            
                                                         }
                                                     }
                                                 }
@@ -513,7 +510,8 @@ public class Customer : MonoBehaviour
                                                         {
                                                             if(dialog.pizzas[w].leftToppings[q] == pricing[p].topping)
                                                             {
-                                                                tip = pricing[p].fullPriceTopping / tipAdditions[r].percentageOfTip;
+                                                                advancedTip.AddToTip(rating, pricing[p].fullPriceTopping);                                                          
+                                                                
                                                             }
                                                         }
                                                     }
@@ -573,7 +571,8 @@ public class Customer : MonoBehaviour
                                                     {
                                                         if(dialog.pizzas[w].rightToppings[q] == pricing[p].topping)
                                                         {
-                                                            tip = pricing[p].fullPriceTopping / tipAdditions[r].percentageOfTip;
+                                                            advancedTip.AddToTip(rating, pricing[p].fullPriceTopping);                                                        
+                                                            
                                                         }
                                                     }
                                                 }
@@ -596,7 +595,8 @@ public class Customer : MonoBehaviour
                                                         {
                                                             if(dialog.pizzas[w].rightToppings[q] == pricing[p].topping)
                                                             {
-                                                                tip = pricing[p].fullPriceTopping / tipAdditions[r].percentageOfTip;
+                                                                advancedTip.AddToTip(rating, pricing[p].fullPriceTopping);
+                                                                
                                                             }
                                                         }
                                                     }
@@ -659,7 +659,8 @@ public class Customer : MonoBehaviour
                                                     {
                                                         if(dialog.pizzas[w].leftToppings[q] == pricing[p].topping)
                                                         {
-                                                            tip = pricing[p].fullPriceTopping / tipAdditions[r].percentageOfTip;
+                                                                advancedTip.AddToTip(rating, pricing[p].fullPriceTopping);
+                                                            
                                                         }
                                                     }
                                                 }
@@ -682,7 +683,8 @@ public class Customer : MonoBehaviour
                                                         {
                                                             if(dialog.pizzas[w].leftToppings[q] == pricing[p].topping)
                                                             {
-                                                                tip = pricing[p].fullPriceTopping / tipAdditions[r].percentageOfTip;
+                                                                advancedTip.AddToTip(rating, pricing[p].fullPriceTopping);
+                                                                
                                                             }
                                                         }
                                                     }
@@ -742,7 +744,9 @@ public class Customer : MonoBehaviour
                                                     {
                                                         if(dialog.pizzas[w].rightToppings[q] == pricing[p].topping)
                                                         {
-                                                            tip = pricing[p].fullPriceTopping / tipAdditions[r].percentageOfTip;
+                                                            advancedTip.AddToTip(rating, pricing[p].fullPriceTopping);
+
+                                                            
                                                         }
                                                     }
                                                 }
@@ -765,7 +769,10 @@ public class Customer : MonoBehaviour
                                                         {
                                                             if(dialog.pizzas[w].rightToppings[q] == pricing[p].topping)
                                                             {
-                                                                tip = pricing[p].fullPriceTopping / tipAdditions[r].percentageOfTip;
+                                                                advancedTip.AddToTip(rating, pricing[p].fullPriceTopping);
+                                                            
+
+                                                                
                                                             }
                                                         }
                                                     }
@@ -825,10 +832,10 @@ public class Customer : MonoBehaviour
             {
                 if(pizzabox[p].cookedTimes != cookedTimes[i]) //If the cook times isn't exact then check if it is 1 more than it.
                 {
-                    if(pizzabox[p].cookedTimes == cookedTimes[i] + 1 && cookedTimes[i] + 1 != 4)
+                    if(pizzabox[p].cookedTimes <= cookedTimes[i] + 2 && cookedTimes[i] + 2 != 4)
                     {
-                        tip += 1f;
-                        break;
+                        advancedTip.OtherTip(pizzabox[p].cookedTimes, cookedTimes[i], cookedTimes[i] + 2, advancedTip.perfectCookingTip);
+                                                break;
                     }
                     else
                     {
@@ -839,8 +846,8 @@ public class Customer : MonoBehaviour
                 }
                 else
                 {
-                    tip += 1f;
-                    break;
+                    advancedTip.OtherTip(pizzabox[p].cookedTimes, cookedTimes[i], cookedTimes[i] + 2, advancedTip.perfectCookingTip);
+                                        break;
                 }
             }
         }
@@ -853,7 +860,8 @@ public class Customer : MonoBehaviour
                 {
                     if(pizzabox[p].cuts.numberOfCuts <= dialog.pizzas[i].maximumCutsAllowed && pizzabox[p].cuts.numberOfCuts >= dialog.pizzas[i].minimumCutsAllowed)
                     {
-                        tip += 0.5f;
+                        advancedTip.OtherTip((int)pizzabox[p].cuts.numberOfCuts, dialog.pizzas[i].minimumCutsAllowed, dialog.pizzas[i].maximumCutsAllowed, advancedTip.perfectCutTip);
+                        
                     }
                     else
                     {
@@ -864,10 +872,13 @@ public class Customer : MonoBehaviour
                 }
                 else
                 {
-                    tip += 0.5f;
+                    advancedTip.OtherTip((int)pizzabox[p].cuts.numberOfCuts, dialog.pizzas[i].minimumCutsAllowed, dialog.pizzas[i].maximumCutsAllowed, advancedTip.perfectCutTip);
+                    
                 }
             }
         }
+
+        advancedTip.CalculateFinalTip(patience, totalPatience);
 
         Satisfied();
     }
@@ -1220,7 +1231,7 @@ public class Customer : MonoBehaviour
         pause.lockMouse = false;
         mission.pizzasMade++;
         SetEmotion(0);
-        float endingTip = Mathf.Round((tip * (percentageOfPatience / 100f)) * 100f) / 100f;      
+        float endingTip = advancedTip.finalTip;      
         settings.AddToMoney(endingTip);
         stats.tipGained += endingTip;
         
