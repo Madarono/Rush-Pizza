@@ -136,6 +136,9 @@ public class Customer : MonoBehaviour
     public Settings settings;
     public SpecialStrings[] specialCharcters;
 
+    [Header("Rush Hour")]
+    public float patienceMultiplyer = 1f;
+
     void Start()
     {
         SetPatience();
@@ -358,6 +361,8 @@ public class Customer : MonoBehaviour
             }
         }
 
+        patience = patience * patienceMultiplyer;
+        
         totalPatience = patience;
         UpdatePatience();
     }

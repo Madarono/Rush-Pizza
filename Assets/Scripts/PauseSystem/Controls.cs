@@ -41,6 +41,7 @@ public class Controls : WindowOpening, IDataPersistence
     public RecipeSystem RecipeSystem;
     public Mission mission;
     public Fps fpsScript;
+    public RushHour rushHour;
 
     [Header("Leaving")]
     public GameObject sureWindow;
@@ -308,6 +309,9 @@ public class Controls : WindowOpening, IDataPersistence
 
         UpdateModifications();
         ApplyToSettings();
+
+        rushHour.StopAllCoroutines();
+        rushHour.RepeatGlitch(rushHour.repeat, rushHour.delayGlitch / 5f, rushHour.delayOriginal / 5f);
 
         if(timeChanges != null)
         {

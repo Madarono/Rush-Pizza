@@ -12,6 +12,7 @@ public class Player_Cam : MonoBehaviour
 
     [Header("Zoom")]
     public Controls controls;
+    public SprintFocus sprintFocus;
     public Settings settings;
     public Camera camera;
     public float zoomSpeed = 5f;
@@ -46,6 +47,11 @@ public class Player_Cam : MonoBehaviour
     
         transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
         orientation.rotation = Quaternion.Euler(0, yRotation, 0);
+
+        if(camera.fieldOfView >= controls.currentFov && !goZoom)
+        {
+            sprintFocus.enabled = true;
+        }
     }
 
     private void FixedUpdate()
@@ -64,6 +70,7 @@ public class Player_Cam : MonoBehaviour
     {
         CalculateTargetZoom();
         goZoom = true;
+        sprintFocus.enabled = false;
     }
 
     void CalculateTargetZoom()

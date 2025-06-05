@@ -6,6 +6,7 @@ using TMPro;
 
 public class CustomerManager : MonoBehaviour
 {
+    public RushHour rushHour;
     public MainMenu main;
     public Pausing pausing;
     public Brief brief;
@@ -237,6 +238,12 @@ public class CustomerManager : MonoBehaviour
             return;
         }
 
+        if(rushHour.canBeRushed && rushHour.rushDelay <= 0)
+        {
+            rushHour.StartRush();
+            rushHour.canBeRushed = false;
+        }
+
         GameObject go = Instantiate(customerPrefab, spawnPosition.position, Quaternion.identity);
         sound.Generate2DSound(go.transform.position, sound.customerEnter, true, .5f);
         customer = go;
@@ -267,6 +274,12 @@ public class CustomerManager : MonoBehaviour
         goScript.brief = brief;
         goScript.mission = mission;
         goScript.pause = pausing;
+
+        if(rushHour.rush)
+        {
+            AdvancedTippingSystem tip = go.GetComponent<AdvancedTippingSystem>();
+            rushHour.AddRushCustomer(goScript, tip);
+        }
     }
 
     public void InstantiateMerchant()

@@ -27,6 +27,9 @@ public class AdvancedTippingSystem : MonoBehaviour
 
     public TipAdditions[] toppingTip;
 
+    [Header("Rush Hour")]
+    public float tipMultiplyer = 1f;
+
     public void AddToTip(PizzaRating rating, float price)
     {
         for(int i = 0; i < toppingTip.Length; i++)
@@ -46,7 +49,7 @@ public class AdvancedTippingSystem : MonoBehaviour
             max = 4;
         }
 
-        if(current > max || current == 4)
+        if(current > max || current == 4 || current == 0) 
         {
             tip += 0;
             return;
@@ -70,6 +73,6 @@ public class AdvancedTippingSystem : MonoBehaviour
             }
         }
 
-        Debug.Log("Normal Tip: " + tip.ToString() + ", FinalTip: " + finalTip.ToString());
+        finalTip = finalTip * tipMultiplyer;
     }
 }

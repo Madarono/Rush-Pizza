@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
     public bool canMove = true;
     public Settings bind;
     public Crouch crouch;
+    public SprintFocus sprintFocus;
 
     public float o_moveSpeed;
     public float o_jump;
@@ -41,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
         rb.freezeRotation = true;
         o_cooldown = cooldown;
 
-        sprintSpeed = moveSpeed * 2f;
+        // sprintSpeed = moveSpeed * 2f;
         o_moveSpeed = moveSpeed;
         o_jump = jumpForce;
     }
@@ -119,11 +120,16 @@ public class PlayerMovement : MonoBehaviour
         {
             moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
             rb.AddForce(moveDirection.normalized * sprintSpeed * 10f);
+            if(horizontalInput != 0 || verticalInput != 0)
+            {
+                sprintFocus.DoFocus();
+            }
         }
         else
         {
             moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f);
+            sprintFocus.LoseFocus();
         }
 
     }
