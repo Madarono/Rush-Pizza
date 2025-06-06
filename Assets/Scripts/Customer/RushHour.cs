@@ -152,7 +152,7 @@ public class RushHour : MonoBehaviour
         
         repeat = true;
         window.SetActive(true);   
-        RepeatGlitch(repeat, delayGlitch, delayOriginal);
+        RepeatGlitch(repeat, delayGlitch / 5f, delayOriginal / 5f);
         StartCoroutine(HeartBeat());
     }
 

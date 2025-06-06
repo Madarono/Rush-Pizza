@@ -24,10 +24,12 @@ public class GameData
 
     //Controls.cs
     public bool showFPS;
+    public bool vsync;
     public int choosingFPS;
     public bool[] volumeValues;
     public int quality;
     public float cameraFOV;
+    public float cameraSens;
     public float master;
     public float background;
     public bool enableVoice;
@@ -84,10 +86,12 @@ public class GameData
 
         //Controls.cs
         this.showFPS = false;
+        this.vsync = false;
         this.choosingFPS = 0;
         this.volumeValues = new bool[5];
         this.quality = 5;
         this.cameraFOV = 60f;
+        this.cameraSens = 200f;
         this.master = 1f;
         this.background = 1f;
         this.enableVoice = true;

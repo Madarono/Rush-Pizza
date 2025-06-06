@@ -22,6 +22,11 @@ public class SprintFocus : MonoBehaviour
         originalFov = controls.currentFov;
     }
 
+    void Update()
+    {
+        originalFov = controls.currentFov;
+    }
+
     void FixedUpdate()
     {
         if(focus)
@@ -43,7 +48,6 @@ public class SprintFocus : MonoBehaviour
             return;
         }
 
-        originalFov = controls.currentFov;
         fullFov = currentFov + increamentFov;
         focus = true;
     }

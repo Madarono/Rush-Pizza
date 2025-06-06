@@ -77,18 +77,6 @@ public class CustomerManager : MonoBehaviour
             return;
         }
 
-        //Debugging
-        // if(Input.GetKeyDown(KeyCode.T))
-        // {
-        //     InstantiateMerchant();
-        // }
-        // if(Input.GetKeyDown(KeyCode.Y))
-        // {
-        //     DeleteCustomer();
-        //     DeleteMerchant();
-        // }
-        //
-
         if(abortCustomerChecking)
         {
             return;

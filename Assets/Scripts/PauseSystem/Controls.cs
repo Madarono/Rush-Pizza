@@ -37,6 +37,7 @@ public class ResolutionLevel
 public class Controls : WindowOpening, IDataPersistence
 {
     [Header("Scripts")]
+    public Player_Cam playerCam;
     public Stats stats;
     public RecipeSystem RecipeSystem;
     public Mission mission;
@@ -107,6 +108,17 @@ public class Controls : WindowOpening, IDataPersistence
     public int choosingFPS;
     public int[] limit;
     public TextMeshProUGUI limitVisual;
+    
+    [Header("Sensitivity")]
+    public float minSens;
+    public float maxSens;
+    public float currentSens;
+    public Slider sensSlider;
+    public TextMeshProUGUI sensVisual;
+
+    [Header("VSync")]
+    public bool vsync;
+    public TextMeshProUGUI vsyncVisual;
 
 
     public void SaveData(GameData data)
@@ -131,6 +143,8 @@ public class Controls : WindowOpening, IDataPersistence
         data.background = this.background;
         data.enableVoice = this.enableVoice;
         data.resolutionChoosing = this.resolutionChoosing;
+        data.vsync = this.vsync;
+        data.cameraSens = this.currentSens;
     }
 
     public void LoadData(GameData data)
@@ -154,6 +168,8 @@ public class Controls : WindowOpening, IDataPersistence
         this.background = data.background;
         this.enableVoice = data.enableVoice;
         this.resolutionChoosing = data.resolutionChoosing;
+        this.vsync = data.vsync;
+        this.currentSens = data.cameraSens;
         
         if(timeChanges != null)
         {
@@ -169,7 +185,10 @@ public class Controls : WindowOpening, IDataPersistence
         UpdateAudioSliders();
         // UpdateAllPPVisual();
         UpdateCameraFOV();
+        UpdateSensitivity();
         UpdateQualitySettngs(quality);
+        fpsScript.vsync = this.vsync;
+        fpsScript.ToggleVsync();
     }
 
     void GetPostProcessing()
@@ -343,6 +362,7 @@ public class Controls : WindowOpening, IDataPersistence
             formatVisual.text = h24Format ? "24 Hour" : "12 Hour";
             fpsVisual.text = showFPS ? "Show" : "Hide";
             voiceVisual.text = enableVoice ? "On" : "Off";
+            vsyncVisual.text = vsync ? "On" : "Off";
         }
         else
         {
@@ -350,11 +370,13 @@ public class Controls : WindowOpening, IDataPersistence
             crouchVisual.text = holdCrouch ? "Halt" : "Umschalten";
             fpsVisual.text = showFPS ? "Anzeigen" : "Ausblenden";
             voiceVisual.text = enableVoice ? "Ein" : "Aus";
+            vsyncVisual.text = vsync ? "Ein" : "Aus";
         }
 
         resolutionVisual.text = resolutionLevels[resolutionChoosing].visual;
         fpsScript.showFPS = showFPS;
         limitVisual.text = limit[choosingFPS].ToString();
+        sensVisual.text = currentSens.ToString("F0");
         fpsScript.ChangeFpsLimit(limit[choosingFPS]);
     }
     void UpdateCameraFOV()
@@ -366,12 +388,26 @@ public class Controls : WindowOpening, IDataPersistence
 
         fovSlider.value = (currentFov - minFov) / (maxFov - minFov);
     }
+    void UpdateSensitivity()
+    {
+        sensSlider.value = (currentSens - minSens) / (maxSens - minSens);
+        playerCam.sensX = currentSens;
+        playerCam.sensY = currentSens;
+    }
     void UpdateAudioSliders()
     {
         masterSlider.value = master;
         backgroundSlider.value = background;
     }
 
+    public void ChangeSensitivity()
+    {
+        float sliderPercentage = sensSlider.value;
+
+        currentSens = Mathf.Lerp(minSens, maxSens, sliderPercentage);
+        sensVisual.text = currentSens.ToString("F0");
+        UpdateSensitivity();
+    }
     public void ChangeHoldCrouch()
     {
         holdCrouch = !holdCrouch;
@@ -441,6 +477,11 @@ public class Controls : WindowOpening, IDataPersistence
     }
     public void ChangeFPSLimit()
     {
+        if(vsync)
+        {
+            return;
+        }
+
         choosingFPS++;
         if(choosingFPS >= limit.Length)
         {
@@ -455,6 +496,21 @@ public class Controls : WindowOpening, IDataPersistence
                 limitVisual.text = limit[i].ToString();
                 break;
             }
+        }
+    }
+    public void ChangeVSync()
+    {
+        vsync = !vsync;
+        fpsScript.vsync = this.vsync;
+        fpsScript.ToggleVsync();
+
+        if(settings.english)
+        {
+            vsyncVisual.text = vsync ? "On" : "Off";
+        }
+        else
+        {
+            vsyncVisual.text = vsync ? "Ein" : "Aus";
         }
     }
     public void ChangeFOV()

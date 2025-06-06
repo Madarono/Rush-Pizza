@@ -17,7 +17,8 @@ public class ConveyerEnd : MonoBehaviour
     public GameObject gate;
 
 
-    private Pickable pickable;
+    [Header("Mod")]
+    public SoundManager sounds;
 
     private void OnTriggerStay(Collider other)
     {
@@ -57,6 +58,11 @@ public class ConveyerEnd : MonoBehaviour
                 {
                     gate.SetActive(true);
                 }
+            }
+
+            if(sounds != null)
+            {
+                sounds.Generate2DSound(transform.position, sounds.conveyerEnd, true, 1f);
             }
         }
     }

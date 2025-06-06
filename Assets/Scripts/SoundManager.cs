@@ -27,6 +27,7 @@ public class SoundManager : MonoBehaviour
     public AudioClip registerLose;
     public AudioClip selectTopping;
     public AudioClip conveyerBelt;
+    public AudioClip conveyerEnd; //Bell
 
     [Header("Customer")]
     public AudioClip customerEnter;
