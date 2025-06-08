@@ -40,6 +40,7 @@ public class Pizza : MonoBehaviour
     [HideInInspector]public DragAndDrop dragAndDrop;
     public Ingrediants[] ingrediants;
     public PizzaCuts cuts;
+    public Tutorial tutorial;
     private PlayerHolder playerHolder;
     public GameObject sideSeparator; //Separates the left and right sides
     public GameObject visualCutter;

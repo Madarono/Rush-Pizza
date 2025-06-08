@@ -12,6 +12,7 @@ public enum DragDirection
 public class DragAndDrop : MonoBehaviour
 {
     public SoundManager sound;
+    public Tutorial tutorial;
     public Transform parent_obj;
     public Crouch crouch;
     private Move_HoldPos holdPos;
@@ -128,6 +129,11 @@ public class DragAndDrop : MonoBehaviour
 
                 StartCoroutine(DelayDropping());
                 sound.GenerateSound(transform.position, sound.pickup, true, 0.2f);
+                if(tutorial.states == TutorialStates.Interact)
+                {
+                    tutorial.hasPicked = true;
+                    tutorial.CheckRequirements();
+                }
             }
             if(heldObjectRB != null)
             {

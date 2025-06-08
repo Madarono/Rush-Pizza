@@ -13,6 +13,8 @@ TagManager:
   - Customer
   - Merchant
   - UnBuildable
+  - MainMenu
+  - Tutorial
   layers:
   - Default
   - TransparentFX

@@ -8,6 +8,7 @@ public class VisualCutter : MonoBehaviour
     public float moveAmount = 5f;
     public GameObject cutPrefab;
     public Pizza pizza;
+    public Tutorial tutorial;
 
     void Start()
     {
@@ -48,5 +49,16 @@ public class VisualCutter : MonoBehaviour
         pizza.cuts.cuts.Add(go);
         pizza.UpdateCuts();
         sound.GenerateSound(transform.position, sound.cut, true, 1f);
+
+        if(tutorial == null)
+        {
+            return;
+        }
+        
+        if(tutorial.states == TutorialStates.CutPizza)
+        {
+            tutorial.hasCut = true;
+            tutorial.CheckRequirements();
+        }
     }
 }

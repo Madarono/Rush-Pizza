@@ -10,6 +10,7 @@ public class Interactable : MonoBehaviour
     public Settings settings;
     public Stats stats;
     public DragAndDrop dragAndDrop;
+    public Tutorial tutorial;
     public float costToChange = 2f;
 
     public void Spawn()
@@ -22,12 +23,22 @@ public class Interactable : MonoBehaviour
         {
             Pizza pizza = go.GetComponent<Pizza>();
             pizza.dragAndDrop = dragAndDrop;
+            if(tutorial != null)
+            {
+                pizza.tutorial = this.tutorial;
+            }
         }
        
         if(settings != null)
         {
             settings.AddWithoutVisual(-costToChange);
             stats.doughSpent += costToChange;
+        }
+
+        if(tutorial != null)
+        {
+            tutorial.hasUsed = true;
+            tutorial.CheckRequirements();
         }
 
         sound.GenerateSound(transform.position, sound.spreadDough, true, .15f);

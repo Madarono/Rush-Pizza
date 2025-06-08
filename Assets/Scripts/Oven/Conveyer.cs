@@ -5,6 +5,7 @@ using UnityEngine;
 public class Conveyer : MonoBehaviour
 {
     public SoundManager sound;
+    public Tutorial tutorial;
     public Vector3 direction = new Vector3(1, 0, 0);
     public float speed = 2f;
     private Pizza pizza;
@@ -62,6 +63,12 @@ public class Conveyer : MonoBehaviour
                     cacheLastSound = sound.lastSound;
                 }
                 pizzaOnConveyer.Add(pizza);
+            }
+
+            if(tutorial.states == TutorialStates.CookPizza)
+            {
+                tutorial.hasCooked = true;
+                tutorial.CheckRequirements();
             }
         }
     }

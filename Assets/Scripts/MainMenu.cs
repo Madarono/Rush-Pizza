@@ -16,6 +16,7 @@ public class MainMenu : MonoBehaviour
     public GameObject button;
     public Outline buttonOutline;
     public InteractCheck check;
+    public GameObject tutorialButton;
 
     [Header("Decorations Saving Before Game")]
     public BuildSystem build;
@@ -49,6 +50,7 @@ public class MainMenu : MonoBehaviour
     {
         DataPersistenceManager.instance.SaveGame();
         gameState = PizzaGameState.InGame;
+        tutorialButton.SetActive(false);
         anim.SetTrigger("StartGame");
         buttonOutline.enabled = false;
         check.mainMenu = null;

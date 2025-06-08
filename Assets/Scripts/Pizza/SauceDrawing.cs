@@ -9,6 +9,7 @@ public class SauceDrawing : MonoBehaviour
     public Stats stats;
     public DragAndDrop dragAndDrop;
     public ToppingSO topping;
+    public Tutorial tutorial;
 
     [Header("Supply.cs")]
     public int idForSupply;
@@ -148,6 +149,12 @@ public class SauceDrawing : MonoBehaviour
                 Pizza pizzaScript = sauce.GetComponentInParent<Pizza>();
                 pizzaScript.CheckName(topping.name, sauce);
                 lastSpawnPosition = hitPoint;  // Update the last spawn position
+
+                if(tutorial.states == TutorialStates.PutToppings)
+                {
+                    tutorial.hasPutToppings = true;
+                    tutorial.CheckRequirements();
+                }
             }
         }
     }

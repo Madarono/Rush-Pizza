@@ -65,6 +65,9 @@ public class GameData
     //BuildMerchant.cs
     public bool[] decorSafe;
 
+    //Tutorial.cs
+    public bool hasCompleted;
+
     public GameData()
     {
         //Settings.cs
@@ -126,5 +129,8 @@ public class GameData
 
         //BuildMerchant.cs
         this.decorSafe = new bool[0];
+
+        //Tutorial.cs
+        this.hasCompleted = false;
     }
 }

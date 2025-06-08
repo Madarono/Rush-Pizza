@@ -37,6 +37,7 @@ public class ResolutionLevel
 public class Controls : WindowOpening, IDataPersistence
 {
     [Header("Scripts")]
+    public Tutorial tutorial;
     public Player_Cam playerCam;
     public Stats stats;
     public RecipeSystem RecipeSystem;
@@ -280,6 +281,10 @@ public class Controls : WindowOpening, IDataPersistence
             timeChanges.h24Format = settings.h24Format;
             timeChanges.UpdateTime(timeChanges.cacheTime);
         }
+        if(!tutorial.hasCompleted)
+        {
+            tutorial.RefreshSubtitles();
+        }
     }
 
     public override void OpenWindow()
@@ -317,15 +322,7 @@ public class Controls : WindowOpening, IDataPersistence
     //Extras Window
     public void ChangeLanguage(bool makeEnglish)
     {
-        if(makeEnglish)
-        {
-            english = true;
-        }
-        else
-        {
-            english = false;
-        }
-
+        english = makeEnglish;
         UpdateModifications();
         ApplyToSettings();
 

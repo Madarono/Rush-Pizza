@@ -540,7 +540,7 @@ MonoBehaviour:
   - ingrediant: 
     amount: 
   dialogToppings: 
-  dialog: {fileID: 11400000, guid: f69e9c499780260779f725e5187a88e5, type: 2}
+  dialog: {fileID: 11400000, guid: 72c3d11a18cf87601b271a289fdfbb20, type: 2}
   cookTimes: 0
   pizzaSides: []
   toppingAttributes:
@@ -635,6 +635,7 @@ MonoBehaviour:
     addedWaitTime: 0.04
   - character: '?'
     addedWaitTime: 0.04
+  patienceMultiplyer: 1
 --- !u!114 &4730463226951115290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -797,6 +798,7 @@ MonoBehaviour:
     percentageOfTip: 0.3
   - rating: 4
     percentageOfTip: 0
+  tipMultiplyer: 1
 --- !u!95 &8724767140982381607
 Animator:
   serializedVersion: 5

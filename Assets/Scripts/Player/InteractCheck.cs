@@ -10,11 +10,15 @@ public class Checks
     public bool customer;
     public bool merchant;
     public bool mainMenu;
+    public bool tutorial;
+
+    public bool isInteracted;
 }
 
 public class InteractCheck : MonoBehaviour
 {
     public MainMenu mainMenu;
+    public Tutorial tutorial;
     public SoundManager sound;
     public Transform mainMenuButton;
     public PlayerMovement playerMovement;
@@ -54,10 +58,16 @@ public class InteractCheck : MonoBehaviour
                 playerMovement.canMove = false;
                 player.velocity = Vector3.zero;
             }
-            else if(mainMenu != null && mainMenu.gameState == PizzaGameState.MainMenu && checks[2].interactionVisual.activeInHierarchy)
+            else if(mainMenu != null && mainMenu.gameState == PizzaGameState.MainMenu && checks[2].isInteracted && tutorial.hasCompleted)
             {
                 sound.Generate2DSound(mainMenuButton.position, sound.startGame, true, 0.4f);
                 mainMenu.BeginGame();
+            }
+            else if(tutorial != null && tutorial.hasCompleted && checks[3].isInteracted)
+            {
+                sound.Generate2DSound(mainMenuButton.position, sound.startGame, true, 0.4f);
+                tutorial.StartTutorial();
+                checks[3].interactionVisual.SetActive(false);
             }
         }
     }
@@ -78,6 +88,7 @@ public class InteractCheck : MonoBehaviour
                 {
                     // Debug.Log("Found Customer");
                     check.interactionVisual.SetActive(true);
+                    check.isInteracted = true;
                     
                     if(check.customer)
                     {
@@ -85,6 +96,7 @@ public class InteractCheck : MonoBehaviour
                         if(customer.state != States.Static)
                         {
                             check.interactionVisual.SetActive(false);
+                            check.isInteracted = false;
                         }
                     }
                     else if(check.merchant)
@@ -93,11 +105,18 @@ public class InteractCheck : MonoBehaviour
                         if(merchant.state != MerchantStates.Static)
                         {
                             check.interactionVisual.SetActive(false);
+                            check.isInteracted = false;
                         }
                     }
                     else if(check.mainMenu && mainMenu == null)
                     {
                         check.interactionVisual.SetActive(false);
+                        check.isInteracted = false;
+                    }
+                    else if(check.tutorial && !tutorial.hasCompleted)
+                    {
+                        check.interactionVisual.SetActive(false);
+                        check.isInteracted = false;
                     }
                     break;
                 }
@@ -108,6 +127,7 @@ public class InteractCheck : MonoBehaviour
             foreach(var check in checks)
             {
                 check.interactionVisual.SetActive(false);
+                check.isInteracted = false;
             }
             customer = null;
             merchant = null;

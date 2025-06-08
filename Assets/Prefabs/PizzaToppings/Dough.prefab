@@ -147,6 +147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b17050d5e5efc287a34a5e774f1d2f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sound: {fileID: 0}
   interactPrefab: {fileID: 1800456938401660260, guid: d34bd6cce70e249fd98dca4ec67b2009, type: 3}
   prefabRotation: {x: -90, y: 0, z: 0}
   settings: {fileID: 0}
