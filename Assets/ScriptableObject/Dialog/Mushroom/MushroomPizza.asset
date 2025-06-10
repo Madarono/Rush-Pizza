@@ -12,16 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80d4285639d01f474af17d0d7d5ddb1a, type: 3}
   m_Name: MushroomPizza
   m_EditorClassIdentifier: 
-  talk:
+  initialTalk:
   - content: Hi! I'd like a mushroom pizza.
-    contentDeutsch: 'Hi! Ich hatte gern eine Pilz pizza. '
-    type: 0
+    contentDeutsch: 'Hi! Ich hatte gern eine Pilzpizza. '
+  - content: Howdy! One mushroom pizza.
+    contentDeutsch: Howdy! Eine Pilzpizza.
+  whatTalk:
   - content: One mushroom pizza please.
-    contentDeutsch: Eine pilz pizza bitte.
-    type: 1
+    contentDeutsch: Eine Pilzpizza bitte.
+  - content: Mushroom pizza, please.
+    contentDeutsch: Pilzpizza, bitte.
+  hintTalk:
   - content: Cheese, Sauce and Mushroom. Well backed.
-    contentDeutsch: Kase, Sosse und Pilz. gut durchbacken.
-    type: 2
+    contentDeutsch: Kase, Sosse und Pilz. Gut durchbacken.
   speedOfTalk: 0.04
   pizzas:
   - leftToppings: 000000000100000004000000

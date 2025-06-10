@@ -114,6 +114,8 @@ public class Customer : MonoBehaviour
     private string cacheLines;
     private bool skipLines = false; 
 
+    private int randomVoice;
+
     [Header("Patience")]
     private float totalPatience;
     private float percentageOfPatience;
@@ -166,6 +168,7 @@ public class Customer : MonoBehaviour
 
     public void InitiateTalk(TalkType talkType)
     {
+        randomVoice = Random.Range(0, manager.sound.customerVoice.Length);
         brief.dialog = dialog;
         StopAllCoroutines();
 
@@ -182,41 +185,104 @@ public class Customer : MonoBehaviour
         pause.lockMouse = false;
 
         dialogWindow.SetActive(true);
+        
+        int random = 0;
+
         if(settings.english)
         {
-            for(int i = 0; i < dialog.talk.Length; i++)
+            switch(talkType)
             {
-                if(dialog.talk[i].type == talkType)
-                {           
-                    StartCoroutine(ShowText(dialog.talk[i].content)); 
+                case TalkType.Initial:  
+                    random = Random.Range(0, dialog.initialTalk.Length);
+                    brief.idTalk[0] = random;
+                    StartCoroutine(ShowText(dialog.initialTalk[random].content)); 
                     if(settings.enableVoice)
                     {
-                        StartCoroutine(MakeVoice(dialog.talk[i].content));
+                        StartCoroutine(MakeVoice(dialog.initialTalk[random].content));
                     }
                     StartCoroutine(EnableSkipLines());
-                    cacheLines = dialog.talk[i].content;  
+                    cacheLines = dialog.initialTalk[random].content;  
                     break;
-                }
+
+                case TalkType.What:
+                    random = Random.Range(0, dialog.whatTalk.Length);
+                    brief.idTalk[1] = random;
+                    StartCoroutine(ShowText(dialog.whatTalk[random].content)); 
+                    if(settings.enableVoice)
+                    {
+                        StartCoroutine(MakeVoice(dialog.whatTalk[random].content));
+                    }
+                    StartCoroutine(EnableSkipLines());
+                    cacheLines = dialog.whatTalk[random].content;  
+                    break;
+
+                case TalkType.Hint:
+                    random = Random.Range(0, dialog.hintTalk.Length);
+                    brief.idTalk[2] = random;
+                    StartCoroutine(ShowText(dialog.hintTalk[random].content)); 
+                    if(settings.enableVoice)
+                    {
+                        StartCoroutine(MakeVoice(dialog.hintTalk[random].content));
+                    }
+                    StartCoroutine(EnableSkipLines());
+                    cacheLines = dialog.hintTalk[random].content;  
+                    break;
             }
+
+            // for(int i = 0; i < dialog.talk.Length; i++)
+            // {
+            //     if(dialog.talk[i].type == talkType)
+            //     {           
+            //         StartCoroutine(ShowText(dialog.talk[i].content)); 
+            //         if(settings.enableVoice)
+            //         {
+            //             StartCoroutine(MakeVoice(dialog.talk[i].content));
+            //         }
+            //         StartCoroutine(EnableSkipLines());
+            //         cacheLines = dialog.talk[i].content;  
+            //         break;
+            //     }
+            // }
             mouseCursor.FreeCusorState();
             playerMovement.canMove = false;
             playerCam.canMove = false;
         }
         else
         {
-            for(int i = 0; i < dialog.talk.Length; i++)
+            switch(talkType)
             {
-                if(dialog.talk[i].type == talkType)
-                {                
-                    StartCoroutine(ShowText(dialog.talk[i].contentDeutsch));
+                case TalkType.Initial:  
+                    random = Random.Range(0, dialog.initialTalk.Length);
+                    StartCoroutine(ShowText(dialog.initialTalk[random].contentDeutsch)); 
                     if(settings.enableVoice)
                     {
-                        StartCoroutine(MakeVoice(dialog.talk[i].contentDeutsch));
+                        StartCoroutine(MakeVoice(dialog.initialTalk[random].contentDeutsch));
                     }
                     StartCoroutine(EnableSkipLines());
-                    cacheLines = dialog.talk[i].contentDeutsch;  
+                    cacheLines = dialog.initialTalk[random].contentDeutsch;  
                     break;
-                }
+
+                case TalkType.What:
+                    random = Random.Range(0, dialog.whatTalk.Length);
+                    StartCoroutine(ShowText(dialog.whatTalk[random].contentDeutsch)); 
+                    if(settings.enableVoice)
+                    {
+                        StartCoroutine(MakeVoice(dialog.whatTalk[random].contentDeutsch));
+                    }
+                    StartCoroutine(EnableSkipLines());
+                    cacheLines = dialog.whatTalk[random].contentDeutsch;  
+                    break;
+
+                case TalkType.Hint:
+                    random = Random.Range(0, dialog.hintTalk.Length);
+                    StartCoroutine(ShowText(dialog.hintTalk[random].contentDeutsch)); 
+                    if(settings.enableVoice)
+                    {
+                        StartCoroutine(MakeVoice(dialog.hintTalk[random].contentDeutsch));
+                    }
+                    StartCoroutine(EnableSkipLines());
+                    cacheLines = dialog.hintTalk[random].contentDeutsch;  
+                    break;
             }
             mouseCursor.FreeCusorState();
             playerMovement.canMove = false;
@@ -271,7 +337,6 @@ public class Customer : MonoBehaviour
     {
         for(int i = 0; i < content.Length; i++)
         {
-            int randomVoice = Random.Range(0, manager.sound.customerVoice.Length);
             int randomType = Random.Range(0, manager.sound.customerVoice[randomVoice].voice.Length);
             manager.sound.Generate2DSound(transform.position, manager.sound.customerVoice[randomVoice].voice[randomType], true, 0.6f);
             yield return new WaitForSeconds(delayOfVoice);

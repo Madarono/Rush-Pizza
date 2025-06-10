@@ -12,16 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80d4285639d01f474af17d0d7d5ddb1a, type: 3}
   m_Name: SausagePizza
   m_EditorClassIdentifier: 
-  talk:
+  initialTalk:
   - content: Yo, one sausage pizza.
     contentDeutsch: Yo, eine wurstchen pizza.
-    type: 0
+  - content: Hello! I would like a sausage pizza.
+    contentDeutsch: Hallo! Ich hatte gern eine Wurtschenpizza.
+  whatTalk:
   - content: Sausage pizza please.
-    contentDeutsch: Wurstchen pizza bitte.
-    type: 1
+    contentDeutsch: Wurstchenpizza bitte.
+  - content: One sausage pizza please.
+    contentDeutsch: Eine Wurstchenpizza bitte.
+  hintTalk:
   - content: Cheese and sausage, Don't forget the sauce.
-    contentDeutsch: Kase und wurstchen. vergessen sie nicht die sosse.
-    type: 2
+    contentDeutsch: Kase und Wurstchen. vergessen sie nicht die Sosse.
   speedOfTalk: 0.04
   pizzas:
   - leftToppings: 000000000100000003000000

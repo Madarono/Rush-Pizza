@@ -93,6 +93,12 @@ public class Tutorial : MonoBehaviour, IDataPersistence
     public void StartTutorial()
     {
         states = TutorialStates.Walking;
+        hasPicked = false;
+        hasUsed = false;
+        hasPutToppings = false;
+        hasCooked = false;
+        hasCut = false;
+        hasDelivered = false;
         startGameButton.SetActive(false);
         subtitleWindow.SetActive(true);
         StartCoroutine(TutorialAnimation());

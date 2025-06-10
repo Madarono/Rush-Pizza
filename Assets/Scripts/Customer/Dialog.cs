@@ -45,13 +45,17 @@ public class Talk
 {
     public string content;
     public string contentDeutsch;
-    public TalkType type;
+    // public TalkType type;
 }
 
 [CreateAssetMenu(fileName="Dialog", menuName="Custom/Dialog", order=1)]
 public class Dialog : ScriptableObject
 {
-    public Talk[] talk = new Talk[3];
+    // public Talk[] talk = new Talk[3];
+
+    public Talk[] initialTalk;
+    public Talk[] whatTalk;
+    public Talk[] hintTalk;
     public float speedOfTalk = 0.4f;
 
     public Pizzas[] pizzas;

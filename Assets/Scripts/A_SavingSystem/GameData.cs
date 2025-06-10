@@ -84,8 +84,8 @@ public class GameData
         this.pause = KeyCode.Tab;
         this.showBrief = KeyCode.B;
         this.zoom = KeyCode.Q;
-        this.buildMode = KeyCode.Y;
-        this.changeMode = KeyCode.H;
+        this.buildMode = KeyCode.None;
+        this.changeMode = KeyCode.None;
 
         //Controls.cs
         this.showFPS = false;

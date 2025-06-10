@@ -692,37 +692,83 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tooMuch:
   - englishVersion: You put too much [Ingrediant] on my pizza. I don't want it.
-    deutschVersion: Sie setzen zu viel [Ingrediant] auf meine pizza. Ich will es
-      nicht.
+    deutschVersion: Sie legen zu viel [Ingrediant] auf meine Pizza. Ich will es nicht.
+  - englishVersion: I will become fat from all this [Ingrediant], I am not taking
+      this.
+    deutschVersion: Ich werde aus alle diese [Ingrediant] fett sein,  ich nehme die
+      Pizza nicht.
+  - englishVersion: This much [Ingrediant] will make me allergic to it, I want a
+      refund.
+    deutschVersion: Diese viel [Ingrediant] wird mich allergisch machen, Ich will
+      eine Erstattung.
+  - englishVersion: I am sure I didn't ask for the whole supply of [Ingrediant] on
+      my pizza.
+    deutschVersion: Ich bin mir sicher, ich habe keiner fur der ganzer Vorrate von
+      [Ingrediant] auf meine Pizza gefragt.
   tooLittle:
   - englishVersion: There is too little [Ingrediant] on my pizza, I can't have it
       like this.
-    deutschVersion: Da ist zu wenig [Ingrediant] auf meine pizza. Ich kann es so
+    deutschVersion: Da ist zu wenig [Ingrediant] auf meine Pizza. Ich kann es so
       nicht haben.
+  - englishVersion: I didn't ask for a diet [Ingrediant] version on my pizza, baker.
+    deutschVersion: "Ich habe nicht fur ein di\xE4tverzion [Ingrediant] auf meine
+      Pizzz gefragt, Bakerei."
+  - englishVersion: 'Too little [Ingrediant] to be enjoyed. '
+    deutschVersion: Zu wenig [Ingrediant], um genossen zu werden.
   terribleQuality:
   - englishVersion: The pizza looks terrible, I can't believe I waited for this.
-    deutschVersion: Die pizza sieht schrecklich aus, Ich kann nicht glauben, Ich
-      wartete fur das.
+    deutschVersion: Die Pizza sieht schrecklich aus, Ich kann nicht glauben, dass
+      Ich fur das wartete.
+  - englishVersion: This would win a worst pizza competition.
+    deutschVersion: "Die Pizza w\xFCrde eine schlimmste Pizza competition gewonnen."
+  - englishVersion: Worst pizza ever baked.
+    deutschVersion: Die Schlimmste Pizza, die je Gebacken wurde.
   tooLittleCuts:
   - englishVersion: Did you forget to cut the pizza?
-    deutschVersion: Haben sie die pizza schneiden vergessen?
+    deutschVersion: Haben sie die Pizza schneiden vergessen?
+  - englishVersion: Did the cutting tool break?
+    deutschVersion: Ist die Schneidewerkzeug gebrochen?
+  - englishVersion: These cuts will not make me able to eat it properly.
+    deutschVersion: Diese Schnitte werden mich nicht die Pizza essen lassen.
   tooMuchCuts:
   - englishVersion: I am eating this alone, not for a family of 5.
-    deutschVersion: Ich esse das allein. nicht fur eine familie von 5.
+    deutschVersion: Ich esse die Pizza allein. nicht fur eine Familie von 5.
+  - englishVersion: This pizza is not for a school party.
+    deutschVersion: Diese Pizza ist nicht fur eine SchulParty.
+  - englishVersion: This will make me workout my shoulder when eating it.
+    deutschVersion: Diese Pizza werde mich meine Schulter ausbilden, wenn ich die
+      Pizza esse.
   overcooked:
   - englishVersion: Looks like you forgot to stop cooking it.
     deutschVersion: 'Sieht aus wie du es kochen stoppen vergessen. '
+  - englishVersion: Oven working hard today?
+    deutschVersion: Der Ofen arbeitet heute hart?
+  - englishVersion: I didn't ask for an overcooked pizza.
+    deutschVersion: Ich frage nicht fur eine Ubergekocht Pizza.
   undercooked:
   - englishVersion: Are you giving raw pizzas now?
-    deutschVersion: giben sie jetzt rohe pizzas?
+    deutschVersion: giben sie jetzt rohe Pizzas?
+  - englishVersion: If I wanted an undercooked pizza I would've told you.
+    deutschVersion: Wenn ich eine unausgebackene Pizza gewollt hatte, hatte ich es
+      dir gesagt.
+  - englishVersion: Raw dough doesn't taste the best on a pizza.
+    deutschVersion: Roher Teig schmekt sehr schlecht auf eine Pizza.
   hatedToppings:
   - englishVersion: I told you not to add [Ingrediant] on my pizza.
     deutschVersion: Ich erzahlte dich nicht zu [Ingrediant] auf meine pizza hinzufungen.
+  - englishVersion: I hate [Ingrediant], why would you put it on my pizza?
+    deutschVersion: Ich hasse [Ingrediant], warum du es auf meine Pizza legen wurdest?
+  - englishVersion: '[Ingrediant] is the worst! I am not taking it.'
+    deutschVersion: '[Ingrediant] ist die schlechteste! Ich nehme es nicht.'
   foreignToppings:
   - englishVersion: There is too much [Ingrediant] on my pizza that I didn't ask
       for.
-    deutschVersion: Da ist zu viele [Ingrediant] auf mein pizza, das ich frage nicht
+    deutschVersion: Da ist zu viele [Ingrediant] auf meine Pizza, das ich frage nicht
       fur.
+  - englishVersion: I didn't ask for this much [Ingrediant] on my pizza.
+    deutschVersion: Ich habe nich fur diese viel [Ingrediant] auf meine Pizza gefragt.
+  - englishVersion: '[Ingrediant] doesn''t belong here.'
+    deutschVersion: '[Ingrediant] gehoert hier nicht.'
   settings: {fileID: 0}
   ingrediantCode: '[Ingrediant]'
   ingrediantName: 

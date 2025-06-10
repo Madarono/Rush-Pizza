@@ -15,13 +15,19 @@ MonoBehaviour:
   talk:
   - content: Hello, I'd like a pepperoni pizza.
     contentDeutsch: Hallo, Ich hatte gern eine salami pizza.
-    type: 0
   - content: pepperoni pizza, please.
     contentDeutsch: salami pizza, bitte.
-    type: 1
   - content: Dough. Cheese. Sauce, and pepperoni. That's it.
     contentDeutsch: Teig. Kase. Sosse, und salami,  Das war's.
-    type: 2
+  initialTalk:
+  - content: Hello, I'd like a pepperoni pizza.
+    contentDeutsch: Hallo, Ich hatte gern eine salami pizza.
+  whatTalk:
+  - content: pepperoni pizza, please.
+    contentDeutsch: salami pizza, bitte.
+  hintTalk:
+  - content: Dough. Cheese. Sauce, and pepperoni. That's it.
+    contentDeutsch: Teig. Kase. Sosse, und salami,  Das war's.
   speedOfTalk: 0.04
   pizzas:
   - leftToppings: 000000000100000002000000

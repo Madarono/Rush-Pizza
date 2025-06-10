@@ -35,6 +35,8 @@ public class Brief : WindowOpening
     public List<string> talk;
     public List<string> answer;
 
+    public int[] idTalk = new int[3]; //for getting which ID for talk
+
     [Header("Talk")]
     public GameObject answerPrefab; 
     public Requirements[] requirements;
@@ -56,12 +58,12 @@ public class Brief : WindowOpening
         {
             if(settings.english)
             {
-                talk.Add(dialog.talk[0].content);
+                talk.Add(dialog.initialTalk[idTalk[0]].content);
                 answer.Add("Okay");
             }
             else
             {
-                talk.Add(dialog.talk[0].contentDeutsch);
+                talk.Add(dialog.initialTalk[idTalk[0]].contentDeutsch);
                 answer.Add("Okay");
             }
         }
@@ -69,16 +71,16 @@ public class Brief : WindowOpening
         {
             if(settings.english)
             {
-                talk.Add(dialog.talk[0].content);
+                talk.Add(dialog.initialTalk[idTalk[0]].content);
                 answer.Add("What?");
-                talk.Add(dialog.talk[1].content);
+                talk.Add(dialog.whatTalk[idTalk[1]].content);
                 answer.Add("Okay");
             }
             else
             {
-                talk.Add(dialog.talk[0].contentDeutsch);
+                talk.Add(dialog.initialTalk[idTalk[0]].contentDeutsch);
                 answer.Add("Was?");
-                talk.Add(dialog.talk[1].contentDeutsch);
+                talk.Add(dialog.whatTalk[idTalk[1]].contentDeutsch);
                 answer.Add("Okay");
             }
         }
@@ -86,20 +88,20 @@ public class Brief : WindowOpening
         {
             if(settings.english)
             {
-                talk.Add(dialog.talk[0].content);
+                talk.Add(dialog.initialTalk[idTalk[0]].content);
                 answer.Add("What?");
-                talk.Add(dialog.talk[1].content);
+                talk.Add(dialog.whatTalk[idTalk[1]].content);
                 answer.Add("Hint");
-                talk.Add(dialog.talk[2].content);
+                talk.Add(dialog.hintTalk[idTalk[2]].content);
                 answer.Add("Okay");
             }
             else
             {
-                talk.Add(dialog.talk[0].contentDeutsch);
+                talk.Add(dialog.initialTalk[idTalk[0]].contentDeutsch);
                 answer.Add("Was?");
-                talk.Add(dialog.talk[1].contentDeutsch);
+                talk.Add(dialog.whatTalk[idTalk[1]].contentDeutsch);
                 answer.Add("Hint");
-                talk.Add(dialog.talk[2].contentDeutsch);
+                talk.Add(dialog.hintTalk[idTalk[2]].contentDeutsch);
                 answer.Add("Okay");
             }
         }

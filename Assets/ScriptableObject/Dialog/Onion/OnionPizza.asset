@@ -15,13 +15,19 @@ MonoBehaviour:
   talk:
   - content: One onion pizza please.
     contentDeutsch: Eine zwiebel pizza bitte.
-    type: 0
   - content: Onion pizza.
     contentDeutsch: Zwiebel pizza.
-    type: 1
   - content: Cheese, sauce, onions on top. Well backed.
     contentDeutsch: Kase, sosse, zwiebeln drauf. Gut durchbacken.
-    type: 2
+  initialTalk:
+  - content: One onion pizza please.
+    contentDeutsch: Eine zwiebel pizza bitte.
+  whatTalk:
+  - content: Onion pizza.
+    contentDeutsch: Zwiebel pizza.
+  hintTalk:
+  - content: Cheese, sauce, onions on top. Well backed.
+    contentDeutsch: Kase, sosse, zwiebeln drauf. Gut durchbacken.
   speedOfTalk: 0.04
   pizzas:
   - leftToppings: 000000000100000006000000

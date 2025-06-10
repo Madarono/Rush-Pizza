@@ -15,13 +15,21 @@ MonoBehaviour:
   talk:
   - content: Hello, I'd like a cheese pizza.
     contentDeutsch: Hallo, Ich hatte gern ein kase pizza.
-    type: 0
   - content: cheese pizza, please.
     contentDeutsch: kase pizza, bitte.
-    type: 1
   - content: Dough. Cheese. Sauce. That's it.
     contentDeutsch: Teig. Kase. Sosse. Das war's.
-    type: 2
+  initialTalk:
+  - content: Hello, I'd like a cheese pizza.
+    contentDeutsch: Hallo, Ich hatte gern eine Kasepizza.
+  whatTalk:
+  - content: Cheese pizza, please.
+    contentDeutsch: Kasepizza, bitte.
+  - content: One cheese pizza, please.
+    contentDeutsch: Eine Kasepizza, bitte.
+  hintTalk:
+  - content: Dough. Cheese. Sauce. That's it.
+    contentDeutsch: Teig. Kase. Sosse. Das war's.
   speedOfTalk: 0.04
   pizzas:
   - leftToppings: 0000000001000000

@@ -109,8 +109,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 50, y: 50}
+  m_AnchoredPosition: {x: 0, y: 0.5}
+  m_SizeDelta: {x: 60, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6390692988564352682
 CanvasRenderer:
@@ -319,6 +319,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isSelected: 0
   selection: {fileID: 1656354205687767380}
+  icon: {fileID: 1425407932102433452}
   rect: {fileID: 6488248293890444694}
   decorPrefab: {fileID: 8935441183465990751, guid: d52fa21d822b1d5cea9690da53e68638, type: 3}
   decorID: 0

@@ -12,16 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80d4285639d01f474af17d0d7d5ddb1a, type: 3}
   m_Name: ClassicMeat
   m_EditorClassIdentifier: 
-  talk:
+  initialTalk:
   - content: Hey, I'd like a classic meat pizza please.
-    contentDeutsch: Hallo, Ich hatte gern ein fleischklassich pizza bitte.
-    type: 0
+    contentDeutsch: Hallo, Ich hatte gern eine Fleischklassichpizza bitte.
+  whatTalk:
   - content: Classic meat, please.
     contentDeutsch: Fleischklassich, bitte.
-    type: 1
+  hintTalk:
   - content: A cheese pizza with pepperoni and sausage on top of it.
-    contentDeutsch: Ein kase pizza mit salami und wurstchen drauf.
-    type: 2
+    contentDeutsch: Ein Kasepizza mit Salami und Wurstchen drauf.
   speedOfTalk: 0.04
   pizzas:
   - leftToppings: 00000000010000000200000003000000
