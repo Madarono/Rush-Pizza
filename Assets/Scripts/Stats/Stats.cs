@@ -32,6 +32,7 @@ public class Stats : MonoBehaviour, IDataPersistence
     public float tipGained;
     public float refundsLost;
     public float rent = 5f;
+    public float dailyChallengeProfit;
     public float profits;
     public GameObject[] statesOfProfit;
     public ToppingStats[] toppingStats;
@@ -110,6 +111,8 @@ public class Stats : MonoBehaviour, IDataPersistence
             information[7].infoValue[0].gameObject.SetActive(false);
             information[7].infoValue[1].gameObject.SetActive(true);
         }
+
+        information[8].infoValue[0].text = "+" + dailyChallengeProfit.ToString();
 
         toppingStats[0].valueVisual.text = "-" + doughSpent.ToString("F2");
         for(int i = 1; i < toppingStats.Length; i++)

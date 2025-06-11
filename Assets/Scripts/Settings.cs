@@ -37,6 +37,7 @@ public class Settings : MonoBehaviour, IDataPersistence
     public KeyCode pause = KeyCode.Tab;
     public KeyCode showBrief = KeyCode.B;
     public KeyCode zoom = KeyCode.Q;
+    public KeyCode dailyChallenge = KeyCode.O;
 
     public KeyCode buildMode = KeyCode.Y;
     public KeyCode changeMode = KeyCode.H;

@@ -37,6 +37,7 @@ public class ResolutionLevel
 public class Controls : WindowOpening, IDataPersistence
 {
     [Header("Scripts")]
+    public DailyChallenges dailyChallenge;
     public Tutorial tutorial;
     public Player_Cam playerCam;
     public Stats stats;
@@ -329,6 +330,8 @@ public class Controls : WindowOpening, IDataPersistence
         rushHour.StopAllCoroutines();
         rushHour.RepeatGlitch(rushHour.repeat, rushHour.delayGlitch / 5f, rushHour.delayOriginal / 5f);
 
+        dailyChallenge.RefreshItems();
+
         if(timeChanges != null)
         {
             timeChanges.UpdateTime(timeChanges.cacheTime);
@@ -375,6 +378,7 @@ public class Controls : WindowOpening, IDataPersistence
         limitVisual.text = limit[choosingFPS].ToString();
         sensVisual.text = currentSens.ToString("F0");
         fpsScript.ChangeFpsLimit(limit[choosingFPS]);
+        dailyChallenge.RefreshItems();
     }
     void UpdateCameraFOV()
     {

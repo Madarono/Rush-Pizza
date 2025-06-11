@@ -83,6 +83,7 @@ public class Customer : MonoBehaviour
     [HideInInspector]public RecipeSystem recipeSys;
     [HideInInspector]public CustomerManager manager;
     [HideInInspector]public Brief brief;
+    [HideInInspector]public DailyChallenges dailyChallenges;
 
     [Header("Checkng Toppings")]
     public List<CheckToppings> pizzaboxToppings = new List<CheckToppings>();
@@ -1242,6 +1243,13 @@ public class Customer : MonoBehaviour
         SetEmotion(2);
         settings.AddToMoney(-bill);
         stats.refundsLost += bill;
+        dailyChallenges.store[2].value += bill;
+        float percentage = (patience / totalPatience) * 100f;
+        if(percentage < dailyChallenges.store[5].value)
+        {
+            dailyChallenges.store[5].value = percentage;
+        }
+        dailyChallenges.RefreshItems();
         string line = "";
         if(settings.english)
         {
@@ -1292,6 +1300,14 @@ public class Customer : MonoBehaviour
         settings.RegisterLoseSound();
         stats.refundsLost += bill;
         state = States.Ending;
+        dailyChallenges.store[2].value += bill;
+        dailyChallenges.store[4].value += 1f;
+        float percentage = (patience / totalPatience) * 100f;
+        if(percentage < dailyChallenges.store[5].value)
+        {
+            dailyChallenges.store[5].value = percentage;
+        }
+        dailyChallenges.RefreshItems();
         manager.AskOkay();
     }
 
@@ -1303,6 +1319,18 @@ public class Customer : MonoBehaviour
         SetEmotion(0);
         float endingTip = advancedTip.finalTip;      
         settings.AddToMoney(endingTip);
+        dailyChallenges.store[3].value += endingTip;
+        float percentage = patience / totalPatience;
+        if(percentage > 0.5f)
+        {
+            dailyChallenges.store[6].value += 1f;
+        }
+        float percentage1 = (patience / totalPatience) * 100f;
+        if(percentage1 < dailyChallenges.store[5].value)
+        {
+            dailyChallenges.store[5].value = percentage1;
+        }
+        dailyChallenges.RefreshItems();
         stats.tipGained += endingTip;
         
         string line = "";
@@ -1341,6 +1369,9 @@ public class Customer : MonoBehaviour
         {
             return;
         }
+
+        dailyChallenges.store[0].value += (float)pizzaBoxes.Count;
+        dailyChallenges.RefreshItems();
 
         for(int i = pizzaBoxes.Count - 1; i >= 0; i--)
         {

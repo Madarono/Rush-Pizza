@@ -74,17 +74,17 @@ public class RushHour : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.O))
-        {
-            if(rush)
-            {
-                StopRush();
-            }
-            else
-            {
-                StartRush();
-            }
-        }
+        // if(Input.GetKeyDown(KeyCode.O))
+        // {
+        //     if(rush)
+        //     {
+        //         StopRush();
+        //     }
+        //     else
+        //     {
+        //         StartRush();
+        //     }
+        // }
 
         if(rush && currentChromatic < maxChromatic)
         {

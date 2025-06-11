@@ -29,6 +29,7 @@ public class CustomerManager : MonoBehaviour
     private float currentWait;
 
     [Header("Things for Customer script")]
+    public DailyChallenges dailyChallenges;
     public Mission mission;
     public RecipeSystem recipeSys;
     public MouseCursor mouseCursor;
@@ -116,6 +117,7 @@ public class CustomerManager : MonoBehaviour
                 settings.RegisterGetSound();
                 stats.moneyGained += goScript.bill;
                 emotionWindow.SetActive(true);
+                dailyChallenges.store[1].value += goScript.bill;
                 brief.canBrief = true;
                 brief.ShowPaper();
             }
@@ -262,6 +264,7 @@ public class CustomerManager : MonoBehaviour
         goScript.brief = brief;
         goScript.mission = mission;
         goScript.pause = pausing;
+        goScript.dailyChallenges = dailyChallenges; 
 
         if(rushHour.rush)
         {

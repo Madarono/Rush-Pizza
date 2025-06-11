@@ -932,8 +932,9 @@ MonoBehaviour:
   playerCam: {fileID: 0}
   merchantLines:
   - englishVersion: Howdy! I got some goodies to sell, Intressted?
-    deutschVersion: Hallo! Ich habe einige leckereien zu verkaufen, sind Sie interessiert?
+    deutschVersion: Hallo! Ich habe einige Leckereien zu verkaufen, sind Sie interessiert?
   speedOfTalk: 0.03
+  delayOfVoice: 0.1
   dialogWindow: {fileID: 0}
   dialogContent: {fileID: 0}
   okayButton: {fileID: 0}

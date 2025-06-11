@@ -16,6 +16,7 @@ public class TimeChanges : MonoBehaviour
     private float speedOfTransition;
 
     [Header("Timer")]
+    public DailyChallenges dailyChallenges;
     public MainMenu main;
     public Mission mission;
     public Pausing pause;
@@ -204,6 +205,7 @@ public class TimeChanges : MonoBehaviour
         mission.canSave = true;
         pause.lockMouse = false;
         mission.UpdateVisual();
+        dailyChallenges.CalculateEnd();
         StartCoroutine(EndofDay());
     }
 
