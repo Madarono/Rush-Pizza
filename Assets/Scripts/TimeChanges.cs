@@ -31,7 +31,7 @@ public class TimeChanges : MonoBehaviour
     public TextMeshProUGUI timeVisual;
     public Image sunVisual;
 
-    private float timeMultiplyer;
+    [HideInInspector]public float timeMultiplyer;
     private float currentTime;
     [HideInInspector]public float cacheTime;
 

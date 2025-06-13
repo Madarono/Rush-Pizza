@@ -21,6 +21,7 @@ public class GameData
     public KeyCode zoom;
     public KeyCode buildMode;
     public KeyCode changeMode;
+    public KeyCode dailyChallenge;
 
     //Controls.cs
     public bool showFPS;
@@ -86,6 +87,7 @@ public class GameData
         this.zoom = KeyCode.Q;
         this.buildMode = KeyCode.None;
         this.changeMode = KeyCode.None;
+        this.dailyChallenge = KeyCode.O;
 
         //Controls.cs
         this.showFPS = false;

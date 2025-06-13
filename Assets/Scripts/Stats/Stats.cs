@@ -25,6 +25,7 @@ public class Stats : MonoBehaviour, IDataPersistence
 {
     public Settings settings;
     public Mission mission;
+    public StartDays startDays;
 
     [Header("Stats")]
     public int day;
@@ -64,6 +65,7 @@ public class Stats : MonoBehaviour, IDataPersistence
     public void LoadData(GameData data)
     {
         this.day = data.day;
+        startDays.CheckTime();
     }
 
     void Start()

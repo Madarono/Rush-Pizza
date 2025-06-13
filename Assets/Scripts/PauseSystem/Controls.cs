@@ -58,6 +58,9 @@ public class Controls : WindowOpening, IDataPersistence
     public int index;
     private KeyCode key;
 
+    [Header("Duplicate Keybinds")]
+    public Color[] visualColors;
+
     [Header("Graphics")]
     public PostProcessVolume volume; //Post processing volume
     public TextMeshProUGUI[] volumeVisual = new TextMeshProUGUI[5];
@@ -133,6 +136,8 @@ public class Controls : WindowOpening, IDataPersistence
         data.zoom = this.keybinds[4].keybind;
         data.buildMode = this.keybinds[5].keybind;
         data.changeMode = this.keybinds[6].keybind;
+        data.dailyChallenge = this.keybinds[7].keybind;
+        data.showBrief = this.keybinds[8].keybind;
         data.h24Format = this.h24Format;
         data.holdCrouch = this.holdCrouch;
         data.showFPS = this.showFPS;
@@ -159,6 +164,8 @@ public class Controls : WindowOpening, IDataPersistence
         this.keybinds[4].keybind = data.zoom;
         this.keybinds[5].keybind = data.buildMode;
         this.keybinds[6].keybind = data.changeMode;
+        this.keybinds[7].keybind = data.dailyChallenge;
+        this.keybinds[8].keybind = data.showBrief;
         this.h24Format = data.h24Format;
         this.holdCrouch = data.holdCrouch;
         this.showFPS = data.showFPS;
@@ -272,6 +279,8 @@ public class Controls : WindowOpening, IDataPersistence
         settings.zoom = this.keybinds[4].keybind;
         settings.buildMode = this.keybinds[5].keybind;
         settings.changeMode = this.keybinds[6].keybind;
+        settings.dailyChallenge = this.keybinds[7].keybind;
+        settings.showBrief = this.keybinds[8].keybind;
         settings.h24Format = this.h24Format;
         settings.holdCrouch = this.holdCrouch;
         settings.enableVoice = this.enableVoice;
@@ -553,11 +562,40 @@ public class Controls : WindowOpening, IDataPersistence
     {
         keybinds[index].visual.text = key.ToString();
         keybinds[index].keybind = key;
+        CheckKeybinds();
         ApplyToSettings();
 
         if(pause != null)
         {
             StartCoroutine(EnableCanPause());
+        }
+    }
+
+    void CheckKeybinds()
+    {
+        foreach(Keybinds bind in keybinds)
+        {
+            bind.visual.color = visualColors[1];
+        }
+
+
+        for(int i = 0; i < keybinds.Length; i++)
+        {
+            for(int o = 0; o < keybinds.Length; o++)
+            {
+                if(o == i)
+                {
+                    continue;
+                }
+
+                if(keybinds[i].keybind == keybinds[o].keybind)
+                {
+                    Debug.Log(i + ", and " + o + " have the same Keybind");
+                    keybinds[i].visual.color = visualColors[0];
+                    keybinds[o].visual.color = visualColors[0];
+                    break;
+                }
+            }
         }
     }
 
@@ -573,6 +611,7 @@ public class Controls : WindowOpening, IDataPersistence
         {
             keybinds[i].visual.text = keybinds[i].keybind.ToString();
         }
+        CheckKeybinds();
     }
 
     public void Leave()
@@ -587,7 +626,15 @@ public class Controls : WindowOpening, IDataPersistence
 
     public void ConfirmLeave()
     {
-        stats.GoToNextDay();
+        StartCoroutine(LeaveGame());
+    }
+
+    IEnumerator LeaveGame()
+    {
+        stats.nextDayScreen.SetActive(true);
+        yield return new WaitForSecondsRealtime(stats.nextDayDelay);
+        DataPersistenceManager.instance.SaveGame();
+        Application.Quit();
     }
 
     IEnumerator TurnOffSureWindow()

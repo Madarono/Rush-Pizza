@@ -12,6 +12,7 @@ public class StoredValues
 public class DailyChallenges : MonoBehaviour
 {
     [Header("Scripts")]
+    public StartDays startDays;
     public Stats stats;
     public Settings settings;
     public Player_Cam playerCam;
@@ -52,7 +53,7 @@ public class DailyChallenges : MonoBehaviour
     {
         window.SetActive(false);
         OrganizeChallenges();
-        GenerateItems();
+        // GenerateItems();
     }
 
     void OrganizeChallenges()
@@ -91,6 +92,11 @@ public class DailyChallenges : MonoBehaviour
 
     public void BothWindow()
     {
+        if(pausing.isPausing || startDays.canCheck)
+        {
+            return;
+        }
+
         isOpen = !isOpen;
         
         if(isOpen)
@@ -206,6 +212,7 @@ public class DailyChallenges : MonoBehaviour
 
     public void RefreshItems()
     {
+        startDays.CheckRequirements();
         foreach(ChallengeItem script in items)
         {
             script.Refresh();

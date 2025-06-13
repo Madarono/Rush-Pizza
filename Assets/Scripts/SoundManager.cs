@@ -37,6 +37,10 @@ public class SoundManager : MonoBehaviour
     [Header("Pick Up")]
     public AudioClip pickup;
     public AudioClip drop;
+    public AudioClip toppingBox;
+    public AudioClip pickupTool;
+    public AudioClip dropTool;
+    public AudioClip slicePizza;
 
     [Header("Misc")]
     public AudioClip[] buttonClick;

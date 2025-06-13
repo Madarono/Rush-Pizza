@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Check : MonoBehaviour
 {
+    public SoundManager sounds;
     public Settings settings;
     public SauceDrawing drawing;
     public ToppingBox topping;
@@ -43,6 +44,7 @@ public class Check : MonoBehaviour
                 topping = box;
                 topping.isUsed = true;
                 topping.OpenUseBox();
+                sounds.GenerateSound(obj.transform.position, sounds.toppingBox, true, 0.30f);
                 return;
             }
             else if(obj.CompareTag("PizzaCutter"))

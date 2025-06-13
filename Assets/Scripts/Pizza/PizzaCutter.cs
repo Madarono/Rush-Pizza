@@ -12,6 +12,7 @@ public class ObjectAndMaterials
 
 public class PizzaCutter : MonoBehaviour
 {
+    public SoundManager sounds; 
     public bool isUsed = false;
     public bool isOnPizza = false;
     public Settings settings;
@@ -42,10 +43,16 @@ public class PizzaCutter : MonoBehaviour
         {
             materials[i].mesh.material = materials[i].onMaterial;
         }
+        sounds.GenerateSound(transform.position, sounds.pickupTool, true, 0.5f);
     }
 
     public void TurnOff()
     {
+        if(!isUsed)
+        {
+            return;
+        }
+
         isUsed = false;
         if(pizza != null)
         {
@@ -55,6 +62,7 @@ public class PizzaCutter : MonoBehaviour
         {
             materials[i].mesh.material = materials[i].offMaterial;
         }
+        sounds.GenerateSound(transform.position, sounds.dropTool, true, 0.3f);
     }
 
     void CheckForPizza()

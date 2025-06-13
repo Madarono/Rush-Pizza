@@ -8,6 +8,7 @@ using TMPro;
 public class RushHour : MonoBehaviour
 {
     [Header("Scripts")]
+    public StartDays startDays;
     public MainMenu main;
     public CustomerManager manager;
     public Settings settings;
@@ -74,17 +75,10 @@ public class RushHour : MonoBehaviour
 
     void Update()
     {
-        // if(Input.GetKeyDown(KeyCode.O))
-        // {
-        //     if(rush)
-        //     {
-        //         StopRush();
-        //     }
-        //     else
-        //     {
-        //         StartRush();
-        //     }
-        // }
+        if(startDays.canCheck)
+        {
+            return;
+        }
 
         if(rush && currentChromatic < maxChromatic)
         {
