@@ -8,6 +8,8 @@ using TMPro;
 public class RushHour : MonoBehaviour
 {
     [Header("Scripts")]
+    public Music music;
+    public SoundManager sounds;
     public StartDays startDays;
     public MainMenu main;
     public CustomerManager manager;
@@ -64,6 +66,9 @@ public class RushHour : MonoBehaviour
     public bool rush = false;
     public bool canBeRushed = false;
 
+    public GameObject song;
+    public AudioSource songSource;
+
     void Start()
     {
         volume.profile.TryGetSettings(out ac);
@@ -78,6 +83,11 @@ public class RushHour : MonoBehaviour
         if(startDays.canCheck)
         {
             return;
+        }
+
+        if(songSource != null)
+        {
+            songSource.volume = sounds.controls.background * 0.8f;
         }
 
         if(rush && currentChromatic < maxChromatic)
@@ -147,6 +157,11 @@ public class RushHour : MonoBehaviour
         repeat = true;
         window.SetActive(true);   
         RepeatGlitch(repeat, delayGlitch / 5f, delayOriginal / 5f);
+        sounds.Generate2DSoundLoop(transform.position, sounds.rushHourMusic, false, 0.8f);
+        song = sounds.lastSound;
+        songSource = sounds.lastScript;
+        music.source.Pause();
+        music.isPaused = true;
         StartCoroutine(HeartBeat());
     }
 
@@ -159,6 +174,11 @@ public class RushHour : MonoBehaviour
         conveyer.speed = currentConveyerSpeed;   
         heartSource.Stop();
         heartBeat.SetActive(false);
+
+        music.source.Play();
+        music.isPaused = false;
+
+        Destroy(song);
 
         StopAllCoroutines();
         StartCoroutine(InactiveWindow());

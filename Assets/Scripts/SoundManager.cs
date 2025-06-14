@@ -14,6 +14,7 @@ public class SoundManager : MonoBehaviour
     public Controls controls;
     public GameObject soundPrefab3D;
     public GameObject soundPrefab2D;
+    public GameObject soundPrefab2DLoop;
 
     [HideInInspector]public GameObject lastSound;
     [HideInInspector]public AudioSource lastScript;
@@ -28,6 +29,10 @@ public class SoundManager : MonoBehaviour
     public AudioClip selectTopping;
     public AudioClip conveyerBelt;
     public AudioClip conveyerEnd; //Bell
+
+    [Header("Musik")]
+    public AudioClip[] backgroundMusic;
+    public AudioClip rushHourMusic;
 
     [Header("Customer")]
     public AudioClip customerEnter;
@@ -81,6 +86,7 @@ public class SoundManager : MonoBehaviour
         source.Play();
 
         lastSound = go;
+        lastScript = source;
 
         Destroy(go, clip.length);
     }
@@ -95,8 +101,22 @@ public class SoundManager : MonoBehaviour
         source.Play();
 
         lastSound = go;
+        lastScript = source;
 
         Destroy(go, clip.length);
+    }
+
+    public void Generate2DSoundLoop(Vector3 place, AudioClip clip, bool isMaster, float amplifier)
+    {
+        GameObject go = Instantiate(soundPrefab2DLoop, place, Quaternion.identity);
+        AudioSource source = go.GetComponent<AudioSource>();
+
+        source.volume = (isMaster ? controls.master : controls.background) * amplifier;
+        source.clip = clip;
+        source.Play();
+
+        lastSound = go;
+        lastScript = source;
     }
 
     public void DeleteLastSound()

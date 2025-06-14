@@ -331,6 +331,7 @@ public class CustomerManager : MonoBehaviour
 
     IEnumerator animationDeleteCustomer()
     {
+        pausing.lockMouse = true;
         sound.Generate2DSound(customer.transform.position, sound.customerLeave, true, .7f);
         Animator anim = customer.GetComponent<Animator>();
         anim.SetTrigger("Leave");
@@ -363,6 +364,10 @@ public class CustomerManager : MonoBehaviour
 
     IEnumerator animationDeleteMerchant()
     {
+        pausing.lockMouse = true;
+        mouseCursor.LockCusorState();
+        playerMovement.canMove = true;
+        playerCam.canMove = true;
         sound.Generate2DSound(merchant.transform.position, sound.customerLeave, true, .7f);
         Animator anim = merchant.GetComponent<Animator>();
         anim.SetTrigger("Leave");
@@ -381,9 +386,6 @@ public class CustomerManager : MonoBehaviour
         yield return new WaitForSeconds(length);
         Destroy(merchant);
         merchant = null;
-        mouseCursor.LockCusorState();
-        playerMovement.canMove = true;
-        playerCam.canMove = true;
         currentWait = Random.Range(minWait, maxWait);
     }
     

@@ -13,6 +13,10 @@ public class Pausing : MonoBehaviour
     public Tabs tabs;
     public Brief brief;
 
+    [Header("For music reasons")]
+    public Music music;
+    public RushHour rushHour;
+
     [Header("Pausing")]
     public HoverInformaton[] buttons;
     public GameObject pauseWindow;
@@ -57,6 +61,13 @@ public class Pausing : MonoBehaviour
         Time.timeScale = 0f;
         pauseWindow.SetActive(true);
         brief.CloseWindow();
+        music.source.Pause();
+        music.isPaused = true;
+        if(rushHour.songSource != null)
+        {
+            rushHour.songSource.Pause();
+        }
+        rushHour.heartSource.Pause();
         StartCoroutine(DelayMoving());
     }
 
@@ -72,6 +83,13 @@ public class Pausing : MonoBehaviour
         controls.StopLeave();
         recipeSys.CloseWindow();
         tabs.ResetAllTabs();
+        music.source.Play();
+        music.isPaused = false;
+        if(rushHour.songSource != null)
+        {
+            rushHour.songSource.Play();
+        }
+        rushHour.heartSource.Play();
         StartCoroutine(WaitForPauseClosing());
         StartCoroutine(DelayMoving());
     }
