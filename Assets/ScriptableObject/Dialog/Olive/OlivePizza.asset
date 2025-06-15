@@ -15,9 +15,13 @@ MonoBehaviour:
   initialTalk:
   - content: Hey, How are you? I want an olive pizza, please.
     contentDeutsch: Hallo, Wie geht's? Ich hatte gern eine Olivenpizza, bitte.
+  - content: I would like a.. uhh... an Olive pizza please.
+    contentDeutsch: Ich hatte gern eiine.... ahmm.. eine Olivepizza bitte.
   whatTalk:
   - content: An olive pizza please.
     contentDeutsch: Eine Olivenpizza bitte.
+  - content: .. Olive pizza please.
+    contentDeutsch: .. Olivepizza bitte.
   hintTalk:
   - content: Sauce and cheese, and olives on top.
     contentDeutsch: Sosse und Kase, und Oliven drauf.

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using System.Globalization;
 using TMPro;
 
 [System.Serializable]
@@ -82,6 +83,15 @@ public class Stats : MonoBehaviour, IDataPersistence
     {
         supplies.SetActive(true);
         settings.AddWithoutVisual(-rent);
+        UpdateValues();
+        day++;
+        mission.CheckRequirements();
+        mission.UpdateVisual();
+        StartCoroutine(SmoothTransition());
+    }
+
+    public void UpdateValues()
+    {
         float totalUsedSupplies = 0f;
         toppingStats[0].moneySpent = doughSpent;
         for(int i = 0; i < toppingStats.Length; i++)
@@ -94,29 +104,62 @@ public class Stats : MonoBehaviour, IDataPersistence
         profits = Mathf.Round(profits * 100f) / 100f;
         paper.SetActive(true);
         information[0].infoValue[0].text = day.ToString();
-        information[1].infoValue[0].text = "+" + moneyGained.ToString();
-        information[2].infoValue[0].text = "+" + tipGained.ToString();
-        information[3].infoValue[0].text = "-" + rent.ToString();
-        information[4].infoValue[0].text = "-" + refundsLost.ToString();
-        information[5].infoValue[0].text = "-" + totalUsedSupplies.ToString();
+        if(settings.english)
+        {
+            information[1].infoValue[0].text = "+" + moneyGained.ToString("F2");
+            information[2].infoValue[0].text = "+" + tipGained.ToString("F2");
+            information[3].infoValue[0].text = "-" + rent.ToString("F2");
+            information[4].infoValue[0].text = "-" + refundsLost.ToString("F2");
+            information[5].infoValue[0].text = "-" + totalUsedSupplies.ToString("F2");
+        }
+        else
+        {
+            information[1].infoValue[0].text = "+" + moneyGained.ToString("F2", new CultureInfo("de-DE"));
+            information[2].infoValue[0].text = "+" + tipGained.ToString("F2", new CultureInfo("de-DE"));
+            information[3].infoValue[0].text = "-" + rent.ToString("F2", new CultureInfo("de-DE"));
+            information[4].infoValue[0].text = "-" + refundsLost.ToString("F2", new CultureInfo("de-DE"));
+            information[5].infoValue[0].text = "-" + totalUsedSupplies.ToString("F2", new CultureInfo("de-DE"));
+        }
         
         if(profits > 0)
         {
-            information[7].infoValue[0].text = "+" + profits.ToString();
+            if(settings.english)
+            {
+                information[7].infoValue[0].text = "+" + profits.ToString("F2");
+            }
+            else
+            {
+                information[7].infoValue[0].text = "+" + profits.ToString("F2", new CultureInfo("de-DE"));
+            }
             information[7].infoValue[0].gameObject.SetActive(true);
             information[7].infoValue[1].gameObject.SetActive(false);
         }
         else
         {
             float absoluteProfit = -profits;
-            information[7].infoValue[1].text = "-" + absoluteProfit.ToString();
+            if(settings.english)
+            {
+                information[7].infoValue[1].text = "-" + absoluteProfit.ToString("F2");
+            }
+            else
+            {
+                information[7].infoValue[1].text = "-" + absoluteProfit.ToString("F2", new CultureInfo("de-DE"));
+            }
             information[7].infoValue[0].gameObject.SetActive(false);
             information[7].infoValue[1].gameObject.SetActive(true);
         }
 
-        information[8].infoValue[0].text = "+" + dailyChallengeProfit.ToString();
+        if(settings.english)
+        {
+            information[8].infoValue[0].text = "+" + dailyChallengeProfit.ToString("F2");
+            toppingStats[0].valueVisual.text = "-" + doughSpent.ToString("F2");
+        }
+        else
+        {
+            information[8].infoValue[0].text = "+" + dailyChallengeProfit.ToString("F2", new CultureInfo("de-DE"));
+            toppingStats[0].valueVisual.text = "-" + doughSpent.ToString("F2", new CultureInfo("de-DE"));
+        }
 
-        toppingStats[0].valueVisual.text = "-" + doughSpent.ToString("F2");
         for(int i = 1; i < toppingStats.Length; i++)
         {
             if(!toppingStats[i].showVisual)
@@ -124,15 +167,16 @@ public class Stats : MonoBehaviour, IDataPersistence
                 continue;
             }
 
-
-            toppingStats[i].valueVisual.text = "-" + toppingStats[i].moneySpent.ToString("F2");
+            if(settings.english)
+            {
+                toppingStats[i].valueVisual.text = "-" + toppingStats[i].moneySpent.ToString("F2");
+            }
+            else
+            {
+                toppingStats[i].valueVisual.text = "-" + toppingStats[i].moneySpent.ToString("F2", new CultureInfo("de-DE"));
+            }
         }
-
-        day++;
-        mission.CheckRequirements();
-        mission.UpdateVisual();
-        StartCoroutine(SmoothTransition());
-    }
+    } 
 
     void Update()
     {

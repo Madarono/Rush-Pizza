@@ -13,6 +13,7 @@ public class Conveyer : MonoBehaviour
 
     private List<Pizza> pizzaOnConveyer = new List<Pizza>();
     private GameObject cacheLastSound;
+    [HideInInspector]public AudioSource cacheLastSource;
 
     void Update()
     {
@@ -61,6 +62,7 @@ public class Conveyer : MonoBehaviour
                 {
                     sound.GenerateSound(transform.position, sound.conveyerBelt, true, 0.06f);
                     cacheLastSound = sound.lastSound;
+                    cacheLastSource = sound.lastScript;
                 }
                 pizzaOnConveyer.Add(pizza);
             }
@@ -83,6 +85,7 @@ public class Conveyer : MonoBehaviour
         {
             Destroy(cacheLastSound);
         }
+        cacheLastSource = null;
     }
 
     public void CheckForPizza(Pizza pizza)

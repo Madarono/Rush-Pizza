@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialTalk:
   - content: I would like a pizza with bell peppers on top of it please.
-    contentDeutsch: Ich hatte gern ein pizza mit Paprika drauf bitte.
+    contentDeutsch: Ich hatte gern eine Pizza mit Paprika drauf bitte.
   whatTalk:
   - content: A bell pepper pizza please.
     contentDeutsch: Eine Paprikapizza bitte.

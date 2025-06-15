@@ -37,7 +37,7 @@ public class GameData
     public int resolutionChoosing;
 
     //RecipeSystem.cs
-    public bool[] isVisible = new bool[8];
+    public bool[] isVisible = new bool[12];
 
     //Stats.cs
     public int day;
@@ -82,7 +82,7 @@ public class GameData
         this.throwKey = KeyCode.R;
         this.jump = KeyCode.None;
         this.sprint = KeyCode.LeftShift;
-        this.pause = KeyCode.Tab;
+        this.pause = KeyCode.Escape;
         this.showBrief = KeyCode.B;
         this.zoom = KeyCode.Q;
         this.buildMode = KeyCode.None;
@@ -103,7 +103,7 @@ public class GameData
         this.resolutionChoosing = 6;
 
         //RecipeSystem.cs
-        this.isVisible = new bool[8];
+        this.isVisible = new bool[11];
 
         //Supply.cs
         this.sumSupply = new int[8];

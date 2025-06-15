@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80d4285639d01f474af17d0d7d5ddb1a, type: 3}
+  m_Name: All2
+  m_EditorClassIdentifier: 
+  initialTalk:
+  - content: Hello baker, I want everything you have in a pizza.
+    contentDeutsch: Hallo Baeker*in, Ich will eine Pizza mit allem, was du hast.
+  whatTalk:
+  - content: An everything pizza please.
+    contentDeutsch: Eine Pizza mit allem bitte.
+  hintTalk:
+  - content: Everything, please.
+    contentDeutsch: Alles, bitte.
+  speedOfTalk: 0.04
+  pizzas:
+  - leftToppings: 0000000001000000
+    rightToppings: 0000000001000000
+    cookTimes: 1
+    numberOfCuts: 3
+    minimumCutsAllowed: 3
+    maximumCutsAllowed: 5
+  hatedToppings: 
+  maximumToppingsAllowed: 3
+  giveToRecipe: 0
+  indexOfRecipe: 10

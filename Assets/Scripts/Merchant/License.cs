@@ -16,6 +16,7 @@ public class L_Box
 public class LicenseDialog
 {
     public PizzaOptions[] ingrediantsNeeded;
+    public PizzaOptions[] stopIngrediants;
     public Dialog dialog;
 }
 
@@ -119,6 +120,22 @@ public class License : MonoBehaviour, IDataPersistence
                         pass[i] = true;
                         break;
                     }
+                }
+            }
+
+            for(int i = 0; i < dialog.stopIngrediants.Length; i++)
+            {
+                for(int o = 0; o < settings.ingrediantsAvailable.Length; o++)
+                {
+                    if(dialog.stopIngrediants[i] == settings.ingrediantsAvailable[o])
+                    {
+                        for(int p = 0; p < pass.Length; p++)
+                        {
+                            pass[p] = false;
+                        }
+                        break;
+                    }
+
                 }
             }
 

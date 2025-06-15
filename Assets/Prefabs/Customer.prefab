@@ -536,11 +536,12 @@ MonoBehaviour:
   recipeSys: {fileID: 0}
   manager: {fileID: 0}
   brief: {fileID: 0}
+  dailyChallenges: {fileID: 0}
   pizzaboxToppings:
   - ingrediant: 
     amount: 
   dialogToppings: 
-  dialog: {fileID: 11400000, guid: 72c3d11a18cf87601b271a289fdfbb20, type: 2}
+  dialog: {fileID: 11400000, guid: 4e4898efe1cc5c110bae64d8fb4450a2, type: 2}
   cookTimes: 0
   pizzaSides: []
   toppingAttributes:
@@ -711,8 +712,8 @@ MonoBehaviour:
     deutschVersion: Da ist zu wenig [Ingrediant] auf meine Pizza. Ich kann es so
       nicht haben.
   - englishVersion: I didn't ask for a diet [Ingrediant] version on my pizza, baker.
-    deutschVersion: "Ich habe nicht fur ein di\xE4tverzion [Ingrediant] auf meine
-      Pizzz gefragt, Bakerei."
+    deutschVersion: Ich habe nicht fur ein diatverzion [Ingrediant] auf meine Pizzz
+      gefragt, Bakerei.
   - englishVersion: 'Too little [Ingrediant] to be enjoyed. '
     deutschVersion: Zu wenig [Ingrediant], um genossen zu werden.
   terribleQuality:
@@ -720,7 +721,7 @@ MonoBehaviour:
     deutschVersion: Die Pizza sieht schrecklich aus, Ich kann nicht glauben, dass
       Ich fur das wartete.
   - englishVersion: This would win a worst pizza competition.
-    deutschVersion: "Die Pizza w\xFCrde eine schlimmste Pizza competition gewonnen."
+    deutschVersion: Die Pizza wurde eine schlimmste Pizza competition gewonnen.
   - englishVersion: Worst pizza ever baked.
     deutschVersion: Die Schlimmste Pizza, die je Gebacken wurde.
   tooLittleCuts:

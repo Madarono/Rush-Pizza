@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80d4285639d01f474af17d0d7d5ddb1a, type: 3}
+  m_Name: Vegan
+  m_EditorClassIdentifier: 
+  initialTalk:
+  - content: Hello, I'd like a vegan pizza.
+    contentDeutsch: Hallo, ich hatte gern eine Vegan Pizza.
+  whatTalk:
+  - content: A vegetarian pizza without cheese.
+    contentDeutsch: Eine Vegetarische Pizza ohne Kase.
+  - content: A vegan pizza please.
+    contentDeutsch: Eine Vegan Pizza bitte.
+  hintTalk:
+  - content: Sauce, mushrooms, olives, onions and bell peppers on my pizza, no cheese.
+    contentDeutsch: Sosse, Pilze, Oliven, Zwiebeln und Paprika auf meine Pizza, ohne
+      Kase.
+  speedOfTalk: 0.04
+  pizzas:
+  - leftToppings: 0000000004000000050000000600000007000000
+    rightToppings: 0000000004000000050000000600000007000000
+    cookTimes: 1
+    numberOfCuts: 3
+    minimumCutsAllowed: 3
+    maximumCutsAllowed: 5
+  hatedToppings: 010000000200000003000000
+  maximumToppingsAllowed: 3
+  giveToRecipe: 1
+  indexOfRecipe: 8

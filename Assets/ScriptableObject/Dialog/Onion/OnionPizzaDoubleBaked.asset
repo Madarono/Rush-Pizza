@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80d4285639d01f474af17d0d7d5ddb1a, type: 3}
+  m_Name: OnionPizzaDoubleBaked
+  m_EditorClassIdentifier: 
+  initialTalk:
+  - content: One double baked onion pizza please.
+    contentDeutsch: Eine doppelt gebacken Zwiebelpizza bitte.
+  whatTalk:
+  - content: Onion pizza, bake it twice.
+    contentDeutsch: Zwiebel pizza, back es zweimal.
+  - content: One onion pizza, put it in the oven twice.
+    contentDeutsch: Eine Zwiebelpizza, Schieb es in den Ofen zweimal.
+  hintTalk:
+  - content: Cheese, sauce, onions on top. Baked twice.
+    contentDeutsch: Kase, sosse, zwiebeln drauf. Zweimal gebacken.
+  speedOfTalk: 0.04
+  pizzas:
+  - leftToppings: 000000000100000006000000
+    rightToppings: 000000000100000006000000
+    cookTimes: 2
+    numberOfCuts: 3
+    minimumCutsAllowed: 3
+    maximumCutsAllowed: 5
+  hatedToppings: 
+  maximumToppingsAllowed: 3
+  giveToRecipe: 1
+  indexOfRecipe: 5

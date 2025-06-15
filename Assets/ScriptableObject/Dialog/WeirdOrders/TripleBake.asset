@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80d4285639d01f474af17d0d7d5ddb1a, type: 3}
+  m_Name: TripleBake
+  m_EditorClassIdentifier: 
+  initialTalk:
+  - content: Give me a cheese pizza, but put it in the oven three times.
+    contentDeutsch: Gib mir eine Kasepizza, aber schieb es in den Ofen dreimal.
+  whatTalk:
+  - content: A triple baked cheese pizza please.
+    contentDeutsch: Eine dreifach gebacken Kasepizza bitte.
+  hintTalk:
+  - content: A cheese pizza baked three times.
+    contentDeutsch: Back dreimal eine Kasepizza.
+  speedOfTalk: 0.04
+  pizzas:
+  - leftToppings: 0000000001000000
+    rightToppings: 0000000001000000
+    cookTimes: 3
+    numberOfCuts: 3
+    minimumCutsAllowed: 3
+    maximumCutsAllowed: 5
+  hatedToppings: 
+  maximumToppingsAllowed: 3
+  giveToRecipe: 1
+  indexOfRecipe: 0

@@ -12,22 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80d4285639d01f474af17d0d7d5ddb1a, type: 3}
   m_Name: OnionPizza
   m_EditorClassIdentifier: 
-  talk:
-  - content: One onion pizza please.
-    contentDeutsch: Eine zwiebel pizza bitte.
-  - content: Onion pizza.
-    contentDeutsch: Zwiebel pizza.
-  - content: Cheese, sauce, onions on top. Well backed.
-    contentDeutsch: Kase, sosse, zwiebeln drauf. Gut durchbacken.
   initialTalk:
   - content: One onion pizza please.
-    contentDeutsch: Eine zwiebel pizza bitte.
+    contentDeutsch: Eine Zwiebelpizza bitte.
+  - content: I want a stinky pizza please.
+    contentDeutsch: Ich hatte gern eine stinkig Pizza bitte.
   whatTalk:
   - content: Onion pizza.
-    contentDeutsch: Zwiebel pizza.
+    contentDeutsch: Zwiebelpizza.
+  - content: One onion pizza please.
+    contentDeutsch: Eine Zwiebelpizza bitte.
   hintTalk:
   - content: Cheese, sauce, onions on top. Well backed.
-    contentDeutsch: Kase, sosse, zwiebeln drauf. Gut durchbacken.
+    contentDeutsch: Kase, Sosse, Zwiebeln drauf. Gut durchbacken.
   speedOfTalk: 0.04
   pizzas:
   - leftToppings: 000000000100000006000000

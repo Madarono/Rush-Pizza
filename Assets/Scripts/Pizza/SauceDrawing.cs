@@ -35,6 +35,7 @@ public class SauceDrawing : MonoBehaviour
     {
         if(topping == null)
         {
+            isDrawing = false;
             return;
         }
 

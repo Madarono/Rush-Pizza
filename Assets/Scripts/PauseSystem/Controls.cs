@@ -340,6 +340,11 @@ public class Controls : WindowOpening, IDataPersistence
         rushHour.RepeatGlitch(rushHour.repeat, rushHour.delayGlitch / 5f, rushHour.delayOriginal / 5f);
 
         dailyChallenge.RefreshItems();
+        if(settings.canSaveMoney) //Just means that the day ended
+        {
+            stats.UpdateValues();
+            mission.UpdateVisual();
+        }
 
         if(timeChanges != null)
         {

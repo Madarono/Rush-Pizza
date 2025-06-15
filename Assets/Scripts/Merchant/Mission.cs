@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Globalization;
 using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
+
 
 public enum LicenseState
 {
@@ -264,7 +266,14 @@ public class Mission : MonoBehaviour, IDataPersistence
 
         daysVisual.text = days.ToString() + "/" + objective[objectiveId].dayRequired;
         pizzasVisual.text = pizzasMade.ToString() + "/" + objective[objectiveId].pizzasRequired;
-        moneyVisual.text = moneyGained.ToString() + "/" + objective[objectiveId].moneyRequired;
+        if(settings.english)
+        {
+            moneyVisual.text = moneyGained.ToString("F2") + "/" + objective[objectiveId].moneyRequired;
+        }
+        else
+        {
+            moneyVisual.text = moneyGained.ToString("F2", new CultureInfo("de-DE")) + "/" + objective[objectiveId].moneyRequired;
+        }
 
         percentage = ((Mathf.Clamp(days / objective[objectiveId].dayRequired, 0f, 1f)) + (Mathf.Clamp(pizzasMade / objective[objectiveId].pizzasRequired, 0f, 1f)) + (Mathf.Clamp(moneyGained / objective[objectiveId].moneyRequired, 0f, 1f))) / 3f;
     }

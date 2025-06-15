@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80d4285639d01f474af17d0d7d5ddb1a, type: 3}
+  m_Name: Weird 1
+  m_EditorClassIdentifier: 
+  initialTalk:
+  - content: I would like a pizza that has 4 olives on it, baked three times and
+      cut for 14 people. Oh yeah I don't like olives by the way.
+    contentDeutsch: Ich hatte gern eine Pizza, die 4 Oliven drauf hat. Dreifach gebacken,
+      die fur 14 Leute reicht. Oh ja, ich mag Oliven nicht.
+  whatTalk:
+  - content: An olive pizza baked three times, and cut for 14 people.
+    contentDeutsch: Eine Olivepizza dreifach baktet, und schneid es fur 14 Leute
+      aus.
+  hintTalk:
+  - content: An olive pizza that is cut 4 times, and is put in the oven three times.
+    contentDeutsch: Eine Olivepizza, die in den Ofen dreimal geschoben hat. ist
+  speedOfTalk: 0.04
+  pizzas:
+  - leftToppings: 0000000001000000
+    rightToppings: 0000000001000000
+    cookTimes: 3
+    numberOfCuts: 7
+    minimumCutsAllowed: 7
+    maximumCutsAllowed: 9
+  hatedToppings: 05000000
+  maximumToppingsAllowed: 3
+  giveToRecipe: 0
+  indexOfRecipe: 0
