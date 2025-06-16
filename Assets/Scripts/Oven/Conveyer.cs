@@ -11,7 +11,7 @@ public class Conveyer : MonoBehaviour
     private Pizza pizza;
     public Transform referenceX;
 
-    private List<Pizza> pizzaOnConveyer = new List<Pizza>();
+    [HideInInspector]public List<Pizza> pizzaOnConveyer = new List<Pizza>();
     private GameObject cacheLastSound;
     [HideInInspector]public AudioSource cacheLastSource;
 

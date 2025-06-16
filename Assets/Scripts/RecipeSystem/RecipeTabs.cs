@@ -6,9 +6,11 @@ using UnityEngine;
 public class Tab
 {
     public RectTransform tab;
+    public RectTransform icon; 
     public GameObject window;
     public bool isActive;
     public RectTransform[] Xpos;
+    public RectTransform[] XposIcon;
     public float[] width = new float[2];
 }
 
@@ -82,6 +84,7 @@ public class RecipeTabs : MonoBehaviour
             Vector2 targetSize = new Vector2(tab.width[i], tab.tab.sizeDelta.y);
 
             tab.tab.position = Vector3.Lerp(tab.tab.position, tab.Xpos[i].position, Time.unscaledDeltaTime * speed);
+            tab.icon.position = Vector3.Lerp(tab.icon.position, tab.XposIcon[i].position, Time.unscaledDeltaTime * speed);
             tab.tab.sizeDelta = Vector2.Lerp(tab.tab.sizeDelta, targetSize, Time.unscaledDeltaTime * speed);
         }
     }

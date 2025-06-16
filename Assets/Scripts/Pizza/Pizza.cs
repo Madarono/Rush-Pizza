@@ -49,7 +49,7 @@ public class Pizza : MonoBehaviour
     public bool isCooked;
     public int cookedTimes;
     public Material[] cookedMaterials;
-
+    
     void Start()
     {
         playerHolder = GameObject.Find("UniversalScripts").GetComponent<PlayerHolder>();

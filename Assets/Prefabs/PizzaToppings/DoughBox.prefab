@@ -138,6 +138,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 113d43c4b305f998c9b16dee4cfffebe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sound: {fileID: 0}
+  main: {fileID: 0}
   doughPrefab: {fileID: 8371783868399049236, guid: b8c73af62f6eb09cba77561cba44ae14, type: 3}
   doughSpawns:
   - {fileID: 4879755793478237894}
@@ -147,6 +149,8 @@ MonoBehaviour:
   checkDelay: 1
   checkRange: 1
   rotationOffset: {x: 90, y: 180, z: 0, w: 0}
+  currentDough: []
+  maximumSpawned: 12
   isDough: 1
   settings: {fileID: 0}
   stats: {fileID: 0}

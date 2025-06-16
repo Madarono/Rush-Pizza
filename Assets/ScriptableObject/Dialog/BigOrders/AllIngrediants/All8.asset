@@ -15,12 +15,18 @@ MonoBehaviour:
   initialTalk:
   - content: Hello baker, I want everything you have in a pizza.
     contentDeutsch: Hallo Baeker*in, Ich will eine Pizza mit allem, was du hast.
+  - content: Hi, I would like a supreme pizza please.
+    contentDeutsch: Hi, Ich hatte gern eine Supreme Pizza bitte.
   whatTalk:
   - content: An everything pizza please.
     contentDeutsch: Eine Pizza mit allem bitte.
+  - content: A supreme pizza please.
+    contentDeutsch: Eine Supreme Pizza bitte.
   hintTalk:
   - content: Everything, please.
     contentDeutsch: Alles, bitte.
+  - content: All that you have please.
+    contentDeutsch: Alles, was du hast, bitte.
   speedOfTalk: 0.04
   pizzas:
   - leftToppings: 0000000001000000020000000300000004000000050000000600000007000000

@@ -107,7 +107,10 @@ public class SauceDrawing : MonoBehaviour
                 }
                 else
                 {
-                    settings.AddWithoutVisual(-topping.priceToPlace);
+                    if(tutorial.hasCompleted)
+                    {
+                        settings.AddWithoutVisual(-topping.priceToPlace);
+                    }
                     stats.toppingStats[topping.indexForStat].moneySpent += topping.priceToPlace;
                 }
                 

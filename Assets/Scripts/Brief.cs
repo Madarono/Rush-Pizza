@@ -67,7 +67,7 @@ public class Brief : WindowOpening
                 answer.Add("Okay");
             }
         }
-        else if(askedHint && !askedHint)
+        else if(askedWhat && !askedHint)
         {
             if(settings.english)
             {

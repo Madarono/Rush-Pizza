@@ -13,6 +13,10 @@ public class DoughSpawner : MonoBehaviour
     public Quaternion rotationOffset;
     private float o_checkDelay;
 
+    [Header("Conditions")]
+    public List<GameObject> currentDough;
+    public int maximumSpawned = 3;
+
     [Header("Special modifications")]
     public bool isDough;
     public Settings settings;
@@ -70,7 +74,17 @@ public class DoughSpawner : MonoBehaviour
             }
         }
 
-        if(disturbance)
+        for(int i = currentDough.Count - 1; i >= 0; i--)
+        {
+            if(currentDough[i] != null)
+            {
+                continue;
+            }
+
+            currentDough.RemoveAt(i);
+        }
+
+        if(disturbance || currentDough.Count >= maximumSpawned)
         {
             return;
         }
@@ -79,6 +93,8 @@ public class DoughSpawner : MonoBehaviour
         {
             GameObject go = Instantiate(doughPrefab, new Vector3(doughSpawns[i].position.x, doughSpawns[i].position.y + 1f, doughSpawns[i].position.z), Quaternion.identity);
             go.transform.rotation = Quaternion.Euler(rotationOffset.x, rotationOffset.y, rotationOffset.z);
+            currentDough.Add(go);
+            
             if(isDough)
             {
                 Interactable dough = go.GetComponent<Interactable>();

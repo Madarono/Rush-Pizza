@@ -5,6 +5,7 @@ using UnityEngine;
 public class Pausing : MonoBehaviour
 {
     [Header("Scripts")]
+    public Crouch crouch;
     public Conveyer conveyer;
     public MouseCursor mouse;
     public Settings settings;
@@ -64,6 +65,7 @@ public class Pausing : MonoBehaviour
         brief.CloseWindow();
         music.source.Pause();
         music.isPaused = true;
+        crouch.can_move = false;
         if(conveyer.cacheLastSource != null)
         {
             conveyer.cacheLastSource.Pause();
@@ -90,6 +92,7 @@ public class Pausing : MonoBehaviour
         tabs.ResetAllTabs();
         music.source.Play();
         music.isPaused = false;
+        crouch.can_move = true;
         if(rushHour.songSource != null)
         {
             rushHour.songSource.Play();

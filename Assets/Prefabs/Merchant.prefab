@@ -953,7 +953,7 @@ MonoBehaviour:
   merchantContent: []
   parentSpawn: {fileID: 0}
   windowAnim: {fileID: 0}
-  delayOfLeaving: 0.7
+  delayOfLeaving: 0.5
   goods:
   - {fileID: 11400000, guid: 341012a3ccc3e7f79acb412b53574e3c, type: 2}
   - {fileID: 11400000, guid: df319ed9ec87ff832a839b642b9810a5, type: 2}

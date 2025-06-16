@@ -40,7 +40,7 @@ public class ConveyerEnd : MonoBehaviour
         Pizza pizza = other.GetComponent<Pizza>();
         if(pizza != null)
         {
-            if(checkCooked)
+            if(checkCooked && conveyer.pizzaOnConveyer.Contains(pizza))
             {
                 pizza.isCooked = true;
                 pizza.cookedTimes++;

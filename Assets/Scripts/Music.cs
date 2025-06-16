@@ -11,8 +11,19 @@ public class Music : MonoBehaviour
     public AudioSource source;
     public bool isPaused;
 
-    void Start()
+    void Awake()
     {
+        foreach(AudioClip clip in sounds.backgroundMusic)
+        {
+            source.clip = clip;
+            source.Play();
+        }
+
+        source.clip = sounds.rushHourMusic;
+        source.Play();
+        source.Stop();
+        source.clip = null;
+
         RandomizeSong();
     }
 

@@ -21,6 +21,8 @@ MonoBehaviour:
   hintTalk:
   - content: Everything, please.
     contentDeutsch: Alles, bitte.
+  - content: All that you have please.
+    contentDeutsch: Alles, was du hast, bitte.
   speedOfTalk: 0.04
   pizzas:
   - leftToppings: 0000000001000000
