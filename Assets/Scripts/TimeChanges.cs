@@ -191,10 +191,11 @@ public class TimeChanges : MonoBehaviour
 
     void EndOfTheDay()
     {
-        if(manager.customer != null || manager.abortCustomerChecking)
+        if((manager.customer != null && manager.goScript != null && manager.goScript.state != States.Static) || manager.abortCustomerChecking)
         {
             return;
         }
+        manager.DeleteCustomer();
         decorManager.canSave = true;
         buildSystem.canSave = true;
         buildMerchant.canSave = true;

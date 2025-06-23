@@ -48,6 +48,7 @@ GameObject:
   - component: {fileID: 222518906540196561}
   - component: {fileID: 918287380678455141}
   - component: {fileID: 5832109739281900974}
+  - component: {fileID: 3898479258920347435}
   m_Layer: 2
   m_Name: DoughBox
   m_TagString: Untagged
@@ -260,6 +261,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.057939492, y: 1.467545, z: 0.37592122}
   m_Center: {x: 0.73, y: 1.7891771e-17, z: -0.31673875}
+--- !u!114 &3898479258920347435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 913102842390189300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2763c238f5a5dad2da4dcc7e3dcc8441, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds: {fileID: 0}
 --- !u!1 &3352869261256400525
 GameObject:
   m_ObjectHideFlags: 0

@@ -20,8 +20,8 @@ public class CustomerManager : MonoBehaviour
     [HideInInspector]public bool abortCustomerChecking = false;
     [HideInInspector]public GameObject customer;
     [HideInInspector]public GameObject merchant;
-    private Customer goScript;
-    private Merchant merchantScript;
+    [HideInInspector]public Customer goScript;
+    [HideInInspector]public Merchant merchantScript;
 
     [Header("Custommer Spawn Rate")]
     public float minWait = 1f;

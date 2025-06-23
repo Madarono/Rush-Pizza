@@ -16,6 +16,8 @@ MonoBehaviour:
   - content: Hey, How are you? I want a double baked olive pizza, please.
     contentDeutsch: Hallo, Wie geht's? Ich hatte gern eine doppelt gebacken  Olivenpizza,
       bitte.
+  - content: Can I have a dark purple pizza please?
+    contentDeutsch: Kann ich eine dunkle lila Pizza bitte haben?
   whatTalk:
   - content: An olive pizza please, put it in the oven twice.
     contentDeutsch: Eine Olivenpizza bitte, Schieb die Pizza in den Ofen zweimal.

@@ -15,6 +15,10 @@ MonoBehaviour:
   initialTalk:
   - content: Just give me sauce on pizza raw.
     contentDeutsch: Gib mir Sosse auf meine roh Pizza .
+  - content: The normal cheese pizza please, but I am lactose intolerant. make it
+      raw please.
+    contentDeutsch: Die normale Pizza bitte, aber ich bin laktoseintoleranz. mach
+      es roh.
   whatTalk:
   - content: Sauce on pizza, no bake please.
     contentDeutsch: Sosse auf Pizza, Back es nicht bitte.

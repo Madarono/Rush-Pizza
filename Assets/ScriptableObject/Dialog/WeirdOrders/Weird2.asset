@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialTalk:
   - content: Give me a brown, a green and a pink on my cheese pizza please. I want
-      it to be baked almost to ash. Cut it 10 times please
+      it to be baked almost to ash. Cut it 10 times.
     contentDeutsch: Gib mir eine Braune, eine Grune und eine rosa auf meine Pizza,
-      bake es fast zu Asche geworden. Schneid es 10 mal bitte.
+      bake es fast zu Asche geworden. Schneid es 10 mal.
   whatTalk:
   - content: Give me Sausage, onions and bell peppers on my pizza please, don't forget
       to bake it alot and cut it 10 times.

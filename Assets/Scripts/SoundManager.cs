@@ -52,6 +52,7 @@ public class SoundManager : MonoBehaviour
     public AudioClip decorationSelection;
     public AudioClip buyMerchant;
     public AudioClip startGame;
+    public AudioClip trashCan;
 
     [Header("Cache")]
     public bool cacheSound;

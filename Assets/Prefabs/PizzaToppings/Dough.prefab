@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3669569844302059892}
   - component: {fileID: 1811222658067584687}
   - component: {fileID: 1299867238181204689}
+  - component: {fileID: 3537079629208334569}
   m_Layer: 6
   m_Name: Dough
   m_TagString: Draggable
@@ -153,4 +154,17 @@ MonoBehaviour:
   settings: {fileID: 0}
   stats: {fileID: 0}
   dragAndDrop: {fileID: 0}
+  tutorial: {fileID: 0}
   costToChange: 2
+--- !u!114 &3537079629208334569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8371783868399049236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2763c238f5a5dad2da4dcc7e3dcc8441, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

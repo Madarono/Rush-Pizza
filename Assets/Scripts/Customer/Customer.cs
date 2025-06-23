@@ -195,6 +195,7 @@ public class Customer : MonoBehaviour
             {
                 case TalkType.Initial:  
                     random = Random.Range(0, dialog.initialTalk.Length);
+                    Debug.Log(random);
                     brief.idTalk[0] = random;
                     StartCoroutine(ShowText(dialog.initialTalk[random].content)); 
                     if(settings.enableVoice)
@@ -207,6 +208,7 @@ public class Customer : MonoBehaviour
 
                 case TalkType.What:
                     random = Random.Range(0, dialog.whatTalk.Length);
+                    Debug.Log(random);
                     brief.idTalk[1] = random;
                     StartCoroutine(ShowText(dialog.whatTalk[random].content)); 
                     if(settings.enableVoice)
@@ -219,6 +221,7 @@ public class Customer : MonoBehaviour
 
                 case TalkType.Hint:
                     random = Random.Range(0, dialog.hintTalk.Length);
+                    Debug.Log(random);
                     brief.idTalk[2] = random;
                     StartCoroutine(ShowText(dialog.hintTalk[random].content)); 
                     if(settings.enableVoice)
@@ -254,6 +257,8 @@ public class Customer : MonoBehaviour
             {
                 case TalkType.Initial:  
                     random = Random.Range(0, dialog.initialTalk.Length);
+                    Debug.Log(random);
+                    brief.idTalk[0] = random;
                     StartCoroutine(ShowText(dialog.initialTalk[random].contentDeutsch)); 
                     if(settings.enableVoice)
                     {
@@ -265,6 +270,8 @@ public class Customer : MonoBehaviour
 
                 case TalkType.What:
                     random = Random.Range(0, dialog.whatTalk.Length);
+                    Debug.Log(random);
+                    brief.idTalk[1] = random;
                     StartCoroutine(ShowText(dialog.whatTalk[random].contentDeutsch)); 
                     if(settings.enableVoice)
                     {
@@ -276,6 +283,8 @@ public class Customer : MonoBehaviour
 
                 case TalkType.Hint:
                     random = Random.Range(0, dialog.hintTalk.Length);
+                    Debug.Log(random);
+                    brief.idTalk[2] = random;
                     StartCoroutine(ShowText(dialog.hintTalk[random].contentDeutsch)); 
                     if(settings.enableVoice)
                     {
@@ -974,7 +983,6 @@ public class Customer : MonoBehaviour
                         {
                             feedback.TurnIngrediantToName(dialog.hatedToppings[o]);
                             feedback.HatedTopping();
-                            Upset();
                             return false;
                         }
                     }

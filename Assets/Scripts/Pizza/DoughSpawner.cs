@@ -94,6 +94,8 @@ public class DoughSpawner : MonoBehaviour
             GameObject go = Instantiate(doughPrefab, new Vector3(doughSpawns[i].position.x, doughSpawns[i].position.y + 1f, doughSpawns[i].position.z), Quaternion.identity);
             go.transform.rotation = Quaternion.Euler(rotationOffset.x, rotationOffset.y, rotationOffset.z);
             currentDough.Add(go);
+            DetectTrashcan trashCan = go.GetComponent<DetectTrashcan>();
+            trashCan.sounds = sound;
             
             if(isDough)
             {

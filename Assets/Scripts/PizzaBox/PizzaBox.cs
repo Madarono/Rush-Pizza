@@ -52,6 +52,8 @@ public class PizzaBox : MonoBehaviour
 
     public BoxInformation[] toppingInfo;
     public CutInformation cutInfo;
+    public TopPizzaBox topBox;
+    public Animator topBoxAnim;
     public bool isCooked;
     public int cookedTimes;
 
@@ -63,6 +65,14 @@ public class PizzaBox : MonoBehaviour
 
     public void GetPizzaInformation(GameObject pizza)
     {
+        if(pizza == null)
+        {         
+            Debug.Log("No pizza found");
+            topBoxAnim.SetBool("Close", false);
+            topBox.hasClosed = false;
+            return;   
+        }
+        
         Pizza pizzaScript = pizza.GetComponent<Pizza>();
         this.ingrediants = pizzaScript.ingrediants;
         this.cuts = pizzaScript.cuts;

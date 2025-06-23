@@ -154,4 +154,4 @@ MonoBehaviour:
   stats: {fileID: 0}
   dragAndDrop: {fileID: 0}
   tutorial: {fileID: 0}
-  costToChange: 2
+  costToChange: 0

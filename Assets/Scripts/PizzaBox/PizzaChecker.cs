@@ -23,7 +23,12 @@ public class PizzaChecker : MonoBehaviour
         if(Physics.Raycast(transform.position, Vector3.up, out hit, checkRange, pizzaLayer))
         {
             pizzaOnTop = true;
-            pizza = hit.collider.gameObject;
+            Pizza script = hit.collider.gameObject.GetComponent<Pizza>();
+            if(script != null)
+            {
+                pizza = hit.collider.gameObject;
+            }
+
         }
         else
         {
@@ -41,6 +46,9 @@ public class PizzaChecker : MonoBehaviour
     {
         yield return new WaitForSeconds(pizzaKillDuration);
         box.GetPizzaInformation(pizza);
-        Destroy(pizza);
+        if(pizza != null)
+        {
+            Destroy(pizza);
+        }
     }
 }

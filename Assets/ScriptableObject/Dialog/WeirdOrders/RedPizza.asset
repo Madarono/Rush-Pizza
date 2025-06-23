@@ -15,6 +15,8 @@ MonoBehaviour:
   initialTalk:
   - content: I would like a red pizza.
     contentDeutsch: Ich hatte gern eine rot Pizza.
+  - content: My favourite color is red, I want it on my pizza too please.
+    contentDeutsch: Meine bevorzugte Farbe ist Rot, ich will es auf meine Pizza bitte.
   whatTalk:
   - content: One red pizza please.
     contentDeutsch: Eine rot Pizza bitte.

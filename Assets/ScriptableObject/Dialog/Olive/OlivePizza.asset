@@ -17,6 +17,8 @@ MonoBehaviour:
     contentDeutsch: Hallo, Wie geht's? Ich hatte gern eine Olivenpizza, bitte.
   - content: I would like a.. uhh... an Olive pizza please.
     contentDeutsch: Ich hatte gern eiine.... ahmm.. eine Olivepizza bitte.
+  - content: A purple pizza would be nice.
+    contentDeutsch: Eine lila Pizza waere schon.
   whatTalk:
   - content: An olive pizza please.
     contentDeutsch: Eine Olivenpizza bitte.

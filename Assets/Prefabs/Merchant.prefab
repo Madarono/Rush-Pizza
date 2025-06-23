@@ -932,8 +932,17 @@ MonoBehaviour:
   playerCam: {fileID: 0}
   merchantLines:
   - englishVersion: Howdy! I got some goodies to sell, Intressted?
-    deutschVersion: Hallo! Ich habe einige Leckereien zu verkaufen, sind Sie interessiert?
-  speedOfTalk: 0.03
+    deutschVersion: Hallo! Ich habe einige Gueter zu verkaufen, sind Sie interessiert?
+  - englishVersion: Hello! I got some goodies while you were working, interested?
+    deutschVersion: Hallo! ich hatte einige Gueter, waehrend du hast arbeiten. sind
+      Sie Interessiert?
+  - englishVersion: i have some goods to sell, wanna have a look?
+    deutschVersion: Ich habe eineige Guter zu verkaufen, willst du eine sehen?
+  - englishVersion: I have licenses and supplies to aid in your joourney, interessted
+      to buy?
+    deutschVersion: Ich habe lizenzen und vorraeten, um ihnen zu helfen. Sind Sie
+      am kauf interessiert?
+  speedOfTalk: 0.04
   delayOfVoice: 0.1
   dialogWindow: {fileID: 0}
   dialogContent: {fileID: 0}

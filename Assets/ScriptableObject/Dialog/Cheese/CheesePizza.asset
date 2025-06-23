@@ -17,6 +17,8 @@ MonoBehaviour:
     contentDeutsch: Hallo, Ich hatte gern eine Kasepizza.
   - content: Can I please... have a cheese pizza.?
     contentDeutsch: Kann ich bitte... eine Kasepizza haben?
+  - content: I would like a yellow pizza please.
+    contentDeutsch: Ich hatte gern eine gelbe Pizza bitte.
   whatTalk:
   - content: Cheese pizza, please.
     contentDeutsch: Kasepizza, bitte.

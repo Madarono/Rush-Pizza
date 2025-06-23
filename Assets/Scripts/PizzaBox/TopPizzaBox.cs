@@ -7,6 +7,7 @@ public class TopPizzaBox : MonoBehaviour
     public SoundManager sound;
     public PizzaChecker pizzaChecker;
     public Tutorial tutorial;
+    public bool hasClosed = false;
 
     void Start()
     {
@@ -22,8 +23,14 @@ public class TopPizzaBox : MonoBehaviour
     
     public void notifyPizzaChecker()
     {
+        if(hasClosed)
+        {
+            return;
+        }
+
         sound.GenerateSound(transform.position, sound.closePizzaBox, true, .35f);
         pizzaChecker.KillPizza();
+        hasClosed = true;
 
         if(tutorial == null || tutorial.hasCompleted)
         {

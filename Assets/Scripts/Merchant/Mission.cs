@@ -58,6 +58,8 @@ public class Mission : MonoBehaviour, IDataPersistence
     public TextMeshProUGUI daysVisual;
     public TextMeshProUGUI pizzasVisual;
     public TextMeshProUGUI moneyVisual;
+    public GameObject completed;
+    public GameObject[] visuals;
 
     public Image progressBar;
     public float fillSpeed = 2f;
@@ -254,16 +256,29 @@ public class Mission : MonoBehaviour, IDataPersistence
     public void UpdateVisual()
     {
         int days = stats.day;
+        bool foundObjective = false;
 
         for(int i = 0; i < objective.Length; i++)
         {
             if(days < objective[i].dayRequired || pizzasMade < objective[i].pizzasRequired || moneyGained < objective[i].moneyRequired)
             {
                 objectiveId = i;
+                foundObjective = true;
                 break;
             }
         }
 
+        if(!foundObjective)
+        {
+            foreach(GameObject obj in visuals)
+            {
+                obj.SetActive(false);
+            }
+            completed.SetActive(true);
+            return;
+        }
+
+        completed.SetActive(false);
         daysVisual.text = days.ToString() + "/" + objective[objectiveId].dayRequired;
         pizzasVisual.text = pizzasMade.ToString() + "/" + objective[objectiveId].pizzasRequired;
         if(settings.english)

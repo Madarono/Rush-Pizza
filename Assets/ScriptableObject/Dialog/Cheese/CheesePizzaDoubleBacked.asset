@@ -16,6 +16,9 @@ MonoBehaviour:
   - content: Hello, I'd like a double baked cheese pizza please.
     contentDeutsch: Hallo, ich hatte gern eine Kasepizza, bitte schieb die Pizza
       in den Ofen zweimal.
+  - content: I would like a yellow pizza, but a dark yellow pizza please.
+    contentDeutsch: Ich hatte gern eine gelbe Pizza bitte, aber eine dunkle gelbe
+      Pizza bitte.
   whatTalk:
   - content: Double baked cheese pizza please.
     contentDeutsch: Doppelt gebacken Kasepizza bitte.

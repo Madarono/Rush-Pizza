@@ -505,28 +505,28 @@ MonoBehaviour:
   pricing:
   - topping: 0
     fullPriceTopping: 1
-    patienceInSeconds: 50
+    patienceInSeconds: 30
   - topping: 1
     fullPriceTopping: 1
-    patienceInSeconds: 50
+    patienceInSeconds: 30
   - topping: 2
     fullPriceTopping: 3
-    patienceInSeconds: 70
+    patienceInSeconds: 40
   - topping: 3
     fullPriceTopping: 3
-    patienceInSeconds: 70
+    patienceInSeconds: 40
   - topping: 4
     fullPriceTopping: 1.6
-    patienceInSeconds: 70
+    patienceInSeconds: 40
   - topping: 5
     fullPriceTopping: 1.6
-    patienceInSeconds: 70
+    patienceInSeconds: 40
   - topping: 6
     fullPriceTopping: 1.6
-    patienceInSeconds: 70
+    patienceInSeconds: 40
   - topping: 7
     fullPriceTopping: 1.8
-    patienceInSeconds: 70
+    patienceInSeconds: 40
   pause: {fileID: 0}
   mouseCursor: {fileID: 0}
   mission: {fileID: 0}
@@ -541,7 +541,7 @@ MonoBehaviour:
   - ingrediant: 
     amount: 
   dialogToppings: 
-  dialog: {fileID: 11400000, guid: 4e4898efe1cc5c110bae64d8fb4450a2, type: 2}
+  dialog: {fileID: 11400000, guid: d7ed9c66269b126f2a4650b4c31755d9, type: 2}
   cookTimes: 0
   pizzaSides: []
   toppingAttributes:

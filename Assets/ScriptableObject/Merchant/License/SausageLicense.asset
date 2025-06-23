@@ -14,10 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ingrediantType: 3
   neutral: 0
+  putOnce: 0
   icon: {fileID: 21300000, guid: 73f4224605fb602e49d6dc03d042f89d, type: 3}
-  price: 50
+  price: 35
   infoEnglish: Allows the use of sausage in your shop.
   infoDeutsch: Ermoglicht wurstchen in dein pizzabackerei nutzen.
   itemType: 1
   licenseID: 1
   supplyCount: 0
+  decorID: 0

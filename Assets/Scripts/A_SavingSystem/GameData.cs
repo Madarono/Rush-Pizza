@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class GameData
@@ -37,7 +38,7 @@ public class GameData
     public int resolutionChoosing;
 
     //RecipeSystem.cs
-    public bool[] isVisible = new bool[12];
+    public bool[] isVisible = new bool[11];
 
     //Stats.cs
     public int day;
@@ -93,7 +94,7 @@ public class GameData
         this.showFPS = false;
         this.vsync = false;
         this.choosingFPS = 0;
-        this.volumeValues = new bool[5];
+        this.volumeValues = Enumerable.Repeat(true, 5).ToArray();
         this.quality = 5;
         this.cameraFOV = 60f;
         this.cameraSens = 200f;

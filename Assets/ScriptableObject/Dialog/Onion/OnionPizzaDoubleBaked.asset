@@ -15,6 +15,10 @@ MonoBehaviour:
   initialTalk:
   - content: One double baked onion pizza please.
     contentDeutsch: Eine doppelt gebacken Zwiebelpizza bitte.
+  - content: I would like a stinky pizza, put it in the oven twice.
+    contentDeutsch: Ich hatte gern eine stinkig Pizza, schieb es zweimal in den Ofen.
+  - content: I like my pizza to be pink and dark please.
+    contentDeutsch: Ich mag meine Pizza rosa und dunkel sein.
   whatTalk:
   - content: Onion pizza, bake it twice.
     contentDeutsch: Zwiebel pizza, back es zweimal.

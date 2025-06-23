@@ -16,6 +16,8 @@ MonoBehaviour:
   - content: Hello, I'd like a double baked pepperoni pizza please.
     contentDeutsch: Hallo, ich hatte gern eine Salamipizza, bitte schieb die Pizza
       in den Ofen zweimal.
+  - content: Za, bake it twice please.
+    contentDeutsch: Za, bitte back es zweimal.
   whatTalk:
   - content: Double baked pepperoni pizza please.
     contentDeutsch: Doppelt gebacken Salamipizza bitte.

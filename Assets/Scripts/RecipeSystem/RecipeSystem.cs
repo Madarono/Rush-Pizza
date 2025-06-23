@@ -62,7 +62,7 @@ public class RecipeSystem : WindowOpening, IDataPersistence
 
     public void LoadData(GameData data)
     {
-        for(int i = 0; i < visualRecipe.Length; i++)
+        for(int i = 0; i < data.isVisible.Length; i++)
         {
             visualRecipe[i].isVisible = data.isVisible[i];
         }

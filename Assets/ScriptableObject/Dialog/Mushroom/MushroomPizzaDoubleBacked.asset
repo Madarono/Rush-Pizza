@@ -18,6 +18,8 @@ MonoBehaviour:
       bitte. '
   - content: Howdy! One mushroom pizza, double baked.
     contentDeutsch: Howdy! Eine Pilzpizza, doppelt gebacken.
+  - content: One white pizza. Dark crust.
+    contentDeutsch: Eine weisse Pizza. Dunkle Kruste.
   whatTalk:
   - content: One mushroom pizza please, put it in the oven twice.
     contentDeutsch: Eine Pilzpizza bitte, schieb es in den Ofen zweimal.

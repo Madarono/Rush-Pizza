@@ -143,6 +143,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sound: {fileID: 0}
   pizzaChecker: {fileID: 1894190854805150871}
+  tutorial: {fileID: 0}
+  hasClosed: 0
 --- !u!1 &1182692498536078924
 GameObject:
   m_ObjectHideFlags: 0
@@ -427,6 +429,8 @@ MonoBehaviour:
     numberOfSlices: 0
     averageDistance: 0
     cutDistanceRating: 0
+  topBox: {fileID: 2460561982063871264}
+  topBoxAnim: {fileID: 5747761711400609263}
   isCooked: 0
   cookedTimes: 0
   overallPizzaRating: 0

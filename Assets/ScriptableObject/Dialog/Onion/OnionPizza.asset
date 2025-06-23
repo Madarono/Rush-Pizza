@@ -17,6 +17,8 @@ MonoBehaviour:
     contentDeutsch: Eine Zwiebelpizza bitte.
   - content: I want a stinky pizza please.
     contentDeutsch: Ich hatte gern eine stinkig Pizza bitte.
+  - content: I would like a pink pizza please.
+    contentDeutsch: Ich hatte gern eine rosa Pizza bitte.
   whatTalk:
   - content: Onion pizza.
     contentDeutsch: Zwiebelpizza.

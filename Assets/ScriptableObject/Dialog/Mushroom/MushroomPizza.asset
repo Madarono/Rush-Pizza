@@ -17,6 +17,8 @@ MonoBehaviour:
     contentDeutsch: 'Hi! Ich hatte gern eine Pilzpizza. '
   - content: Howdy! One mushroom pizza.
     contentDeutsch: Howdy! Eine Pilzpizza.
+  - content: One white pizza please.
+    contentDeutsch: Eine weisse Pizza bitte.
   whatTalk:
   - content: One mushroom pizza please.
     contentDeutsch: Eine Pilzpizza bitte.

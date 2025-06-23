@@ -141,7 +141,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d839e6e3bc0289e3eb36d9b493bcbb0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sound: {fileID: 0}
   pizzaChecker: {fileID: 1894190854805150871}
+  tutorial: {fileID: 0}
+  hasClosed: 0
 --- !u!1 &1182692498536078924
 GameObject:
   m_ObjectHideFlags: 0
@@ -281,6 +284,7 @@ GameObject:
   - component: {fileID: 7832778247554834295}
   - component: {fileID: 5430286274533110537}
   - component: {fileID: 7700600642564542677}
+  - component: {fileID: 5278019779873979172}
   m_Layer: 6
   m_Name: PizzaBox
   m_TagString: Draggable
@@ -426,6 +430,8 @@ MonoBehaviour:
     numberOfSlices: 0
     averageDistance: 0
     cutDistanceRating: 0
+  topBox: {fileID: 2460561982063871264}
+  topBoxAnim: {fileID: 5747761711400609263}
   isCooked: 0
   cookedTimes: 0
   overallPizzaRating: 0
@@ -464,3 +470,15 @@ MonoBehaviour:
   - rating: 4
     maxRequirement: 1
     minRequirement: 0
+--- !u!114 &5278019779873979172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4017157061192471410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2763c238f5a5dad2da4dcc7e3dcc8441, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

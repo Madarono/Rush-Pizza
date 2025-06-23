@@ -58,6 +58,8 @@ public class Stats : MonoBehaviour, IDataPersistence
     public GameObject nextDayScreen;
     public float nextDayDelay = 1f;
 
+    private bool canShowSupplies = false;
+
     public void SaveData(GameData data)
     {
         data.day = this.day;
@@ -81,6 +83,7 @@ public class Stats : MonoBehaviour, IDataPersistence
 
     public void ShowEndOfTheDay()
     {
+        canShowSupplies = true;
         supplies.SetActive(true);
         settings.AddWithoutVisual(-rent);
         UpdateValues();
@@ -180,7 +183,7 @@ public class Stats : MonoBehaviour, IDataPersistence
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Q))
+        if(Input.GetKeyDown(KeyCode.Q) && canShowSupplies)
         {
             checkSupplies = !checkSupplies;
         }

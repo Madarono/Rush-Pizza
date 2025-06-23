@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Check : MonoBehaviour
 {
+    public Pausing pausing;
     public SoundManager sounds;
     public Settings settings;
     public SauceDrawing drawing;
@@ -13,6 +14,11 @@ public class Check : MonoBehaviour
 
     public void Update()
     {
+        if(pausing.isPausing)
+        {
+            return;
+        }
+        
         if(Input.GetMouseButtonDown(0))
         {
             CheckObject();

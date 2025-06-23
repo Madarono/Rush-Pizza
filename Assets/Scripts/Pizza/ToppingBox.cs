@@ -63,10 +63,6 @@ public class ToppingBox : MonoBehaviour
             }
             return;
         }
-        if(supply >= cacheSupply && cacheSupply > 0)
-        {
-            return;
-        }
 
         for(int i = 0; i < supplyReq.Length; i++)
         {
@@ -88,7 +84,7 @@ public class ToppingBox : MonoBehaviour
                     }
                 }
 
-                cacheSupply = supplyReq[i].minSupply;
+                // cacheSupply = supplyReq[i].minSupply;
                 break;
             }
         }

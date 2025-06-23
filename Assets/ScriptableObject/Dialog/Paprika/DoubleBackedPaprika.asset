@@ -15,7 +15,10 @@ MonoBehaviour:
   initialTalk:
   - content: I would like a pizza with bell peppers on top of it please, bake it
       twice.
-    contentDeutsch: Ich hatte gern eine Pizza mit Paprika drauf bitte, back es zwimal.
+    contentDeutsch: Ich hatte gern eine Pizza mit Paprika drauf bitte, back es zweimal.
+  - content: I want a green pizza, like my emotions. Make it dark, like my heart.
+    contentDeutsch: Ich will eine gruene Pizza, wie meine Gefuehle. Mach es dunkel,
+      wie meine Herz.
   whatTalk:
   - content: A bell pepper pizza please, bake it twice.
     contentDeutsch: Eine Paprikapizza bitte, back es zweimal.

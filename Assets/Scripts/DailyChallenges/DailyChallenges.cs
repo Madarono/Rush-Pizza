@@ -12,6 +12,7 @@ public class StoredValues
 public class DailyChallenges : MonoBehaviour
 {
     [Header("Scripts")]
+    public CustomerManager manager;
     public StartDays startDays;
     public Stats stats;
     public Settings settings;
@@ -129,10 +130,25 @@ public class DailyChallenges : MonoBehaviour
         {
             animator.SetTrigger("Close");
         }
-        playerCam.canMove = true;
-        playerMovement.canMove = true;
-        pausing.lockMouse = true;
-        mouseCursor.LockCusorState();
+
+        bool lockMouse = true;
+
+        if(manager.merchantScript != null && manager.merchantScript.state != MerchantStates.Static)
+        {
+            lockMouse = false;
+        }
+        else if(manager.goScript != null && (manager.goScript.state == States.Talking || manager.goScript.state == States.Ending))
+        {
+            lockMouse = false;
+        }
+
+        if(lockMouse)
+        {
+            pausing.lockMouse = true;
+            playerCam.canMove = true;
+            playerMovement.canMove = true;
+            mouseCursor.LockCusorState();
+        }
         yield return new WaitForSeconds(leaveDuration);
         window.SetActive(false);
     }

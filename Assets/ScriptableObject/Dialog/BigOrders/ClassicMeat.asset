@@ -16,7 +16,7 @@ MonoBehaviour:
   - content: Hey, I'd like a classic meat pizza please.
     contentDeutsch: Hallo, Ich hatte gern eine Fleischklassichpizza bitte.
   - content: I'd like a meat pizza please.
-    contentDeutsch: Ich hatet gern eine Fleischpizza bitte.
+    contentDeutsch: Ich hatte gern eine Fleischpizza bitte.
   whatTalk:
   - content: Classic meat, please.
     contentDeutsch: Fleischklassich, bitte.

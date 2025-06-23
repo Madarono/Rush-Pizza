@@ -15,6 +15,10 @@ MonoBehaviour:
   initialTalk:
   - content: Can I have a spicy pizza please?
     contentDeutsch: Kann ich bitte eine scharf Pizza haben?
+  - content: I would like a pizza that would let me stay in the bathroom for a long
+      time.
+    contentDeutsch: Ich hatte gern eine Pizza, die mich stundenlang auf der Toilette
+      fesselt.
   whatTalk:
   - content: A spicy pizza please
     contentDeutsch: Eine scharf Pizza bitte.
@@ -23,8 +27,8 @@ MonoBehaviour:
     contentDeutsch: Salami und Paprika auf eine Kasepizza.
   speedOfTalk: 0.04
   pizzas:
-  - leftToppings: 0000000001000000030000000200000007000000
-    rightToppings: 0000000001000000030000000200000007000000
+  - leftToppings: 00000000010000000200000007000000
+    rightToppings: 00000000010000000200000007000000
     cookTimes: 1
     numberOfCuts: 3
     minimumCutsAllowed: 3
